@@ -6,7 +6,8 @@ import Carrousel from './components/carrousel';
 import NestedGrid from './components/gridcardaction'
 import * as serviceWorker from './serviceWorker';
 import Container from '@material-ui/core/Container';
-import Footer from './components/footer'
+import Footer from './components/footer';
+import Content from './components/index/content';
 
 
 ReactDOM.render(
@@ -15,6 +16,7 @@ ReactDOM.render(
     <Container maxWidth="lg" style={{ marginTop: '6rem' }}>
       <Carrousel />
       <NestedGrid />
+      <Content />
     </Container>
     <Footer />
   </React.StrictMode>,

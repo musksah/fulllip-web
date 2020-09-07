@@ -9,22 +9,22 @@ import Typography from '@material-ui/core/Typography'
 const images = [
     {
       url: '/img/fullip1.jpg',
-      title: 'Breakfast',
+      title: 'Kit',
       width: '25%',
     },
     {
       url: '/static/images/grid-list/burgers.jpg',
-      title: 'Burgers',
+      title: 'Redondo Grande',
       width: '25%',
     },
     {
       url: '/static/images/grid-list/camera.jpg',
-      title: 'Camera',
+      title: 'Mediano Óvalo',
       width: '25%',
     },
     {
       url: '/static/images/grid-list/camera.jpg',
-      title: 'HolaMundo',
+      title: 'Pequeño Óvalo',
       width: '25%',
     },
   ];
@@ -157,7 +157,7 @@ export default function NestedGrid() {
     return (
         <div className={classes.root} style={{ marginTop: '1rem' }}>
             <Grid container spacing={1}>
-                <Grid container item xs={12} lg={12} sm={12} spacing={3}>
+                <Grid container item xs={12} lg={12} sm={12}>
                     <FormRow />
                 </Grid>
             </Grid>

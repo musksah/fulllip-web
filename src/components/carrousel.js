@@ -38,7 +38,8 @@ const tutorialSteps = [
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: '100%',
-    flexGrow: 1,
+    // maxHeight: '450px',
+    // overflow:'hidden'
   },
   header: {
     display: 'flex',
@@ -49,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
   },
   img: {
     maxWidth: '100%',
-    maxHeight:'420px',
     overflow: 'hidden',
     display: 'block',
     width: '100%',
@@ -65,8 +65,8 @@ export default function TextMobileStepper() {
   const handleNext = () => {
     console.log(maxSteps);
     // setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setActiveStep(function(prevActiveStep){
-      if((maxSteps) == (prevActiveStep+1)){
+    setActiveStep(function (prevActiveStep) {
+      if ((maxSteps) == (prevActiveStep + 1)) {
         return 0;
       }
       return prevActiveStep + 1;
@@ -79,11 +79,13 @@ export default function TextMobileStepper() {
 
   return (
     <div className={classes.root}>
-      <img
-        className={classes.img}
-        src={tutorialSteps[activeStep].imgPath}
-        alt={tutorialSteps[activeStep].label}
-      />
+      <div style={{maxHeight:'450px',overflow:'hidden'}}>
+        <img
+          className={classes.img}
+          src={tutorialSteps[activeStep].imgPath}
+          alt={tutorialSteps[activeStep].label}
+        />
+      </div>
       <MobileStepper
         variant="dots"
         steps={5}

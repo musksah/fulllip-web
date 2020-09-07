@@ -17,7 +17,9 @@ const useStyles = makeStyles((theme) => ({
     },
     footer_p: {
         fontSize: '0.77em',
-        textAlign: 'left'
+        textAlign: 'left',
+        marginLeft:'2em',
+        marginRight:'2em'
     }
 }));
 
@@ -25,7 +27,7 @@ export default function PrimaryFooter() {
     const classes = useStyles();
     return (
         <div className={classes.footer}>
-            <Container style={{ marginLeft: '2em', marginRight: '2em' }}>
+            <Container>
                 <Grid container>
                     <Grid item xs={6}>
                         <p className={classes.footer_p}>PREGUNTAS FRECUENTES</p>
@@ -40,7 +42,7 @@ export default function PrimaryFooter() {
                         <p className={classes.footer_p}>USO</p>
                     </Grid>
                     <Grid item xs={12} style={{ marginTop: '1.5em' }}>
-                        <p style={{ textAlign: 'left', fontSize: '0.77em' }}>Copyright © 2020. All Rights Reserved</p>
+                        <p style={{ textAlign: 'left', fontSize: '0.77em', marginLeft:'2em' }}>Copyright © 2020. All Rights Reserved</p>
                     </Grid>
                 </Grid>
             </Container>

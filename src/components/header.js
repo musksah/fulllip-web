@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
   linkHeader: {
     fontFamily: 'Poiret One',
     fontWeight: '600',
-    fontSize: '0.95em',
+    fontSize: '0.85em',
   },
   sectionMobile: {
     display: 'flex',
@@ -222,7 +222,7 @@ export default function PrimarySearchAppBar(props) {
                 inputProps={{ 'aria-label': 'search' }}
               />
             </div> */}
-            <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '5em' }}>
+            <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '10em' }}>
               PREGUNTAS FRECUENTES
           </Typography>
             <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '3em' }}>

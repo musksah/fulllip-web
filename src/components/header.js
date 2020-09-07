@@ -8,12 +8,15 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import AccountCircle from '@material-ui/icons/AccountCircleOutlined';
+import { RiUserLine } from "react-icons/ri";
+import MailIcon from '@material-ui/icons/MailOutline';
+import NotificationsIcon from '@material-ui/icons/NotificationsActiveOutlined';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import PropTypes from 'prop-types';
+import { AiOutlineShopping } from "react-icons/ai";
+import "fontsource-poiret-one";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -71,6 +74,15 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
     },
   },
+  brandHeader: {
+    fontFamily: 'Poiret One',
+    fontStyle: 'normal',
+  },
+  linkHeader: {
+    fontFamily: 'Poiret One',
+    fontWeight: '600',
+    fontSize: '0.95em',
+  },
   sectionMobile: {
     display: 'flex',
     [theme.breakpoints.up('md')]: {
@@ -79,7 +91,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+function ElevationScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
+  });
+
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
+
+ElevationScroll.propTypes = {
+  children: PropTypes.element.isRequired,
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
+
+export default function PrimarySearchAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -154,7 +191,7 @@ export default function PrimarySearchAppBar() {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          <RiUserLine />
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -163,70 +200,73 @@ export default function PrimarySearchAppBar() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" color="transparent" style={{paddingBottom:'10px',paddingTop:'10px'}}>
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-            style={{color:'#545454'}}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" style={{color:'#545454'}} noWrap>
-            Fulllip
-          </Typography>
-          <div className={classes.search} style={{color:'#545454'}}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
+      <ElevationScroll {...props}>
+        <AppBar position="fixed" color="transparent" style={{ paddingBottom: '17.5px', paddingTop: '17.5px', background: '#FFFFFF' }}>
+          <Toolbar>
+            <img
+              src={`/img/logofulllips.png`}
+              alt={`logo`}
+              width="100"
+              style={{ marginLeft: '1em' }}
             />
-          </div>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit" style={{color:'#545454'}}>
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit" style={{color:'#545454'}}>
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-              style={{color:'#545454'}}
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
-        </Toolbar>
-      </AppBar>
+            {/* <div className={classes.search} style={{ color: '#545454' }}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Buscar…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </div> */}
+            <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '5em' }}>
+              PREGUNTAS FRECUENTES
+          </Typography>
+            <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '3em' }}>
+              USO
+          </Typography>
+            <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '3em' }}>
+              NOSOTROS
+          </Typography>
+            <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '3em' }}>
+              CONTACTO
+          </Typography>
+            <div className={classes.grow} />
+            <div className={classes.sectionDesktop}>
+              <IconButton aria-label="show 4 new mails" color="inherit" style={{ color: '#545454' }}>
+                <Badge badgeContent={4} color="error">
+                  <AiOutlineShopping />
+                </Badge>
+              </IconButton>
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+                style={{ color: '#545454' }}
+              >
+                <RiUserLine />
+              </IconButton>
+            </div>
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
+            </div>
+          </Toolbar>
+        </AppBar>
+      </ElevationScroll>
       {renderMobileMenu}
       {renderMenu}
     </div>

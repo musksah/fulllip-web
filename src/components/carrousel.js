@@ -11,27 +11,27 @@ const tutorialSteps = [
   {
     label: 'San Francisco – Oakland Bay Bridge, United States',
     imgPath:
-      'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=1700&h=650&q=60',
+      '/img/slider1.jpg',
   },
   {
     label: 'Bird',
     imgPath:
-      'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=1700&h=650&q=60',
+      '/img/slider2.png',
   },
   {
     label: 'Bali, Indonesia',
     imgPath:
-      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1700&h=650&q=80',
+      '/img/slider3.png',
   },
   {
     label: 'NeONBRAND Digital Marketing, Las Vegas, United States',
     imgPath:
-      'https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=1700&h=650&q=60',
+      '/img/slider4.jpg',
   },
   {
     label: 'Goč, Serbia',
     imgPath:
-      'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=1700&h=650&q=60',
+      '/img/slider5.png',
   },
 ];
 
@@ -48,8 +48,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
   },
   img: {
-    height: '300',
     maxWidth: '100%',
+    maxHeight:'420px',
     overflow: 'hidden',
     display: 'block',
     width: '100%',

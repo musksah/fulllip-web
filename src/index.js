@@ -1,19 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import AppMui from './AppMui';
 import PrimarySearchAppBar from './components/header';
-import TextMobileStepper from './components/carrousel';
+import Carrousel from './components/carrousel';
+import NestedGrid from './components/gridcardaction'
 import * as serviceWorker from './serviceWorker';
 import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
+import Footer from './components/footer'
+
 
 ReactDOM.render(
   <React.StrictMode>
     <PrimarySearchAppBar />
-    <Container maxWidth="lg" style={{marginTop:'1rem'}}>
-      <TextMobileStepper />
+    <Container maxWidth="lg" style={{ marginTop: '6rem' }}>
+      <Carrousel />
+      <NestedGrid />
     </Container>
+    <Footer />
   </React.StrictMode>,
   document.getElementById('root')
 );

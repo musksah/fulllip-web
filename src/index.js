@@ -1,23 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import PrimarySearchAppBar from './components/header';
-import Carrousel from './components/carrousel';
-import NestedGrid from './components/gridcardaction'
+import Header from './components/header';
 import * as serviceWorker from './serviceWorker';
-import Container from '@material-ui/core/Container';
 import Footer from './components/footer';
-import Content from './components/index/content';
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Login from './pages/login';
+import Home from './pages/home';
+import Register from './pages/register';
 
 ReactDOM.render(
   <React.StrictMode>
-    <PrimarySearchAppBar />
-    <Container maxWidth="lg" style={{ marginTop: '6rem' }}>
-      <Carrousel />
-      <NestedGrid />
-      <Content />
-    </Container>
+    <Router>
+      <Header />
+      <Switch>
+          <Route path="/">
+            <Home />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+        </Switch>
+    </Router>
     <Footer />
   </React.StrictMode>,
   document.getElementById('root')

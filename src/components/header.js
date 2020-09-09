@@ -8,7 +8,6 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircleOutlined';
 import { RiUserLine } from "react-icons/ri";
 import MailIcon from '@material-ui/icons/MailOutline';
 import NotificationsIcon from '@material-ui/icons/NotificationsActiveOutlined';
@@ -17,6 +16,7 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import PropTypes from 'prop-types';
 import { AiOutlineShopping } from "react-icons/ai";
 import "fontsource-poiret-one";
+import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -152,8 +152,9 @@ export default function PrimarySearchAppBar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      
+      <MenuItem onClick={handleMenuClose}><NavLink to="/register" style={{ textDecoration: 'none' }}> Profile </NavLink></MenuItem>
+      <MenuItem onClick={handleMenuClose}><NavLink to="/register" style={{ textDecoration: 'none' }}>My account </NavLink></MenuItem>
     </Menu>
   );
 
@@ -182,7 +183,9 @@ export default function PrimarySearchAppBar(props) {
             <NotificationsIcon />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <NavLink to="/register" style={{ textDecoration: 'none' }}>
+          <p>Registrarse</p>
+        </NavLink>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -193,7 +196,9 @@ export default function PrimarySearchAppBar(props) {
         >
           <RiUserLine />
         </IconButton>
-        <p>Profile</p>
+        <NavLink to="/register" style={{ textDecoration: 'none' }}>
+          <p>Login</p>
+        </NavLink>
       </MenuItem>
     </Menu>
   );
@@ -203,12 +208,14 @@ export default function PrimarySearchAppBar(props) {
       <ElevationScroll {...props}>
         <AppBar position="fixed" color="transparent" style={{ paddingBottom: '17.5px', paddingTop: '17.5px', background: '#FFFFFF' }}>
           <Toolbar>
-            <img
-              src={`/img/logofulllips.png`}
-              alt={`logo`}
-              width="100"
-              style={{ marginLeft: '1em' }}
-            />
+            <NavLink to="/" style={{ textDecoration: 'none' }}>
+              <img
+                src={`/img/logofulllips.png`}
+                alt={`logo`}
+                width="100"
+                style={{ marginLeft: '1em' }}
+              />
+            </NavLink>
             {/* <div className={classes.search} style={{ color: '#545454' }}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -222,9 +229,11 @@ export default function PrimarySearchAppBar(props) {
                 inputProps={{ 'aria-label': 'search' }}
               />
             </div> */}
-            <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '10em' }}>
-              PREGUNTAS FRECUENTES
-          </Typography>
+            <NavLink to="/login" style={{ textDecoration: 'none' }}>
+              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '10em' }}>
+                PREGUNTAS FRECUENTES
+              </Typography>
+            </NavLink>
             <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '3em' }}>
               USO
           </Typography>

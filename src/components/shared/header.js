@@ -16,7 +16,10 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import PropTypes from 'prop-types';
 import { AiOutlineShopping } from "react-icons/ai";
 import "fontsource-poiret-one";
-import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, NavLink, useHistory } from "react-router-dom";
+import axios from 'axios';
+
+const url = "http://localhost:3006/api/user";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -120,6 +123,7 @@ export default function PrimarySearchAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const history = useHistory();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -132,6 +136,8 @@ export default function PrimarySearchAppBar(props) {
     setMobileMoreAnchorEl(null);
   };
 
+
+
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
@@ -140,6 +146,16 @@ export default function PrimarySearchAppBar(props) {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const logOut = () => {
+    axios.get(url + "/logout").then(res => {
+      console.log(res);
+      handleMenuClose();
+      history.push("/");
+      localStorage.clear();
+    }).catch(console.log);
+  };
+
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -152,10 +168,17 @@ export default function PrimarySearchAppBar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+      {localStorage.getItem("token") == null &&
+        <>
+          < MenuItem onClick={handleMenuClose}><NavLink to="/login" style={{ textDecoration: 'none' }}> Iniciar Sesión </NavLink></MenuItem>
+          <MenuItem onClick={handleMenuClose}><NavLink to="/register" style={{ textDecoration: 'none' }}>Registrarse </NavLink></MenuItem>
+        </>
+      }
+      {localStorage.getItem("token") != null &&
+        <MenuItem onClick={logOut}> Cerrar Sesión</MenuItem>
+      }
 
-      <MenuItem onClick={handleMenuClose}><NavLink to="/login" style={{ textDecoration: 'none' }}> Iniciar Sesión </NavLink></MenuItem>
-      <MenuItem onClick={handleMenuClose}><NavLink to="/register" style={{ textDecoration: 'none' }}>Registrarse </NavLink></MenuItem>
-    </Menu>
+    </Menu >
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';

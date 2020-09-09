@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,6 +15,18 @@ import Container from '@material-ui/core/Container';
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+
+const url = "http://localhost:3006/api/user";
+
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,67 +48,121 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
+
 export default function SignIn() {
   const classes = useStyles();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [open, setOpen] = React.useState(false);
+  const [messagge, setMessagge] = React.useState("");
+  const history = useHistory();
+
+  const changeEmail = (e) => {
+    const { value } = e.target;
+    setEmail(value);
+  }
+
+  const changePassword = (e) => {
+    const { value } = e.target;
+    setPassword(value);
+  }
+
+  const findUser = (e) => {
+    e.preventDefault();
+    axios.post(url, { email, password }).then(res => {
+      if (res.status == 200) {
+        localStorage.setItem("token", res.data);
+        history.push("/");
+      }
+      else {
+
+        setMessagge(res.data.message);
+        handleClick();
+      }
+    })
+  }
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   return (
     <Container component="main" maxWidth="xs" style={{ marginTop: '10rem', marginBottom: '8rem' }}>
       <Card>
-      <CardContent>
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Iniciar Sesión
+        <CardContent>
+          <CssBaseline />
+          <div className={classes.paper}>
+            <img
+              src={`/img/logofulllips.png`}
+              alt={`logo`}
+              width="200"
+              style={{ marginLeft: '1em', marginBottom: '2em' }}
+            />
+            <Typography component="h1" variant="h5">
+              Iniciar Sesión
         </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Correo Electrónico"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Contraseña"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="secondary"
-              className={classes.submit}
-            >
-              Ingresar
+            <form className={classes.form} onSubmit={findUser}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Correo Electrónico"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={changeEmail}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Contraseña"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={changePassword}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classes.submit}
+              >
+                Ingresar
           </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Olvidó su contraseña?
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Olvidó su contraseña?
               </Link>
+                </Grid>
+                <Grid item>
+                  <NavLink to="/register">
+                    {"Registrarse"}
+                  </NavLink>
+                </Grid>
               </Grid>
-              <Grid item>
-                <NavLink to="/register">
-                  {"Registrarse"}
-                </NavLink>
-              </Grid>
-            </Grid>
-          </form>
-        </div>
+            </form>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="error">
+                {messagge}
+              </Alert>
+            </Snackbar>
+          </div>
         </CardContent>
       </Card>
     </Container>

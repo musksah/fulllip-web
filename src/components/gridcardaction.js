@@ -13,17 +13,17 @@ const images = [
       width: '25%',
     },
     {
-      url: '/static/images/grid-list/burgers.jpg',
+      url: '/img/slider1.jpg',
       title: 'Redondo Grande',
       width: '25%',
     },
     {
-      url: '/static/images/grid-list/camera.jpg',
+      url: '/img/slider5.png',
       title: 'Mediano Óvalo',
       width: '25%',
     },
     {
-      url: '/static/images/grid-list/camera.jpg',
+      url: '/img/slider2.png',
       title: 'Pequeño Óvalo',
       width: '25%',
     },

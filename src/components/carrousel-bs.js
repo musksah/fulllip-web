@@ -3,11 +3,11 @@ import Carousel from 'react-bootstrap/Carousel'
 
 export default function Carrousel() {
     return (
-        <Carousel>
+        <Carousel style={{height:'500px',overflow:'hidden'}}>
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="/img/slider1.jpg"
+                    src="/img/slider-4.jpg"
                     alt="First slide"
                 />
                 <Carousel.Caption>
@@ -18,7 +18,7 @@ export default function Carrousel() {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="/img/slider1.jpg"
+                    src="/img/slider-2.jpg"
                     alt="Third slide"
                 />
 
@@ -30,7 +30,7 @@ export default function Carrousel() {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="/img/slider1.jpg"
+                    src="/img/slider-3.jpg"
                     alt="Third slide"
                 />
 

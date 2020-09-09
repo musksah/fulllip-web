@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,14 +38,14 @@ export default function SignUp() {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" style={{marginTop:'10rem', marginBottom:'8rem'}}>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Registrarse
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -56,7 +57,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="firstName"
-                label="First Name"
+                label="Primer nombre"
                 autoFocus
               />
             </Grid>
@@ -66,7 +67,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="lastName"
-                label="Last Name"
+                label="Apellido"
                 name="lastName"
                 autoComplete="lname"
               />
@@ -77,7 +78,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Correo Electrónico"
                 name="email"
                 autoComplete="email"
               />
@@ -88,16 +89,10 @@ export default function SignUp() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Contraseña"
                 type="password"
                 id="password"
                 autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
               />
             </Grid>
           </Grid>
@@ -112,9 +107,9 @@ export default function SignUp() {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
-              </Link>
+              <NavLink to="/login">
+                Ya tienes cuenta? Iniciar Sesión
+              </NavLink>
             </Grid>
           </Grid>
         </form>

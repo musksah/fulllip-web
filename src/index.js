@@ -8,19 +8,16 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from './pages/login';
 import Home from './pages/home';
 import Register from './pages/register';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Header />
       <Switch>
-          <Route path="/">
-            <Home />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
+          <Route path="/" exact component={Home} />
+          <Route path="/login" exact component={Login}/>
+          <Route path="/register" exact component={Register}>
             <Register />
           </Route>
         </Switch>

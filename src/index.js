@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Header from './components/header';
+import Header from './components/shared/header';
 import * as serviceWorker from './serviceWorker';
-import Footer from './components/footer';
+import Footer from './components/shared/footer';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from './pages/login';
 import Home from './pages/home';

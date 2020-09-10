@@ -187,7 +187,9 @@ export default function PrimarySearchAppBar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}><NavLink to="/Perfil" style={{ textDecoration: 'none' }}> Perfil </NavLink></MenuItem>
+      <NavLink to="/Perfil" style={{ textDecoration: 'none' }}>
+        <MenuItem onClick={handleMenuClose}> Perfil</MenuItem>
+      </NavLink>
       <MenuItem onClick={logOut}> Cerrar Sesión</MenuItem>
     </Menu >
   );
@@ -263,7 +265,7 @@ export default function PrimarySearchAppBar(props) {
                 inputProps={{ 'aria-label': 'search' }}
               />
             </div> */}
-            <NavLink to="/login" style={{ textDecoration: 'none' }}>
+            <NavLink to="/Ingresar" style={{ textDecoration: 'none' }}>
               <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '10em' }}>
                 PREGUNTAS FRECUENTES
               </Typography>
@@ -278,7 +280,7 @@ export default function PrimarySearchAppBar(props) {
               CONTACTO
           </Typography>
             <div className={classes.grow} />
-            <NavLink to="/login" style={{ textDecoration: 'none', visibility: visibleIn }}>
+            <NavLink to="/Ingresar" style={{ textDecoration: 'none', visibility: visibleIn }}>
               <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginRight: '6em' }}>
                 INGRESAR/REGISTRARSE
           </Typography>

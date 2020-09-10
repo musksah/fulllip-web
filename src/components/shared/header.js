@@ -123,7 +123,25 @@ export default function PrimarySearchAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [visibleMenu, setVisibleMenu] = React.useState("hidden");
+  const [visibleIn, setVisibleIn] = React.useState("visible");
   const history = useHistory();
+
+
+  React.useEffect(() => {
+    validateToken();
+  });
+
+  document.addEventListener(('click'), () => {
+    validateToken();
+  });
+
+  const validateToken = () => {
+    if (localStorage.getItem("token") !== null) {
+      setVisibleMenu("visible");
+      setVisibleIn("hidden");
+    }
+  }
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -149,10 +167,11 @@ export default function PrimarySearchAppBar(props) {
 
   const logOut = () => {
     axios.get(url + "/logout").then(res => {
-      console.log(res);
       handleMenuClose();
       history.push("/");
       localStorage.clear();
+      setVisibleMenu("hidden");
+      setVisibleIn("visible");
     }).catch(console.log);
   };
 
@@ -168,16 +187,8 @@ export default function PrimarySearchAppBar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {localStorage.getItem("token") == null &&
-        <>
-          < MenuItem onClick={handleMenuClose}><NavLink to="/login" style={{ textDecoration: 'none' }}> Iniciar Sesión </NavLink></MenuItem>
-          <MenuItem onClick={handleMenuClose}><NavLink to="/register" style={{ textDecoration: 'none' }}>Registrarse </NavLink></MenuItem>
-        </>
-      }
-      {localStorage.getItem("token") != null &&
-        <MenuItem onClick={logOut}> Cerrar Sesión</MenuItem>
-      }
-
+      <MenuItem onClick={handleMenuClose}><NavLink to="/Perfil" style={{ textDecoration: 'none' }}> Perfil </NavLink></MenuItem>
+      <MenuItem onClick={logOut}> Cerrar Sesión</MenuItem>
     </Menu >
   );
 
@@ -267,6 +278,11 @@ export default function PrimarySearchAppBar(props) {
               CONTACTO
           </Typography>
             <div className={classes.grow} />
+            <NavLink to="/login" style={{ textDecoration: 'none', visibility: visibleIn }}>
+              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginRight: '6em' }}>
+                INGRESAR/REGISTRARSE
+          </Typography>
+            </NavLink>
             <div className={classes.sectionDesktop}>
               <IconButton aria-label="show 4 new mails" color="inherit" style={{ color: '#545454' }}>
                 <Badge badgeContent={4} color="error">
@@ -280,7 +296,7 @@ export default function PrimarySearchAppBar(props) {
                 aria-haspopup="true"
                 onClick={handleProfileMenuOpen}
                 color="inherit"
-                style={{ color: '#545454' }}
+                style={{ color: '#545454', visibility: visibleMenu }}
               >
                 <RiUserLine />
               </IconButton>
@@ -301,6 +317,6 @@ export default function PrimarySearchAppBar(props) {
       </ElevationScroll>
       {renderMobileMenu}
       {renderMenu}
-    </div>
+    </div >
   );
 }

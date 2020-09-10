@@ -56,8 +56,14 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = React.useState(false);
-  const [messagge, setMessagge] = React.useState("");
+  const [message, setMessage] = React.useState("");
   const history = useHistory();
+
+  React.useEffect(() => {
+    if (localStorage.getItem("token") !== null) {
+      history.push("/");
+    }
+  });
 
   const changeEmail = (e) => {
     const { value } = e.target;
@@ -73,16 +79,27 @@ export default function SignIn() {
     e.preventDefault();
     axios.post(url, { email, password }).then(res => {
       if (res.status == 200) {
-        localStorage.setItem("token", res.data);
-        history.push("/");
+        if (res.data.rol == 1) {
+          localStorage.setItem("token", res.data.token);
+          const event = new Event("click");
+          document.dispatchEvent(event);
+          history.push("/");
+        } else {
+          openMessage("Credenciales Inválidas");
+        }
       }
       else {
-
-        setMessagge(res.data.message);
-        handleClick();
+        openMessage(res.data.message);
       }
     })
+
   }
+
+  const openMessage = (message) => {
+    setMessage(message);
+    handleClick();
+  }
+
   const handleClick = () => {
     setOpen(true);
   };
@@ -159,7 +176,7 @@ export default function SignIn() {
             </form>
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
               <Alert onClose={handleClose} severity="error">
-                {messagge}
+                {message}
               </Alert>
             </Snackbar>
           </div>

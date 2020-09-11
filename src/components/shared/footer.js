@@ -10,16 +10,15 @@ const useStyles = makeStyles((theme) => ({
     },
     footer: {
         paddingTop: '2em',
-        paddingBottom: '2em',
-        background: '#B82929',
+        background: '#8A0000',
         color: '#FFFFFF',
         marginTop: '3em',
+        clear: 'both',
+        position: 'relative',
+        height: '200px',
     },
-    footer_p: {
-        fontSize: '0.77em',
-        textAlign: 'left',
-        marginLeft:'2em',
-        marginRight:'2em'
+    item_footer:{
+        listStyle: 'none',
     }
 }));
 
@@ -30,19 +29,25 @@ export default function PrimaryFooter() {
             <Container>
                 <Grid container>
                     <Grid item xs={6}>
-                        <p className={classes.footer_p}>PREGUNTAS FRECUENTES</p>
+                        <h5 style={{ marginLeft: '1em' }}>PREGUNTAS FRECUENTES</h5>
                     </Grid>
-                    <Grid item xs={6}>
-                        <p className={classes.footer_p}>CONTACTO</p>
+                    <Grid item xs={3}>
+                        <h5>FULLIP</h5>
+                        <ul>
+                            <li className={classes.item_footer}>Contacto</li>
+                            <li className={classes.item_footer}>Nosotros</li>
+                            <li className={classes.item_footer}>Uso</li>
+                        </ul>
                     </Grid>
-                    <Grid item xs={6}>
-                        <p className={classes.footer_p}>CONSEJOS</p>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <p className={classes.footer_p}>USO</p>
+                    <Grid item xs={3}>
+                        <h5>REDES SOCIALES</h5>
+                        <ul>
+                            <li className={classes.item_footer}>Facebook</li>
+                            <li className={classes.item_footer}>Twitter</li>
+                        </ul>
                     </Grid>
                     <Grid item xs={12} style={{ marginTop: '1.5em' }}>
-                        <p style={{ textAlign: 'left', fontSize: '0.77em', marginLeft:'2em' }}>Copyright © 2020. All Rights Reserved</p>
+                        <p style={{ textAlign: 'left', fontSize: '0.77em', marginLeft: '2em' }}>Copyright © 2020. All Rights Reserved</p>
                     </Grid>
                 </Grid>
             </Container>

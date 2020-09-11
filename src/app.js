@@ -6,6 +6,8 @@ import Header from './components/shared/header';
 import Footer from './components/shared/footer';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Box from '@material-ui/core/Box';
+import ModalContact from './pages/contact';
+
 function App() {
     return (
         <Box>

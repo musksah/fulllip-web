@@ -18,6 +18,7 @@ import { AiOutlineShopping } from "react-icons/ai";
 import "fontsource-poiret-one";
 import { BrowserRouter as Router, Switch, Route, NavLink, useHistory } from "react-router-dom";
 import axios from 'axios';
+import ModalContact from '../../pages/contact';
 
 const url = "http://localhost:3006/api/user";
 
@@ -277,7 +278,7 @@ export default function PrimarySearchAppBar(props) {
               NOSOTROS
           </Typography>
             <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '3em' }}>
-              CONTACTO
+              <ModalContact/>
           </Typography>
             <div className={classes.grow} />
             <NavLink to="/Ingresar" style={{ textDecoration: 'none', visibility: visibleIn }}>

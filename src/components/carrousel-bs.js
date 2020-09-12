@@ -1,10 +1,47 @@
-import React from 'react';
-import Carousel from 'react-bootstrap/Carousel'
+import React, { useState, useEffect } from 'react';
+import Carousel from 'react-bootstrap/Carousel';
+import axios from 'axios';
+import Enviroment from '../enviroment';
+
+const URL = `${Enviroment.urlApi}/img-carrousell`;
 
 export default function Carrousel() {
+    const [listImages, setListImages] = useState([]);
+
+    useEffect(() => {
+        getImages();
+    }, []);
+
+    const getImages = () => {
+        console.log("Trayendo imágenes");
+        // debugger
+        axios.get(URL).then(
+            res => {
+                console.log(res);
+                setListImages(res.data);
+            },
+            err => {
+                console.log(err);
+            }
+        )
+    }
+
     return (
-        <Carousel style={{height:'500px',overflow:'hidden'}}>
-            <Carousel.Item>
+        <Carousel style={{ height: '500px', overflow: 'hidden' }}>
+            {listImages.map(img => (
+                <Carousel.Item>
+                    <img
+                        className="d-block w-100"
+                        src={img.url}
+                        alt={img.name}
+                    />
+                    <Carousel.Caption>
+                        <h3>{img.title}</h3>
+                        <p>{img.subtitle}</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            ))}
+            {/* <Carousel.Item>
                 <img
                     className="d-block w-100"
                     src="/img/slider-4.jpg"
@@ -38,7 +75,7 @@ export default function Carrousel() {
                     <h3>Third slide label</h3>
                     <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                 </Carousel.Caption>
-            </Carousel.Item>
+            </Carousel.Item> */}
         </Carousel>
     );
 }

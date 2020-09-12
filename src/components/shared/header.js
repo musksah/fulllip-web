@@ -126,6 +126,7 @@ export default function PrimarySearchAppBar(props) {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [visibleMenu, setVisibleMenu] = React.useState("hidden");
   const [visibleIn, setVisibleIn] = React.useState("visible");
+  const [profile, setProfile] = React.useState("visible");
   const history = useHistory();
 
 
@@ -141,6 +142,7 @@ export default function PrimarySearchAppBar(props) {
     if (localStorage.getItem("token") !== null) {
       setVisibleMenu("visible");
       setVisibleIn("hidden");
+      setProfile(localStorage.getItem("name"));
     }
   }
 
@@ -167,7 +169,7 @@ export default function PrimarySearchAppBar(props) {
   };
 
   const logOut = () => {
-    axios.get(url + "/logout").then(res => {
+    axios.post(url + "/logout", { session: localStorage.getItem("sessionid") }).then(res => {
       handleMenuClose();
       history.push("/");
       localStorage.clear();
@@ -189,7 +191,7 @@ export default function PrimarySearchAppBar(props) {
       onClose={handleMenuClose}
     >
       <NavLink to="/Perfil" style={{ textDecoration: 'none' }}>
-        <MenuItem onClick={handleMenuClose}> Perfil</MenuItem>
+        <MenuItem onClick={handleMenuClose}> {profile}</MenuItem>
       </NavLink>
       <MenuItem onClick={logOut}> Cerrar Sesión</MenuItem>
     </Menu >
@@ -278,8 +280,8 @@ export default function PrimarySearchAppBar(props) {
               NOSOTROS
           </Typography>
             <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '3em' }}>
-              <ModalContact/>
-          </Typography>
+              <ModalContact />
+            </Typography>
             <div className={classes.grow} />
             <NavLink to="/Ingresar" style={{ textDecoration: 'none', visibility: visibleIn }}>
               <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginRight: '6em' }}>

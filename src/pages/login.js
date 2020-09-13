@@ -201,14 +201,6 @@ export default function SignIn() {
           <Tab label="REGISTRARSE" />
         </Tabs>
         <TabPanel value={value} index={0}>
-          <div className={classes.centered}>
-            <img
-              src={`/img/logofulllips.png`}
-              alt={`logo`}
-              width="200"
-              style={{ marginLeft: '1em', marginBottom: '2em' }}
-            />
-          </div>
           <form className={classes.form} onSubmit={findUser}>
             <TextField
               variant="outlined"
@@ -253,14 +245,6 @@ export default function SignIn() {
           </form>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <div className={classes.centered}>
-            <img
-              src={`/img/logofulllips.png`}
-              alt={`logo`}
-              width="200"
-              style={{ marginLeft: '1em', marginBottom: '2em' }}
-            />
-          </div>
           <form className={classes.form} onSubmit={createUser}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>

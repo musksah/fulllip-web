@@ -273,9 +273,11 @@ export default function PrimarySearchAppBar(props) {
                 PREGUNTAS FRECUENTES
               </Typography>
             </NavLink>
+            <NavLink to="/profile" style={{ textDecoration: 'none' }}>
             <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '3em' }}>
               USO
           </Typography>
+          </NavLink>
             <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '3em' }}>
               NOSOTROS
           </Typography>

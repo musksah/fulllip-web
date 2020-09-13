@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from './pages/login';
 import Home from './pages/home';
-import Perfil from './pages/perfil';
+import Profile from './pages/profile';
 import Header from './components/shared/header';
 import Footer from './components/shared/footer';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -16,7 +16,7 @@ function App() {
                 <Switch>
                     <Route path="/" exact component={Home} />
                     <Route path="/Ingresar" exact component={Login} />
-                    <Route path="/Perfil" exact component={Perfil} />
+                    <Route path="/profile" exact component={Profile} />
                 </Switch>
             </Router>
             <Footer />

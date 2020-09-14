@@ -332,7 +332,7 @@ export default function Perfil() {
                     </Grid>
                 </Grid>
             </form>
-            <form className={classes.form} onSubmit={}>
+            <form className={classes.form}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} style={{ marginTop: '2em' }}>
                         <h5>CREDENCIALES</h5>
@@ -386,7 +386,7 @@ export default function Perfil() {
           </Button>
                 </Grid>
             </form>
-            <form className={classes.form} onSubmit={}>
+            <form className={classes.form}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} style={{ marginTop: '2em' }}>
                         <h5>CORREO ELECTRÓNICO</h5>

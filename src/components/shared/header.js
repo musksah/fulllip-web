@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -122,23 +122,25 @@ ElevationScroll.propTypes = {
 
 export default function PrimarySearchAppBar(props) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [visibleMenu, setVisibleMenu] = React.useState("hidden");
-  const [visibleIn, setVisibleIn] = React.useState("visible");
-  const [profile, setProfile] = React.useState("visible");
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [visibleMenu, setVisibleMenu] = useState("hidden");
+  const [visibleIn, setVisibleIn] = useState("visible");
+  const [profile, setProfile] = useState("visible");
   const history = useHistory();
 
 
-  React.useEffect(() => {
-    validateToken();
-  });
+  useEffect(() => {
+    console.log("rebuenas");
+    document.addEventListener(('click'), () => {
+      validateToken();
+    });
+  }, []);
 
-  document.addEventListener(('click'), () => {
-    validateToken();
-  });
+
 
   const validateToken = () => {
+
     if (localStorage.getItem("token") !== null) {
       setVisibleMenu("visible");
       setVisibleIn("hidden");
@@ -190,7 +192,7 @@ export default function PrimarySearchAppBar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <NavLink to="/Perfil" style={{ textDecoration: 'none' }}>
+      <NavLink to="/profile" style={{ textDecoration: 'none' }}>
         <MenuItem onClick={handleMenuClose}> {profile}</MenuItem>
       </NavLink>
       <MenuItem onClick={logOut}> Cerrar Sesión</MenuItem>
@@ -274,10 +276,10 @@ export default function PrimarySearchAppBar(props) {
               </Typography>
             </NavLink>
             <NavLink to="/profile" style={{ textDecoration: 'none' }}>
-            <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '3em' }}>
-              USO
+              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '3em' }}>
+                USO
           </Typography>
-          </NavLink>
+            </NavLink>
             <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '3em' }}>
               NOSOTROS
           </Typography>

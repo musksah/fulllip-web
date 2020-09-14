@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -86,17 +86,17 @@ export default function SignIn() {
   const [open, setOpen] = React.useState(false);
   const [message, setMessage] = React.useState("");
   const history = useHistory();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (localStorage.getItem("token") !== null) {
       history.push("/");
     }
-  });
+  }, []);
 
   const changeName = (e) => {
     const { value } = e.target;
@@ -131,7 +131,7 @@ export default function SignIn() {
       if (res.status == 200) {
         if (res.data.rol == 1) {
           localStorage.setItem("token", res.data.token);
-          localStorage.setItem("name", res.data.name);
+          localStorage.setItem("name", res.data.name.split(" ")[0]);
           localStorage.setItem("sessionid", res.data.session);
           const event = new Event("click");
           document.dispatchEvent(event);
@@ -153,7 +153,7 @@ export default function SignIn() {
       axios.post(url + "/register", { email, password, name, lastname }).then(res => {
         if (res.status == 200) {
           localStorage.setItem("token", res.data.token);
-          localStorage.setItem("name", res.data.name);
+          localStorage.setItem("name", res.data.name.split(" ")[0]);
           localStorage.setItem("sessionid", res.data.session);
           const event = new Event("click");
           document.dispatchEvent(event);

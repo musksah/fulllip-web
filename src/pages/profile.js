@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
@@ -10,7 +10,19 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
+import Enviroment from '../enviroment';
+import { CollectionsOutlined } from '@material-ui/icons';
+import DateFnsUtils from '@date-io/date-fns';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
+const url = "http://localhost:3006/api/customer";
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
     centered: {
@@ -38,10 +50,45 @@ export default function Perfil() {
     const classes = useStyles();
     const [name, setName] = useState("");
     const [lastname, setLastname] = useState("");
-    const [passwordRe, setPasswordRe] = useState("");
+    const [dni, setDni] = useState("");
+    const [address, setAddress] = useState("");
+    const [phone, setPhone] = useState("");
+    const [birthdate, setBirthdate] = useState(new Date());
+    const [country, setCountry] = useState("");
+    const [city, setCity] = useState("");
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [open, setOpen] = React.useState(false);
+    const [message, setMessage] = React.useState("");
 
+    useEffect(() => {
+        findCustomer();
+    }, []);
+
+    const findCustomer = () => {
+        axios.post(url, { session: localStorage.getItem("sessionid") }).then(res => {
+            const datos = res.data;
+            console.log(res);
+            setName(datos.name);
+            setLastname(datos.lastname);
+            setDni(datos.dni_id);
+            setAddress(datos.address);
+            setPhone(datos.phone);
+            // setBirthdate();
+            // setCountry();
+            setCity(datos.city);
+            setEmail(datos.user.email);
+        });
+    }
+
+    const changeAddress = (e) => {
+        const { value } = e.target;
+        setAddress(value);
+    }
+
+    const changeDni = (e) => {
+        const { value } = e.target;
+        setDni(value);
+    }
 
     const changeName = (e) => {
         const { value } = e.target;
@@ -53,10 +100,10 @@ export default function Perfil() {
         setLastname(value);
     }
 
-    const changePasswordRe = (e) => {
+    const changePhone = (e) => {
         const { value } = e.target;
         console.log(value);
-        setPasswordRe(value);
+        setPhone(value);
     }
 
     const changeEmail = (e) => {
@@ -64,15 +111,54 @@ export default function Perfil() {
         setEmail(value);
     }
 
-    const changePassword = (e) => {
-        const { value } = e.target;
-        console.log(value);
-        setPassword(value);
+    const changeBirthdate = (date) => {
+        setBirthdate(date);
     }
+
+    const changeCountry = (e) => {
+        const { value } = e.target;
+        setCountry(value);
+    }
+
+    const changeCity = (e) => {
+        const { value } = e.target;
+        setCity(value);
+    }
+
+    // const changePassword = (e) => {
+    //     const { value } = e.target;
+    //     console.log(value);
+    //     setPassword(value);
+    // }
 
     const updateUser = (e) => {
         e.preventDefault();
+        if (isNaN(dni)) {
+            openMessage("el campo cédula debe ser un número")
+        } else {
+
+            axios.post(url, { name, lastname, phone, dni }).then(res => {
+
+            });
+        }
     }
+
+    const openMessage = (message) => {
+        setMessage(message);
+        handleClick();
+    }
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
     return (
         <Container component="main" style={{ marginTop: '9rem', marginBottom: '9rem' }}>
             <CssBaseline />
@@ -80,88 +166,109 @@ export default function Perfil() {
             <hr />
             <form className={classes.form} onSubmit={updateUser}>
                 <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                        <TextField
-                            variant="outlined"
-                            fullWidth
-                            id="dni_id"
-                            label="Cédula"
-                            name="dni_id"
-                            autoComplete="off"
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField
-                            variant="outlined"
-                            fullWidth
-                            id="address"
-                            label="Dirección"
-                            name="address"
-                            autoComplete="off"
-                        />
-                    </Grid>
-
                     <Grid item xs={12} sm={6}>
+                        <InputLabel htmlFor="standard-adornment-amount">Nombre</InputLabel>
                         <TextField
                             autoComplete="off"
                             name="firstName"
                             variant="outlined"
                             fullWidth
+                            required
                             id="firstName"
-                            label="Nombre"
                             autoFocus
+                            value={name}
+                            onChange={changeName}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
+                        <InputLabel htmlFor="standard-adornment-amount">Apellido</InputLabel>
                         <TextField
                             variant="outlined"
                             fullWidth
                             id="lastName"
-                            label="Apellido"
                             name="lastName"
+                            required
                             autoComplete="off"
+                            value={lastname}
+                            onChange={changeLastname}
                         />
                     </Grid>
                     <Grid item xs={6}>
+                        <InputLabel htmlFor="standard-adornment-amount">Cédula</InputLabel>
+                        <TextField
+                            variant="outlined"
+                            fullWidth
+                            id="dni_id"
+                            name="dni_id"
+                            required
+                            autoComplete="off"
+                            value={dni}
+                            onChange={changeDni}
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <InputLabel htmlFor="standard-adornment-amount">Dirección</InputLabel>
+                        <TextField
+                            variant="outlined"
+                            fullWidth
+                            id="address"
+                            name="address"
+                            autoComplete="off"
+                            value={address}
+                            onChange={changeAddress}
+                        />
+                    </Grid>
+
+                    <Grid item xs={6}>
+                        <InputLabel htmlFor="standard-adornment-amount">Teléfono</InputLabel>
                         <TextField
                             variant="outlined"
                             fullWidth
                             id="phone"
-                            label="Teléfono"
                             name="phone"
                             autoComplete="off"
+                            value={phone}
+                            onChange={changePhone}
                         />
                     </Grid>
                     <Grid item xs={6}>
-                        <TextField
-                            variant="outlined"
-                            fullWidth
-                            id="birthdate"
-                            label="Fecha de nacimiento"
-                            name="birthdate"
-                            autoComplete="off"
-                        />
+                        <InputLabel htmlFor="standard-adornment-amount">Fecha Nacimiento</InputLabel>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDatePicker
+                                variant="outlined"
+                                fullWidth
+                                required
+                                id="date-picker-dialog"
+                                format="MM/dd/yyyy"
+                                value={birthdate}
+                                onChange={changeBirthdate}
+                            />
+                        </MuiPickersUtilsProvider>
                     </Grid>
                     <Grid item xs={6}>
+                        <InputLabel htmlFor="standard-adornment-amount">País</InputLabel>
                         <TextField
                             variant="outlined"
                             fullWidth
                             name="country"
-                            label="País"
                             type="text"
                             id="country"
                             autoComplete="off"
+                            value={country}
+                            onChange={changeCountry}
                         />
                     </Grid>
                     <Grid item xs={6}>
+                        <InputLabel htmlFor="standard-adornment-amount">Ciudad</InputLabel>
                         <TextField
                             variant="outlined"
                             fullWidth
                             name="city"
-                            label="Ciudad"
                             type="text"
                             id="city"
                             autoComplete="off"
+                            value={city}
+                            onChange={changeCity}
                         />
                     </Grid>
                     <Button
@@ -174,37 +281,37 @@ export default function Perfil() {
           </Button>
                 </Grid>
             </form>
-            <form className={classes.form} onSubmit={updateUser}>
-            <Grid container spacing={2}>
-                <Grid item xs={12} style={{ marginTop: '2em' }}>
-                    <h5>CREDENCIALES</h5>
-                    <hr />
-                </Grid>
-                <Grid item xs={6}>
-                    <InputLabel htmlFor="standard-adornment-amount">Contraseña Anterior</InputLabel>
-                    <TextField
-                        fullWidth
-                        variant="outlined"
-                        name="password"
-                        type="password"
-                        id="password"
-                        autoComplete="off"
-                        placeholder="Ingresa contraseña anterior"
-                    />
-                </Grid>
-                <Grid item xs={6}>
-                    <InputLabel htmlFor="standard-adornment-amount">Nueva contraseña</InputLabel>
-                    <TextField
-                        fullWidth
-                        variant="outlined"
-                        name="password2"
-                        type="password"
-                        id="password2"
-                        autoComplete="off"
-                        placeholder="Ingresa nueva contraseña"
-                    />
-                </Grid>
-                <Button
+            <form className={classes.form} >
+                <Grid container spacing={2}>
+                    <Grid item xs={12} style={{ marginTop: '2em' }}>
+                        <h5>CREDENCIALES</h5>
+                        <hr />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <InputLabel htmlFor="standard-adornment-amount">Contraseña Anterior</InputLabel>
+                        <TextField
+                            fullWidth
+                            variant="outlined"
+                            name="password"
+                            type="password"
+                            id="password"
+                            autoComplete="off"
+                            placeholder="Ingresa contraseña anterior"
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <InputLabel htmlFor="standard-adornment-amount">Nueva contraseña</InputLabel>
+                        <TextField
+                            fullWidth
+                            variant="outlined"
+                            name="password2"
+                            type="password"
+                            id="password2"
+                            autoComplete="off"
+                            placeholder="Ingresa nueva contraseña"
+                        />
+                    </Grid>
+                    <Button
                         type="submit"
                         variant="contained"
                         color="secondary"
@@ -212,39 +319,41 @@ export default function Perfil() {
                     >
                         Actualizar contraseña
           </Button>
-            </Grid>
+                </Grid>
             </form>
-            <form className={classes.form} onSubmit={updateUser}>
-            <Grid container spacing={2}>
-                <Grid item xs={12} style={{ marginTop: '2em' }}>
-                    <h5>CORREO ELECTRÓNICO</h5>
-                    <hr />
-                </Grid>
-                <Grid item xs={6}>
-                    <InputLabel htmlFor="standard-adornment-amount">Correo Anterior</InputLabel>
-                    <TextField
-                        fullWidth
-                        variant="outlined"
-                        name="password"
-                        type="password"
-                        id="password"
-                        autoComplete="off"
-                        placeholder="Ingresa correo anterior"
-                    />
-                </Grid>
-                <Grid item xs={6}>
-                    <InputLabel htmlFor="standard-adornment-amount">Nuevo correo</InputLabel>
-                    <TextField
-                        fullWidth
-                        variant="outlined"
-                        name="password2"
-                        type="password"
-                        id="password2"
-                        autoComplete="off"
-                        placeholder="Ingresa nueva correo"
-                    />
-                </Grid>
-                <Button
+            <form className={classes.form} >
+                <Grid container spacing={2}>
+                    <Grid item xs={12} style={{ marginTop: '2em' }}>
+                        <h5>CORREO ELECTRÓNICO</h5>
+                        <hr />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <InputLabel htmlFor="standard-adornment-amount">Correo Anterior</InputLabel>
+                        <TextField
+                            fullWidth
+                            variant="outlined"
+                            name="email"
+                            type="email"
+                            id="email"
+                            autoComplete="off"
+                            placeholder="Ingresa correo anterior"
+                            aria-readonly
+                            value={email}
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <InputLabel htmlFor="standard-adornment-amount">Nuevo correo</InputLabel>
+                        <TextField
+                            fullWidth
+                            variant="outlined"
+                            name="password2"
+                            type="password"
+                            id="password2"
+                            autoComplete="off"
+                            placeholder="Ingresa nueva correo"
+                        />
+                    </Grid>
+                    <Button
                         type="submit"
                         variant="contained"
                         color="secondary"
@@ -252,9 +361,13 @@ export default function Perfil() {
                     >
                         Actualizar correo
           </Button>
-            </Grid>
+                </Grid>
             </form>
-
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error">
+                    {message}
+                </Alert>
+            </Snackbar>
 
         </Container>
     );

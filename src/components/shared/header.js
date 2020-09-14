@@ -131,7 +131,7 @@ export default function PrimarySearchAppBar(props) {
 
 
   useEffect(() => {
-    console.log("rebuenas");
+    validateToken();
     document.addEventListener(('click'), () => {
       validateToken();
     });

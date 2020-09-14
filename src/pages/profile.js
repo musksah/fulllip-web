@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-import Enviroment from '../enviroment';
-import { CollectionsOutlined } from '@material-ui/icons';
 import DateFnsUtils from '@date-io/date-fns';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Backdrop from '@material-ui/core/Backdrop';
 
 const url = "http://localhost:3006/api/customer";
 
@@ -42,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
     large: {
         width: theme.spacing(15),
         height: theme.spacing(15),
+    },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
     }
 }));
 
@@ -49,8 +51,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Perfil() {
     const classes = useStyles();
     const [name, setName] = useState("");
+    const [customer, setCustomer] = useState(0);
     const [lastname, setLastname] = useState("");
-    const [dni, setDni] = useState("");
+    const [dni_id, setDni] = useState("");
+    const [gender, setGender] = useState(0);
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
     const [birthdate, setBirthdate] = useState(new Date());
@@ -59,24 +63,32 @@ export default function Perfil() {
     const [email, setEmail] = useState("");
     const [open, setOpen] = React.useState(false);
     const [message, setMessage] = React.useState("");
+    const [open2, setOpen2] = React.useState(false);
+    const [message2, setMessage2] = React.useState("");
+    const [openProgress, setOpenProgress] = React.useState(false);
 
     useEffect(() => {
         findCustomer();
     }, []);
 
     const findCustomer = () => {
+        setOpenProgress(true);
         axios.post(url, { session: localStorage.getItem("sessionid") }).then(res => {
             const datos = res.data;
-            console.log(res);
+            setCustomer(datos.id_customer);
             setName(datos.name);
             setLastname(datos.lastname);
             setDni(datos.dni_id);
             setAddress(datos.address);
             setPhone(datos.phone);
-            // setBirthdate();
-            // setCountry();
+            setCountry(datos.country);
             setCity(datos.city);
             setEmail(datos.user.email);
+            setGender(datos.gender);
+            if (datos.birthdate !== null) {
+                setBirthdate(datos.birthdate);
+            }
+            setOpenProgress(false);
         });
     }
 
@@ -102,7 +114,6 @@ export default function Perfil() {
 
     const changePhone = (e) => {
         const { value } = e.target;
-        console.log(value);
         setPhone(value);
     }
 
@@ -124,6 +135,10 @@ export default function Perfil() {
         const { value } = e.target;
         setCity(value);
     }
+    const changeGender = (e) => {
+        const { value } = e.target;
+        setGender(value);
+    }
 
     // const changePassword = (e) => {
     //     const { value } = e.target;
@@ -133,12 +148,13 @@ export default function Perfil() {
 
     const updateUser = (e) => {
         e.preventDefault();
-        if (isNaN(dni)) {
+        if (isNaN(dni_id)) {
             openMessage("el campo cédula debe ser un número")
         } else {
-
-            axios.post(url, { name, lastname, phone, dni }).then(res => {
-
+            setOpenProgress(true);
+            axios.put(url + "/" + customer, { name, lastname, phone, dni_id, address, birthdate, gender, country, city }).then(res => {
+                setOpenProgress(false);
+                openMessage2("Los datos personales fueron actualizados.")
             });
         }
     }
@@ -159,8 +175,27 @@ export default function Perfil() {
 
         setOpen(false);
     };
+    const openMessage2 = (message) => {
+        setMessage2(message);
+        handleClick2();
+    }
+
+    const handleClick2 = () => {
+        setOpen2(true);
+    };
+
+    const handleClose2 = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen2(false);
+    };
     return (
         <Container component="main" style={{ marginTop: '9rem', marginBottom: '9rem' }}>
+            <Backdrop className={classes.backdrop} open={openProgress}>
+                <CircularProgress color="inherit" style={{ width: 100, height: 100 }} />
+            </Backdrop>
             <CssBaseline />
             <h5>DATOS PERSONALES</h5>
             <hr />
@@ -200,9 +235,8 @@ export default function Perfil() {
                             fullWidth
                             id="dni_id"
                             name="dni_id"
-                            required
                             autoComplete="off"
-                            value={dni}
+                            value={dni_id}
                             onChange={changeDni}
                         />
                     </Grid>
@@ -235,9 +269,9 @@ export default function Perfil() {
                         <InputLabel htmlFor="standard-adornment-amount">Fecha Nacimiento</InputLabel>
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <KeyboardDatePicker
-                                variant="outlined"
                                 fullWidth
-                                required
+                                variant="outlined"
+                                // required
                                 id="date-picker-dialog"
                                 format="MM/dd/yyyy"
                                 value={birthdate}
@@ -271,42 +305,73 @@ export default function Perfil() {
                             onChange={changeCity}
                         />
                     </Grid>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        color="secondary"
-                        className={classes.submit}
-                    >
-                        Actualizar Perfil
-          </Button>
+                    <Grid item xs={6}>
+                        <InputLabel htmlFor="standard-adornment-amount">Genero</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-outlined-label"
+                            id="demo-simple-select-outlined"
+                            value={gender}
+                            onChange={changeGender}
+                            fullWidth
+                            variant="outlined"
+                        >
+                            <MenuItem value={0}>Seleccione</MenuItem>
+                            <MenuItem value={1}>Hombre</MenuItem>
+                            <MenuItem value={2}>Mujer</MenuItem>
+                        </Select>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="secondary"
+                            className={classes.submit}
+                        >
+                            Actualizar Perfil
+                        </Button>
+                    </Grid>
                 </Grid>
             </form>
-            <form className={classes.form} >
+            <form className={classes.form} onSubmit={}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} style={{ marginTop: '2em' }}>
                         <h5>CREDENCIALES</h5>
                         <hr />
                     </Grid>
-                    <Grid item xs={6}>
-                        <InputLabel htmlFor="standard-adornment-amount">Contraseña Anterior</InputLabel>
-                        <TextField
-                            fullWidth
-                            variant="outlined"
-                            name="password"
-                            type="password"
-                            id="password"
-                            autoComplete="off"
-                            placeholder="Ingresa contraseña anterior"
-                        />
+                    <Grid item xs={12} >
+                        <Grid item xs={6}>
+                            <InputLabel htmlFor="standard-adornment-amount">Contraseña Anterior</InputLabel>
+                            <TextField
+                                fullWidth
+                                variant="outlined"
+                                name="password"
+                                type="password"
+                                id="password"
+                                autoComplete="off"
+                                placeholder="Ingresa contraseña anterior"
+                            />
+                        </Grid>
                     </Grid>
                     <Grid item xs={6}>
-                        <InputLabel htmlFor="standard-adornment-amount">Nueva contraseña</InputLabel>
+                        <InputLabel htmlFor="standard-adornment-amount">Nueva Contraseña</InputLabel>
                         <TextField
                             fullWidth
                             variant="outlined"
                             name="password2"
                             type="password"
                             id="password2"
+                            autoComplete="off"
+                            placeholder="Ingresa contraseña anterior"
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <InputLabel htmlFor="standard-adornment-amount">Confirmar Nueva contraseña</InputLabel>
+                        <TextField
+                            fullWidth
+                            variant="outlined"
+                            name="password3"
+                            type="password"
+                            id="password3"
                             autoComplete="off"
                             placeholder="Ingresa nueva contraseña"
                         />
@@ -321,36 +386,53 @@ export default function Perfil() {
           </Button>
                 </Grid>
             </form>
-            <form className={classes.form} >
+            <form className={classes.form} onSubmit={}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} style={{ marginTop: '2em' }}>
                         <h5>CORREO ELECTRÓNICO</h5>
                         <hr />
                     </Grid>
+                    <Grid item xs={12} >
+                        <Grid item xs={6}>
+                            <InputLabel htmlFor="standard-adornment-amount">Correo Anterior</InputLabel>
+                            <TextField
+                                fullWidth
+                                variant="outlined"
+                                name="email"
+                                type="email"
+                                id="email"
+                                autoComplete="off"
+                                placeholder="Ingresa correo anterior"
+                                aria-readonly
+                                value={email}
+                                readonly
+                            />
+                        </Grid>
+                    </Grid>
                     <Grid item xs={6}>
-                        <InputLabel htmlFor="standard-adornment-amount">Correo Anterior</InputLabel>
+                        <InputLabel htmlFor="standard-adornment-amount">Nuevo Correo</InputLabel>
                         <TextField
                             fullWidth
                             variant="outlined"
-                            name="email"
+                            name="email2"
                             type="email"
-                            id="email"
+                            id="email2"
                             autoComplete="off"
-                            placeholder="Ingresa correo anterior"
+                            placeholder="Ingresa nuevo anterior"
                             aria-readonly
-                            value={email}
+                            readonly
                         />
                     </Grid>
                     <Grid item xs={6}>
-                        <InputLabel htmlFor="standard-adornment-amount">Nuevo correo</InputLabel>
+                        <InputLabel htmlFor="standard-adornment-amount">Confirmar Nuevo Correo</InputLabel>
                         <TextField
                             fullWidth
                             variant="outlined"
-                            name="password2"
-                            type="password"
-                            id="password2"
+                            name="email3"
+                            type="email"
+                            id="email3"
                             autoComplete="off"
-                            placeholder="Ingresa nueva correo"
+                            placeholder="Ingresa confirmación nueva correo"
                         />
                     </Grid>
                     <Button
@@ -366,6 +448,11 @@ export default function Perfil() {
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error">
                     {message}
+                </Alert>
+            </Snackbar>
+            <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}>
+                <Alert onClose={handleClose2} severity="success">
+                    {message2}
                 </Alert>
             </Snackbar>
 

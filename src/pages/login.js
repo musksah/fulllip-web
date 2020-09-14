@@ -1,22 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import Snackbar from '@material-ui/core/Snackbar';
@@ -128,8 +119,8 @@ export default function SignIn() {
   const findUser = (e) => {
     e.preventDefault();
     axios.post(url, { email, password }).then(res => {
-      if (res.status == 200) {
-        if (res.data.rol == 1) {
+      if (res.status === 200) {
+        if (res.data.rol === 1) {
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("name", res.data.name.split(" ")[0]);
           localStorage.setItem("sessionid", res.data.session);
@@ -155,8 +146,8 @@ export default function SignIn() {
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("name", res.data.name.split(" ")[0]);
           localStorage.setItem("sessionid", res.data.session);
-          const event = new Event("click");
-          document.dispatchEvent(event);
+          // const event = new Event("click");
+          // document.dispatchEvent(event);
           history.push("/");
         }
         else {

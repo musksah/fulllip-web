@@ -14,6 +14,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
+import SessionToken from '../util/sessions'
 
 
 const url = "http://localhost:3006/api/user";
@@ -121,7 +122,9 @@ export default function SignIn() {
     axios.post(url, { email, password }).then(res => {
       if (res.status === 200) {
         if (res.data.rol === 1) {
-          localStorage.setItem("token", res.data.token);
+          let manageToken = new SessionToken();
+          manageToken.setToken(res.data.token)
+          // localStorage.setItem("token", res.data.token);
           localStorage.setItem("name", res.data.name.split(" ")[0]);
           localStorage.setItem("sessionid", res.data.session);
           const event = new Event("click");

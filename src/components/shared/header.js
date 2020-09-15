@@ -141,7 +141,7 @@ export default function PrimarySearchAppBar(props) {
 
   const validateToken = () => {
 
-    if (localStorage.getItem("token") !== null) {
+    if (localStorage.getItem("h_tiov") !== null) {
       setVisibleMenu("visible");
       setVisibleIn("hidden");
       setProfile(localStorage.getItem("name"));

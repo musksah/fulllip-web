@@ -10,7 +10,8 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: '4em',
         // marginLeft: '10em',
         // marginRight: '10em',
-        background: '#FFEAEA'
+        background: '#FFEAEA',
+        marginBottom:'2em'
     }
 }));
 

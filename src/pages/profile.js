@@ -18,8 +18,10 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Header from '../components/shared/header';
 import Box from '@material-ui/core/Box';
 import { useHistory } from "react-router-dom";
+import Enviroment from '../enviroment';
 
-const url = "http://localhost:3006/api/customer";
+const URL = `${Enviroment.urlApi}/customer`;
+const URL2 = `${Enviroment.urlApi}/user`;
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -55,6 +57,7 @@ export default function Perfil() {
     const classes = useStyles();
     const [name, setName] = useState("");
     const [customer, setCustomer] = useState(0);
+    const [user, setUser] = useState(0);
     const [lastname, setLastname] = useState("");
     const [dni_id, setDni] = useState("");
     const [gender, setGender] = useState(0);
@@ -64,11 +67,14 @@ export default function Perfil() {
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
     const [email, setEmail] = useState("");
-    const [open, setOpen] = React.useState(false);
-    const [message, setMessage] = React.useState("");
-    const [open2, setOpen2] = React.useState(false);
-    const [message2, setMessage2] = React.useState("");
-    const [openProgress, setOpenProgress] = React.useState(true);
+    const [open, setOpen] = useState(false);
+    const [message, setMessage] = useState("");
+    const [open2, setOpen2] = useState(false);
+    const [message2, setMessage2] = useState("");
+    const [passwordA, setPasswordA] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordC, setPasswordC] = useState("");
+    const [openProgress, setOpenProgress] = useState(true);
     const history = useHistory();
 
     useEffect(() => {
@@ -81,7 +87,7 @@ export default function Perfil() {
     }, []);
 
     const findCustomer = () => {
-        axios.post(url, { session: localStorage.getItem("sessionid") }).then(res => {
+        axios.post(URL, { session: localStorage.getItem("sessionid") }).then(res => {
             const datos = res.data;
             setCustomer(datos.id_customer);
             setName(datos.name);
@@ -92,6 +98,7 @@ export default function Perfil() {
             setCountry(datos.country);
             setCity(datos.city);
             setEmail(datos.user.email);
+            setUser(datos.user.id_user);
             setGender(datos.gender);
             if (datos.birthdate !== null) {
                 setBirthdate(datos.birthdate);
@@ -148,11 +155,18 @@ export default function Perfil() {
         setGender(value);
     }
 
-    // const changePassword = (e) => {
-    //     const { value } = e.target;
-    //     console.log(value);
-    //     setPassword(value);
-    // }
+    const changePasswordA = (e) => {
+        const { value } = e.target;
+        setPasswordA(value);
+    }
+    const changePassword = (e) => {
+        const { value } = e.target;
+        setPassword(value);
+    }
+    const changePasswordC = (e) => {
+        const { value } = e.target;
+        setPasswordC(value);
+    }
 
     const updateUser = (e) => {
         e.preventDefault();
@@ -160,7 +174,7 @@ export default function Perfil() {
             openMessage("el campo cédula debe ser un número")
         } else {
             setOpenProgress(true);
-            axios.put(url + "/" + customer, { name, lastname, phone, dni_id, address, birthdate, gender, country, city }).then(res => {
+            axios.put(URL + "/" + user, { name, lastname, phone, dni_id, address, birthdate, gender, country, city }).then(res => {
                 setOpenProgress(false);
                 openMessage2("Los datos personales fueron actualizados.")
             });
@@ -199,6 +213,28 @@ export default function Perfil() {
 
         setOpen2(false);
     };
+
+    const updatePassword = (e) => {
+        e.preventDefault();
+        if (password === passwordC) {
+            setOpenProgress(true);
+            axios.put(URL2 + "/" + user, { password, passwordA }).then(res => {
+                setOpenProgress(false);
+                setPasswordA("");
+                setPassword("");
+                setPasswordC("");
+                if (res.status == 200) {
+                    openMessage2("La contraseña fue actualizada.")
+                }
+                else {
+                    openMessage(res.data.message);
+                }
+            });
+        } else {
+            openMessage("Contraseñas Distintas");
+        }
+
+    }
     return (
         <Box>
             <Header />
@@ -342,7 +378,7 @@ export default function Perfil() {
                         </Grid>
                     </Grid>
                 </form>
-                <form className={classes.form}>
+                <form className={classes.form} onSubmit={updatePassword}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} style={{ marginTop: '2em' }}>
                             <h5>CREDENCIALES</h5>
@@ -359,6 +395,8 @@ export default function Perfil() {
                                     id="password"
                                     autoComplete="off"
                                     placeholder="Ingresa contraseña anterior"
+                                    value={passwordA}
+                                    onChange={changePasswordA}
                                 />
                             </Grid>
                         </Grid>
@@ -372,6 +410,8 @@ export default function Perfil() {
                                 id="password2"
                                 autoComplete="off"
                                 placeholder="Ingresa contraseña anterior"
+                                value={password}
+                                onChange={changePassword}
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -384,16 +424,20 @@ export default function Perfil() {
                                 id="password3"
                                 autoComplete="off"
                                 placeholder="Ingresa nueva contraseña"
+                                value={passwordC}
+                                onChange={changePasswordC}
                             />
                         </Grid>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            color="secondary"
-                            className={classes.submit}
-                        >
-                            Actualizar contraseña
-          </Button>
+                        <Grid item xs={12}>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="secondary"
+                                className={classes.submit}
+                            >
+                                Actualizar contraseña
+                        </Button>
+                        </Grid>
                     </Grid>
                 </form>
                 <form className={classes.form}>

@@ -18,9 +18,9 @@ import SessionToken from '../util/sessions';
 import Header from '../components/shared/header';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
+import Enviroment from '../enviroment';
 
-
-const url = "http://localhost:3006/api/user";
+const URL = `${Enviroment.urlApi}/user`;
 
 
 function Alert(props) {
@@ -130,7 +130,7 @@ export default function SignIn() {
   const findUser = (e) => {
     setOpenProgress(true);
     e.preventDefault();
-    axios.post(url, { email, password }).then(res => {
+    axios.post(URL, { email, password }).then(res => {
       setOpenProgress(false);
       if (res.status === 200) {
         if (res.data.rol === 1) {
@@ -155,14 +155,12 @@ export default function SignIn() {
     e.preventDefault();
     if (password === passwordRe) {
       setOpenProgress(true);
-      axios.post(url + "/register", { email, password, name, lastname }).then(res => {
+      axios.post(URL + "/register", { email, password, name, lastname }).then(res => {
         setOpenProgress(false);
         if (res.status == 200) {
           localStorage.setItem("h_tiov", res.data.token);
           localStorage.setItem("name", res.data.name.split(" ")[0]);
           localStorage.setItem("sessionid", res.data.session);
-          const event = new Event("click");
-          document.dispatchEvent(event);
           history.push("/");
         }
         else {

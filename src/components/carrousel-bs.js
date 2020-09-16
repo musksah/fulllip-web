@@ -13,8 +13,6 @@ export default function Carrousel() {
     }, []);
 
     const getImages = () => {
-        console.log("Trayendo imágenes");
-        // debugger
         axios.get(URL).then(
             res => {
                 console.log(res);
@@ -29,7 +27,7 @@ export default function Carrousel() {
     return (
         <Carousel style={{ height: '500px', overflow: 'hidden' }}>
             {listImages.map(img => (
-                <Carousel.Item>
+                <Carousel.Item key={img.id_image_carrousel}>
                     <img
                         className="d-block w-100"
                         src={img.url}

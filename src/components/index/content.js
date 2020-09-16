@@ -30,7 +30,7 @@ export default function ContentIndex() {
                     <Grid item sm={4}>
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <h3 style={{ textAlign: 'center', color: '#AE5353' }}>¿Por qué Fullips?</h3>
+                        <h3 style={{ textAlign: 'center', color: '#AE5353' }}>¿Por qué usar Fullips?</h3>
                         <hr style={{ background: '#A20000', height: '0.2em', width: '40%' }} />
                     </Grid>
                     <Grid item sm={4}>

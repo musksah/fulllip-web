@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,10 +26,6 @@ export default function PrimaryFooter() {
     return (
         <BottomNavigation
             value={value}
-            onChange={(event, newValue) => {
-                setValue(newValue);
-            }}
-            showLabels
             className={classes.footer}
         >
             <Grid container >

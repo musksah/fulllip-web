@@ -14,7 +14,10 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
-import SessionToken from '../util/sessions'
+import SessionToken from '../util/sessions';
+import Header from '../components/shared/header';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Backdrop from '@material-ui/core/Backdrop';
 
 
 const url = "http://localhost:3006/api/user";
@@ -42,7 +45,15 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  centered: { display: 'flex', justifyContent: 'center', alignItems: 'center', }
+  centered: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  }
 }));
 
 function TabPanel(props) {
@@ -79,13 +90,14 @@ export default function SignIn() {
   const [message, setMessage] = React.useState("");
   const history = useHistory();
   const [value, setValue] = useState(0);
+  const [openProgress, setOpenProgress] = React.useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   useEffect(() => {
-    if (localStorage.getItem("token") !== null) {
+    if (localStorage.getItem("h_tiov") !== null) {
       history.push("/");
     }
   }, []);
@@ -102,7 +114,6 @@ export default function SignIn() {
 
   const changePasswordRe = (e) => {
     const { value } = e.target;
-    console.log(value);
     setPasswordRe(value);
   }
 
@@ -113,22 +124,21 @@ export default function SignIn() {
 
   const changePassword = (e) => {
     const { value } = e.target;
-    console.log(value);
     setPassword(value);
   }
 
   const findUser = (e) => {
+    setOpenProgress(true);
     e.preventDefault();
     axios.post(url, { email, password }).then(res => {
+      setOpenProgress(false);
       if (res.status === 200) {
         if (res.data.rol === 1) {
           let manageToken = new SessionToken();
           manageToken.setToken(res.data.token)
-          // localStorage.setItem("token", res.data.token);
+          localStorage.setItem("h_tiov", res.data.token);
           localStorage.setItem("name", res.data.name.split(" ")[0]);
           localStorage.setItem("sessionid", res.data.session);
-          const event = new Event("click");
-          document.dispatchEvent(event);
           history.push("/");
         } else {
           openMessage("Credenciales Inválidas");
@@ -144,13 +154,15 @@ export default function SignIn() {
   const createUser = (e) => {
     e.preventDefault();
     if (password === passwordRe) {
+      setOpenProgress(true);
       axios.post(url + "/register", { email, password, name, lastname }).then(res => {
+        setOpenProgress(false);
         if (res.status == 200) {
-          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("h_tiov", res.data.token);
           localStorage.setItem("name", res.data.name.split(" ")[0]);
           localStorage.setItem("sessionid", res.data.session);
-          // const event = new Event("click");
-          // document.dispatchEvent(event);
+          const event = new Event("click");
+          document.dispatchEvent(event);
           history.push("/");
         }
         else {
@@ -181,147 +193,153 @@ export default function SignIn() {
   };
 
   return (
-    <Container component="main" maxWidth="sm" style={{ marginTop: '9rem', marginBottom: '9rem' }}>
-      <Paper square elevation={5}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          variant="fullWidth"
-          indicatorColor="secondary"
-          textColor="secondary"
-          aria-label="icon label tabs example"
-        >
-          <Tab label="INGRESAR" />
-          <Tab label="REGISTRARSE" />
-        </Tabs>
-        <TabPanel value={value} index={0}>
-          <form className={classes.form} onSubmit={findUser}>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Correo Electrónico"
-              name="email"
-              autoComplete="off"
-              autoFocus
-              onChange={changeEmail}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Contraseña"
-              type="password"
-              id="password"
-              autoComplete="off"
-              onChange={changePassword}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="secondary"
-              className={classes.submit}
-            >
-              Ingresar
+    <Box>
+      <Header />
+      <Container component="main" maxWidth="sm" style={{ marginTop: '9rem', marginBottom: '16rem' }}>
+        <Backdrop className={classes.backdrop} open={openProgress}>
+          <CircularProgress color="inherit" variant="indeterminate" disableShrink style={{ width: 80, height: 80 }} />
+        </Backdrop>
+        <Paper square elevation={5}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="fullWidth"
+            indicatorColor="secondary"
+            textColor="secondary"
+            aria-label="icon label tabs example"
+          >
+            <Tab label="INGRESAR" />
+            <Tab label="REGISTRARSE" />
+          </Tabs>
+          <TabPanel value={value} index={0}>
+            <form className={classes.form} onSubmit={findUser}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Correo Electrónico"
+                name="email"
+                autoComplete="off"
+                autoFocus
+                onChange={changeEmail}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Contraseña"
+                type="password"
+                id="password"
+                autoComplete="off"
+                onChange={changePassword}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classes.submit}
+              >
+                Ingresar
           </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Olvidó su contraseña?
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Olvidó su contraseña?
               </Link>
+                </Grid>
               </Grid>
-            </Grid>
-          </form>
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <form className={classes.form} onSubmit={createUser}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="off"
-                  name="firstName"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="Nombre"
-                  autoFocus
-                  onChange={changeName}
-                />
+            </form>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <form className={classes.form} onSubmit={createUser}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    autoComplete="off"
+                    name="firstName"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="firstName"
+                    label="Nombre"
+                    autoFocus
+                    onChange={changeName}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="lastName"
+                    label="Apellido"
+                    name="lastName"
+                    autoComplete="off"
+                    onChange={changeLastname}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Correo Electrónico"
+                    name="email"
+                    autoComplete="off"
+                    onChange={changeEmail}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Contraseña"
+                    type="password"
+                    id="password"
+                    autoComplete="off"
+                    onChange={changePassword}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="password2"
+                    label="Confirmar Contraseña"
+                    type="password"
+                    id="password2"
+                    autoComplete="off"
+                    onChange={changePasswordRe}
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Apellido"
-                  name="lastName"
-                  autoComplete="off"
-                  onChange={changeLastname}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Correo Electrónico"
-                  name="email"
-                  autoComplete="off"
-                  onChange={changeEmail}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Contraseña"
-                  type="password"
-                  id="password"
-                  autoComplete="off"
-                  onChange={changePassword}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password2"
-                  label="Confirmar Contraseña"
-                  type="password"
-                  id="password2"
-                  autoComplete="off"
-                  onChange={changePasswordRe}
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="secondary"
-              className={classes.submit}
-            >
-              Registrarse
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classes.submit}
+              >
+                Registrarse
           </Button>
-          </form>
-        </TabPanel>
-      </Paper>
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error">
-          {message}
-        </Alert>
-      </Snackbar>
-    </Container >
+            </form>
+          </TabPanel>
+        </Paper>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error">
+            {message}
+          </Alert>
+        </Snackbar>
+      </Container >
+    </Box>
   );
 }

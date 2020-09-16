@@ -11,6 +11,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import clsx from 'clsx';
+import Header from '../components/shared/header';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,45 +41,48 @@ function ItemDetail() {
     };
 
     return (
-        <Container className={classes.root}>
-            <Box style={{ paddingTop: '10rem', paddingBottom: '7rem' }}>
-                <Grid container spacing={3}>
-                    <Grid item xs={6}>
-                        <img className={classes.img_product} width="100%" src="/img/kit.jpg" />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Grid container>
-                            <Grid item xs={12} style={{ marginTop: '0.5em' }}>
-                                <h4>Kit</h4>
-                            </Grid>
-                            <Grid item xs={12} style={{ marginTop: '2em', color: '#FF5C5C' }}>
-                                <h5>$150.000</h5>
-                            </Grid>
-                            <Grid item xs={12} style={{ marginTop: '2em' }}>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea nulla modi, odit explicabo hic doloremque commodi ab molestiae. Iure voluptatem labore et aliquid soluta inventore expedita quam vel a earum!</p>
-                            </Grid>
-                            <Grid item xs={12} style={{ marginTop: '1em' }}>
-                                <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-                                    <OutlinedInput
-                                        id="outlined-adornment-weight"
-                                        value={values.weight}
-                                        onChange={handleChange('weight')}
-                                        aria-describedby="outlined-weight-helper-text"
-                                        inputProps={{
-                                            'aria-label': 'weight',
-                                        }}
-                                    />
-                                    <FormHelperText id="outlined-weight-helper-text">cantidad</FormHelperText>
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={12} style={{ marginTop: '1em' }}>
-                                <Button variant="contained" style={{ padding:'1em' }} >Añadir al Carrito</Button>
+        <Box>
+            <Header />
+            <Container className={classes.root}>
+                <Box style={{ paddingTop: '10rem', paddingBottom: '7rem' }}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={6}>
+                            <img className={classes.img_product} width="100%" src="/img/kit.jpg" />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Grid container>
+                                <Grid item xs={12} style={{ marginTop: '0.5em' }}>
+                                    <h4>Kit</h4>
+                                </Grid>
+                                <Grid item xs={12} style={{ marginTop: '2em', color: '#FF5C5C' }}>
+                                    <h5>$150.000</h5>
+                                </Grid>
+                                <Grid item xs={12} style={{ marginTop: '2em' }}>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea nulla modi, odit explicabo hic doloremque commodi ab molestiae. Iure voluptatem labore et aliquid soluta inventore expedita quam vel a earum!</p>
+                                </Grid>
+                                <Grid item xs={12} style={{ marginTop: '1em' }}>
+                                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+                                        <OutlinedInput
+                                            id="outlined-adornment-weight"
+                                            value={values.weight}
+                                            onChange={handleChange('weight')}
+                                            aria-describedby="outlined-weight-helper-text"
+                                            inputProps={{
+                                                'aria-label': 'weight',
+                                            }}
+                                        />
+                                        <FormHelperText id="outlined-weight-helper-text">cantidad</FormHelperText>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={12} style={{ marginTop: '1em' }}>
+                                    <Button variant="contained" style={{ padding: '1em' }} >Añadir al Carrito</Button>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
-                </Grid>
-            </Box>
-        </Container>
+                </Box>
+            </Container>
+        </Box>
     );
 }
 

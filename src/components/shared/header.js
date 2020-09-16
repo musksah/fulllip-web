@@ -132,19 +132,25 @@ export default function PrimarySearchAppBar(props) {
 
   useEffect(() => {
     validateToken();
-    document.addEventListener(('click'), () => {
-      validateToken();
-    });
   }, []);
 
 
 
   const validateToken = () => {
-
     if (localStorage.getItem("h_tiov") !== null) {
+      const AuthStr = 'bearer ' + localStorage.getItem("h_tiov");
       setVisibleMenu("visible");
       setVisibleIn("hidden");
       setProfile(localStorage.getItem("name"));
+      axios.get(url, { headers: { "Authorization": AuthStr, "Content-Type": "application/json" } })
+        .then(response => {
+          if (response.status !== 200) {
+            localStorage.clear();
+            history.push("/");
+            setVisibleMenu("hidden");
+            setVisibleIn("visible");
+          }
+        });
     }
   }
 
@@ -173,11 +179,11 @@ export default function PrimarySearchAppBar(props) {
   const logOut = () => {
     axios.post(url + "/logout", { session: localStorage.getItem("sessionid") }).then(res => {
       handleMenuClose();
-      history.push("/");
       localStorage.clear();
+      history.push("/");
       setVisibleMenu("hidden");
       setVisibleIn("visible");
-    }).catch(console.log);
+    });
   };
 
 
@@ -192,7 +198,7 @@ export default function PrimarySearchAppBar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <NavLink to="/profile" style={{ textDecoration: 'none' }}>
+      <NavLink to="/Perfil" style={{ textDecoration: 'none' }}>
         <MenuItem onClick={handleMenuClose}> {profile}</MenuItem>
       </NavLink>
       <MenuItem onClick={logOut}> Cerrar Sesión</MenuItem>
@@ -257,19 +263,6 @@ export default function PrimarySearchAppBar(props) {
                 style={{ marginLeft: '1em' }}
               />
             </NavLink>
-            {/* <div className={classes.search} style={{ color: '#545454' }}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Buscar…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </div> */}
             <NavLink to="/Ingresar" style={{ textDecoration: 'none' }}>
               <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '10em' }}>
                 PREGUNTAS FRECUENTES

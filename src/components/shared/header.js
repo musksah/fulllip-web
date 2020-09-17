@@ -263,7 +263,7 @@ export default function PrimarySearchAppBar(props) {
                 style={{ marginLeft: '1em' }}
               />
             </NavLink>
-            <NavLink to="/Ingresar" style={{ textDecoration: 'none' }}>
+            <NavLink to="/Preguntas" style={{ textDecoration: 'none' }}>
               <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '10em' }}>
                 PREGUNTAS FRECUENTES
               </Typography>

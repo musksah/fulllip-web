@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import clsx from 'clsx';
 import Header from '../components/shared/header';
+import { useParams } from "react-router-dom";
+import Enviroment from '../enviroment';
+
+const URL = `${Enviroment.urlApi}/item`;
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,13 +31,34 @@ const useStyles = makeStyles((theme) => ({
 
 function ItemDetail() {
     const classes = useStyles();
-    const [values, setValues] = React.useState({
+    const [values, setValues] = useState({
         amount: '',
         password: '',
         weight: '',
         weightRange: '',
         showPassword: false,
     });
+    const [product, setProduct] = useState({});
+
+    let { id } = useParams();
+
+    useEffect(() => {
+        getProductInfo();
+    }, []);
+
+    const getProductInfo = () => {
+        axios.get(`${URL}/${id}`).then(
+            res => {
+                console.log(res);
+                setProduct(res.data);
+            },
+            err => {
+                console.log(err);
+            }
+        )
+        console.log("Trayendo la información del producto");
+        console.log(id);
+    }
 
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
@@ -52,13 +76,16 @@ function ItemDetail() {
                         <Grid item xs={6}>
                             <Grid container>
                                 <Grid item xs={12} style={{ marginTop: '0.5em' }}>
-                                    <h4>Kit</h4>
+                                    <h4>{product.name}</h4>
                                 </Grid>
                                 <Grid item xs={12} style={{ marginTop: '2em', color: '#FF5C5C' }}>
-                                    <h5>$150.000</h5>
+                                    <h5>${product.price}</h5>
                                 </Grid>
                                 <Grid item xs={12} style={{ marginTop: '2em' }}>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea nulla modi, odit explicabo hic doloremque commodi ab molestiae. Iure voluptatem labore et aliquid soluta inventore expedita quam vel a earum!</p>
+                                    <p>{product.description}</p>
+                                </Grid>
+                                <Grid item xs={12} style={{ marginTop: '0.5em',fontSize:'0.7em' }}>
+                                    <p>Disponibles en inventario: {product.quantity}</p>
                                 </Grid>
                                 <Grid item xs={12} style={{ marginTop: '1em' }}>
                                     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">

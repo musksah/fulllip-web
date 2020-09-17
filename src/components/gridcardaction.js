@@ -137,10 +137,9 @@ export default function NestedGrid() {
     )
   }
 
-  const goProduct = () =>{
-    history.push("/product");
+  function goProduct(id) {
+    history.push("/product/"+id);
   }
-
 
   function FormRow() {
     return (
@@ -156,7 +155,7 @@ export default function NestedGrid() {
                     width: '25%',
                   }}
                   key={image.id_image_index_product}
-                  onClick={goProduct}
+                  onClick={() => goProduct(image.id_image_index_product)}
                 >
                   <span
                     className={classes.imageSrc}
@@ -185,7 +184,7 @@ export default function NestedGrid() {
   }
 
   return (
-    <div className={classes.root} style={{ marginTop: '1rem' }}>
+    <div className={classes.root} style={{ marginTop: '1rem', background:'#FFFFFF' }}>
       <Grid container spacing={1}>
         <Grid container item xs={12} lg={12} sm={12}>
           <FormRow />

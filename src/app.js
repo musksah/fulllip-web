@@ -17,7 +17,7 @@ function App() {
                     <Route path="/Ingresar" exact component={Login} />
                     <Route path="/Perfil" exact component={Profile} />
                     <Route path="/profile" exact component={Profile} />
-                    <Route path="/product" exact component={Product} />
+                    <Route path="/product/:id" exact component={Product} />
                 </Switch>
             </Router>
             <Footer />

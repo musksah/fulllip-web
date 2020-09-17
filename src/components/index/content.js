@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -10,8 +10,6 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: '4em',
         // marginLeft: '10em',
         // marginRight: '10em',
-        background: '#FFEAEA',
-        marginBottom:'2em'
     }
 }));
 
@@ -26,6 +24,13 @@ export default function ContentIndex() {
     return (
         <div className={classes.root}>
             <Box>
+                <Grid container style={{marginBottom:'2em'}}>
+                    <Grid item xs={12}>
+                        <center>
+                            <img style={{width:'30%'}} src="img/distribuidor autorizado.jpg"></img>
+                        </center>
+                    </Grid>
+                </Grid>
                 <Grid container>
                     <Grid item sm={4}>
                     </Grid>

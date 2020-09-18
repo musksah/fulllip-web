@@ -34,7 +34,7 @@ export default function PrimaryFooter() {
                 </Grid>
                 <Grid item xs={3}>
                     <ul>
-                        <h5>FULLIP</h5>
+                        <h5>FULLIPS</h5>
                         <li className={classes.item_footer}>Contacto</li>
                         <li className={classes.item_footer}>Nosotros</li>
                         <li className={classes.item_footer}>Uso</li>

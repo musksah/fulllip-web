@@ -1,6 +1,6 @@
 import React from 'react';
-import Carrousel from '../components/carrousel';
 import CarrouselBs from '../components/carrousel-bs';
+import Carrousel from '../components/carrousel';
 import NestedGrid from '../components/gridcardaction';
 import Container from '@material-ui/core/Container';
 import Content from '../components/index/content';
@@ -11,18 +11,24 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
     root: {
         background: '#FFEAEA',
+    },
+    container_card:{
+        background:'#FFFFFF',
+        marginBottom:'3em'
     }
 }));
 
 function Home() {
     const classes = useStyles();
     return (
-        <Box className={classes.root}>
+        <Box>
             <Header />
-            <Box style={{ marginTop: '6rem' }}>
-                <CarrouselBs />
-                <Container maxWidth="lg">
+            <Box>
+                <Carrousel />
+                <Container maxWidth="lg" className={classes.container_card}>
                     <NestedGrid />
+                </Container>
+                <Container maxWidth="lg" className={classes.root}>
                     <Content />
                 </Container>
             </Box>

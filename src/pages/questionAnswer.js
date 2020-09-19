@@ -13,6 +13,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Interweave from 'interweave';
 
 
 const URL = `${Enviroment.urlApi}/qa`;
@@ -63,7 +64,7 @@ export default function Question() {
                     <CircularProgress color="inherit" variant="indeterminate" disableShrink style={{ width: 80, height: 80 }} />
                 </Backdrop>
                 <Grid className={classes.centered} item xs={12}>
-                    <h3 >Preguntas Frecuentes</h3>
+                    <Typography variant="h4">Preguntas Frecuentes</Typography>
                 </Grid>
                 <Grid style={{ marginTop: '3rem', marginBottom: '6rem' }} className={classes.centered} item xs={12}>
                     <Grid item xs={10}>
@@ -72,11 +73,13 @@ export default function Question() {
                                 <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}
                                 >
-                                    <Typography className={classes.heading}>{q.name}</Typography>
+                                    <Typography variant="h6" className={classes.heading}>{q.name}</Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
                                     <Typography>
-                                        {q.description}
+                                        <Interweave
+                                            content={q.description}
+                                        />
                                     </Typography>
                                 </AccordionDetails>
                             </Accordion>

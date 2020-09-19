@@ -1,5 +1,4 @@
 import React from 'react';
-import CarrouselBs from '../components/carrousel-bs';
 import Carrousel from '../components/carrousel';
 import NestedGrid from '../components/gridcardaction';
 import Container from '@material-ui/core/Container';

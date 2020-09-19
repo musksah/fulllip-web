@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import Carousel from 'react-material-ui-carousel';
 
 const tutorialSteps = [
   {
@@ -62,6 +63,19 @@ export default function TextMobileStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = tutorialSteps.length;
 
+  var items = [
+    {
+      name: "Random Name #1",
+      description: "Probably the most random thing you have ever seen!",
+      url:"img/BANNER-CANDY.jpg"
+    },
+    {
+      name: "Random Name #2",
+      description: "Hello World!",
+      url:"img/BANNER-FRUTAS.jpg"
+    }
+  ];
+
   const handleNext = () => {
     console.log(maxSteps);
     // setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -73,38 +87,53 @@ export default function TextMobileStepper() {
     });
   };
 
+  function Item(props) {
+    return (
+      // <Paper>
+        <img src={props.item.url} style={{height:'550px'}}></img>
+      // </Paper>
+    )
+  }
+
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   return (
-    <div className={classes.root}>
-      <div style={{maxHeight:'450px',overflow:'hidden'}}>
-        <img
-          className={classes.img}
-          src={tutorialSteps[activeStep].imgPath}
-          alt={tutorialSteps[activeStep].label}
-        />
-      </div>
-      <MobileStepper
-        variant="dots"
-        steps={5}
-        position="static"
-        activeStep={activeStep}
-        className={classes.root}
-        nextButton={
-          <Button size="small" onClick={handleNext} disabled={activeStep === 5}>
-            Siguiente
-          {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-          </Button>
-        }
-        backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-          Anterior
-        </Button>
-        }
-      />
-    </div>
+    <Carousel>
+      {
+        items.map((item, i) => <Item key={i} item={item} />)
+      }
+    </Carousel>
   );
+  // return (
+  //   <div className={classes.root}>
+  //     <div style={{maxHeight:'450px',overflow:'hidden'}}>
+  //       <img
+  //         className={classes.img}
+  //         src={tutorialSteps[activeStep].imgPath}
+  //         alt={tutorialSteps[activeStep].label}
+  //       />
+  //     </div>
+  //     <MobileStepper
+  //       variant="dots"
+  //       steps={5}
+  //       position="static"
+  //       activeStep={activeStep}
+  //       className={classes.root}
+  //       nextButton={
+  //         <Button size="small" onClick={handleNext} disabled={activeStep === 5}>
+  //           Siguiente
+  //         {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+  //         </Button>
+  //       }
+  //       backButton={
+  //         <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+  //           {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+  //         Anterior
+  //       </Button>
+  //       }
+  //     />
+  //   </div>
+  // );
 }

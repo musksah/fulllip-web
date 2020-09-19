@@ -6,6 +6,7 @@ import Header from './components/shared/header';
 import Footer from './components/shared/footer';
 import Product from './pages/productdetail';
 import Question from './pages/questionAnswer';
+import Use from './pages/use';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Box from '@material-ui/core/Box';
 
@@ -19,7 +20,8 @@ function App() {
                     <Route path="/Perfil" exact component={Profile} />
                     <Route path="/profile" exact component={Profile} />
                     <Route path="/product/:id" exact component={Product} />
-                    <Route path="/Preguntas" exact component={Question} />
+                    <Route path="/Question" exact component={Question} />
+                    <Route path="/Use" exact component={Use} />
                 </Switch>
             </Router>
             <Footer />

@@ -4,6 +4,7 @@ import MobileStepper from '@material-ui/core/MobileStepper';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Carousel from 'react-material-ui-carousel';
@@ -39,8 +40,11 @@ const tutorialSteps = [
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: '100%',
-    // maxHeight: '450px',
+    marginTop: '1em',
     // overflow:'hidden'
+  },
+  rootBefore: {
+    backgroundColor: 'rgba(0,0,0,0.6)',
   },
   header: {
     display: 'flex',
@@ -67,12 +71,12 @@ export default function TextMobileStepper() {
     {
       name: "Random Name #1",
       description: "Probably the most random thing you have ever seen!",
-      url:"img/BANNER-CANDY.jpg"
+      url: "img/BANNER-CANDY.jpg"
     },
     {
       name: "Random Name #2",
       description: "Hello World!",
-      url:"img/BANNER-FRUTAS.jpg"
+      url: "img/BANNER-FRUTAS.jpg"
     }
   ];
 
@@ -90,7 +94,9 @@ export default function TextMobileStepper() {
   function Item(props) {
     return (
       // <Paper>
-        <img src={props.item.url} style={{height:'550px'}}></img>
+      <Box>
+        <img src={props.item.url} style={{ height: '550px', width: '100%' }}></img>
+      </Box>
       // </Paper>
     )
   }
@@ -100,11 +106,13 @@ export default function TextMobileStepper() {
   };
 
   return (
-    <Carousel>
-      {
-        items.map((item, i) => <Item key={i} item={item} />)
-      }
-    </Carousel>
+    <Box className={classes.root}>
+      <Carousel navButtonsAlwaysVisible="true">
+        {
+          items.map((item, i) => <Item key={i} item={item} />)
+        }
+      </Carousel>
+    </Box>
   );
   // return (
   //   <div className={classes.root}>

@@ -10,6 +10,7 @@ import Use from './pages/use';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Box from '@material-ui/core/Box';
+import ScrollToTop from './util/scrolltop';
 
 const theme = createMuiTheme({
     palette: {
@@ -48,6 +49,7 @@ function App() {
         <Box>
             <ThemeProvider theme={theme}>
                 <Router>
+                    <ScrollToTop />
                     <Switch>
                         <Route path="/" exact component={Home} />
                         <Route path="/Ingresar" exact component={Login} />

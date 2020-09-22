@@ -16,6 +16,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
@@ -24,6 +25,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import './gridcardaction.css';
 
 
 const images = [
@@ -56,6 +58,27 @@ const useStyles = makeStyles((theme) => ({
   media: {
     height: 200,
   },
+  box_product: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  btn_product: {
+    position: 'relative',
+    border: 'solid 3px white',
+    opacity: '0.7',
+    backgroundColor: 'grey',
+    borderRadius: '0',
+    color: 'white'
+  },
+  hoverButton:{
+    '&:hover': {
+      display: "none",
+   },
+  }
 }));
 
 const URL = `${Enviroment.urlApi}/img-in-products`;
@@ -65,6 +88,7 @@ export default function NestedGrid() {
   const [listImages, setlistImages] = useState([]);
   const history = useHistory();
   const [expanded, setExpanded] = React.useState(false);
+  const [buttonStyle, setButtonStyle] = useState({ 'img': '' });
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -91,36 +115,69 @@ export default function NestedGrid() {
     history.push("/product/" + id);
   }
 
+  function hoverProductCard(key, image) {
+    console.log(`Hover product ${key}`);
+    // console.log(listImages);
+    let newArr = [...listImages];
+    newArr.forEach((value, index, currentArr) => {
+      if (index == key) {
+        currentArr[index].url = listImages[index].name;
+      }
+    });
+    console.log(newArr);
+    // debugger
+    setlistImages(newArr);
+  }
+
+  function leaveProductCard(key, image) {
+    console.log(`Leaving product ${key}`);
+    // console.log(listImages);
+    let newArr = [...listImages];
+    newArr.forEach((value, index, currentArr) => {
+      if (index == key) {
+        currentArr[index].url = listImages[index].subtitle;
+      }
+    });
+    // console.log(newArr);
+    setlistImages(newArr);
+  }
+
   function FormRow() {
     return (
       <React.Fragment>
-        <Grid container justify="center" spacing={2}>
-          {listImages.map((image) => (
-            <Grid item xs={12} sm={3} lg={3} key={image.id_image_index_product}>
-              <Card className={classes.root}>
-                <CardActionArea>
-                  <CardMedia
-                    className={classes.media}
-                    image={image.url}
-                    title="Contemplative Reptile"
-                  />
-                  <CardContent>
+        <Grid container justify="center" spacing={2} style={{ marginTop: '1em' }}>
+          {listImages.map((image, index) => (
+            <Grid item xs={12} sm={3} md={3} lg={3} key={image.id_image_index_product} onMouseEnter={() => hoverProductCard(index, image.name)} onMouseLeave={() => leaveProductCard(index, image.name)} className={[].join(' ')}  >
+              {/* onMouseEnter={() => hoverProductCard(index, image.name)} onMouseLeave={() => leaveProductCard(index, image.name)}  */}
+              <Card className={[classes.root].join(' ')} >
+                <CardActionArea >
+                  <Box className={classes.box_product}>
+                    <Button className={classes.btn_product} onClick={() => goProduct(image.id_image_index_product)} >{image.title}</Button>
+                  </Box>
+                  <Box>
+                    <CardMedia
+                      className={[classes.media].join(' ')}
+                      image={image.url}
+                      title="Contemplative Reptile"
+                    />
+                  </Box>
+                  {/* <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                       {image.title}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
                       {image.subtitle}
                     </Typography>
-                  </CardContent>
+                  </CardContent> */}
                 </CardActionArea>
-                <CardActions>
+                {/* <CardActions>
                   <Button size="small" color="primary">
                     Share
                  </Button>
                   <Button size="small" color="primary">
                     Learn More
                  </Button>
-                </CardActions>
+                </CardActions> */}
               </Card>
             </Grid>
             // <ButtonBase

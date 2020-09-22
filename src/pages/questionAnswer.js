@@ -64,7 +64,7 @@ export default function Question() {
                     <CircularProgress color="inherit" variant="indeterminate" disableShrink style={{ width: 80, height: 80 }} />
                 </Backdrop>
                 <Grid className={classes.centered} item xs={12}>
-                    <Typography variant="h4">Preguntas Frecuentes</Typography>
+                    <Typography variant="h4" color="primary" style={{ textDecoration: "underline" }}>Preguntas Frecuentes</Typography>
                 </Grid>
                 <Grid style={{ marginTop: '3rem', marginBottom: '6rem' }} className={classes.centered} item xs={12}>
                     <Grid item xs={10}>
@@ -79,6 +79,7 @@ export default function Question() {
                                     <Typography>
                                         <Interweave
                                             content={q.description}
+                                            color="secondary"
                                         />
                                     </Typography>
                                 </AccordionDetails>

@@ -202,8 +202,8 @@ export default function SignIn() {
             value={value}
             onChange={handleChange}
             variant="fullWidth"
-            indicatorColor="secondary"
-            textColor="secondary"
+            indicatorColor="primary"
+            textColor="primary"
             aria-label="icon label tabs example"
           >
             <Tab label="INGRESAR" />
@@ -239,14 +239,14 @@ export default function SignIn() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="secondary"
+                color="primary"
                 className={classes.submit}
               >
                 Ingresar
           </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="#" color="secondary" variant="body2">
                     Olvidó su contraseña?
               </Link>
                 </Grid>
@@ -324,7 +324,7 @@ export default function SignIn() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="secondary"
+                color="primary"
                 className={classes.submit}
               >
                 Registrarse

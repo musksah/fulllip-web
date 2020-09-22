@@ -14,9 +14,13 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Interweave from 'interweave';
+import ReactPlayer from "react-player";
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 
 const URL = `${Enviroment.urlApi}/advice`;
+const URL2 = `${Enviroment.urlApi}/video`;
 
 const useStyles = makeStyles((theme) => ({
     centered: {
@@ -36,17 +40,28 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Question() {
     const classes = useStyles();
-    const [openProgress, setOpenProgress] = useState(true);
+    const [openProgress, setOpenProgress] = useState(false);
     const [use, setUse] = useState([]);
+    const [video, setVideo] = useState([]);
 
 
     useEffect(() => {
+        setOpenProgress(true);
         findUse();
+        findVideo();
     }, []);
 
     const findUse = () => {
         axios.get(URL).then(res => {
             setUse(res.data);
+            setOpenProgress(false);
+        });
+    }
+
+    const findVideo = () => {
+        axios.get(URL2).then(res => {
+            console.log(res);
+            setVideo(res.data);
             setOpenProgress(false);
         });
     }
@@ -61,10 +76,10 @@ export default function Question() {
                 {use.map(u => (
                     <Grid>
                         <Grid className={classes.centered} item xs={12}>
-                            <Typography variant="h4">{u.name}</Typography>
+                            <Typography variant="h4" color="primary" style={{ textDecoration: "underline" }}>{u.name}</Typography>
                         </Grid>
                         <Grid style={{ marginBottom: '4rem' }} className={classes.centered} item xs={12}>
-                            <Grid item xs={10}>
+                            <Grid item xs={10} sm={10}>
                                 <Interweave
                                     content={u.description}
                                 />
@@ -72,7 +87,30 @@ export default function Question() {
                         </Grid>
                     </Grid>
                 ))}
+                <Box>
+                    <Grid className={classes.centered} item xs={12}>
+                        <Typography variant="h4" color="primary" style={{ textDecoration: "underline" }}>Tutoriales</Typography>
+                    </Grid>
+                    <Grid style={{ marginTop: '3rem' }} container justify="center" spacing={3}>
+                        {video.map(v => (
+                            <Grid item xs={10} sm={8} md={3} lg={3}>
+                                <Card elevation={5}>
+                                    <CardContent>
+                                        <ReactPlayer
+                                            url={v.url}
+                                            width='100%'
+                                            height='200px'
+                                        />
+                                        <Typography gutterBottom variant="h6" color="secondary" style={{ marginTop: '1rem' }}>
+                                            {v.title}
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Box>
             </Box>
-        </Box>
+        </Box >
     );
 }

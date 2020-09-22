@@ -251,42 +251,42 @@ export default function PrimarySearchAppBar(props) {
   );
 
   return (
-    <div className={classes.grow}>
+    <div className={classes.grow} xs={12}>
       <ElevationScroll {...props}>
         <AppBar position="fixed" color="transparent" style={{ paddingBottom: '17.5px', paddingTop: '17.5px', background: '#FFFFFF' }}>
           <Toolbar>
             <NavLink to="/" style={{ textDecoration: 'none' }}>
               <img
-                src={`/img/logofulllips.png`}
+                src={`/img/FULLIPS_COLOMBIA_JPG.jpg`}
                 alt={`logo`}
                 width="100"
                 style={{ marginLeft: '1em' }}
               />
             </NavLink>
             <NavLink to="/Question" style={{ textDecoration: 'none' }}>
-              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '10em' }}>
+              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '10em' }}>
                 PREGUNTAS FRECUENTES
               </Typography>
             </NavLink>
             <NavLink to="/Use" style={{ textDecoration: 'none' }}>
-              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '3em' }}>
+              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '3em' }}>
                 USO
           </Typography>
             </NavLink>
-            <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '3em' }}>
+            <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '3em' }}>
               NOSOTROS
           </Typography>
-            <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginLeft: '3em' }}>
+            <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '3em' }}>
               <ModalContact />
             </Typography>
             <div className={classes.grow} />
             <NavLink to="/Ingresar" style={{ textDecoration: 'none', visibility: visibleIn }}>
-              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} style={{ color: '#545454', marginRight: '6em' }}>
+              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginRight: '6em' }}>
                 INGRESAR/REGISTRARSE
           </Typography>
             </NavLink>
             <div className={classes.sectionDesktop}>
-              <IconButton aria-label="show 4 new mails" color="inherit" style={{ color: '#545454' }}>
+              <IconButton aria-label="show 4 new mails" color="inherit" color="secondary">
                 <Badge badgeContent={4} color="error">
                   <AiOutlineShopping />
                 </Badge>

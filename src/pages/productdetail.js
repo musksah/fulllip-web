@@ -84,7 +84,7 @@ function ItemDetail() {
                                 <Grid item xs={12} style={{ marginTop: '2em' }}>
                                     <p>{product.description}</p>
                                 </Grid>
-                                <Grid item xs={12} style={{ marginTop: '0.5em',fontSize:'0.7em' }}>
+                                <Grid item xs={12} style={{ marginTop: '0.5em', fontSize: '0.7em' }}>
                                     <p>Disponibles en inventario: {product.quantity}</p>
                                 </Grid>
                                 <Grid item xs={12} style={{ marginTop: '1em' }}>
@@ -102,7 +102,7 @@ function ItemDetail() {
                                     </FormControl>
                                 </Grid>
                                 <Grid item xs={12} style={{ marginTop: '1em' }}>
-                                    <Button variant="contained" style={{ padding: '1em' }} >Añadir al Carrito</Button>
+                                    <Button variant="contained" style={{ padding: '1em' }}>Añadir al Carrito</Button>
                                 </Grid>
                             </Grid>
                         </Grid>

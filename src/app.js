@@ -6,6 +6,7 @@ import Header from './components/shared/header';
 import Footer from './components/shared/footer';
 import Product from './pages/productdetail';
 import Question from './pages/questionAnswer';
+import Checkout from './pages/checkout';
 import Use from './pages/use';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -58,6 +59,7 @@ function App() {
                         <Route path="/product/:id" exact component={Product} />
                         <Route path="/Question" exact component={Question} />
                         <Route path="/Use" exact component={Use} />
+                        <Route path="/checkout" exact component={Checkout} />
                     </Switch>
                 </Router>
                 <Footer />

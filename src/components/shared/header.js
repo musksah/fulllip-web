@@ -134,8 +134,6 @@ export default function PrimarySearchAppBar(props) {
     validateToken();
   }, []);
 
-
-
   const validateToken = () => {
     if (localStorage.getItem("h_tiov") !== null) {
       const AuthStr = 'bearer ' + localStorage.getItem("h_tiov");
@@ -164,8 +162,6 @@ export default function PrimarySearchAppBar(props) {
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
-
-
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -286,11 +282,13 @@ export default function PrimarySearchAppBar(props) {
           </Typography>
             </NavLink>
             <div className={classes.sectionDesktop}>
-              <IconButton aria-label="show 4 new mails" color="inherit" color="secondary">
-                <Badge badgeContent={4} color="error">
-                  <AiOutlineShopping />
-                </Badge>
-              </IconButton>
+              <NavLink to="/checkout">
+                <IconButton aria-label="show 4 new mails" color="inherit" color="secondary">
+                  <Badge badgeContent={5} color="error">
+                    <AiOutlineShopping />
+                  </Badge>
+                </IconButton>
+              </NavLink>
               <IconButton
                 edge="end"
                 aria-label="account of current user"

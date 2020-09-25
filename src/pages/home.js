@@ -24,10 +24,10 @@ function Home() {
             <Header />
             <Box>
                 <Carrousel />
-                <Container maxWidth="lg" className={classes.container_card}>
+                <Container maxWidth="xl" className={classes.container_card}>
                     <NestedGrid />
                 </Container>
-                <Container maxWidth="lg" className={classes.root}>
+                <Container maxWidth="xl" className={classes.root}>
                     <Content />
                 </Container>
             </Box>

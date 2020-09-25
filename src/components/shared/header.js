@@ -15,10 +15,10 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import PropTypes from 'prop-types';
 import { AiOutlineShopping } from "react-icons/ai";
-import "fontsource-poiret-one";
 import { BrowserRouter as Router, Switch, Route, NavLink, useHistory } from "react-router-dom";
 import axios from 'axios';
 import ModalContact from '../../pages/contact';
+import 'typeface-rubik';
 
 const url = "http://localhost:3006/api/user";
 
@@ -79,12 +79,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   brandHeader: {
-    fontFamily: 'Poiret One',
+    fontFamily: 'Rubik',
     fontStyle: 'normal',
   },
   linkHeader: {
-    fontFamily: 'Poiret One',
-    fontWeight: '600',
+    fontFamily: 'Rubik, verdana',
+    fontWeight: '400',
     fontSize: '0.85em',
   },
   sectionMobile: {

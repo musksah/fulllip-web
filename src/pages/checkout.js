@@ -107,7 +107,7 @@ export default function CheckOut() {
                     </Grid>
                     <Grid container >
                         <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-                            <NavLink to="/payment" style={{ textDecoration: 'none' }}>
+                            <NavLink to="/sending" style={{ textDecoration: 'none' }}>
                                 <Button variant="contained">Finalizar Pedido</Button>
                             </NavLink>
                         </Grid>

@@ -9,6 +9,7 @@ import Question from './pages/questionAnswer';
 import Checkout from './pages/checkout';
 import Payment from './pages/payment';
 import Use from './pages/use';
+import Sending from './pages/sending';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Box from '@material-ui/core/Box';
@@ -96,6 +97,7 @@ function App() {
                         <Route path="/Use" exact component={Use} />
                         <Route path="/checkout" exact component={Checkout} />
                         <Route path="/payment" exact component={Payment} />
+                        <Route path="/sending" exact component={Sending} />
                     </Switch>
                 </Router>
                 <Footer />

@@ -27,6 +27,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import Information from '../components/shooping_cart/information'
 
 const items = [
     { img: 'img/kit.jpg', name: 'Kit', price: '10000', quantiy: 1 },
@@ -128,7 +129,7 @@ export default function Payment() {
 
     const handleChange = (event) => {
         setValue(event.target.value);
-      };
+    };
 
     return (
         <Box>
@@ -137,6 +138,7 @@ export default function Payment() {
                 <Container style={{ marginBottom: '7em' }}>
                     <Grid container style={{ marginTop: '2em', padding: '0.7em' }} >
                         <Grid item xs={6}>
+                            <Information />
                             <Grid container>
                                 <Grid item xs={1}></Grid>
                                 <Grid item xs={11}>

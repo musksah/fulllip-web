@@ -42,18 +42,13 @@ export default function Sending() {
     const [city, setCity] = useState("");
     const [email, setEmail] = useState("");
 
-    const saveData = () => {
-        localStorage.setItem("name", name);
-        localStorage.setItem("adicional", adicional);
-        localStorage.setItem("lastname", lastname);
-        localStorage.setItem("dni_id", dni_id);
-        localStorage.setItem("address", address);
-        localStorage.setItem("phone", phone);
-        localStorage.setItem("country", country);
-        localStorage.setItem("city", city);
-        localStorage.setItem("email", email);
+    const saveData = (e) => {
+        e.preventDefault();
+        const information = {
+            name, lastname, adicional, dni_id, address, phone, country, city, email
+        }
+        localStorage.setItem("h_tinformation", JSON.stringify(information));
         history.push('/payment');
-
     }
 
     const changeAddress = (e) => {

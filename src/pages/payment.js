@@ -137,7 +137,7 @@ export default function Payment() {
             <Box style={{ marginTop: '8em' }}>
                 <Container style={{ marginBottom: '7em' }}>
                     <Grid container style={{ marginTop: '2em', padding: '0.7em' }} >
-                        <Grid item xs={6}>
+                        <Grid item xs={12} md={6}>
                             <Information />
                             <Grid container>
                                 <Grid item xs={1}></Grid>

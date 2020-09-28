@@ -55,6 +55,18 @@ const useStyles = makeStyles((theme) => ({
 export default function CheckOut() {
     const classes = useStyles();
     const [listitems, setlistitems] = useState(items);
+    const history = useHistory();
+
+    const validateLogin = () => {
+        if (localStorage.getItem("h_tiov") !== null) {
+            history.push("/sending");
+        } else {
+            history.push({
+                pathname: "/Ingresar",
+                state: "checkout"
+            });
+        }
+    }
     return (
         <Box>
             <Header />
@@ -107,9 +119,9 @@ export default function CheckOut() {
                     </Grid>
                     <Grid container >
                         <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-                            <NavLink to="/sending" style={{ textDecoration: 'none' }}>
-                                <Button variant="contained">Finalizar Pedido</Button>
-                            </NavLink>
+                            {/* <NavLink to="/sending" style={{ textDecoration: 'none' }}> */}
+                            <Button variant="contained" onClick={validateLogin}>Finalizar Pedido</Button>
+                            {/* </NavLink> */}
                         </Grid>
                     </Grid>
                 </Container>

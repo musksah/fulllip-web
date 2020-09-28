@@ -79,7 +79,7 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-export default function SignIn() {
+export default function SignIn(props) {
   const classes = useStyles();
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
@@ -139,7 +139,7 @@ export default function SignIn() {
           localStorage.setItem("h_tiov", res.data.token);
           localStorage.setItem("name", res.data.name.split(" ")[0]);
           localStorage.setItem("sessionid", res.data.session);
-          history.push("/");
+          validate();
         } else {
           openMessage("Credenciales Inválidas");
         }
@@ -161,7 +161,7 @@ export default function SignIn() {
           localStorage.setItem("h_tiov", res.data.token);
           localStorage.setItem("name", res.data.name.split(" ")[0]);
           localStorage.setItem("sessionid", res.data.session);
-          history.push("/");
+          validate();
         }
         else {
           openMessage(res.data.message);
@@ -189,6 +189,14 @@ export default function SignIn() {
 
     setOpen(false);
   };
+
+  const validate = () => {
+    if (props.location.state === "checkout") {
+      history.push("/sending");
+    } else {
+      history.push("/");
+    }
+  }
 
   return (
     <Box>

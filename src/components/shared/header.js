@@ -19,8 +19,9 @@ import { BrowserRouter as Router, Switch, Route, NavLink, useHistory } from "rea
 import axios from 'axios';
 import ModalContact from '../../pages/contact';
 import 'typeface-rubik';
+import Enviroment from '../../enviroment';
 
-const url = "http://localhost:3006/api/user";
+const URL = `${Enviroment.urlApi}/user`;
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -140,7 +141,7 @@ export default function PrimarySearchAppBar(props) {
       setVisibleMenu("visible");
       setVisibleIn("hidden");
       setProfile(localStorage.getItem("name"));
-      axios.get(url, { headers: { "Authorization": AuthStr, "Content-Type": "application/json" } })
+      axios.get(URL, { headers: { "Authorization": AuthStr, "Content-Type": "application/json" } })
         .then(response => {
           if (response.status !== 200) {
             localStorage.clear();
@@ -173,7 +174,7 @@ export default function PrimarySearchAppBar(props) {
   };
 
   const logOut = () => {
-    axios.post(url + "/logout", { session: localStorage.getItem("sessionid") }).then(res => {
+    axios.post(URL + "/logout", { session: localStorage.getItem("sessionid") }).then(res => {
       handleMenuClose();
       localStorage.clear();
       history.push("/");
@@ -276,7 +277,10 @@ export default function PrimarySearchAppBar(props) {
               <ModalContact />
             </Typography>
             <div className={classes.grow} />
-            <NavLink to="/Ingresar" style={{ textDecoration: 'none', visibility: visibleIn }}>
+            <NavLink to={{
+              pathname: "/Ingresar",
+              state: "menu"
+            }} style={{ textDecoration: 'none', visibility: visibleIn }}>
               <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginRight: '6em' }}>
                 INGRESAR/REGISTRARSE
           </Typography>
@@ -315,8 +319,8 @@ export default function PrimarySearchAppBar(props) {
           </Toolbar>
         </AppBar>
       </ElevationScroll>
-      {renderMobileMenu}
-      {renderMenu}
+      { renderMobileMenu}
+      { renderMenu}
     </div >
   );
 }

@@ -8,6 +8,10 @@ import Box from '@material-ui/core/Box';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Carousel from 'react-material-ui-carousel';
+import axios from 'axios';
+import Enviroment from '../enviroment';
+
+const URL = `${Enviroment.urlApi}/img-carrousell`;
 
 const tutorialSteps = [
   {
@@ -35,6 +39,24 @@ const tutorialSteps = [
     imgPath:
       '/img/slider5.png',
   },
+];
+
+var items = [
+  {
+    name: "Random Name #1",
+    description: "Probably the most random thing you have ever seen!",
+    url: "img/BANNER-CANDY.jpg"
+  },
+  {
+    name: "Random Name #2",
+    description: "Hello World!",
+    url: "img/BANNER-FRUTAS.jpg"
+  },
+  {
+    name: "Random Name #2",
+    description: "Hello World!",
+    url: "img/BANNER-GLOSSY.jpg"
+  }
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -65,20 +87,27 @@ export default function TextMobileStepper() {
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [itemsCarrousell, setItemsCarrousell] = React.useState(items);
   const maxSteps = tutorialSteps.length;
 
-  var items = [
-    {
-      name: "Random Name #1",
-      description: "Probably the most random thing you have ever seen!",
-      url: "img/BANNER-CANDY.jpg"
-    },
-    {
-      name: "Random Name #2",
-      description: "Hello World!",
-      url: "img/BANNER-FRUTAS.jpg"
-    }
-  ];
+  
+
+  React.useEffect(() => {
+    getImageCarrousel();
+  }, []);
+
+  const getImageCarrousel = () => {
+    console.log("Trayendo imágenes carrousell");
+    axios.get(`${URL}`).then(
+      res => {
+        console.log(res);
+        setItemsCarrousell(res.data);
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
 
   const handleNext = () => {
     console.log(maxSteps);
@@ -109,7 +138,7 @@ export default function TextMobileStepper() {
     <Box className={classes.root}>
       <Carousel navButtonsAlwaysVisible="true">
         {
-          items.map((item, i) => <Item key={i} item={item} />)
+          itemsCarrousell.map((item, i) => <Item key={i} item={item} />)
         }
       </Carousel>
     </Box>

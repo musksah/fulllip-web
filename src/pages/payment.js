@@ -14,8 +14,10 @@ import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import ArrowBack from '@material-ui/icons/ArrowBack';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -28,6 +30,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Information from '../components/shooping_cart/information'
+import ReviewSale from '../components/shooping_cart/reviewSale';
+import { BrowserRouter as NavLink } from "react-router-dom";
 
 const items = [
     { img: 'img/kit.jpg', name: 'Kit', price: '10000', quantiy: 1 },
@@ -133,45 +137,38 @@ export default function Payment() {
 
     return (
         <Box>
-            <Header />
-            <Box style={{ marginTop: '8em' }}>
+            {/* <Header /> */}
+            <Box style={{ marginTop: '1.8em' }}>
                 <Container style={{ marginBottom: '7em' }}>
-                    <Grid container style={{ marginTop: '2em', padding: '0.7em' }} >
-                        <Grid item xs={12} md={6}>
+                    <Grid container>
+                        <Grid item xs={1}></Grid>
+                        <Grid item xs={10}>
+                            <Container>
+                                <NavLink to="/sending" style={{ textDecoration: 'none' }}>
+                                    <Button variant="contained"><ArrowBack style={{ marginRight: '0.3em' }} /> Regresar</Button>
+                                </NavLink>
+                            </Container>
+                        </Grid>
+                        <Grid item xs={1}></Grid>
+                    </Grid>
+                    <Grid container style={{ marginTop: '1.8em', padding: '0.7em' }} >
+                        <Grid item md={1}></Grid>
+                        <Grid item xs={12} md={5}>
                             <Information />
                             <Grid container>
-                                <Grid item xs={1}></Grid>
-                                <Grid item xs={11}>
-                                    <Typography className={classes.product_header} > Fullips Colombia </Typography>
-                                    <p>Nuestros medios de pago son seguros y confiables</p>
+                                <Grid item xs={12}>
+                                    <Typography variant="h6" style={{fontWeight:'bold'}}> Pago </Typography>
                                 </Grid>
-                                <Grid item xs={1}></Grid>
-                                <Grid item xs={11}>
-                                    <Typography > Forma de Pago </Typography>
+                                <Grid item xs={12}>
+                                    <Typography variant="body2">Nuestros medios de pago son seguros y confiables</Typography>
                                 </Grid>
-                                <Grid item xs={1}></Grid>
-                                <Grid item xs={11}>
+                                <Grid item xs={10}>
                                     <Card style={{ marginTop: '2em' }}>
-                                        <CardHeader
-                                            // avatar={
-                                            //     <Avatar aria-label="recipe" className={classes.avatar}>
-                                            //         R
-                                            //     </Avatar>
-                                            // }
-                                            // action={
-                                            //     <IconButton aria-label="settings">
-                                            //         <MoreVertIcon />
-                                            //     </IconButton>
-                                            // }
-                                            title="Pasarelas de pago"
-                                            subheader=""
-                                        />
                                         <CardContent>
-                                            <hr></hr>
+                                            {/* <hr style={{marginBottom:'1.7em'}} /> */}
                                             <FormControl component="fieldset">
-                                                <FormLabel component="legend">Método de pago</FormLabel>
                                                 <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-                                                    <FormControlLabel value="Epayco" control={<Radio />} label="Epayco" />
+                                                    <FormControlLabel value="Epayco" control={<Radio />} label="Epayco"  />
                                                     <FormControlLabel value="PayU" control={<Radio />} label="PayU" />
                                                 </RadioGroup>
                                             </FormControl>
@@ -181,15 +178,19 @@ export default function Payment() {
                                     </Card>
                                     <Typography >  </Typography>
                                 </Grid>
+                                <Grid item xs={1}></Grid>
                             </Grid>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={5} style={{ background: '#FFF2F2' }}>
                             <Grid container>
-                                <Grid item xs={12}>
-                                    <Typography className={classes.product_header} > Resumen de la venta </Typography>
+                                <Grid item xs={1}></Grid>
+                                <Grid item xs={10}>
+                                    <ReviewSale></ReviewSale>
                                 </Grid>
+                                <Grid item xs={1}></Grid>
                             </Grid>
                         </Grid>
+                        <Grid item md={1}></Grid>
                     </Grid>
                 </Container>
             </Box>

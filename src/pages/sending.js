@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Header from '../components/shared/header';
+import ReviewSale from '../components/shooping_cart/reviewSale';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -108,7 +109,7 @@ export default function Sending() {
                                 <Grid item xs={12} md={12}>
                                     <InputLabel ><Typography variant="body1" color="secondary" component="p" className={classes.subtitle}>Información de contacto</Typography></InputLabel>
                                 </Grid>
-                                <Grid item xs={12} md={12} style={{ marginBlockEnd: '3rem' }}>
+                                <Grid item xs={11} md={11} style={{ marginBlockEnd: '3rem' }}>
                                     <TextField
                                         autoComplete="off"
                                         name="email"
@@ -123,70 +124,80 @@ export default function Sending() {
                                         inputProps={{ className: classes.inputtext }}
                                     />
                                 </Grid>
-                                <Grid item xs={12} md={12}>
+                                <Grid item xs={11} md={11}>
                                     <InputLabel><Typography variant="body1" color="secondary" component="p" className={classes.subtitle}>Dirección Envío</Typography></InputLabel>
                                 </Grid>
-                                <Grid item xs={12} md={6} >
-                                    <TextField
-                                        autoComplete="off"
-                                        name="name"
-                                        variant="outlined"
-                                        fullWidth
-                                        required
-                                        id="name"
-                                        placeholder='Nombre'
-                                        inputProps={{ className: classes.inputtext }}
-                                        autoFocus
-                                        value={name}
-                                        onChange={changeName}
-                                    />
+                                <Grid item xs={12} md={11} >
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={6}>
+                                            <TextField
+                                                autoComplete="off"
+                                                name="name"
+                                                variant="outlined"
+                                                fullWidth
+                                                required
+                                                id="name"
+                                                placeholder='Nombre'
+                                                inputProps={{ className: classes.inputtext }}
+                                                autoFocus
+                                                value={name}
+                                                onChange={changeName}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} md={6} >
+                                            <TextField
+                                                autoComplete="off"
+                                                name="lastname"
+                                                variant="outlined"
+                                                fullWidth
+                                                required
+                                                id="lastname"
+                                                placeholder='Apellido'
+                                                inputProps={{ className: classes.inputtext }}
+                                                autoFocus
+                                                value={lastname}
+                                                onChange={changeLastname}
+                                            />
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={12} md={6} >
-                                    <TextField
-                                        autoComplete="off"
-                                        name="lastname"
-                                        variant="outlined"
-                                        fullWidth
-                                        required
-                                        id="lastname"
-                                        placeholder='Apellido'
-                                        inputProps={{ className: classes.inputtext }}
-                                        autoFocus
-                                        value={lastname}
-                                        onChange={changeLastname}
-                                    />
+
+                                <Grid item xs={12} md={11} >
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={6}>
+                                            <TextField
+                                                autoComplete="off"
+                                                name="dni_id"
+                                                variant="outlined"
+                                                fullWidth
+                                                required
+                                                id="dni_id"
+                                                placeholder='Numero de Documento'
+                                                inputProps={{ className: classes.inputtext }}
+                                                autoFocus
+                                                value={dni_id}
+                                                onChange={changeDni}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <TextField
+                                                autoComplete="off"
+                                                name="phone"
+                                                variant="outlined"
+                                                fullWidth
+                                                required
+                                                id="phone"
+                                                placeholder='Celular'
+                                                inputProps={{ className: classes.inputtext }}
+                                                autoFocus
+                                                value={phone}
+                                                onChange={changePhone}
+                                            />
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={12} md={6} >
-                                    <TextField
-                                        autoComplete="off"
-                                        name="dni_id"
-                                        variant="outlined"
-                                        fullWidth
-                                        required
-                                        id="dni_id"
-                                        placeholder='Numero de Documento'
-                                        inputProps={{ className: classes.inputtext }}
-                                        autoFocus
-                                        value={dni_id}
-                                        onChange={changeDni}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} md={6} >
-                                    <TextField
-                                        autoComplete="off"
-                                        name="phone"
-                                        variant="outlined"
-                                        fullWidth
-                                        required
-                                        id="phone"
-                                        placeholder='Celular'
-                                        inputProps={{ className: classes.inputtext }}
-                                        autoFocus
-                                        value={phone}
-                                        onChange={changePhone}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} md={12} >
+
+                                <Grid item xs={12} md={11} >
                                     <TextField
                                         autoComplete="off"
                                         name="address"
@@ -201,7 +212,7 @@ export default function Sending() {
                                         onChange={changeAddress}
                                     />
                                 </Grid>
-                                <Grid item xs={12} md={12} >
+                                <Grid item xs={12} md={11} >
                                     <TextField
                                         autoComplete="off"
                                         name="adicional"
@@ -215,37 +226,42 @@ export default function Sending() {
                                         onChange={changeAdicional}
                                     />
                                 </Grid>
-                                <Grid item xs={12} md={6} >
-                                    <TextField
-                                        autoComplete="off"
-                                        name="country"
-                                        variant="outlined"
-                                        fullWidth
-                                        required
-                                        id="country"
-                                        placeholder='País'
-                                        inputProps={{ className: classes.inputtext }}
-                                        autoFocus
-                                        value={country}
-                                        onChange={changeCountry}
-                                    />
+                                <Grid item xs={12} md={11} >
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={6}>
+                                            <TextField
+                                                autoComplete="off"
+                                                name="country"
+                                                variant="outlined"
+                                                fullWidth
+                                                required
+                                                id="country"
+                                                placeholder='País'
+                                                inputProps={{ className: classes.inputtext }}
+                                                autoFocus
+                                                value={country}
+                                                onChange={changeCountry}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <TextField
+                                                autoComplete="off"
+                                                name="city"
+                                                variant="outlined"
+                                                fullWidth
+                                                required
+                                                id="city"
+                                                placeholder='Ciudad'
+                                                inputProps={{ className: classes.inputtext }}
+                                                autoFocus
+                                                value={city}
+                                                onChange={changeCity}
+                                            />
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={12} md={6} >
-                                    <TextField
-                                        autoComplete="off"
-                                        name="city"
-                                        variant="outlined"
-                                        fullWidth
-                                        required
-                                        id="city"
-                                        placeholder='Ciudad'
-                                        inputProps={{ className: classes.inputtext }}
-                                        autoFocus
-                                        value={city}
-                                        onChange={changeCity}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} md={12} >
+
+                                <Grid item xs={12} md={11} >
                                     {/* <Link href="#" color="secondary" variant="body1" style={{ float: 'left' }} className={classes.submit}>
                                     Volver al Carrito
                                 </Link> */}
@@ -270,7 +286,15 @@ export default function Sending() {
                             </Grid>
                         </form>
                     </Grid>
-                    <Grid item xs={12} md={5}></Grid>
+                    <Grid item xs={12} md={5} style={{ background: '#FFF2F2' }}>
+                        <Grid container >
+                            <Grid item xs={1}></Grid>
+                            <Grid item xs={10}>
+                                <ReviewSale />
+                            </Grid>
+                            <Grid item xs={1}></Grid>
+                        </Grid>
+                    </Grid>
                     <Grid item xs={12} md={1}></Grid>
                 </Grid>
             </Container>

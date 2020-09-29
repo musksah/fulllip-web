@@ -28,12 +28,14 @@ export default function Information() {
         <Grid>
 
             <Grid container style={{ marginBlockEnd: '3rem' }} spacing={2}>
-                <Grid item xs={1}></Grid>
+                <Grid item xs={12}>
+                    <Typography variant="h6" style={{ fontWeight: 'bold' }}> Datos de Envío </Typography>
+                </Grid>
+                {/* <Grid item xs={12}>
+                    <Typography variant="body2" component="p"> Revisa tu información de envío </Typography>
+                </Grid> */}
                 <Grid item xs={11} md={11}>
-                    <Card>
-                        <CardHeader
-                            title="Información de Envío"
-                        />
+                    <Card style={{paddingTop:'1em'}}>
                         <CardContent>
                             <Grid container spacing={3} style={{ textAlign: 'center' }}>
                                 <Grid item xs={4} sm={3} md={4} lg={2}>
@@ -83,6 +85,7 @@ export default function Information() {
                         </CardContent>
                     </Card>
                 </Grid>
+                <Grid item xs={1}></Grid>
             </Grid>
         </Grid>
     );

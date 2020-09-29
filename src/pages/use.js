@@ -16,6 +16,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Interweave from 'interweave';
 import ReactPlayer from "react-player";
 import Card from '@material-ui/core/Card';
+import Container from '@material-ui/core/Container';
 import CardContent from '@material-ui/core/CardContent';
 
 
@@ -69,25 +70,29 @@ export default function Question() {
     return (
         <Box>
             <Header />
-            <Box style={{ marginTop: '9rem', marginBottom: '9rem' }}>
-                <Backdrop className={classes.backdrop} open={openProgress}>
-                    <CircularProgress color="inherit" variant="indeterminate" disableShrink style={{ width: 80, height: 80 }} />
-                </Backdrop>
-                {use.map(u => (
-                    <Grid>
-                        <Grid className={classes.centered} item xs={12}>
-                            <Typography variant="h4" color="primary" style={{ textDecoration: "underline" }}>{u.name}</Typography>
-                        </Grid>
-                        <Grid style={{ marginBottom: '4rem' }} className={classes.centered} item xs={12}>
-                            <Grid item xs={10} sm={10}>
-                                <Interweave
-                                    content={u.description}
-                                />
+            <Container style={{ marginTop: '9rem', marginBottom: '9rem' }}>
+                <Grid container>
+                    <Grid item xs={1}></Grid>
+
+                    <Grid item xs={10}>
+                        <Backdrop className={classes.backdrop} open={openProgress}>
+                            <CircularProgress color="inherit" variant="indeterminate" disableShrink style={{ width: 80, height: 80 }} />
+                        </Backdrop>
+                        {use.map(u => (
+                            <Grid>
+                                <Grid className={classes.centered} item xs={12}>
+                                    <Typography variant="h6" color="primary" style={{ textDecoration: "underline" }}>{u.name}</Typography>
+                                </Grid>
+                                <Grid style={{ marginBottom: '4rem' }} className={classes.centered} item xs={12}>
+                                    <Grid item xs={10} sm={10}>
+                                        <Interweave
+                                            content={u.description}
+                                        />
+                                    </Grid>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </Grid>
-                ))}
-                <Box>
+                        ))}
+                        {/* <Box>
                     <Grid className={classes.centered} item xs={12}>
                         <Typography variant="h4" color="primary" style={{ textDecoration: "underline" }}>Tutoriales</Typography>
                     </Grid>
@@ -109,8 +114,14 @@ export default function Question() {
                             </Grid>
                         ))}
                     </Grid>
-                </Box>
-            </Box>
+                </Box> */}
+
+
+                    </Grid>
+
+                    <Grid item xs={1}></Grid>
+                </Grid>
+            </Container>
         </Box >
     );
 }

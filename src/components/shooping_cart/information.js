@@ -84,12 +84,6 @@ export default function Information() {
                     </Card>
                 </Grid>
             </Grid>
-            <Grid container style={{ marginBlockEnd: '3rem' }} spacing={2}>
-                <Grid item xs={1}></Grid>
-                <Grid item xs={11}>
-                    <InputLabel ><Typography variant="body1" color="secondary" component="p" className={classes.subtitle}>Envío</Typography></InputLabel>
-                </Grid>
-            </Grid>
         </Grid>
     );
 }

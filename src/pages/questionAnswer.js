@@ -70,10 +70,13 @@ export default function Question() {
                     <Grid item xs={10}>
                         {question.map(q => (
                             <Accordion key={q.id_qa} expanded={expanded === `panel${q.id_qa}`} onChange={handleChange(`panel${q.id_qa}`)} elevation={5}>
-                                <AccordionSummary
+                                <AccordionSummary 
                                     expandIcon={<ExpandMoreIcon />}
                                 >
-                                    <Typography variant="h6" className={classes.heading}>{q.name}</Typography>
+                                    <Typography variant="h6" className={classes.heading}><Interweave
+                                            content={q.name}
+                                            color="secondary"
+                                        /></Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
                                     <Typography>

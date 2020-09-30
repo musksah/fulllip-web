@@ -17,7 +17,6 @@ import PropTypes from 'prop-types';
 import { AiOutlineShopping } from "react-icons/ai";
 import { BrowserRouter as Router, Switch, Route, NavLink, useHistory } from "react-router-dom";
 import axios from 'axios';
-import ModalContact from '../../pages/contact';
 import 'typeface-rubik';
 import Enviroment from '../../enviroment';
 
@@ -273,9 +272,11 @@ export default function PrimarySearchAppBar(props) {
             <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '3em' }}>
               NOSOTROS
           </Typography>
-            <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '3em' }}>
-              <ModalContact />
-            </Typography>
+            <NavLink to="/contact" style={{ textDecoration: 'none' }}>
+              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '3em' }}>
+                CONTACTO
+              </Typography>
+            </NavLink>
             <div className={classes.grow} />
             <NavLink to={{
               pathname: "/Ingresar",
@@ -319,8 +320,8 @@ export default function PrimarySearchAppBar(props) {
           </Toolbar>
         </AppBar>
       </ElevationScroll>
-      { renderMobileMenu}
-      { renderMenu}
+      {renderMobileMenu}
+      {renderMenu}
     </div >
   );
 }

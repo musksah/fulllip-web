@@ -162,7 +162,7 @@ export default function Payment() {
                                 <Grid item xs={12}>
                                     <Typography variant="body2">Nuestros medios de pago son seguros y confiables</Typography>
                                 </Grid>
-                                <Grid item xs={10}>
+                                <Grid item xs={11}>
                                     <Card style={{ marginTop: '2em' }}>
                                         <CardContent>
                                             {/* <hr style={{marginBottom:'1.7em'}} /> */}

@@ -8,6 +8,7 @@ import Product from './pages/productdetail';
 import Question from './pages/questionAnswer';
 import Checkout from './pages/checkout';
 import Payment from './pages/payment';
+import Contact from './pages/contact';
 import Use from './pages/use';
 import Sending from './pages/sending';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
@@ -98,6 +99,7 @@ function App() {
                         <Route path="/checkout" exact component={Checkout} />
                         <Route path="/payment" exact component={Payment} />
                         <Route path="/sending" exact component={Sending} />
+                        <Route path="/contact" exact component={Contact} />
                     </Switch>
                 </Router>
                 <Footer />

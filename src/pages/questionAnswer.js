@@ -13,10 +13,15 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ReactPlayer from "react-player";
 import Interweave from 'interweave';
+import Card from '@material-ui/core/Card';
+import Container from '@material-ui/core/Container';
+import CardContent from '@material-ui/core/CardContent';
 
 
 const URL = `${Enviroment.urlApi}/qa`;
+const URL2 = `${Enviroment.urlApi}/video`;
 
 const useStyles = makeStyles((theme) => ({
     centered: {
@@ -40,6 +45,7 @@ export default function Question() {
     const [openProgress, setOpenProgress] = useState(true);
     const [question, setQuestion] = useState([]);
     const [expanded, setExpanded] = React.useState(false);
+    const [video, setVideo] = useState([]);
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
@@ -47,11 +53,18 @@ export default function Question() {
 
     useEffect(() => {
         findQuestion();
+        findVideo();
     }, []);
 
     const findQuestion = () => {
         axios.get(URL).then(res => {
             setQuestion(res.data);
+        });
+    }
+
+    const findVideo = () => {
+        axios.get(URL2).then(res => {
+            setVideo(res.data);
             setOpenProgress(false);
         });
     }
@@ -70,16 +83,32 @@ export default function Question() {
                     <Grid item xs={10}>
                         {question.map(q => (
                             <Accordion key={q.id_qa} expanded={expanded === `panel${q.id_qa}`} onChange={handleChange(`panel${q.id_qa}`)} elevation={5}>
-                                <AccordionSummary 
+                                <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}
                                 >
                                     <Typography variant="h6" className={classes.heading}><Interweave
-                                            content={q.name}
-                                            color="secondary"
-                                        /></Typography>
+                                        content={q.name}
+                                        color="secondary"
+                                    /></Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
                                     <Typography>
+                                        {q.id_qa == 1 &&
+                                            <Grid style={{ marginTop: '1rem', marginBottom: '1rem' }} container justify="center" spacing={3}>
+                                                {video.map(v => (
+                                                    <Grid item xs={10} sm={8} md={3} lg={3}>
+                                                        <ReactPlayer
+                                                            url={v.url}
+                                                            width='100%'
+                                                            height='200px'
+                                                        />
+                                                        <Typography gutterBottom variant="h6" color="secondary" style={{ marginTop: '1rem' }}>
+                                                            {v.title}
+                                                        </Typography>
+                                                    </Grid>
+                                                ))}
+                                            </Grid>
+                                        }
                                         <Interweave
                                             content={q.description}
                                             color="secondary"

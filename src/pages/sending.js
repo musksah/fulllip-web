@@ -41,12 +41,11 @@ export default function Sending() {
     const [phone, setPhone] = useState("");
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
-    const [email, setEmail] = useState("");
 
     const saveData = (e) => {
         e.preventDefault();
         const information = {
-            name, lastname, adicional, dni_id, address, phone, country, city, email
+            name, lastname, adicional, dni_id, address, phone, country, city
         }
         localStorage.setItem("h_tinformation", JSON.stringify(information));
         history.push('/payment');
@@ -77,11 +76,6 @@ export default function Sending() {
         setPhone(value);
     }
 
-    const changeEmail = (e) => {
-        const { value } = e.target;
-        setEmail(value);
-    }
-
     const changeAdicional = (e) => {
         const { value } = e.target;
         SetAdicional(value);
@@ -106,25 +100,7 @@ export default function Sending() {
                     <Grid item xs={12} md={5}>
                         <form onSubmit={saveData}>
                             <Grid container spacing={2}>
-                                <Grid item xs={12} md={12}>
-                                    <InputLabel ><Typography variant="body1" color="secondary" component="p" className={classes.subtitle}>Información de contacto</Typography></InputLabel>
-                                </Grid>
-                                <Grid item xs={11} md={11} style={{ marginBlockEnd: '3rem' }}>
-                                    <TextField
-                                        autoComplete="off"
-                                        name="email"
-                                        variant="outlined"
-                                        fullWidth
-                                        required
-                                        id="email"
-                                        autoFocus
-                                        value={email}
-                                        onChange={changeEmail}
-                                        placeholder="Correo Electrónico"
-                                        inputProps={{ className: classes.inputtext }}
-                                    />
-                                </Grid>
-                                <Grid item xs={11} md={11}>
+                                <Grid item xs={12} md={11}>
                                     <InputLabel><Typography variant="body1" color="secondary" component="p" className={classes.subtitle}>Dirección Envío</Typography></InputLabel>
                                 </Grid>
                                 <Grid item xs={12} md={11} >
@@ -283,6 +259,7 @@ export default function Sending() {
                                         Continuar Compra
                                 </Button>
                                 </Grid>
+
                             </Grid>
                         </form>
                     </Grid>

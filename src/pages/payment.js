@@ -31,7 +31,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Information from '../components/shooping_cart/information'
 import ReviewSale from '../components/shooping_cart/reviewSale';
-import { BrowserRouter as NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const items = [
     { img: 'img/kit.jpg', name: 'Kit', price: '10000', quantiy: 1 },
@@ -157,7 +157,7 @@ export default function Payment() {
                             <Information />
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <Typography variant="h6" style={{fontWeight:'bold'}}> Pago </Typography>
+                                    <Typography variant="h6" style={{ fontWeight: 'bold' }}> Pago </Typography>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Typography variant="body2">Nuestros medios de pago son seguros y confiables</Typography>
@@ -168,7 +168,7 @@ export default function Payment() {
                                             {/* <hr style={{marginBottom:'1.7em'}} /> */}
                                             <FormControl component="fieldset">
                                                 <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-                                                    <FormControlLabel value="Epayco" control={<Radio />} label="Epayco"  />
+                                                    <FormControlLabel value="Epayco" control={<Radio />} label="Epayco" />
                                                     <FormControlLabel value="PayU" control={<Radio />} label="PayU" />
                                                 </RadioGroup>
                                             </FormControl>

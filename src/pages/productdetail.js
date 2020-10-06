@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -10,10 +10,18 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import clsx from 'clsx';
 import Header from '../components/shared/header';
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import Enviroment from '../enviroment';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { CartContext } from '../contexts/cartContext';
 
 const URL = `${Enviroment.urlApi}/item`;
+
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,14 +39,13 @@ const useStyles = makeStyles((theme) => ({
 
 function ItemDetail() {
     const classes = useStyles();
-    const [values, setValues] = useState({
-        amount: '',
-        password: '',
-        weight: '',
-        weightRange: '',
-        showPassword: false,
-    });
+    const [values, setValues] = useState(1);
     const [product, setProduct] = useState({});
+    const [image, setImage] = useState("");
+    const [open, setOpen] = React.useState(false);
+    const [message, setMessage] = React.useState("");
+    const history = useHistory();
+    const { addProduct, itemCount } = useContext(CartContext);
 
     let { id } = useParams();
 
@@ -49,29 +56,54 @@ function ItemDetail() {
     const getProductInfo = () => {
         axios.get(`${URL}/${id}`).then(
             res => {
-                console.log(res);
+                console.log(res.data);
                 setProduct(res.data);
+                setImage(res.data.image_item.url);
             },
             err => {
                 console.log(err);
             }
         )
-        console.log("Trayendo la información del producto");
-        console.log(id);
     }
 
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
+    const handleChange = (event) => {
+        setValues(event.target.value);
+    };
+
+    const saveProduct = () => {
+        if (parseInt(values) <= 0) {
+            openMessage("la cantidad debe ser mayor a 0");
+        } else {
+            const products = { id: product.id_item, img: image, name: product.name, price: product.price, quantity: parseInt(values) }
+            addProduct(products);
+        }
+    }
+
+    const openMessage = (message) => {
+        setMessage(message);
+        handleClick();
+    }
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
     };
 
     return (
         <Box>
-            <Header />
+            <Header itemCount={itemCount} />
             <Container className={classes.root}>
                 <Box style={{ paddingTop: '10rem', paddingBottom: '7rem' }}>
                     <Grid container spacing={3}>
                         <Grid item xs={6}>
-                            <img className={classes.img_product} width="100%" src="/img/kit.jpg" />
+                            <img className={classes.img_product} width="100%" src={image} />
                         </Grid>
                         <Grid item xs={6}>
                             <Grid container>
@@ -91,9 +123,11 @@ function ItemDetail() {
                                     <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
                                         <OutlinedInput
                                             id="outlined-adornment-weight"
-                                            value={values.weight}
-                                            onChange={handleChange('weight')}
+                                            value={values}
+                                            onChange={handleChange}
                                             aria-describedby="outlined-weight-helper-text"
+                                            autoComplete="off"
+                                            required
                                             inputProps={{
                                                 'aria-label': 'weight',
                                             }}
@@ -102,12 +136,17 @@ function ItemDetail() {
                                     </FormControl>
                                 </Grid>
                                 <Grid item xs={12} style={{ marginTop: '1em' }}>
-                                    <Button variant="contained" style={{ padding: '1em' }}>Añadir al Carrito</Button>
+                                    <Button variant="contained" style={{ padding: '1em' }} onClick={saveProduct}>Añadir al Carrito</Button>
                                 </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
                 </Box>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="error">
+                        {message}
+                    </Alert>
+                </Snackbar>
             </Container>
         </Box>
     );

@@ -112,11 +112,11 @@ export default function Information() {
                     <Card style={{ paddingTop: '1em' }}>
                         <CardContent>
                             <form>
-                                <Grid container spacing={3} style={{ textAlign: 'center' }}>
+                                <Grid container spacing={3}>
                                     <Grid item xs={12} md={11} >
                                         <Grid container spacing={2}>
                                             <Grid item xs={6}>
-                                                <InputLabel><Typography variant="body1" color="secondary" component="p" >Nombre :</Typography></InputLabel>
+                                                <InputLabel><Typography variant="body1" color="secondary" component="p" >Nombre</Typography></InputLabel>
                                                 <TextField
                                                     autoComplete="off"
                                                     name="name"
@@ -133,7 +133,7 @@ export default function Information() {
                                                 />
                                             </Grid>
                                             <Grid item xs={12} md={6} >
-                                                <InputLabel><Typography variant="body1" color="secondary" component="p" >Apellido :</Typography></InputLabel>
+                                                <InputLabel><Typography variant="body1" color="secondary" component="p" >Apellido</Typography></InputLabel>
                                                 <TextField
                                                     autoComplete="off"
                                                     name="lastname"
@@ -155,7 +155,7 @@ export default function Information() {
                                     <Grid item xs={12} md={11} >
                                         <Grid container spacing={2}>
                                             <Grid item xs={6}>
-                                                <InputLabel><Typography variant="body1" color="secondary" component="p" >Cédula :</Typography></InputLabel>
+                                                <InputLabel><Typography variant="body1" color="secondary" component="p" >Cédula</Typography></InputLabel>
                                                 <TextField
                                                     autoComplete="off"
                                                     name="dni_id"
@@ -172,7 +172,7 @@ export default function Information() {
                                                 />
                                             </Grid>
                                             <Grid item xs={6}>
-                                                <InputLabel><Typography variant="body1" color="secondary" component="p" >Teléfono :</Typography></InputLabel>
+                                                <InputLabel><Typography variant="body1" color="secondary" component="p" >Teléfono</Typography></InputLabel>
                                                 <TextField
                                                     autoComplete="off"
                                                     name="phone"
@@ -192,7 +192,7 @@ export default function Information() {
                                     </Grid>
 
                                     <Grid item xs={12} md={11} >
-                                        <InputLabel><Typography variant="body1" color="secondary" component="p" >Dirección :</Typography></InputLabel>
+                                        <InputLabel><Typography variant="body1" color="secondary" component="p" >Dirección</Typography></InputLabel>
                                         <TextField
                                             autoComplete="off"
                                             name="address"
@@ -209,7 +209,7 @@ export default function Information() {
                                         />
                                     </Grid>
                                     <Grid item xs={12} md={11} >
-                                        <InputLabel><Typography variant="body1" color="secondary" component="p" >Adicional :</Typography></InputLabel>
+                                        <InputLabel><Typography variant="body1" color="secondary" component="p" >Adicional</Typography></InputLabel>
                                         <TextField
                                             autoComplete="off"
                                             name="adicional"
@@ -227,7 +227,7 @@ export default function Information() {
                                     <Grid item xs={12} md={11} >
                                         <Grid container spacing={2}>
                                             <Grid item xs={6}>
-                                                <InputLabel><Typography variant="body1" color="secondary" component="p" >País :</Typography></InputLabel>
+                                                <InputLabel><Typography variant="body1" color="secondary" component="p" >País</Typography></InputLabel>
                                                 <TextField
                                                     autoComplete="off"
                                                     name="country"
@@ -245,7 +245,7 @@ export default function Information() {
                                                 />
                                             </Grid>
                                             <Grid item xs={6}>
-                                                <InputLabel><Typography variant="body1" color="secondary" component="p" >Ciudad :</Typography></InputLabel>
+                                                <InputLabel><Typography variant="body1" color="secondary" component="p" >Ciudad</Typography></InputLabel>
                                                 <TextField
                                                     autoComplete="off"
                                                     name="city"

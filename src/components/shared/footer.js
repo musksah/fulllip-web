@@ -54,11 +54,11 @@ export default function PrimaryFooter() {
                 <Grid item xs={3}>
                     <ul>
                         <h5>REDES SOCIALES</h5>
-                        <a  target="_blank" href="https://sebastian-hr.com/" className={classes.navlink}>
+                        <a  target="_blank" href="https://www.facebook.com/880665175331108/posts/3553199911410941/?extid=0&d=n" className={classes.navlink}>
                             <li className={classes.item_footer}>Facebook</li>
                         </a>
-                        <a  target="_blank" href="https://www.google.com/" className={classes.navlink}>
-                            <li className={classes.item_footer}>Twitter</li>
+                        <a  target="_blank" href="https://www.instagram.com/p/CF7sPsuDALH/?igshid=1aw8zwg3nggt0" className={classes.navlink}>
+                            <li className={classes.item_footer}>Instagram</li>
                         </a>
                         {/* </NavLink> */}
                     </ul>

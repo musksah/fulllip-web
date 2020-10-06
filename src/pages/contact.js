@@ -66,12 +66,12 @@ function ModalContact() {
                                     <Grid item md={2} lg={2} xl={2}>
                                     </Grid>
                                     <Grid item md={4} lg={4} xl={4}>
-                                        <a target="_blank" href="https://sebastian-hr.com/">
+                                        <a target="_blank" href="https://www.facebook.com/880665175331108/posts/3553199911410941/?extid=0&d=n">
                                             <img src="img/icons/icon_facebook.png" className={classes.img_social} />
                                         </a>
                                     </Grid>
                                     <Grid item md={4} lg={4} xl={4}>
-                                        <a target="_blank" href="https://sebastian-hr.com/">
+                                        <a target="_blank" href="https://www.instagram.com/p/CF7sPsuDALH/?igshid=1aw8zwg3nggt0">
                                             <img src="img/icons/icon_instagram.png" className={classes.img_social} />
                                         </a>
                                     </Grid>

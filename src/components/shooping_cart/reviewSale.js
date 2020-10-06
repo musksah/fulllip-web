@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import { CartContext } from '../../contexts/cartContext';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,6 +32,7 @@ export default function ReviewSale() {
     const classes = useStyles();
     const [email, setEmail] = useState({});
     const [listItemsReview, setListItemsReview] = useState(items);
+    const { cartItems, total, increase, decrease, removeProduct } = useContext(CartContext);
 
     React.useEffect(() => {
 
@@ -38,25 +40,25 @@ export default function ReviewSale() {
 
     return (
         <Container>
-            {listItemsReview.map((item, index) => (
+            {cartItems.map((cart, index) => (
                 <Grid container style={{ marginBottom: '1.5em', marginTop: '1.5em' }}>
 
                     <Grid item xs={3} style={{ border: '1px solid #D9D9D9', background: 'white', borderRadius: '0.2em' }}>
-                        <img src={item.url} style={{ width: '90%', paddingLeft: '5%', paddingRight: '5%' }} />
+                        <img src={cart.url} style={{ width: '90%', paddingLeft: '5%', paddingRight: '5%' }} />
                     </Grid>
                     <Grid item xs={5} className={classes.detail_review}>
                         <Box>
                             <Typography variant="body2" component="p" style={{ fontWeight: 'bold' }}>
-                                {item.title}
+                                {cart.title}
                             </Typography>
                             <Typography variant="body2" component="p" >
-                                {item.subtitle}
+                                {cart.quantity}
                             </Typography>
                         </Box>
                     </Grid>
                     <Grid item xs={4} className={classes.detail_review}>
                         <Typography variant="body2" component="p" style={{ fontWeight: 'bold' }}>
-                            {item.price}
+                            {cart.price}
                         </Typography>
                     </Grid>
                 </Grid>
@@ -73,7 +75,7 @@ export default function ReviewSale() {
                 </Grid>
                 <Grid item xs={6}>
                     <Typography variant="body2" component="p" style={{ fontWeight: 'bold', textAlign: 'right' }}>
-                        $ 560.000
+                        $ {total}
                     </Typography>
                     <Typography variant="body2" component="p" style={{ marginTop: '0.5em', textAlign: 'right' }}>
                         Gratis

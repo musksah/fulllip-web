@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -19,6 +19,7 @@ import { BrowserRouter as Router, Switch, Route, NavLink, useHistory } from "rea
 import axios from 'axios';
 import 'typeface-rubik';
 import Enviroment from '../../enviroment';
+import { CartContext } from '../../contexts/cartContext';
 
 const URL = `${Enviroment.urlApi}/user`;
 
@@ -128,6 +129,7 @@ export default function PrimarySearchAppBar(props) {
   const [visibleIn, setVisibleIn] = useState("visible");
   const [profile, setProfile] = useState("visible");
   const history = useHistory();
+  const { itemCount } = useContext(CartContext);
 
 
   useEffect(() => {
@@ -296,7 +298,7 @@ export default function PrimarySearchAppBar(props) {
             <div className={classes.sectionDesktop}>
               <NavLink to="/checkout">
                 <IconButton aria-label="show 4 new mails" color="inherit" color="secondary">
-                  <Badge badgeContent={5} color="error">
+                  <Badge badgeContent={itemCount} color="error">
                     <AiOutlineShopping />
                   </Badge>
                 </IconButton>

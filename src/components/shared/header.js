@@ -259,8 +259,13 @@ export default function PrimarySearchAppBar(props) {
                 style={{ marginLeft: '1em' }}
               />
             </NavLink>
-            <NavLink to="/Question" style={{ textDecoration: 'none' }}>
+            <NavLink to="/" style={{ textDecoration: 'none' }}>
               <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '10em' }}>
+                INICIO
+              </Typography>
+            </NavLink>
+            <NavLink to="/Question" style={{ textDecoration: 'none' }}>
+              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '3em' }}>
                 PREGUNTAS FRECUENTES
               </Typography>
             </NavLink>
@@ -269,9 +274,11 @@ export default function PrimarySearchAppBar(props) {
                 USO
           </Typography>
             </NavLink>
-            <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '3em' }}>
-              NOSOTROS
+            <NavLink to="/razon-social" style={{ textDecoration: 'none' }}>
+              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '3em' }}>
+                RAZÓN SOCIAL
           </Typography>
+              </NavLink>
             <NavLink to="/contact" style={{ textDecoration: 'none' }}>
               <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '3em' }}>
                 CONTACTO

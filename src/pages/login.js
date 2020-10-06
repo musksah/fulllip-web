@@ -139,6 +139,8 @@ export default function SignIn(props) {
           localStorage.setItem("h_tiov", res.data.token);
           localStorage.setItem("name", res.data.name.split(" ")[0]);
           localStorage.setItem("sessionid", res.data.session);
+          localStorage.setItem("confirmed", res.data.confirmed);
+          openMessage("Se ha enviado un correo electrónico a tu correo para que confirmes el correo");
           validate();
         } else {
           openMessage("Credenciales Inválidas");
@@ -161,6 +163,7 @@ export default function SignIn(props) {
           localStorage.setItem("h_tiov", res.data.token);
           localStorage.setItem("name", res.data.name.split(" ")[0]);
           localStorage.setItem("sessionid", res.data.session);
+          localStorage.setItem("confirmed", 0);
           validate();
         }
         else {

@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 const items = [
     { url: 'img/index/products/1.1kit_segunda.jpg', title: 'Fullip Ovalado', subtitle: 'Solo', price: '$ 67,000 COP' },
     { url: 'img/index/products/1.1kit_segunda.jpg', title: 'Fullip Redondo', subtitle: 'Solo', price: '$ 67,000 COP' },
+    { url: 'img/index/products/1.1kit_segunda.jpg', title: 'Fullip Redondo', subtitle: 'Solo', price: '$ 67,000 COP' },
 ];
 
 export default function ReviewSale() {

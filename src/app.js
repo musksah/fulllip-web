@@ -9,6 +9,9 @@ import Question from './pages/questionAnswer';
 import Checkout from './pages/checkout';
 import Payment from './pages/payment';
 import Contact from './pages/contact';
+import Rsocial from './pages/rsocial';
+import ErrorConfirmation from './pages/errorconfirmation';
+import ConfirmationEmail from './pages/confirmationEmail';
 import Use from './pages/use';
 import Sending from './pages/sending';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
@@ -100,9 +103,12 @@ function App() {
                         <Route path="/payment" exact component={Payment} />
                         <Route path="/sending" exact component={Sending} />
                         <Route path="/contact" exact component={Contact} />
+                        <Route path="/error-confirmation" exact component={ErrorConfirmation} />
+                        <Route path="/razon-social" exact component={Rsocial} />
+                        <Route path="/confirmation-email/:token" exact component={ConfirmationEmail} />
                     </Switch>
+                    <Footer />
                 </Router>
-                <Footer />
             </ThemeProvider>
         </Box>
     );

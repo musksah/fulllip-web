@@ -13,6 +13,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Container from '@material-ui/core/Container';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { ImInstagram } from 'react-icons/im';
+import { Typography } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
         width: '20%',
         marginLeft: '40%',
         marginRight: '40%',
+    },
+    social: {
+
     }
 }));
 
@@ -62,17 +66,21 @@ function ModalContact() {
                                     <Grid item md={2} lg={2} xl={2}>
                                     </Grid>
                                     <Grid item md={4} lg={4} xl={4}>
-                                        <img src="img/icons/icon_facebook.png" className={classes.img_social} />
+                                        <a target="_blank" href="https://sebastian-hr.com/">
+                                            <img src="img/icons/icon_facebook.png" className={classes.img_social} />
+                                        </a>
                                     </Grid>
                                     <Grid item md={4} lg={4} xl={4}>
-                                        <img src="img/icons/icon_instagram.png" className={classes.img_social} />
+                                        <a target="_blank" href="https://sebastian-hr.com/">
+                                            <img src="img/icons/icon_instagram.png" className={classes.img_social} />
+                                        </a>
                                     </Grid>
                                     <Grid item md={2} lg={2} xl={2}>
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid item md={12} lg={12} xl={12} style={{ marginTop: '3em' }}>
-                                <a onClick={handleClickOpen} style={{ cursor: 'pointer' }}>CONTACTO</a>
+                            <Grid item md={12} lg={12} xl={12} style={{ marginTop: '3em', marginBottom: '1.5em', textAlign: 'center' }}>
+                                <a onClick={handleClickOpen} style={{ cursor: 'pointer' }}>COMUNÍCATE CON NOSOTROS</a>
                             </Grid>
                             <Grid item md={12} lg={12} xl={12}>
                                 <form noValidate autoComplete="off">
@@ -139,6 +147,18 @@ function ModalContact() {
                                         </Grid>
                                     </Grid>
                                 </form>
+                            </Grid>
+                            <Grid item md={12} xl={12} lg={12} style={{ marginTop: '2em' }}>
+                                <center>
+                                    <Button variant="contained" color="primary">Enviar</Button>
+                                </center>
+                            </Grid>
+                            <Grid item md={12} xl={12} lg={12} style={{ marginTop: '4em', marginBottom: '1em' }}>
+                                <Typography variant="h5">Datos de Contácto</Typography>
+                            </Grid>
+                            <Grid item md={12} xl={12} lg={12} style={{ marginBottom: '4em' }}>
+                                <Typography variant="h6" style={{ display: 'inline' }}>CORREO: </Typography>
+                                <Typography variant="body1" style={{ display: 'inline', marginLeft: '0.5em' }}>fullipscolombia@gmail.com</Typography>
                             </Grid>
                         </Grid>
                     </Grid>

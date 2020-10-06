@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   media: {
-    height: 200,
+    height: '300px',
   },
   box_product: {
     position: 'absolute',
@@ -74,10 +74,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '0',
     color: 'white'
   },
-  hoverButton:{
+  hoverButton: {
     '&:hover': {
       display: "none",
-   },
+    },
   }
 }));
 
@@ -149,8 +149,8 @@ export default function NestedGrid() {
           {listImages.map((image, index) => (
             <Grid item xs={12} sm={3} md={3} lg={3} key={image.id_image_index_product} onMouseEnter={() => hoverProductCard(index, image.name)} onMouseLeave={() => leaveProductCard(index, image.name)} className={[].join(' ')}  >
               {/* onMouseEnter={() => hoverProductCard(index, image.name)} onMouseLeave={() => leaveProductCard(index, image.name)}  */}
-              <Card className={[classes.root].join(' ')} >
-                <CardActionArea >
+              <Card className={[classes.root].join(' ')}>
+                <CardActionArea>
                   <Box className={classes.box_product}>
                     <Button className={classes.btn_product} onClick={() => goProduct(image.id_image_index_product)} >{image.title}</Button>
                   </Box>

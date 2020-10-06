@@ -72,6 +72,18 @@ export default function CheckOut() {
             });
         }
     }
+
+    useEffect(() => {
+        let confirmed = localStorage.getItem("confirmed");
+        console.log(`confirmed: ${confirmed}`);
+        if (confirmed == 0 || confirmed == null) {
+            console.log("No se ha confirmado");
+            history.push("/error-confirmation");
+        } else {
+            console.log("Se confirmó");
+        }
+    }, []);
+
     return (
         <Box>
             <Header />

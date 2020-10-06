@@ -81,7 +81,7 @@ export default function Question() {
                         {use.map(u => (
                             <Grid>
                                 <Grid className={classes.centered} item xs={12}>
-                                    <Typography variant="h6" color="primary" style={{ textDecoration: "underline" }}>{u.name}</Typography>
+                                    <Typography variant="h6" color="primary">{u.name}</Typography>
                                 </Grid>
                                 <Grid style={{ marginBottom: '4rem' }} className={classes.centered} item xs={12}>
                                     <Grid item xs={10} sm={10}>

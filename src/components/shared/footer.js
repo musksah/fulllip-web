@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
+import { BrowserRouter as Router, Switch, Route, NavLink, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
     },
     item_footer: {
         listStyle: 'none',
+    },
+    navlink: {
+        color: 'white',
+        textDecoration: 'none'
     }
 }));
 
@@ -35,16 +40,27 @@ export default function PrimaryFooter() {
                 <Grid item xs={3}>
                     <ul>
                         <h5>FULLIPS</h5>
-                        <li className={classes.item_footer}>Contacto</li>
-                        <li className={classes.item_footer}>Nosotros</li>
-                        <li className={classes.item_footer}>Uso</li>
+                        <NavLink to="/contact" className={classes.navlink}>
+                            <li className={classes.item_footer}>Contacto</li>
+                        </NavLink>
+                        <NavLink to="/razon-social" className={classes.navlink}>
+                            <li className={classes.item_footer}>Razón Social</li>
+                        </NavLink>
+                        <NavLink to="/Use" className={classes.navlink}>
+                            <li className={classes.item_footer}>Uso</li>
+                        </NavLink>
                     </ul>
                 </Grid>
                 <Grid item xs={3}>
                     <ul>
                         <h5>REDES SOCIALES</h5>
-                        <li className={classes.item_footer}>Facebook</li>
-                        <li className={classes.item_footer}>Twitter</li>
+                        <a  target="_blank" href="https://sebastian-hr.com/" className={classes.navlink}>
+                            <li className={classes.item_footer}>Facebook</li>
+                        </a>
+                        <a  target="_blank" href="https://www.google.com/" className={classes.navlink}>
+                            <li className={classes.item_footer}>Twitter</li>
+                        </a>
+                        {/* </NavLink> */}
                     </ul>
                 </Grid>
                 <Grid item xs={12} style={{ marginTop: '1.5em' }}>

@@ -31,19 +31,17 @@ export default function Information() {
     const [dni_id, setDni] = useState("");
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
-    const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
 
     useEffect(() => {
         if (localStorage.getItem("h_tinformation") !== null) {
             const information = JSON.parse(localStorage.getItem("h_tinformation"));
             setName(information.name);
-            SetAdicional(information.name);
+            SetAdicional(information.adicional);
             setLastname(information.lastname);
             setDni(information.dni_id);
             setAddress(information.address);
             setPhone(information.phone);
-            setCountry(information.country);
             setCity(information.city);
         } else {
             history.push('/sending');
@@ -80,11 +78,6 @@ export default function Information() {
         SetAdicional(value);
     }
 
-    const changeCountry = (e) => {
-        const { value } = e.target;
-        setCountry(value);
-    }
-
     const changeCity = (e) => {
         const { value } = e.target;
         setCity(value);
@@ -96,7 +89,7 @@ export default function Information() {
 
     const saveChange = () => {
         const information = {
-            name, lastname, adicional, dni_id, address, phone, country, city
+            name, lastname, adicional, dni_id, address, phone, city
         }
         localStorage.setItem("h_tinformation", JSON.stringify(information));
         setFlat(true);
@@ -236,12 +229,10 @@ export default function Information() {
                                                     required
                                                     id="country"
                                                     placeholder='País'
-                                                    disabled={flat}
-                                                    inputProps={{ className: classes.inputtext, readOnly: flat }}
+                                                    disabled="true"
+                                                    inputProps={{ className: classes.inputtext, readOnly: true }}
                                                     autoFocus
-                                                    value={country}
-                                                    onChange={changeCountry}
-
+                                                    value="Colombia"
                                                 />
                                             </Grid>
                                             <Grid item xs={6}>

@@ -39,13 +39,12 @@ export default function Sending() {
     const [dni_id, setDni] = useState("");
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
-    const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
 
     const saveData = (e) => {
         e.preventDefault();
         const information = {
-            name, lastname, adicional, dni_id, address, phone, country, city
+            name, lastname, adicional, dni_id, address, phone, city
         }
         localStorage.setItem("h_tinformation", JSON.stringify(information));
         history.push('/payment');
@@ -79,11 +78,6 @@ export default function Sending() {
     const changeAdicional = (e) => {
         const { value } = e.target;
         SetAdicional(value);
-    }
-
-    const changeCountry = (e) => {
-        const { value } = e.target;
-        setCountry(value);
     }
 
     const changeCity = (e) => {
@@ -213,10 +207,10 @@ export default function Sending() {
                                                 required
                                                 id="country"
                                                 placeholder='País'
-                                                inputProps={{ className: classes.inputtext }}
+                                                disabled="true"
+                                                inputProps={{ className: classes.inputtext, readOnly: true }}
                                                 autoFocus
-                                                value={country}
-                                                onChange={changeCountry}
+                                                value="Colombia"
                                             />
                                         </Grid>
                                         <Grid item xs={6}>
@@ -265,11 +259,11 @@ export default function Sending() {
                     </Grid>
                     <Grid item xs={12} md={5} style={{ background: '#FFF2F2' }}>
                         <Grid container >
-                            <Grid item xs={1}></Grid>
-                            <Grid item xs={10}>
+                            {/* <Grid item xs={1}></Grid> */}
+                            <Grid item xs={12}>
                                 <ReviewSale />
                             </Grid>
-                            <Grid item xs={1}></Grid>
+                            {/* <Grid item xs={1}></Grid> */}
                         </Grid>
                     </Grid>
                     <Grid item xs={12} md={1}></Grid>

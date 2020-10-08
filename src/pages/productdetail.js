@@ -15,6 +15,7 @@ import Enviroment from '../enviroment';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { CartContext } from '../contexts/cartContext';
+import NumberFormat from 'react-number-format';
 
 const URL = `${Enviroment.urlApi}/item`;
 
@@ -56,7 +57,6 @@ function ItemDetail() {
     const getProductInfo = () => {
         axios.get(`${URL}/${id}`).then(
             res => {
-                console.log(res.data);
                 setProduct(res.data);
                 setImage(res.data.image_item.url);
             },
@@ -74,7 +74,7 @@ function ItemDetail() {
         if (parseInt(values) <= 0) {
             openMessage("la cantidad debe ser mayor a 0");
         } else {
-            const products = { id: product.id_item, img: image, name: product.name, price: product.price, quantity: parseInt(values) }
+            const products = { id: product.id_item, img: image, name: product.name, subtitle: product.subtitle, price: product.price, quantity: parseInt(values) }
             addProduct(products);
         }
     }
@@ -111,7 +111,9 @@ function ItemDetail() {
                                     <h4>{product.name}</h4>
                                 </Grid>
                                 <Grid item xs={12} style={{ marginTop: '2em', color: '#FF5C5C' }}>
-                                    <h5>${product.price}</h5>
+                                    {product.price &&
+                                        <h5><NumberFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value}</div>} /></h5>
+                                    }
                                 </Grid>
                                 <Grid item xs={12} style={{ marginTop: '2em' }}>
                                     <p>{product.description}</p>

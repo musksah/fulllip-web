@@ -13,6 +13,7 @@ import Add from '@material-ui/icons/Add';
 import Remove from '@material-ui/icons/Remove';
 import { BrowserRouter as Router, Switch, Route, NavLink, useHistory } from "react-router-dom";
 import { CartContext } from '../contexts/cartContext';
+import NumberFormat from 'react-number-format';
 
 const items = [
     { img: 'img/kit.jpg', name: 'Kit', price: '10000', quantiy: 1 },
@@ -94,7 +95,7 @@ export default function CheckOut() {
             removeProduct(product);
         }
     }
-    
+
     return (
         <Box>
             <Header />
@@ -102,69 +103,73 @@ export default function CheckOut() {
                 <center>
                     <Typography variant="h6" style={{ color: '#4F4F4F' }}>CARRITO DE COMPRA</Typography>
                 </center>
-                <Container style={{ marginBottom: '7em' }}>
-                    <Grid container style={{ marginTop: '2em' }} >
-                        <Grid item md={1}></Grid>
-                        <Grid item xs={3} md={3} style={{ background: '#E1E1E1', padding: '0.7em' }}>
-                            <Typography className={classes.product_header} > Imagen </Typography>
-                        </Grid>
-                        <Grid item xs={3} md={3} style={{ background: '#E1E1E1', padding: '0.7em' }}>
-                            <Typography className={classes.product_header} > Producto </Typography>
-                        </Grid>
-                        <Grid item xs={3} md={2} style={{ background: '#E1E1E1', padding: '0.7em' }}>
-                            <Typography className={classes.product_header}> Precio </Typography>
-                        </Grid>
-                        <Grid item xs={3} md={2} style={{ background: '#E1E1E1', padding: '0.7em' }}>
-                            <Typography className={classes.product_header}> Cantidad </Typography>
-                        </Grid>
-                    </Grid>
-                    {cartItems.map((cart, index) => (
-                        <Grid container style={{ padding: '0.7em' }} >
+                {parseInt(total) > 0 &&
+                    <Container style={{ marginBottom: '7em' }}>
+                        <Grid container style={{ marginTop: '2em' }} >
                             <Grid item md={1}></Grid>
-                            <Grid item xs={3} md={3} className={classes.item_field_container}>
-                                <img src={cart.img} style={{ width: '40%', marginLeft: '30%', marginRight: '30%' }}></img>
+                            <Grid item xs={3} md={3} style={{ background: '#E1E1E1', padding: '0.7em' }}>
+                                <Typography className={classes.product_header} > Imagen </Typography>
                             </Grid>
-                            <Grid item xs={3} md={3} className={classes.item_field_container}>
-                                <Typography variant="span" className={classes.item_cart}> {cart.name}  </Typography>
+                            <Grid item xs={3} md={3} style={{ background: '#E1E1E1', padding: '0.7em' }}>
+                                <Typography className={classes.product_header} > Producto </Typography>
                             </Grid>
-                            <Grid item xs={3} md={2} className={classes.item_field_container}>
-                                <Typography className={classes.item_cart}> {cart.price} </Typography>
+                            <Grid item xs={3} md={2} style={{ background: '#E1E1E1', padding: '0.7em' }}>
+                                <Typography className={classes.product_header}> Precio </Typography>
                             </Grid>
-                            <Grid item xs={3} md={2} className={classes.item_field_container}>
-                                <Grid item xs={4}>
-                                    <Typography className={classes.item_cart}> {cart.quantity} </Typography>
+                            <Grid item xs={3} md={2} style={{ background: '#E1E1E1', padding: '0.7em' }}>
+                                <Typography className={classes.product_header}> Cantidad </Typography>
+                            </Grid>
+                        </Grid>
+                        {cartItems.map((cart, index) => (
+                            <Grid container style={{ padding: '0.7em' }} >
+                                <Grid item md={1}></Grid>
+                                <Grid item xs={3} md={3} className={classes.item_field_container}>
+                                    <img src={cart.img} style={{ width: '40%', marginLeft: '30%', marginRight: '30%' }}></img>
                                 </Grid>
-                                <Grid item xs={4}>
-                                    <IconButton aria-label="add" onClick={() => increase(cart)}>
-                                        <Add />
-                                    </IconButton>
+                                <Grid item xs={3} md={3} className={classes.item_field_container}>
+                                    <Typography variant="span" className={classes.item_cart}> {cart.name}  </Typography>
                                 </Grid>
-                                <Grid item xs={4}>
-                                    <IconButton aria-label="delete" onClick={() => decreaseProduct(cart)}>
-                                        <Remove />
-                                    </IconButton>
+                                <Grid item xs={3} md={2} className={classes.item_field_container}>
+                                    {cart.price &&
+                                        <Typography className={classes.item_cart}><NumberFormat value={cart.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value}</div>} /> </Typography>
+                                    }
+                                </Grid>
+                                <Grid item xs={3} md={2} className={classes.item_field_container}>
+                                    <Grid item xs={4}>
+                                        <Typography className={classes.item_cart}> {cart.quantity} </Typography>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <IconButton aria-label="add" onClick={() => increase(cart)}>
+                                            <Add />
+                                        </IconButton>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <IconButton aria-label="delete" onClick={() => decreaseProduct(cart)}>
+                                            <Remove />
+                                        </IconButton>
+                                    </Grid>
                                 </Grid>
                             </Grid>
+                        ))}
+                        <Grid container style={{ padding: '0.7em', marginTop: '2em', }} >
+                            <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
+                                <Typography className={classes.subtotal}> Subtotal:  <span className={classes.price}> <NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value} COP</div>} /> </span> </Typography>
+                            </Grid>
                         </Grid>
-                    ))}
-                    <Grid container style={{ padding: '0.7em', marginTop: '2em', }} >
-                        <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-                            <Typography className={classes.subtotal}> Subtotal:  <span className={classes.price}> $ {total}</span> </Typography>
+                        <Grid container style={{ padding: '0.7em' }} >
+                            <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
+                                <Typography className={classes.item_cart}> Acepto los términos y condiciones y autorizo el tratamiento de datos personales. </Typography>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid container style={{ padding: '0.7em' }} >
-                        <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-                            <Typography className={classes.item_cart}> Acepto los términos y condiciones y autorizo el tratamiento de datos personales. </Typography>
+                        <Grid container >
+                            <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
+                                {/* <NavLink to="/sending" style={{ textDecoration: 'none' }}> */}
+                                <Button variant="contained" onClick={validateLogin}>Finalizar Pedido</Button>
+                                {/* </NavLink> */}
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid container >
-                        <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-                            {/* <NavLink to="/sending" style={{ textDecoration: 'none' }}> */}
-                            <Button variant="contained" onClick={validateLogin}>Finalizar Pedido</Button>
-                            {/* </NavLink> */}
-                        </Grid>
-                    </Grid>
-                </Container>
+                    </Container>
+                }
             </Box>
         </Box >
     );

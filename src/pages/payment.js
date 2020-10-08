@@ -33,11 +33,6 @@ import Information from '../components/shooping_cart/information'
 import ReviewSale from '../components/shooping_cart/reviewSale';
 import { NavLink } from "react-router-dom";
 
-const items = [
-    { img: 'img/kit.jpg', name: 'Kit', price: '10000', quantiy: 1 },
-    { img: 'img/kit.jpg', name: 'Medio Ovalado', price: '10000', quantiy: 1 },
-    { img: 'img/kit.jpg', name: 'Pequeño Ovalado', price: '10000', quantiy: 1 },
-]
 
 const Accordion = withStyles({
     root: {
@@ -127,7 +122,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Payment() {
     const classes = useStyles();
-    const [listitems, setlistitems] = useState(items);
     const [expanded, setExpanded] = React.useState('panel1');
     const [value, setValue] = React.useState('female');
 
@@ -200,11 +194,9 @@ export default function Payment() {
                         </Grid>
                         <Grid item xs={5} style={{ background: '#FFF2F2' }}>
                             <Grid container>
-                                <Grid item xs={1}></Grid>
-                                <Grid item xs={10}>
+                                <Grid item xs={12}>
                                     <ReviewSale></ReviewSale>
                                 </Grid>
-                                <Grid item xs={1}></Grid>
                             </Grid>
                         </Grid>
                         <Grid item md={1}></Grid>

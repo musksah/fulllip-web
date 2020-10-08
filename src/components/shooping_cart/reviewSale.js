@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
     detail_review: {
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'center', 
         justifyContent: 'center'
     }
 }));

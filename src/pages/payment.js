@@ -135,6 +135,28 @@ export default function Payment() {
         setValue(event.target.value);
     };
 
+    useEffect(() => {
+        const script = document.createElement("script");
+        script.src =
+            "https://checkout.epayco.co/checkout.js";
+        script.className = "epayco-button"
+        script.setAttribute("data-epayco-key", "491d6a0b6e992cf924edd8d3d088aff1");
+        script.setAttribute("data-epayco-amount", "50000");
+        script.setAttribute("data-epayco-name", "Vestido");
+        script.setAttribute("data-epayco-description", "Primavera");
+        script.setAttribute("data-epayco-currency", "cop");
+        script.setAttribute("data-epayco-country", "co");
+        script.setAttribute("data-epayco-test", "true");
+        script.setAttribute("data-epayco-external", "false");
+        script.setAttribute("data-epayco-response", "https://ejemplo.com/respuesta");
+        script.setAttribute("data-epayco-confirmation", "https://ejemplo.com/confirmacion");
+        let contenedorForm = document.getElementById("epaycoForm");
+        contenedorForm.appendChild(script);
+        return () => {
+            contenedorForm.removeChild(script);
+        };
+    }, []);
+
     return (
         <Box>
             {/* <Header /> */}
@@ -166,14 +188,9 @@ export default function Payment() {
                                     <Card style={{ marginTop: '2em' }}>
                                         <CardContent>
                                             {/* <hr style={{marginBottom:'1.7em'}} /> */}
-                                            <FormControl component="fieldset">
-                                                <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
-                                                    <FormControlLabel value="Epayco" control={<Radio />} label="Epayco" />
-                                                    <FormControlLabel value="PayU" control={<Radio />} label="PayU" />
-                                                </RadioGroup>
-                                            </FormControl>
-                                            <Typography variant="body2" color="textSecondary" component="p">
+                                            <Typography variant="body2" color="textSecondary" component="p" style={{marginBottom:'2em'}}>EPAYCO
                                             </Typography>
+                                            <form id="epaycoForm"></form>
                                         </CardContent>
                                     </Card>
                                     <Typography >  </Typography>

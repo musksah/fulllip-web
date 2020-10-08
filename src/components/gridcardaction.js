@@ -55,9 +55,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  media: {
-    height: '300px',
-  },
   box_product: {
     position: 'absolute',
     width: '100%',
@@ -77,6 +74,21 @@ const useStyles = makeStyles((theme) => ({
   hoverButton: {
     '&:hover': {
       display: "none",
+    },
+  },
+  cardProductsMedia: {
+    display: 'default',
+    [theme.breakpoints.down('sm')]: {
+      height: '350px',
+    },
+    // [theme.breakpoints.down('sm')]: {
+    //   height: '200px',
+    // },
+    [theme.breakpoints.up('md')]: {
+      height: '200px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      height: '350px',
     },
   }
 }));
@@ -147,7 +159,7 @@ export default function NestedGrid() {
       <React.Fragment>
         <Grid container justify="center" spacing={2} style={{ marginTop: '1em' }}>
           {listImages.map((image, index) => (
-            <Grid item xs={12} sm={3} md={3} lg={3} key={image.id_image_index_product} onMouseEnter={() => hoverProductCard(index, image.name)} onMouseLeave={() => leaveProductCard(index, image.name)} className={[].join(' ')}  >
+            <Grid item xs={12} sm={12} md={3} lg={3} key={image.id_image_index_product} onMouseEnter={() => hoverProductCard(index, image.name)} onMouseLeave={() => leaveProductCard(index, image.name)} className={[].join(' ')}  >
               {/* onMouseEnter={() => hoverProductCard(index, image.name)} onMouseLeave={() => leaveProductCard(index, image.name)}  */}
               <Card className={[classes.root].join(' ')}>
                 <CardActionArea>
@@ -156,7 +168,7 @@ export default function NestedGrid() {
                   </Box>
                   <Box>
                     <CardMedia
-                      className={[classes.media].join(' ')}
+                      className={[classes.media, classes.cardProductsMedia].join(' ')}
                       image={image.url}
                       title="Contemplative Reptile"
                     />

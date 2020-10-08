@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme) => ({
     span_bold: {
         fontWeight: 'bold'
     },
-    paragraph:{
-        textAlign:'justify'
-    }
+    paragraph: {
+        textAlign: 'justify'
+    },
 }));
 
 export default function ContentIndex() {
@@ -51,21 +51,21 @@ export default function ContentIndex() {
                     <Grid item xs={10}>
                         {/* <hr style={{ background: '#A20000', height: '0.2em', width: '40%' }} /> */}
                         <Typography variant="body1" component="p" className={classes.paragraph}>
-                            Fullips es un accesorio versátil y de uso personal, hoy miles de mujeres lo incluyen en su ritual de belleza, 👄 es Ideal para todas aquellas personas que les gusta lucir unos labios con mayor volumen y mas sexys y buscan siempre una forma de reinventarse.  <br/><br/>
+                            Fullips es un accesorio versátil y de uso personal, hoy miles de mujeres lo incluyen en su ritual de belleza, 👄 es Ideal para todas aquellas personas que les gusta lucir unos labios con mayor volumen y mas sexys y buscan siempre una forma de reinventarse.  <br /><br />
                         </Typography>
                         <Typography variant="body1" component="p" className={classes.paragraph}>
-                            Recomendamos exfoliar los labios previamente con un cepillo, y poner un hidratante antes y después de la succión, deja que los labios se relajen en el potenciador. Deberás sentir un suave tirón. La cantidad de tiempo para dejar fullips variará para cada persona, pero <span className={classes.span_bold}> se recomienda comenzar en incrementos de 15-30 segundos.</span> Para más información dirigite a la sección de preguntas y respuestas frecuentes donde explicamos mejor los tamaños y la secuencia de uso.<br/><br/>
+                            Recomendamos exfoliar los labios previamente con un cepillo, y poner un hidratante antes y después de la succión, deja que los labios se relajen en el potenciador. Deberás sentir un suave tirón. La cantidad de tiempo para dejar fullips variará para cada persona, pero <span className={classes.span_bold}> se recomienda comenzar en incrementos de 15-30 segundos.</span> Para más información dirigite a la sección de preguntas y respuestas frecuentes donde explicamos mejor los tamaños y la secuencia de uso.<br /><br />
                         </Typography>
                         <Typography variant="body1" component="p" className={classes.paragraph}>
-                            Fullips potencia tu belleza de manera auténtica y natural,<span className={classes.span_bold}> Su efecto dura entre 2-4 horas, </span> después de este tiempo puedes repetir el proceso si así lo deseas, para exaltar tus labios en Photoshoots, eventos, o simplemente cuando quieres sacar el mejor provecho de tus labios.<br/><br/>
+                            Fullips potencia tu belleza de manera auténtica y natural,<span className={classes.span_bold}> Su efecto dura entre 2-4 horas, </span> después de este tiempo puedes repetir el proceso si así lo deseas, para exaltar tus labios en Photoshoots, eventos, o simplemente cuando quieres sacar el mejor provecho de tus labios.<br /><br />
                         </Typography>
                         <Typography variant="body1" component="p" className={classes.paragraph}>
-                            Este producto <span className={classes.span_bold}> es hecho en Estados Unidos y cuenta con la patente N ° 8858472,</span> su uso es seguro y práctico si hace correctamente, por favor tener en cuenta las recomendaciones antes de usarlo.<br/><br/>
+                            Este producto <span className={classes.span_bold}> es hecho en Estados Unidos y cuenta con la patente N ° 8858472,</span> su uso es seguro y práctico si hace correctamente, por favor tener en cuenta las recomendaciones antes de usarlo.<br /><br />
                         </Typography>
                         <Typography variant="body1" component="p" className={classes.paragraph}>
                             Gracias por llegar hasta aquí
                         </Typography>
-                        <br/>
+                        <br />
                         <Typography variant="body1" component="p" className={classes.paragraph}>
                             Xoxo 💋 equipo Fullips Colombia
                         </Typography>
@@ -74,7 +74,7 @@ export default function ContentIndex() {
                     <Grid item xs={1}></Grid>
                     <Grid item xs={1}></Grid>
                     <Grid item xs={10}>
-                        <img src="img/distribuidor autorizado.jpg" style={{width:'40%', marginLeft:'30%', marginRight:'30%', marginTop:'3em'}}/>
+                        <img src="img/distribuidor autorizado.jpg" style={{ width: '40%', marginLeft: '30%', marginRight: '30%', marginTop: '3em' }} />
                     </Grid>
                     <Grid item xs={1}></Grid>
                     {/* <Grid item xs={1}></Grid> */}

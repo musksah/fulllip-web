@@ -12,6 +12,7 @@ import Contact from './pages/contact';
 import Rsocial from './pages/rsocial';
 import ErrorConfirmation from './pages/errorconfirmation';
 import ConfirmationEmail from './pages/confirmationEmail';
+import ConfirmationPayment from './pages/epayco/confirmationPayment';
 import Use from './pages/use';
 import Sending from './pages/sending';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
@@ -106,6 +107,7 @@ function App() {
                         <Route path="/error-confirmation" exact component={ErrorConfirmation} />
                         <Route path="/razon-social" exact component={Rsocial} />
                         <Route path="/confirmation-email/:token" exact component={ConfirmationEmail} />
+                        <Route path="/confirmation-payment" exact component={ConfirmationPayment} />
                     </Switch>
                     <Footer />
                 </Router>

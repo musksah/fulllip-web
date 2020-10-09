@@ -30,12 +30,17 @@ const useStyles = makeStyles((theme) => ({
         color: '#676767'
     },
     img_product: {
-        width: '80%',
-        marginLeft: '15%',
-        marginRight: '5%',
-        boxSizing: 'border-box',
-        // border: 'solid 0.02em #C9C9C9',
+        height: '350px',
+        width: '100%',
+        border: 'solid 0.03em #C9C9C9',
+        borderRadius: '10px'
     },
+    img_products: {
+        height: '150px',
+        width: '100%',
+        border: 'solid 0.03em #C9C9C9',
+        borderRadius: '10px'
+    }
 }));
 
 function ItemDetail() {
@@ -43,6 +48,7 @@ function ItemDetail() {
     const [values, setValues] = useState(1);
     const [product, setProduct] = useState({});
     const [image, setImage] = useState("");
+    const [images, setImages] = useState([]);
     const [open, setOpen] = React.useState(false);
     const [message, setMessage] = React.useState("");
     const history = useHistory();
@@ -57,8 +63,9 @@ function ItemDetail() {
     const getProductInfo = () => {
         axios.get(`${URL}/${id}`).then(
             res => {
-                setProduct(res.data);
-                setImage(res.data.image_item.url);
+                setProduct(res.data[0]);
+                setImages(res.data);
+                setImage(res.data[0].image_item.url);
             },
             err => {
                 console.log(err);
@@ -96,6 +103,10 @@ function ItemDetail() {
         setOpen(false);
     };
 
+    const changeImage = (image) => {
+        setImage(image.image_item.url);
+    }
+
     return (
         <Box>
             <Header itemCount={itemCount} />
@@ -103,7 +114,16 @@ function ItemDetail() {
                 <Box style={{ paddingTop: '10rem', paddingBottom: '7rem' }}>
                     <Grid container spacing={3}>
                         <Grid item xs={6}>
-                            <img className={classes.img_product} width="100%" src={image} />
+                            <Grid container style={{ marginBottom: '2em', paddingRight: '1em' }}>
+                                <img className={classes.img_product} src={image} />
+                            </Grid>
+                            <Grid container style={{ paddingRight: '1em' }}>
+                                {images.map((img, index) => (
+                                    <Grid item xs={3} key={img.id_item} style={{ cursor: 'pointer', paddingRight: '0.5em' }}>
+                                        <img className={classes.img_products} id={img.image_item.name} src={img.image_item.url} onClick={() => changeImage(img)} />
+                                    </Grid>
+                                ))}
+                            </Grid>
                         </Grid>
                         <Grid item xs={6}>
                             <Grid container>

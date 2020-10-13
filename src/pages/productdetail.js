@@ -39,7 +39,8 @@ const useStyles = makeStyles((theme) => ({
         height: '150px',
         width: '100%',
         border: 'solid 0.03em #C9C9C9',
-        borderRadius: '10px'
+        borderRadius: '10px',
+        opacity: '0.5'
     }
 }));
 
@@ -47,7 +48,7 @@ function ItemDetail() {
     const classes = useStyles();
     const [values, setValues] = useState(1);
     const [product, setProduct] = useState({});
-    const [image, setImage] = useState("");
+    const [image, setImage] = useState({});
     const [images, setImages] = useState([]);
     const [open, setOpen] = React.useState(false);
     const [message, setMessage] = React.useState("");
@@ -65,7 +66,7 @@ function ItemDetail() {
             res => {
                 setProduct(res.data[0]);
                 setImages(res.data);
-                setImage(res.data[0].image_item.url);
+                setImage({ url: res.data[0].image_item.url, priority: res.data[0].image_item.priority_field });
             },
             err => {
                 console.log(err);
@@ -103,66 +104,91 @@ function ItemDetail() {
         setOpen(false);
     };
 
-    const changeImage = (image) => {
-        setImage(image.image_item.url);
+    const changeImage = (e) => {
+        let images = document.getElementsByClassName(e.target.className);
+        e.target.style.opacity = '1';
+        for (let i = 0; i < images.length; i++) {
+            if (images[i].attributes.id.value !== e.target.attributes.id.value) {
+                images[i].style.opacity = '0.5';
+            }
+        }
+        setImage({ url: e.target.attributes.data.value, priority: e.target.attributes.priority.value });
     }
 
+    const hoverImage = (e) => {
+        if (parseInt(image.priority) !== parseInt(e.target.attributes.priority.value)) {
+            e.target.style.opacity = '1';
+        }
+    }
+
+    const leaveImage = (e) => {
+        if (parseInt(image.priority) !== parseInt(e.target.attributes.priority.value)) {
+            e.target.style.opacity = '0.5';
+        }
+    }
     return (
         <Box>
             <Header itemCount={itemCount} />
             <Container className={classes.root}>
                 <Box style={{ paddingTop: '10rem', paddingBottom: '7rem' }}>
-                    <Grid container spacing={3}>
-                        <Grid item xs={6}>
-                            <Grid container style={{ marginBottom: '2em', paddingRight: '1em' }}>
-                                <img className={classes.img_product} src={image} />
+                    {images.length > 0 &&
+                        < Grid container spacing={3}>
+                            <Grid item xs={12} md={6}>
+                                <Grid container style={{ marginBottom: '2em', paddingRight: '1em' }}>
+                                    <img className={classes.img_product} src={image.url} />
+                                </Grid>
+                                <Grid container style={{ paddingRight: '1em' }}>
+                                    {images.map((img, index) => (
+                                        <Grid item xs={3} key={img.image_item.priority_field} style={{ cursor: 'pointer', paddingRight: '0.5em' }}>
+                                            {img.image_item.priority_field === 1 ? (
+                                                <img className={classes.img_products} id={img.image_item.name} src={img.image_item.url} data={img.image_item.url} priority={img.image_item.priority_field} onClick={changeImage} style={{ opacity: '1' }} onMouseOver={hoverImage} onMouseOut={leaveImage} />
+                                            ) : (
+                                                    <img className={classes.img_products} id={img.image_item.name} src={img.image_item.url} data={img.image_item.url} priority={img.image_item.priority_field} onClick={changeImage} style={{ opacity: '0.5' }} onMouseOver={hoverImage} onMouseOut={leaveImage} />
+                                                )
+                                            }
+                                        </Grid>
+                                    ))}
+                                </Grid>
                             </Grid>
-                            <Grid container style={{ paddingRight: '1em' }}>
-                                {images.map((img, index) => (
-                                    <Grid item xs={3} key={img.id_item} style={{ cursor: 'pointer', paddingRight: '0.5em' }}>
-                                        <img className={classes.img_products} id={img.image_item.name} src={img.image_item.url} onClick={() => changeImage(img)} />
+                            <Grid item xs={12} md={6}>
+                                <Grid container>
+                                    <Grid item xs={12} style={{ marginTop: '0.5em' }}>
+                                        <h4>{product.name}</h4>
                                     </Grid>
-                                ))}
-                            </Grid>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Grid container>
-                                <Grid item xs={12} style={{ marginTop: '0.5em' }}>
-                                    <h4>{product.name}</h4>
-                                </Grid>
-                                <Grid item xs={12} style={{ marginTop: '2em', color: '#FF5C5C' }}>
-                                    {product.price &&
-                                        <h5><NumberFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value}</div>} /></h5>
-                                    }
-                                </Grid>
-                                <Grid item xs={12} style={{ marginTop: '2em' }}>
-                                    <p>{product.description}</p>
-                                </Grid>
-                                <Grid item xs={12} style={{ marginTop: '0.5em', fontSize: '0.7em' }}>
-                                    <p>Disponibles en inventario: {product.quantity}</p>
-                                </Grid>
-                                <Grid item xs={12} style={{ marginTop: '1em' }}>
-                                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-                                        <OutlinedInput
-                                            id="outlined-adornment-weight"
-                                            value={values}
-                                            onChange={handleChange}
-                                            aria-describedby="outlined-weight-helper-text"
-                                            autoComplete="off"
-                                            required
-                                            inputProps={{
-                                                'aria-label': 'weight',
-                                            }}
-                                        />
-                                        <FormHelperText id="outlined-weight-helper-text">cantidad</FormHelperText>
-                                    </FormControl>
-                                </Grid>
-                                <Grid item xs={12} style={{ marginTop: '1em' }}>
-                                    <Button variant="contained" style={{ padding: '1em' }} onClick={saveProduct}>Añadir al Carrito</Button>
+                                    <Grid item xs={12} style={{ marginTop: '2em', color: '#FF5C5C' }}>
+                                        {product.price &&
+                                            <h5><NumberFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value}</div>} /></h5>
+                                        }
+                                    </Grid>
+                                    <Grid item xs={12} style={{ marginTop: '2em' }}>
+                                        <p>{product.description}</p>
+                                    </Grid>
+                                    <Grid item xs={12} style={{ marginTop: '0.5em', fontSize: '0.7em' }}>
+                                        <p>Disponibles en inventario: {product.quantity}</p>
+                                    </Grid>
+                                    <Grid item xs={12} style={{ marginTop: '1em' }}>
+                                        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+                                            <OutlinedInput
+                                                id="outlined-adornment-weight"
+                                                value={values}
+                                                onChange={handleChange}
+                                                aria-describedby="outlined-weight-helper-text"
+                                                autoComplete="off"
+                                                required
+                                                inputProps={{
+                                                    'aria-label': 'weight',
+                                                }}
+                                            />
+                                            <FormHelperText id="outlined-weight-helper-text">cantidad</FormHelperText>
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid item xs={12} style={{ marginTop: '1em' }}>
+                                        <Button variant="contained" style={{ padding: '1em' }} onClick={saveProduct}>Añadir al Carrito</Button>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
+                    }
                 </Box>
                 <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="error">
@@ -170,7 +196,7 @@ function ItemDetail() {
                     </Alert>
                 </Snackbar>
             </Container>
-        </Box>
+        </Box >
     );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Container from '@material-ui/core/Container';
 import { Box } from '@material-ui/core';
 import Header from '../components/shared/header';
@@ -32,6 +32,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Information from '../components/shooping_cart/information'
 import ReviewSale from '../components/shooping_cart/reviewSale';
 import { NavLink } from "react-router-dom";
+import Enviroment from '../enviroment';
+import { CartContext } from '../contexts/cartContext';
 
 
 const Accordion = withStyles({
@@ -124,6 +126,7 @@ export default function Payment() {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState('panel1');
     const [value, setValue] = React.useState('female');
+    const { cartItems, total, increase, decrease, removeProduct } = useContext(CartContext);
 
     const handleChange = (event) => {
         setValue(event.target.value);
@@ -131,19 +134,19 @@ export default function Payment() {
 
     useEffect(() => {
         const script = document.createElement("script");
-        script.src =
-            "https://checkout.epayco.co/checkout.js";
+        script.src = "https://checkout.epayco.co/checkout.js";
         script.className = "epayco-button"
-        script.setAttribute("data-epayco-key", "491d6a0b6e992cf924edd8d3d088aff1");
-        script.setAttribute("data-epayco-amount", "50000");
-        script.setAttribute("data-epayco-name", "Vestido");
-        script.setAttribute("data-epayco-description", "Primavera");
+        script.setAttribute("data-epayco-key", Enviroment.apiKey);
+        script.setAttribute("data-epayco-amount", total);
+        script.setAttribute("data-epayco-name", "Compra producto Fullips");
+        script.setAttribute("data-epayco-description", `Cantidad: ${cartItems.lenght} productos`);
+        script.setAttribute("data-epayco-invoice", "cop");
         script.setAttribute("data-epayco-currency", "cop");
         script.setAttribute("data-epayco-country", "co");
         script.setAttribute("data-epayco-test", "true");
         script.setAttribute("data-epayco-external", "false");
-        script.setAttribute("data-epayco-response", "https://ejemplo.com/respuesta");
-        script.setAttribute("data-epayco-confirmation", "https://ejemplo.com/confirmacion");
+        script.setAttribute("data-epayco-response", Enviroment.responsePage);
+        script.setAttribute("data-epayco-confirmation", Enviroment.confirmationPage);
         let contenedorForm = document.getElementById("epaycoForm");
         contenedorForm.appendChild(script);
         return () => {
@@ -182,7 +185,7 @@ export default function Payment() {
                                     <Card style={{ marginTop: '2em' }}>
                                         <CardContent>
                                             {/* <hr style={{marginBottom:'1.7em'}} /> */}
-                                            <Typography variant="body2" color="textSecondary" component="p" style={{marginBottom:'2em'}}>EPAYCO
+                                            <Typography variant="body2" color="textSecondary" component="p" style={{ marginBottom: '2em' }}>EPAYCO
                                             </Typography>
                                             <form id="epaycoForm"></form>
                                         </CardContent>

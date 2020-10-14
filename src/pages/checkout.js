@@ -14,6 +14,7 @@ import Remove from '@material-ui/icons/Remove';
 import { BrowserRouter as Router, Switch, Route, NavLink, useHistory } from "react-router-dom";
 import { CartContext } from '../contexts/cartContext';
 import NumberFormat from 'react-number-format';
+import Checkbox from '@material-ui/core/Checkbox';
 
 const items = [
     { img: 'img/kit.jpg', name: 'Kit', price: '10000', quantiy: 1 },
@@ -44,6 +45,12 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '0.9em',
         fontWeight: '500',
     },
+    donation: {
+        color: '#2B2B2B',
+        textAlign: 'left',
+        fontSize: '0.8em',
+        fontWeight: '500',
+    },
     item_field_container: {
         display: 'flex',
         alignItems: 'center',
@@ -53,6 +60,11 @@ const useStyles = makeStyles((theme) => ({
     },
     price: {
         color: '#785900',
+        fontWeight: '500',
+        fontSize: '1.6em',
+    },
+    price_donation: {
+        color: '#2B2B2B',
         fontWeight: '500',
         fontSize: '1.6em',
     }
@@ -153,7 +165,10 @@ export default function CheckOut() {
                         ))}
                         <Grid container style={{ padding: '0.7em', marginTop: '2em', }} >
                             <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-                                <Typography className={classes.subtotal}> Subtotal:  <span className={classes.price}> <NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value} COP</div>} /> </span> </Typography>
+                                <Typography className={classes.donation}> Donación:  <span className={classes.price}> <NumberFormat value={800} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div style={{display:'inline'}}>{value} COP</div>} /> </span> </Typography>
+                            </Grid>
+                            <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
+                                <Typography className={classes.subtotal}> Total:  <span className={classes.price}> <NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value} COP</div>} /> </span> </Typography>
                             </Grid>
                         </Grid>
                         <Grid container style={{ padding: '0.7em' }} >

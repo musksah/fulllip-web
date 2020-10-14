@@ -135,7 +135,7 @@ export default function Payment() {
             "https://checkout.epayco.co/checkout.js";
         script.className = "epayco-button"
         script.setAttribute("data-epayco-key", "491d6a0b6e992cf924edd8d3d088aff1");
-        script.setAttribute("data-epayco-amount", "50000");
+        script.setAttribute("data-epayco-amount", "67900");
         script.setAttribute("data-epayco-name", "Vestido");
         script.setAttribute("data-epayco-description", "Primavera");
         script.setAttribute("data-epayco-currency", "cop");

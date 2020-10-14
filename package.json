@@ -18,6 +18,7 @@
     "fontsource-amatic-sc": "^3.0.9",
     "fontsource-lobster": "^3.0.5",
     "fontsource-poiret-one": "^3.0.9",
+    "history": "^5.0.0",
     "interweave": "^12.5.0",
     "material-auto-rotating-carousel": "^3.0.2",
     "react": "^16.13.1",

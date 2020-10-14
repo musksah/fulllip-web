@@ -19,6 +19,7 @@ import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/sty
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Box from '@material-ui/core/Box';
 import ScrollToTop from './util/scrolltop';
+import { BrowserHistory } from 'history';
 import 'typeface-rubik';
 import 'typeface-roboto';
 

@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     item_cart: {
         color: '#7F7F7F',
         textAlign: 'center',
-        fontSize: '0.8em'
+        fontSize: '0.7em'
     },
     subtotal: {
         color: '#7F7F7F',
@@ -46,10 +46,28 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: '500',
     },
     donation: {
-        color: '#2B2B2B',
+        color: '#7F7F7F',
         textAlign: 'left',
-        fontSize: '0.8em',
+        fontSize: '0.9em',
         fontWeight: '500',
+    },
+    info_donation: {
+        color: '#7F7F7F',
+        textAlign: 'left',
+        fontSize: '0.7em',
+        fontWeight: '500',
+    },
+    donation_checked: {
+        display: 'inline',
+        marginRight: '2.1em',
+        fontSize: '0.9em',
+    },
+    donation_unchecked: {
+        color: '#7F7F7F',
+        display: 'inline',
+        marginRight: '2.1em',
+        textDecoration: 'line-through',
+        fontSize: '0.9em',
     },
     item_field_container: {
         display: 'flex',
@@ -74,6 +92,18 @@ const useStyles = makeStyles((theme) => ({
 export default function CheckOut() {
     const classes = useStyles();
     const [listitems, setlistitems] = useState(items);
+    const [classDonation, setClassDonation] = useState(classes.donation_checked);
+    const [checked, setChecked] = React.useState(true);
+
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
+        if (event.target.checked) {
+            setClassDonation(classes.donation_checked);
+        } else {
+            setClassDonation(classes.donation_unchecked);
+        }
+    };
+
     const history = useHistory();
     const { cartItems, total, increase, decrease, removeProduct } = useContext(CartContext);
 
@@ -90,15 +120,22 @@ export default function CheckOut() {
     }
 
     useEffect(() => {
+        checkConfirmationEmail();
+    }, []);
+
+    const checkConfirmationEmail = () => {
         let confirmed = localStorage.getItem("confirmed");
+        let tokenStorage = localStorage.getItem("h_tiov");
         console.log(`confirmed: ${confirmed}`);
-        if (confirmed == 0 || confirmed == null) {
+        if (tokenStorage == null) {
+            history.push("/Ingresar");
+        } else if (confirmed == 0 || confirmed == null) {
             console.log("No se ha confirmado");
             history.push("/error-confirmation");
         } else {
             console.log("Se confirmó");
         }
-    }, []);
+    }
 
     const decreaseProduct = (product) => {
         if (product.quantity > 1) {
@@ -115,6 +152,19 @@ export default function CheckOut() {
                 <center>
                     <Typography variant="h6" style={{ color: '#4F4F4F' }}>CARRITO DE COMPRA</Typography>
                 </center>
+                {parseInt(total) == 0 &&
+                    <Box>
+                        <Container style={{ marginBottom: '20em', marginTop: '2em' }}>
+                            <center>
+                                <Typography variant="body2">
+                                    El carrito de compras está vació. <NavLink to="/" >
+                                        <span>Haz click para buscar tu producto fullips.</span>
+                                    </NavLink>
+                                </Typography>
+                            </center>
+                        </Container>
+                    </Box>
+                }
                 {parseInt(total) > 0 &&
                     <Container style={{ marginBottom: '7em' }}>
                         <Grid container style={{ marginTop: '2em' }} >
@@ -163,9 +213,28 @@ export default function CheckOut() {
                                 </Grid>
                             </Grid>
                         ))}
-                        <Grid container style={{ padding: '0.7em', marginTop: '2em', }} >
+                        <Grid container style={{ padding: '0.7em', marginTop: '2em' }} >
                             <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
-                                <Typography className={classes.donation}> Donación:  <span className={classes.price}> <NumberFormat value={800} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div style={{display:'inline'}}>{value} COP</div>} /> </span> </Typography>
+                                <Typography className={classes.info_donation}> ¿Deseas hacer una donación para ayudar a la educación de los niños? </Typography>
+                            </Grid>
+                            <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', marginBottom: '1em' }}>
+                                <NavLink to="/razon-social" className={classes.navlink}>
+                                    <Typography className={classes.info_donation}>
+                                        Ver mas información
+                                    </Typography>
+                                </NavLink>
+                            </Grid>
+                            <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', marginRight: '7.2em' }}>
+                                <Typography className={classes.donation}> Donación:   </Typography>
+                            </Grid>
+                            <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
+                                <span className={classes.price}> <Checkbox
+                                    checked={checked}
+                                    onChange={handleChange}
+                                    size="small"
+                                    color="secondary"
+                                    inputProps={{ 'aria-label': 'checkbox with small size' }}
+                                /><NumberFormat value={800} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div className={classDonation}>{value} COP</div>} /> </span>
                             </Grid>
                             <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
                                 <Typography className={classes.subtotal}> Total:  <span className={classes.price}> <NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value} COP</div>} /> </span> </Typography>

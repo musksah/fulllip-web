@@ -145,8 +145,11 @@ export default function Payment() {
         script.setAttribute("data-epayco-country", "co");
         script.setAttribute("data-epayco-test", "true");
         script.setAttribute("data-epayco-external", "false");
+        script.setAttribute("data-epayco-acepted", Enviroment.urlWeb+"/accepted-payment");
+        script.setAttribute("data-epayco-rejected", Enviroment.urlWeb+"/rejected-payment");
+        script.setAttribute("data-epayco-pending", Enviroment.urlWeb+"/pending-payment");
         script.setAttribute("data-epayco-response", Enviroment.responsePage);
-        script.setAttribute("data-epayco-confirmation", Enviroment.confirmationPage);
+        script.setAttribute("data-epayco-confirmation", Enviroment.urlApi+"/epayco/confirmation-payment");
         let contenedorForm = document.getElementById("epaycoForm");
         contenedorForm.appendChild(script);
         return () => {

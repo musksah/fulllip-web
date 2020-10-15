@@ -153,13 +153,13 @@ function ModalContact() {
                                     <Button variant="contained" color="primary">Enviar</Button>
                                 </center>
                             </Grid>
-                            <Grid item md={12} xl={12} lg={12} style={{ marginTop: '4em', marginBottom: '1em' }}>
+                            {/* <Grid item md={12} xl={12} lg={12} style={{ marginTop: '4em', marginBottom: '1em' }}>
                                 <Typography variant="h5">Datos de Contácto</Typography>
                             </Grid>
                             <Grid item md={12} xl={12} lg={12} style={{ marginBottom: '4em' }}>
                                 <Typography variant="h6" style={{ display: 'inline' }}>CORREO: </Typography>
                                 <Typography variant="body1" style={{ display: 'inline', marginLeft: '0.5em' }}>fullipscolombia@gmail.com</Typography>
-                            </Grid>
+                            </Grid> */}
                         </Grid>
                     </Grid>
                     <Grid item md={1} lg={1} xl={1}></Grid>

@@ -13,6 +13,9 @@ import Rsocial from './pages/rsocial';
 import ErrorConfirmation from './pages/errorconfirmation';
 import ConfirmationEmail from './pages/confirmationEmail';
 import ConfirmationPayment from './pages/epayco/confirmationPayment';
+import acceptedPayment from './pages/epayco/acceptedPayment';
+import rejectedPayment from './pages/epayco/rejectedPayment';
+import pendingPayment from './pages/epayco/pendingPayment';
 import Use from './pages/use';
 import Sending from './pages/sending';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
@@ -109,6 +112,9 @@ function App() {
                         <Route path="/razon-social" exact component={Rsocial} />
                         <Route path="/confirmation-email/:token" exact component={ConfirmationEmail} />
                         <Route path="/confirmation-payment" exact component={ConfirmationPayment} />
+                        <Route path="/accepted-payment" exact component={acceptedPayment} />
+                        <Route path="/rejected-payment" exact component={rejectedPayment} />
+                        <Route path="/pending-payment" exact component={pendingPayment} />
                     </Switch>
                     <Footer />
                 </Router>

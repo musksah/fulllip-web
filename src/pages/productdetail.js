@@ -62,6 +62,7 @@ function ItemDetail() {
     }, []);
 
     const getProductInfo = () => {
+        // console.log("Get product info");
         axios.get(`${URL}/${id}`).then(
             res => {
                 setProduct(res.data[0]);

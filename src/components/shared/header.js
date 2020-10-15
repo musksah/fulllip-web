@@ -20,6 +20,13 @@ import axios from 'axios';
 import 'typeface-rubik';
 import Enviroment from '../../enviroment';
 import { CartContext } from '../../contexts/cartContext';
+import HelpIcon from '@material-ui/icons/Help'
+import VideoLabelIcon from '@material-ui/icons/VideoLabel'
+import PeopleIcon from '@material-ui/icons/People'
+import ContactMailIcon from '@material-ui/icons/ContactMail'
+import HomeIcon from '@material-ui/icons/Home';
+import { grey } from '@material-ui/core/colors';
+
 
 const URL = `${Enviroment.urlApi}/user`;
 
@@ -113,7 +120,7 @@ function ElevationScroll(props) {
 }
 
 ElevationScroll.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.element.isRequigrey,
   /**
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
@@ -215,21 +222,43 @@ export default function PrimarySearchAppBar(props) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
+        <IconButton color="inherit">
+          <HomeIcon style={{ color: grey[600] }}/>
         </IconButton>
-        <p>Messages</p>
+        <NavLink to="/" style={{ textDecoration: 'none' }}>
+          <p>Inicio</p>
+        </NavLink>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
+        <IconButton color="inherit">
+          <HelpIcon style={{ color: grey[600] }} />
         </IconButton>
-        <NavLink to="/register" style={{ textDecoration: 'none' }}>
-          <p>Registrarse</p>
+        <NavLink to="/Question" style={{ textDecoration: 'none' }}>
+          <p>Preguntas Frecuentes</p>
+        </NavLink>
+      </MenuItem>
+      <MenuItem>
+        <IconButton color="inherit">
+          <VideoLabelIcon style={{ color: grey[600] }}/>
+        </IconButton>
+        <NavLink to="/Use" style={{ textDecoration: 'none' }}>
+          <p>Uso</p>
+        </NavLink>
+      </MenuItem>
+      <MenuItem>
+        <IconButton color="inherit">
+          <PeopleIcon style={{ color: grey[600] }}/>
+        </IconButton>
+        <NavLink to="/razon-social" style={{ textDecoration: 'none' }}>
+          <p>Razón Social</p>
+        </NavLink>
+      </MenuItem>
+      <MenuItem>
+        <IconButton color="inherit">
+          <ContactMailIcon style={{ color: grey[600] }}/>
+        </IconButton>
+        <NavLink to="/contact" style={{ textDecoration: 'none' }}>
+          <p>Contacto</p>
         </NavLink>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
@@ -239,10 +268,10 @@ export default function PrimarySearchAppBar(props) {
           aria-haspopup="true"
           color="inherit"
         >
-          <RiUserLine />
+          <RiUserLine style={{ color: grey[600] }}/>
         </IconButton>
-        <NavLink to="/register" style={{ textDecoration: 'none' }}>
-          <p>Login</p>
+        <NavLink to="/profile" style={{ textDecoration: 'none' }}>
+          <p>Perfil</p>
         </NavLink>
       </MenuItem>
     </Menu>
@@ -280,7 +309,7 @@ export default function PrimarySearchAppBar(props) {
               <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '3em' }}>
                 RAZÓN SOCIAL
           </Typography>
-              </NavLink>
+            </NavLink>
             <NavLink to="/contact" style={{ textDecoration: 'none' }}>
               <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '3em' }}>
                 CONTACTO
@@ -316,6 +345,13 @@ export default function PrimarySearchAppBar(props) {
               </IconButton>
             </div>
             <div className={classes.sectionMobile}>
+              <NavLink to="/checkout">
+                <IconButton aria-label="show 4 new mails" color="inherit" color="secondary">
+                  <Badge badgeContent={itemCount} color="error">
+                    <AiOutlineShopping />
+                  </Badge>
+                </IconButton>
+              </NavLink>
               <IconButton
                 aria-label="show more"
                 aria-controls={mobileMenuId}

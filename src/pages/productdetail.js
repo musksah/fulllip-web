@@ -16,6 +16,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { CartContext } from '../contexts/cartContext';
 import NumberFormat from 'react-number-format';
+import Swal from "sweetalert2";
 
 const URL = `${Enviroment.urlApi}/item`;
 
@@ -30,17 +31,91 @@ const useStyles = makeStyles((theme) => ({
         color: '#676767'
     },
     img_product: {
-        height: '350px',
-        width: '100%',
-        border: 'solid 0.03em #C9C9C9',
-        borderRadius: '10px'
-    },
-    img_products: {
-        height: '150px',
         width: '100%',
         border: 'solid 0.03em #C9C9C9',
         borderRadius: '10px',
-        opacity: '0.5'
+        [theme.breakpoints.only('xs')]: {
+            height: '350px',
+        },
+        [theme.breakpoints.only('sm')]: {
+            height: '400px',
+        },
+        [theme.breakpoints.only('md')]: {
+            height: '350px',
+        },
+        [theme.breakpoints.only('lg')]: {
+            height: '400px',
+        },
+        [theme.breakpoints.up('xl')]: {
+            height: '400px',
+        },
+    },
+    img_products: {
+
+        width: '100%',
+        border: 'solid 0.03em #C9C9C9',
+        borderRadius: '10px',
+        opacity: '0.5',
+        [theme.breakpoints.only('xs')]: {
+            height: '100px',
+        },
+        [theme.breakpoints.only('sm')]: {
+            height: '120px',
+        },
+        [theme.breakpoints.only('md')]: {
+            height: '110px',
+        },
+        [theme.breakpoints.only('lg')]: {
+            height: '130px',
+        },
+        [theme.breakpoints.up('xl')]: {
+            height: '150px',
+        },
+    },
+    grid1: {
+
+        [theme.breakpoints.only('xs')]: {
+            paddingLeft: '3em',
+            paddingRight: '3em',
+            marginBottom: '3em'
+        },
+        [theme.breakpoints.only('sm')]: {
+            paddingLeft: '6em',
+            paddingRight: '6em',
+            marginBottom: '3em'
+        },
+        [theme.breakpoints.only('md')]: {
+            paddingLeft: '5em',
+            paddingRight: '3em',
+        },
+        [theme.breakpoints.only('lg')]: {
+            paddingLeft: '8em',
+            paddingRight: '6em',
+        },
+        [theme.breakpoints.up('xl')]: {
+            paddingLeft: '12em',
+            paddingRight: '8em',
+        },
+    },
+    grid2: {
+        [theme.breakpoints.only('xs')]: {
+            paddingLeft: '3em',
+            paddingRight: '3em',
+        },
+        [theme.breakpoints.only('sm')]: {
+            paddingLeft: '6em',
+            paddingRight: '6em',
+        },
+        [theme.breakpoints.only('md')]: {
+            paddingRight: '5em',
+        },
+        [theme.breakpoints.only('lg')]: {
+            paddingRight: '8em',
+        },
+        [theme.breakpoints.up('xl')]: {
+            paddingRight: '12em'
+        },
+
     }
 }));
 
@@ -50,8 +125,8 @@ function ItemDetail() {
     const [product, setProduct] = useState({});
     const [image, setImage] = useState({});
     const [images, setImages] = useState([]);
-    const [open, setOpen] = React.useState(false);
-    const [message, setMessage] = React.useState("");
+    const [open, setOpen] = useState(false);
+    const [message, setMessage] = useState("");
     const history = useHistory();
     const { addProduct, itemCount } = useContext(CartContext);
 
@@ -82,8 +157,24 @@ function ItemDetail() {
         if (parseInt(values) <= 0) {
             openMessage("la cantidad debe ser mayor a 0");
         } else {
-            const products = { id: product.id_item, img: image, name: product.name, subtitle: product.subtitle, price: product.price, quantity: parseInt(values) }
+            Swal.fire({
+                title: 'Producto Agregado',
+                type: 'success',
+                text: 'Su producto fue agregado satisfactoriamente al carrito.',
+                cancelButtonText: 'Seguir Comprando',
+                confirmButtonText: 'Ir al Carrito',
+                showCancelButton: true,
+                allowOutsideClick: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    history.push("/checkout");
+                } else {
+                    history.push("/");
+                }
+            });
+            const products = { id: product.id_item, img: image.url, name: product.name, subtitle: product.subtitle, price: product.price, quantity: parseInt(values) }
             addProduct(products);
+
         }
     }
 
@@ -103,6 +194,7 @@ function ItemDetail() {
 
         setOpen(false);
     };
+
 
     const changeImage = (e) => {
         let images = document.getElementsByClassName(e.target.className);
@@ -126,76 +218,75 @@ function ItemDetail() {
             e.target.style.opacity = '0.5';
         }
     }
+
     return (
         <Box>
             <Header itemCount={itemCount} />
-            <Container className={classes.root}>
-                <Box style={{ paddingTop: '10rem', paddingBottom: '7rem' }}>
-                    {images.length > 0 &&
-                        < Grid container spacing={3}>
-                            <Grid item xs={12} md={6}>
-                                <Grid container style={{ marginBottom: '2em', paddingRight: '1em' }}>
-                                    <img className={classes.img_product} src={image.url} />
-                                </Grid>
-                                <Grid container style={{ paddingRight: '1em' }}>
-                                    {images.map((img, index) => (
-                                        <Grid item xs={3} key={img.image_item.priority_field} style={{ cursor: 'pointer', paddingRight: '0.5em' }}>
-                                            {img.image_item.priority_field === 1 ? (
-                                                <img className={classes.img_products} id={img.image_item.name} src={img.image_item.url} data={img.image_item.url} priority={img.image_item.priority_field} onClick={changeImage} style={{ opacity: '1' }} onMouseOver={hoverImage} onMouseOut={leaveImage} />
-                                            ) : (
-                                                    <img className={classes.img_products} id={img.image_item.name} src={img.image_item.url} data={img.image_item.url} priority={img.image_item.priority_field} onClick={changeImage} style={{ opacity: '0.5' }} onMouseOver={hoverImage} onMouseOut={leaveImage} />
-                                                )
-                                            }
-                                        </Grid>
-                                    ))}
-                                </Grid>
+            <Box className={classes.root} style={{ paddingTop: '10rem', paddingBottom: '7rem' }}>
+                {images.length > 0 &&
+                    < Grid container>
+                        <Grid item xs={12} sm={12} md={6} className={classes.grid1}>
+                            <Grid container style={{ marginBottom: '2em' }}>
+                                <img className={classes.img_product} src={image.url} />
                             </Grid>
-                            <Grid item xs={12} md={6}>
-                                <Grid container>
-                                    <Grid item xs={12} style={{ marginTop: '0.5em' }}>
-                                        <h4>{product.name}</h4>
-                                    </Grid>
-                                    <Grid item xs={12} style={{ marginTop: '2em', color: '#FF5C5C' }}>
-                                        {product.price &&
-                                            <h5><NumberFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value}</div>} /></h5>
+                            <Grid container >
+                                {images.map((img, index) => (
+                                    <Grid item xs={3} key={img.image_item.priority_field} style={{ cursor: 'pointer', paddingRight: '0.5em' }}>
+                                        {img.image_item.priority_field === 1 ? (
+                                            <img className={classes.img_products} id={img.image_item.name} src={img.image_item.url} data={img.image_item.url} priority={img.image_item.priority_field} onClick={changeImage} style={{ opacity: '1' }} onMouseOver={hoverImage} onMouseOut={leaveImage} />
+                                        ) : (
+                                                <img className={classes.img_products} id={img.image_item.name} src={img.image_item.url} data={img.image_item.url} priority={img.image_item.priority_field} onClick={changeImage} style={{ opacity: '0.5' }} onMouseOver={hoverImage} onMouseOut={leaveImage} />
+                                            )
                                         }
                                     </Grid>
-                                    <Grid item xs={12} style={{ marginTop: '2em' }}>
-                                        <p>{product.description}</p>
-                                    </Grid>
-                                    <Grid item xs={12} style={{ marginTop: '0.5em', fontSize: '0.7em' }}>
-                                        <p>Disponibles en inventario: {product.quantity}</p>
-                                    </Grid>
-                                    <Grid item xs={12} style={{ marginTop: '1em' }}>
-                                        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-                                            <OutlinedInput
-                                                id="outlined-adornment-weight"
-                                                value={values}
-                                                onChange={handleChange}
-                                                aria-describedby="outlined-weight-helper-text"
-                                                autoComplete="off"
-                                                required
-                                                inputProps={{
-                                                    'aria-label': 'weight',
-                                                }}
-                                            />
-                                            <FormHelperText id="outlined-weight-helper-text">cantidad</FormHelperText>
-                                        </FormControl>
-                                    </Grid>
-                                    <Grid item xs={12} style={{ marginTop: '1em' }}>
-                                        <Button variant="contained" style={{ padding: '1em' }} onClick={saveProduct}>Añadir al Carrito</Button>
-                                    </Grid>
+                                ))}
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={6} className={classes.grid2}>
+                            <Grid container>
+                                <Grid item xs={12} style={{ marginTop: '0.5em' }}>
+                                    <h4>{product.name}</h4>
+                                </Grid>
+                                <Grid item xs={12} style={{ marginTop: '2em', color: '#FF5C5C' }}>
+                                    {product.price &&
+                                        <h5><NumberFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value}</div>} /></h5>
+                                    }
+                                </Grid>
+                                <Grid item xs={12} style={{ marginTop: '2em' }}>
+                                    <p>{product.description}</p>
+                                </Grid>
+                                <Grid item xs={12} style={{ marginTop: '0.5em', fontSize: '0.7em' }}>
+                                    <p>Disponibles en inventario: {product.quantity}</p>
+                                </Grid>
+                                <Grid item xs={12} style={{ marginTop: '1em' }}>
+                                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+                                        <OutlinedInput
+                                            id="outlined-adornment-weight"
+                                            value={values}
+                                            onChange={handleChange}
+                                            aria-describedby="outlined-weight-helper-text"
+                                            autoComplete="off"
+                                            required
+                                            inputProps={{
+                                                'aria-label': 'weight',
+                                            }}
+                                        />
+                                        <FormHelperText id="outlined-weight-helper-text">cantidad</FormHelperText>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={12} style={{ marginTop: '1em' }}>
+                                    <Button variant="contained" style={{ padding: '1em' }} onClick={saveProduct}>Añadir al Carrito</Button>
                                 </Grid>
                             </Grid>
                         </Grid>
-                    }
-                </Box>
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                    <Alert onClose={handleClose} severity="error">
-                        {message}
-                    </Alert>
-                </Snackbar>
-            </Container>
+                    </Grid>
+                }
+            </Box>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error">
+                    {message}
+                </Alert>
+            </Snackbar>
         </Box >
     );
 }

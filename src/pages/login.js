@@ -150,7 +150,6 @@ export default function SignIn(props) {
         openMessage(res.data.message);
       }
     })
-
   }
 
   const createUser = (e) => {

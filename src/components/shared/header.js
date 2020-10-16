@@ -223,7 +223,7 @@ export default function PrimarySearchAppBar(props) {
     >
       <MenuItem>
         <IconButton color="inherit">
-          <HomeIcon style={{ color: grey[600] }}/>
+          <HomeIcon style={{ color: grey[600] }} />
         </IconButton>
         <NavLink to="/" style={{ textDecoration: 'none' }}>
           <p>Inicio</p>
@@ -239,7 +239,7 @@ export default function PrimarySearchAppBar(props) {
       </MenuItem>
       <MenuItem>
         <IconButton color="inherit">
-          <VideoLabelIcon style={{ color: grey[600] }}/>
+          <VideoLabelIcon style={{ color: grey[600] }} />
         </IconButton>
         <NavLink to="/Use" style={{ textDecoration: 'none' }}>
           <p>Uso</p>
@@ -247,7 +247,7 @@ export default function PrimarySearchAppBar(props) {
       </MenuItem>
       <MenuItem>
         <IconButton color="inherit">
-          <PeopleIcon style={{ color: grey[600] }}/>
+          <PeopleIcon style={{ color: grey[600] }} />
         </IconButton>
         <NavLink to="/razon-social" style={{ textDecoration: 'none' }}>
           <p>Razón Social</p>
@@ -255,20 +255,33 @@ export default function PrimarySearchAppBar(props) {
       </MenuItem>
       <MenuItem>
         <IconButton color="inherit">
-          <ContactMailIcon style={{ color: grey[600] }}/>
+          <ContactMailIcon style={{ color: grey[600] }} />
         </IconButton>
         <NavLink to="/contact" style={{ textDecoration: 'none' }}>
           <p>Contacto</p>
         </NavLink>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={handleProfileMenuOpen} style={{ textDecoration: 'none', visibility: visibleIn }}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
         >
-          <RiUserLine style={{ color: grey[600] }}/>
+          <RiUserLine style={{ color: grey[600] }} />
+        </IconButton>
+        <NavLink to="/login" style={{ textDecoration: 'none' }}>
+          <p>Login</p>
+        </NavLink>
+      </MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen} style={{visibility: visibleMenu}}>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <RiUserLine style={{ color: grey[600] }} />
         </IconButton>
         <NavLink to="/profile" style={{ textDecoration: 'none' }}>
           <p>Perfil</p>

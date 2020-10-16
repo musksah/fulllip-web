@@ -44,10 +44,10 @@ const useStyles = makeStyles((theme) => ({
             height: '350px',
         },
         [theme.breakpoints.only('lg')]: {
-            height: '400px',
+            height: '700px',
         },
         [theme.breakpoints.up('xl')]: {
-            height: '400px',
+            height: '700px',
         },
     },
     img_products: {

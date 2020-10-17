@@ -32,6 +32,10 @@ const CartContextProvider = ({ children }) => {
         dispatch({ type: 'CLEAR' })
     }
 
+    const addExtra = () => {
+        dispatch({ type: 'ADD_EXTRA' })
+    }
+
 
     const contextValues = {
         removeProduct,
@@ -39,6 +43,7 @@ const CartContextProvider = ({ children }) => {
         increase,
         decrease,
         clearCart,
+        addExtra,
         ...state
     }
 

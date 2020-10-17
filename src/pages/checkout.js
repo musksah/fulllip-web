@@ -93,19 +93,23 @@ export default function CheckOut() {
     const classes = useStyles();
     const [listitems, setlistitems] = useState(items);
     const [classDonation, setClassDonation] = useState(classes.donation_checked);
-    const [checked, setChecked] = React.useState(true);
+    const [checked, setChecked] = useState(true);
 
     const handleChange = (event) => {
         setChecked(event.target.checked);
         if (event.target.checked) {
+            localStorage.setItem("donation", 1);
+            addExtra();
             setClassDonation(classes.donation_checked);
         } else {
+            localStorage.setItem("donation", 0);
+            addExtra();
             setClassDonation(classes.donation_unchecked);
         }
     };
 
     const history = useHistory();
-    const { cartItems, total, increase, decrease, removeProduct } = useContext(CartContext);
+    const { cartItems, total, increase, decrease, removeProduct, addExtra } = useContext(CartContext);
 
 
     const validateLogin = () => {
@@ -133,6 +137,8 @@ export default function CheckOut() {
             console.log("No se ha confirmado");
             history.push("/error-confirmation");
         } else {
+            localStorage.setItem("donation", 1);
+            addExtra();
             console.log("Se confirmó");
         }
     }

@@ -25,6 +25,7 @@ import VideoLabelIcon from '@material-ui/icons/VideoLabel'
 import PeopleIcon from '@material-ui/icons/People'
 import ContactMailIcon from '@material-ui/icons/ContactMail'
 import HomeIcon from '@material-ui/icons/Home';
+import InputIcon from '@material-ui/icons/Input';
 import { grey } from '@material-ui/core/colors';
 
 
@@ -221,73 +222,88 @@ export default function PrimarySearchAppBar(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton color="inherit">
-          <HomeIcon style={{ color: grey[600] }} />
-        </IconButton>
-        <NavLink to="/" style={{ textDecoration: 'none' }}>
+      <NavLink to="/" style={{ textDecoration: 'none' }}>
+        <MenuItem>
+          <IconButton color="inherit">
+            <HomeIcon style={{ color: grey[600] }} />
+          </IconButton>
           <p>Inicio</p>
-        </NavLink>
-      </MenuItem>
-      <MenuItem>
-        <IconButton color="inherit">
-          <HelpIcon style={{ color: grey[600] }} />
-        </IconButton>
-        <NavLink to="/Question" style={{ textDecoration: 'none' }}>
+        </MenuItem>
+      </NavLink>
+      <NavLink to="/Question" style={{ textDecoration: 'none' }}>
+        <MenuItem>
+          <IconButton color="inherit">
+            <HelpIcon style={{ color: grey[600] }} />
+          </IconButton>
           <p>Preguntas Frecuentes</p>
-        </NavLink>
-      </MenuItem>
-      <MenuItem>
-        <IconButton color="inherit">
-          <VideoLabelIcon style={{ color: grey[600] }} />
-        </IconButton>
-        <NavLink to="/Use" style={{ textDecoration: 'none' }}>
+        </MenuItem>
+      </NavLink>
+      <NavLink to="/Use" style={{ textDecoration: 'none' }}>
+        <MenuItem>
+          <IconButton color="inherit">
+            <VideoLabelIcon style={{ color: grey[600] }} />
+          </IconButton>
           <p>Uso</p>
-        </NavLink>
-      </MenuItem>
-      <MenuItem>
-        <IconButton color="inherit">
-          <PeopleIcon style={{ color: grey[600] }} />
-        </IconButton>
-        <NavLink to="/razon-social" style={{ textDecoration: 'none' }}>
+        </MenuItem>
+      </NavLink>
+      <NavLink to="/razon-social" style={{ textDecoration: 'none' }}>
+        <MenuItem>
+          <IconButton color="inherit">
+            <PeopleIcon style={{ color: grey[600] }} />
+          </IconButton>
           <p>Razón Social</p>
-        </NavLink>
-      </MenuItem>
-      <MenuItem>
-        <IconButton color="inherit">
-          <ContactMailIcon style={{ color: grey[600] }} />
-        </IconButton>
-        <NavLink to="/contact" style={{ textDecoration: 'none' }}>
+        </MenuItem>
+      </NavLink>
+      <NavLink to="/contact" style={{ textDecoration: 'none' }}>
+        <MenuItem>
+          <IconButton color="inherit">
+            <ContactMailIcon style={{ color: grey[600] }} />
+          </IconButton>
           <p>Contacto</p>
+        </MenuItem>
+      </NavLink>
+      {visibleIn == "visible" ? (
+        <NavLink to={{
+          pathname: "/Ingresar",
+          state: "menu"
+        }} style={{ textDecoration: 'none' }}>
+          <MenuItem style={{ textDecoration: 'none' }}>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <RiUserLine style={{ color: grey[600] }} />
+            </IconButton>
+            <p>Login</p>
+          </MenuItem>
         </NavLink>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen} style={{ textDecoration: 'none', visibility: visibleIn }}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <RiUserLine style={{ color: grey[600] }} />
-        </IconButton>
-        <NavLink to="/login" style={{ textDecoration: 'none' }}>
-          <p>Login</p>
-        </NavLink>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen} style={{visibility: visibleMenu}}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <RiUserLine style={{ color: grey[600] }} />
-        </IconButton>
-        <NavLink to="/profile" style={{ textDecoration: 'none' }}>
-          <p>Perfil</p>
-        </NavLink>
-      </MenuItem>
-    </Menu>
+      ) : (
+          <>
+            <NavLink to="/profile" style={{ textDecoration: 'none' }}>
+              <MenuItem >
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="primary-search-account-menu"
+                  aria-haspopup="true"
+                  color="inherit"
+                >
+                  <RiUserLine style={{ color: grey[600] }} />
+                </IconButton>
+                <p>Perfil</p>
+              </MenuItem>
+            </NavLink>
+            <MenuItem onClick={logOut}>
+              <IconButton color="inherit">
+                <InputIcon style={{ color: grey[600] }} />
+              </IconButton>
+              <p>Cerrar Sesión</p>
+            </MenuItem>
+          </>
+        )
+      }
+    </Menu >
   );
 
   return (

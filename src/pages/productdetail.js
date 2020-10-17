@@ -159,7 +159,7 @@ function ItemDetail() {
         } else {
             Swal.fire({
                 title: 'Producto Agregado',
-                type: 'success',
+                icon: 'success',
                 text: 'Su producto fue agregado satisfactoriamente al carrito.',
                 cancelButtonText: 'Seguir Comprando',
                 confirmButtonText: 'Ir al Carrito',

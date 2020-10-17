@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
@@ -17,6 +18,11 @@ import MuiAlert from '@material-ui/lab/Alert';
 import { CartContext } from '../contexts/cartContext';
 import NumberFormat from 'react-number-format';
 import Swal from "sweetalert2";
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 
 const URL = `${Enviroment.urlApi}/item`;
 
@@ -31,9 +37,6 @@ const useStyles = makeStyles((theme) => ({
         color: '#676767'
     },
     img_product: {
-        width: '100%',
-        border: 'solid 0.03em #C9C9C9',
-        borderRadius: '10px',
         [theme.breakpoints.only('xs')]: {
             height: '350px',
         },
@@ -51,10 +54,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     img_products: {
-
-        width: '100%',
         border: 'solid 0.03em #C9C9C9',
-        borderRadius: '10px',
         opacity: '0.5',
         [theme.breakpoints.only('xs')]: {
             height: '100px',
@@ -73,7 +73,6 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     grid1: {
-
         [theme.breakpoints.only('xs')]: {
             paddingLeft: '3em',
             paddingRight: '3em',
@@ -228,9 +227,11 @@ function ItemDetail() {
                     < Grid container>
                         <Grid item xs={12} sm={12} md={6} className={classes.grid1}>
                             <Grid container style={{ marginBottom: '2em' }}>
-                                <img className={classes.img_product} src={image.url} />
+                                <Grid item xs={12}>
+                                    <img className={classes.img_product} src={image.url} />
+                                </Grid>
                             </Grid>
-                            <Grid container >
+                            <Grid container spacing={1}>
                                 {images.map((img, index) => (
                                     <Grid item xs={3} key={img.image_item.priority_field} style={{ cursor: 'pointer', paddingRight: '0.5em' }}>
                                         {img.image_item.priority_field === 1 ? (

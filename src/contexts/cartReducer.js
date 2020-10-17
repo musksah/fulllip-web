@@ -2,10 +2,21 @@ const Storage = (cartItems) => {
     localStorage.setItem('products', JSON.stringify(cartItems.length > 0 ? cartItems : []));
 }
 
+const Extra = (total_temp) => {
+    let bandera = localStorage.getItem('donation');
+    let valor = 800;
+    let total = parseInt(total_temp);
+    if (parseInt(bandera) == 1) {
+        total = total + valor;
+    }
+    return total.toFixed(2);
+}
+
 export const sumItems = cartItems => {
     Storage(cartItems);
     let itemCount = cartItems.reduce((total, product) => total + product.quantity, 0);
-    let total = cartItems.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
+    let total_temp = cartItems.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
+    let total = Extra(total_temp);
     return { itemCount, total }
 }
 
@@ -40,6 +51,12 @@ export const CartReducer = (state, action) => {
             }
         case "DECREASE":
             state.cartItems[state.cartItems.findIndex(item => item.id === action.payload.id)].quantity--
+            return {
+                ...state,
+                ...sumItems(state.cartItems),
+                cartItems: [...state.cartItems]
+            }
+        case "ADD_EXTRA":
             return {
                 ...state,
                 ...sumItems(state.cartItems),

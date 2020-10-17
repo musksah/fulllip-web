@@ -19,6 +19,7 @@ import Header from '../components/shared/header';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
 import Enviroment from '../enviroment';
+import Swal from "sweetalert2";
 
 const URL = `${Enviroment.urlApi}/user`;
 
@@ -159,11 +160,22 @@ export default function SignIn(props) {
       axios.post(URL + "/register", { email, password, name, lastname }).then(res => {
         setOpenProgress(false);
         if (res.status == 200) {
-          localStorage.setItem("h_tiov", res.data.token);
-          localStorage.setItem("name", res.data.name.split(" ")[0]);
-          localStorage.setItem("sessionid", res.data.session);
-          localStorage.setItem("confirmed", 0);
-          validate();
+          Swal.fire({
+            title: 'Urgente',
+            icon: 'warning',
+            text: 'Se a enviado un correo para confirmar su cuenta. Por favor revisar su correo.',
+            confirmButtonText: 'Ok',
+            allowOutsideClick: false
+          }).then((result) => {
+            if (result.isConfirmed) {
+              localStorage.setItem("h_tiov", res.data.token);
+              localStorage.setItem("name", res.data.name.split(" ")[0]);
+              localStorage.setItem("sessionid", res.data.session);
+              localStorage.setItem("confirmed", 0);
+              validate();
+            }
+          });
+
         }
         else {
           openMessage(res.data.message);

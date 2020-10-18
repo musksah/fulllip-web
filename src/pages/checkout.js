@@ -158,7 +158,7 @@ export default function CheckOut() {
                 <center>
                     <Typography variant="h6" style={{ color: '#4F4F4F' }}>CARRITO DE COMPRA</Typography>
                 </center>
-                {parseInt(total) == 0 &&
+                {parseInt(cartItems.length) == 0 &&
                     <Box>
                         <Container style={{ marginBottom: '20em', marginTop: '2em' }}>
                             <center>
@@ -171,7 +171,7 @@ export default function CheckOut() {
                         </Container>
                     </Box>
                 }
-                {parseInt(total) > 0 &&
+                {parseInt(cartItems.length) > 0 &&
                     <Container style={{ marginBottom: '7em' }}>
                         <Grid container style={{ marginTop: '2em' }} >
                             <Grid item md={1}></Grid>

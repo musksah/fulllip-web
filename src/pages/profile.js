@@ -20,8 +20,7 @@ import Box from '@material-ui/core/Box';
 import { useHistory } from "react-router-dom";
 import Enviroment from '../enviroment';
 
-const URL = `${Enviroment.urlApi}/customer`;
-const URL2 = `${Enviroment.urlApi}/user`;
+const URL = `${Enviroment.urlApi}`;
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -75,6 +74,8 @@ export default function Perfil() {
     const [password, setPassword] = useState("");
     const [passwordC, setPasswordC] = useState("");
     const [openProgress, setOpenProgress] = useState(true);
+    const [emailN, setEmailN] = useState("");
+    const [emailNC, setEmailNC] = useState("");
     const history = useHistory();
 
     useEffect(() => {
@@ -87,7 +88,7 @@ export default function Perfil() {
     }, []);
 
     const findCustomer = () => {
-        axios.post(URL, { session: localStorage.getItem("sessionid") }).then(res => {
+        axios.post(URL + "/customer", { session: localStorage.getItem("sessionid") }).then(res => {
             const datos = res.data;
             setCustomer(datos.id_customer);
             setName(datos.name);
@@ -134,7 +135,12 @@ export default function Perfil() {
 
     const changeEmail = (e) => {
         const { value } = e.target;
-        setEmail(value);
+        setEmailN(value.trim());
+    }
+
+    const changeEmailC = (e) => {
+        const { value } = e.target;
+        setEmailNC(value.trim());
     }
 
     const changeBirthdate = (date) => {
@@ -174,7 +180,7 @@ export default function Perfil() {
             openMessage("el campo cédula debe ser un número")
         } else {
             setOpenProgress(true);
-            axios.put(URL + "/" + user, { name, lastname, phone, dni_id, address, birthdate, gender, country, city }).then(res => {
+            axios.put(URL + "/customer/" + user, { name, lastname, phone, dni_id, address, birthdate, gender, country, city }).then(res => {
                 setOpenProgress(false);
                 openMessage2("Los datos personales fueron actualizados.")
             });
@@ -218,7 +224,7 @@ export default function Perfil() {
         e.preventDefault();
         if (password === passwordC) {
             setOpenProgress(true);
-            axios.put(URL2 + "/" + user, { password, passwordA }).then(res => {
+            axios.put(URL + "/user/" + user, { password, passwordA }).then(res => {
                 setOpenProgress(false);
                 setPasswordA("");
                 setPassword("");
@@ -235,6 +241,29 @@ export default function Perfil() {
         }
 
     }
+
+    const saveEmail = (e) => {
+        e.preventDefault();
+        if (emailN === email) {
+            openMessage("El correo es igual al actual.");
+        } else if (emailN === emailNC) {
+            setOpenProgress(true);
+            axios.post(URL + "/email/send-mail-change", { email: emailN, usuario: user }).then(res => {
+                setOpenProgress(false);
+                if (res.status === 200) {
+                    setEmail(emailN);
+                    setEmailN("");
+                    setEmailNC("");
+                    openMessage2(res.data.message)
+                } else {
+                    openMessage(res.data.message);
+                }
+            });
+        } else if (emailN !== emailNC) {
+            openMessage("Correos Distintas.");
+        }
+    }
+
     return (
         <Box>
             <Header />
@@ -440,7 +469,7 @@ export default function Perfil() {
                         </Grid>
                     </Grid>
                 </form>
-                <form className={classes.form}>
+                <form className={classes.form} onSubmit={saveEmail}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} style={{ marginTop: '2em' }}>
                             <h5>CORREO ELECTRÓNICO</h5>
@@ -469,24 +498,30 @@ export default function Perfil() {
                             <InputLabel htmlFor="standard-adornment-amount">Nuevo Correo</InputLabel>
                             <TextField
                                 fullWidth
+                                required
                                 variant="outlined"
                                 name="email2"
                                 type="email"
                                 id="email2"
                                 autoComplete="off"
                                 placeholder="Ingresa nuevo anterior"
+                                onChange={changeEmail}
+                                value={emailN}
                             />
                         </Grid>
                         <Grid item xs={6}>
                             <InputLabel htmlFor="standard-adornment-amount">Confirmar Nuevo Correo</InputLabel>
                             <TextField
                                 fullWidth
+                                required
                                 variant="outlined"
                                 name="email3"
                                 type="email"
                                 id="email3"
                                 autoComplete="off"
                                 placeholder="Ingresa confirmación nueva correo"
+                                onChange={changeEmailC}
+                                value={emailNC}
                             />
                         </Grid>
                         <Button
@@ -499,12 +534,12 @@ export default function Perfil() {
           </Button>
                     </Grid>
                 </form>
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Snackbar open={open} autoHideDuration={3000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="error">
                         {message}
                     </Alert>
                 </Snackbar>
-                <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}>
+                <Snackbar open={open2} autoHideDuration={3000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} onClose={handleClose2}>
                     <Alert onClose={handleClose2} severity="success">
                         {message2}
                     </Alert>

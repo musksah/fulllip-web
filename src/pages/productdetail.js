@@ -284,7 +284,7 @@ function ItemDetail() {
                     </Grid>
                 }
             </Box>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Snackbar open={open} autoHideDuration={3000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error">
                     {message}
                 </Alert>

@@ -170,6 +170,8 @@ function ItemDetail() {
                 text: 'Su producto fue agregado satisfactoriamente al carrito.',
                 cancelButtonText: 'Seguir Comprando',
                 confirmButtonText: 'Ir al Carrito',
+                confirmButtonColor: '#FF0D00',
+                cancelButtonColor: '#FF6961',
                 showCancelButton: true,
                 allowOutsideClick: false
             }).then((result) => {

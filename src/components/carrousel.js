@@ -3,6 +3,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Hidden from '@material-ui/core/Hidden';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
@@ -45,17 +46,20 @@ var items = [
   {
     name: "Random Name #1",
     description: "Probably the most random thing you have ever seen!",
-    url: "img/BANNER-CANDY.jpg"
+    url: "img/index/banner/banner_web_1.jpg",
+    subtitle: "img/index/banner/banner_mobile_1.jpg"
   },
   {
     name: "Random Name #2",
     description: "Hello World!",
-    url: "img/BANNER-FRUTAS.jpg"
+    url: "img/index/banner/banner_web_2.jpg",
+    subtitle: "img/index/banner/banner_mobile_2.jpg"
   },
   {
     name: "Random Name #2",
     description: "Hello World!",
-    url: "img/BANNER-GLOSSY.jpg"
+    url: "img/index/banner/banner_web_3.jpg",
+    subtitle: "img/index/banner/banner_mobile_3.jpg"
   }
 ];
 
@@ -63,7 +67,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: '100%',
     marginTop: '6em',
-    // overflow:'hidden'
   },
   rootBefore: {
     backgroundColor: 'rgba(0,0,0,0.6)',
@@ -90,7 +93,7 @@ export default function TextMobileStepper() {
   const [itemsCarrousell, setItemsCarrousell] = React.useState(items);
   const maxSteps = tutorialSteps.length;
 
-  
+
 
   React.useEffect(() => {
     getImageCarrousel();
@@ -122,11 +125,16 @@ export default function TextMobileStepper() {
 
   function Item(props) {
     return (
-      // <Paper>
       <Box>
-        <img src={props.item.url} style={{ height: '550px', width: '100%' }}></img>
+        {/* Se muestra en xs */}
+        <Hidden only={['sm','md','lg','xl']}>
+          <img src={props.item.subtitle} style={{ height: '550px', width: '100%' }}></img>
+        </Hidden>
+        {/* Se muestra en sm, md, lg, xl */}
+        <Hidden only={['xs']}>
+          <img src={props.item.url} style={{ height: '550px', width: '100%' }}></img>
+        </Hidden>
       </Box>
-      // </Paper>
     )
   }
 

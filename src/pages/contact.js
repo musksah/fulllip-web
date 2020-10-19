@@ -14,8 +14,12 @@ import Container from '@material-ui/core/Container';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { ImInstagram } from 'react-icons/im';
 import { Typography } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
 import Enviroment from '../enviroment';
+import Hidden from '@material-ui/core/Hidden';
 
 const URL = Enviroment.urlApi + '/email';
 
@@ -36,8 +40,59 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: '40%',
         marginRight: '40%',
     },
-    social: {
-
+    collage: {
+        [theme.breakpoints.down('xs')]: {
+            position: 'absolute',
+            top: '15%',
+            left: 0,
+            right: 0,
+            bottom: 0
+        },
+        [theme.breakpoints.only('sm')]: {
+            position: 'absolute',
+            top: '10%',
+            left: 0,
+            right: 0,
+            bottom: 0
+        },
+        [theme.breakpoints.up('md')]: {
+            position: 'absolute',
+            top: 0,
+            left: '20%',
+            right: 0,
+            bottom: 0
+        },
+        [theme.breakpoints.up('lg')]: {
+            position: 'absolute',
+            top: 0,
+            left: '20%',
+            right: 0,
+            bottom: 0
+        },
+    },
+    container_card_form: {
+        [theme.breakpoints.down('sm')]: {
+            marginTop: '11em',
+            marginBottom: '4em'
+        },
+        [theme.breakpoints.up('md')]: {
+            marginTop: '10em',
+            marginBottom: '4em'
+        },
+    },
+    title_social_card: {
+        [theme.breakpoints.down('sm')]: {
+            position: 'relative',
+            top: '-2em'
+        },
+        [theme.breakpoints.up('md')]: {
+            position: 'relative',
+            top: '-4em'
+        },
+    },
+    link_social_net: {
+        textDecoration: 'none',
+        color: 'inherit'
     }
 }));
 
@@ -50,6 +105,7 @@ function ModalContact() {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
     const [open, setOpen] = React.useState(false);
+    const bull = <span className={classes.bullet}>•</span>;
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -104,137 +160,161 @@ function ModalContact() {
     return (
         <Box>
             <Header />
-            <Container style={{ marginTop: '9em', marginBottom: '4em' }}>
-                <Grid container>
-                    <Grid item md={1} lg={1} xl={1}></Grid>
-                    <Grid item md={5} lg={5} xl={5}>
-                        Rejilla Instagram
-                    </Grid>
-                    <Grid item md={5} lg={5} xl={5}>
+            <Container className={classes.container_card_form}>
+                <Grid container style={{ zIndex: '10', position: 'relative' }} >
+                    <Grid item md={3} lg={3} xl={3} style={{ marginLeft: '1em', marginRight: '1em' }}></Grid>
+                    <Grid item md={6} lg={6} xl={6} style={{ marginLeft: '1em', marginRight: '1em' }}>
                         <Grid container>
-                            <Grid item md={12} lg={12} xl={12}>
-                                <Grid container>
-                                    <Grid item md={2} lg={2} xl={2}>
-                                    </Grid>
-                                    <Grid item md={4} lg={4} xl={4}>
-                                        <a target="_blank" href="https://www.facebook.com/880665175331108/posts/3553199911410941/?extid=0&d=n">
-                                            <img src="img/icons/icon_facebook.png" className={classes.img_social} />
-                                        </a>
-                                    </Grid>
-                                    <Grid item md={4} lg={4} xl={4}>
-                                        <a target="_blank" href="https://www.instagram.com/p/CF7sPsuDALH/?igshid=1aw8zwg3nggt0">
-                                            <img src="img/icons/icon_instagram.png" className={classes.img_social} />
-                                        </a>
-                                    </Grid>
-                                    <Grid item md={2} lg={2} xl={2}>
-                                    </Grid>
-                                </Grid>
+                            <Grid item>
+                                <Paper elevation={7} >
+                                    <Container style={{ paddingTop: '1em' }}>
+                                        <Grid item md={12} lg={12} xl={12} style={{ marginTop: '0.7em', marginBottom: '1.5em', marginRight: '1em', marginLeft: '1em', textAlign: 'center' }}>
+                                            <a onClick={handleClickOpen} style={{ cursor: 'pointer', paddingTop: '2em' }}><Typography variant="h5">CONTÁCTANOS</Typography></a>
+                                        </Grid>
+                                        <form noValidate autoComplete="off" onSubmit={sendMessage}>
+                                            <Grid item md={12} lg={12} xl={12} style={{ marginRight: '1em', marginLeft: '1em' }}>
+                                                <Grid container spacing={2}>
+                                                    <Grid item xs={6} lg={6}>
+                                                        <TextField
+                                                            autoFocus
+                                                            margin="dense"
+                                                            id="name"
+                                                            label="Nombres"
+                                                            type="text"
+                                                            variant="outlined"
+                                                            autoComplete="off"
+                                                            fullWidth
+                                                            onChange={changeName}
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={6} lg={6}>
+                                                        <TextField
+                                                            autoFocus
+                                                            margin="dense"
+                                                            id="lastname"
+                                                            label="Apellidos"
+                                                            type="text"
+                                                            variant="outlined"
+                                                            autoComplete="off"
+                                                            fullWidth
+                                                            onChange={changeLastname}
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={6} lg={6}>
+                                                        <TextField
+                                                            autoFocus
+                                                            margin="dense"
+                                                            id="subject"
+                                                            label="Asunto"
+                                                            type="text"
+                                                            variant="outlined"
+                                                            autoComplete="off"
+                                                            fullWidth
+                                                            onChange={changeSubject}
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={6} lg={6}>
+                                                        <TextField
+                                                            autoFocus
+                                                            margin="dense"
+                                                            id="email"
+                                                            label="Correo"
+                                                            type="email"
+                                                            variant="outlined"
+                                                            autoComplete="off"
+                                                            fullWidth
+                                                            onChange={changeEmail}
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={12} lg={12}>
+                                                        <TextField
+                                                            id="outlined-textarea"
+                                                            label="Mensaje"
+                                                            placeholder="Placeholder"
+                                                            multiline
+                                                            variant="outlined"
+                                                            rows={3}
+                                                            fullWidth
+                                                            autoComplete="off"
+                                                            onChange={changeMessage}
+                                                        />
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                            <Grid item md={12} xl={12} lg={12} style={{ marginTop: '1.5em', marginBottom: '1.5em' }}>
+                                                <center>
+                                                    <Button type="submit" variant="contained" color="primary" style={{ marginBottom: '2em' }}>Enviar</Button>
+                                                </center>
+                                            </Grid>
+                                        </form>
+                                    </Container>
+                                </Paper>
                             </Grid>
-                            <Grid item md={12} lg={12} xl={12} style={{ marginTop: '3em', marginBottom: '1.5em', textAlign: 'center' }}>
-                                <a onClick={handleClickOpen} style={{ cursor: 'pointer' }}>COMUNÍCATE CON NOSOTROS</a>
-                            </Grid>
-                            <form noValidate autoComplete="off" onSubmit={sendMessage}>
-                                <Grid item md={12} lg={12} xl={12}>
-                                    <Grid container spacing={2}>
-                                        <Grid item xs={6} lg={6}>
-                                            <TextField
-                                                autoFocus
-                                                margin="dense"
-                                                id="name"
-                                                label="Nombres"
-                                                type="text"
-                                                variant="outlined"
-                                                autoComplete="off"
-                                                fullWidth
-                                                onChange={changeName}
-                                            />
-                                        </Grid>
-                                        <Grid item xs={6} lg={6}>
-                                            <TextField
-                                                autoFocus
-                                                margin="dense"
-                                                id="lastname"
-                                                label="Apellidos"
-                                                type="text"
-                                                variant="outlined"
-                                                autoComplete="off"
-                                                fullWidth
-                                                onChange={changeLastname}
-                                            />
-                                        </Grid>
-                                        <Grid item xs={6} lg={6}>
-                                            <TextField
-                                                autoFocus
-                                                margin="dense"
-                                                id="subject"
-                                                label="Asunto"
-                                                type="text"
-                                                variant="outlined"
-                                                autoComplete="off"
-                                                fullWidth
-                                                onChange={changeSubject}
-                                            />
-                                        </Grid>
-                                        <Grid item xs={6} lg={6}>
-                                            <TextField
-                                                autoFocus
-                                                margin="dense"
-                                                id="email"
-                                                label="Correo"
-                                                type="email"
-                                                variant="outlined"
-                                                autoComplete="off"
-                                                fullWidth
-                                                onChange={changeEmail}
-                                            />
-                                        </Grid>
-                                        <Grid item xs={12} lg={12}>
-                                            <TextField
-                                                id="outlined-textarea"
-                                                label="Mensaje"
-                                                placeholder="Placeholder"
-                                                multiline
-                                                variant="outlined"
-                                                rows={4}
-                                                fullWidth
-                                                autoComplete="off"
-                                                onChange={changeMessage}
-                                            />
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <Grid item md={12} xl={12} lg={12} style={{ marginTop: '2em' }}>
-                                    <center>
-                                        <Button type="submit" variant="contained" color="primary">Enviar</Button>
-                                    </center>
-                                </Grid>
-                            </form>
-                            {/* <Grid item md={12} xl={12} lg={12} style={{ marginTop: '4em', marginBottom: '1em' }}>
-                                <Typography variant="h5">Datos de Contácto</Typography>
-                            </Grid>
-                            <Grid item md={12} xl={12} lg={12} style={{ marginBottom: '4em' }}>
-                                <Typography variant="h6" style={{ display: 'inline' }}>CORREO: </Typography>
-                                <Typography variant="body1" style={{ display: 'inline', marginLeft: '0.5em' }}>fullipscolombia@gmail.com</Typography>
-                            </Grid> */}
                         </Grid>
                     </Grid>
-                    <Grid item md={1} lg={1} xl={1}></Grid>
+                    <Grid item md={3} lg={3} xl={3} style={{ marginLeft: '1em', marginRight: '1em' }}></Grid>
+                </Grid>
+                {/* Se muestra en XS  */}
+                <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                    <img src="img/contact/collage_400x400.png" alt="" className={classes.collage} />
+                </Hidden>
+                {/* Se muestra en sm y md */}
+                <Hidden only={['xs', 'lg', 'xl']}>
+                    <img src="img/contact/collage_800x800.png" alt="" className={classes.collage} />
+                </Hidden>
+                {/* Se muestra en lg Y xl */}
+                <Hidden only={['xs', 'sm', 'md']}>
+                    <img src="img/contact/collage_1000x1000.png" alt="" className={classes.collage} />
+                </Hidden>
+                <Grid container style={{ marginTop: '10em' }}>
+                    <Grid item md={12} lg={12} xl={12} style={{ marginTop: '2em', marginBottom: '3.5em', marginRight: '1em', marginLeft: '1em', textAlign: 'center' }}>
+                        <Typography variant="h5">
+                            MANTENTE AL DÍA EN NUESTRAS REDES SOCIALES
+                        </Typography>
+                    </Grid>
+                </Grid>
+                <Grid container spacing={5} style={{marginBottom:'2em'}}>
+                    <Grid item xs={12} md={4} lg={4} xl={4}>
+                        <center>
+                            <Paper >
+                                <img src="img/contact/gmail_200x200.png" alt="" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} />
+                                <Typography variant="h6" className={classes.title_social_card}>
+                                    fullipscolombia@gmail.com
+                                </Typography>
+                            </Paper>
+                        </center>
+                    </Grid>
+                    <Grid item xs={12} md={4} lg={4} xl={4}>
+                        <center>
+                            <Paper>
+                                <a target="_blank" href="https://www.facebook.com/880665175331108/posts/3553199911410941/?extid=0&d=n">
+                                    <img src="img/contact/facebook_200x200.png" alt="" />
+                                </a>
+                                <Typography variant="h6" className={classes.title_social_card}>
+                                    <a target="_blank" href="https://www.facebook.com/880665175331108/posts/3553199911410941/?extid=0&d=n" className={classes.link_social_net}>
+                                        Fullips Oficial Colombia
+                                </a>
+                                </Typography>
+                            </Paper>
+                        </center>
+                    </Grid>
+                    <Grid item xs={12} md={4} lg={4} xl={4}>
+                        <center>
+                            <Paper>
+                                <img src="img/contact/Instagram_200x200.png" alt="" />
+                                <Typography variant="h6" className={classes.title_social_card}>
+                                    <a target="_blank" href="https://www.instagram.com/p/CF7sPsuDALH/?igshid=1aw8zwg3nggt0" className={classes.link_social_net}>
+                                        @fullipscolombia
+                                    </a>
+                                </Typography>
+                            </Paper>
+                        </center>
+                    </Grid>
                 </Grid>
             </Container>
-            {/* <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">¿Necesitas ayuda?</DialogTitle>
-                <DialogContent>
-                    
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="secondary">
-                        Cancelar
-          </Button>
-                    <Button onClick={handleClose} color="secondary">
-                        Enviar
-          </Button>
-                </DialogActions>
-            </Dialog> */}
+            {/* <Container>
+                
+            </Container> */}
         </Box>
     );
 }

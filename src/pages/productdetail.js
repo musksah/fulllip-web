@@ -36,40 +36,47 @@ const useStyles = makeStyles((theme) => ({
     root: {
         color: '#676767'
     },
+    container: {
+        marginRight: '1em',
+        marginLeft: '1em'
+    },
     img_product: {
         [theme.breakpoints.only('xs')]: {
-            height: '350px',
+            width: '70%',
         },
         [theme.breakpoints.only('sm')]: {
-            height: '400px',
+            width: '70%',
         },
         [theme.breakpoints.only('md')]: {
-            height: '350px',
+            width: '70%',
         },
-        [theme.breakpoints.only('lg')]: {
-            height: '700px',
+        [theme.breakpoints.up('lg')]: {
+            width: '70%',
         },
         [theme.breakpoints.up('xl')]: {
-            height: '700px',
+            width: '70%',
         },
     },
     img_products: {
-        border: 'solid 0.03em #C9C9C9',
+        // border: 'solid 0.03em #C9C9C9',
         opacity: '0.5',
+        "&:hover": {
+            opacity: "1"
+        },
         [theme.breakpoints.only('xs')]: {
-            height: '100px',
+            height: '85px',
         },
         [theme.breakpoints.only('sm')]: {
-            height: '120px',
+            height: '100px',
         },
         [theme.breakpoints.only('md')]: {
-            height: '110px',
+            height: '85px',
         },
         [theme.breakpoints.only('lg')]: {
-            height: '130px',
+            height: '85px',
         },
         [theme.breakpoints.up('xl')]: {
-            height: '150px',
+            height: '85px',
         },
     },
     grid1: {
@@ -196,15 +203,17 @@ function ItemDetail() {
     };
 
 
-    const changeImage = (e) => {
-        let images = document.getElementsByClassName(e.target.className);
-        e.target.style.opacity = '1';
-        for (let i = 0; i < images.length; i++) {
-            if (images[i].attributes.id.value !== e.target.attributes.id.value) {
-                images[i].style.opacity = '0.5';
-            }
-        }
-        setImage({ url: e.target.attributes.data.value, priority: e.target.attributes.priority.value });
+    function changeImage(img) {
+        console.log("CLick imagen");
+        console.log(img);
+        // let images = document.getElementsByClassName(e.target.className);
+        // e.target.style.opacity = '1';
+        // for (let i = 0; i < images.length; i++) {
+        //     if (images[i].attributes.id.value !== e.target.attributes.id.value) {
+        //         images[i].style.opacity = '0.5';
+        //     }
+        // }
+        setImage({ url: img.image_item.url, priority: img.image_item.priority_field });
     }
 
     const hoverImage = (e) => {
@@ -222,68 +231,111 @@ function ItemDetail() {
     return (
         <Box>
             <Header itemCount={itemCount} />
-            <Box className={classes.root} style={{ paddingTop: '10rem', paddingBottom: '7rem' }}>
-                {images.length > 0 &&
-                    < Grid container>
-                        <Grid item xs={12} sm={12} md={6} className={classes.grid1}>
-                            <Grid container style={{ marginBottom: '2em' }}>
-                                <Grid item xs={12}>
-                                    <img className={classes.img_product} src={image.url} />
+            <Container style={{}}>
+                <Box className={classes.root} style={{ paddingTop: '9rem', paddingBottom: '7rem' }}>
+                    {images.length > 0 &&
+                        < Grid container>
+                            <Grid item xs={12} sm={12} md={6}>
+                                <Grid container style={{ marginBottom: '2em' }}>
+                                    <Grid item xs={12}>
+                                        <center>
+                                            <img className={classes.img_product} src={image.url} />
+                                        </center>
+                                    </Grid>
+                                    <Grid item xs={12} style={{ width: '70%',marginTop:'0.5em', marginRight: '15%', marginLeft: '15%' }}>
+                                        <Grid container spacing={1} >
+                                            {images.map((img, index) => (
+                                                <Grid item xs={3} key={img.image_item.priority_field} style={{ cursor: 'pointer', paddingRight: '0.5em' }}>
+                                                    {img.image_item.priority_field === 1 ? (
+                                                        <Card variant="outlined"
+                                                            // data={img.image_item.url}
+                                                            // priority={img.image_item.priority_field}
+                                                            onClick={() => changeImage(img)}
+                                                            style={{ opacity: '1' }}
+                                                        // onMouseOver={hoverImage}
+                                                        // onMouseOut={leaveImage}
+                                                        >
+                                                            <CardMedia
+                                                                className={classes.img_products}
+                                                                image={img.image_item.url}
+                                                                title={img.image_item.name}
+                                                            />
+                                                            {/* <CardContent> */}
+                                                            {/* <img className={classes.img_products} id={img.image_item.name} src={img.image_item.url} data={img.image_item.url} priority={img.image_item.priority_field} onClick={changeImage} style={{ opacity: '1' }} onMouseOver={hoverImage} onMouseOut={leaveImage} /> */}
+                                                            {/* </CardContent> */}
+                                                        </Card>
+                                                    ) : (
+                                                            <Card variant="outlined"
+                                                                // data={img.image_item.url}
+                                                                // priority={img.image_item.priority_field}
+                                                                onClick={() => changeImage(img)}
+                                                            // style={{ opacity: '0.5' }}
+                                                            // onMouseOver={hoverImage}
+                                                            // onMouseOut={leaveImage}
+                                                            >
+                                                                <CardMedia
+                                                                    className={classes.img_products}
+                                                                    image={img.image_item.url}
+                                                                    title={img.image_item.name}
+                                                                />
+                                                                {/* <CardContent> */}
+                                                                {/* <img className={classes.img_products} id={img.image_item.name} src={img.image_item.url} data={img.image_item.url} priority={img.image_item.priority_field} onClick={changeImage} style={{ opacity: '1' }} onMouseOver={hoverImage} onMouseOut={leaveImage} /> */}
+                                                                {/* </CardContent> */}
+                                                            </Card>
+                                                            // <Card variant="outlined">
+                                                            //     <CardContent>
+                                                            //         <img className={classes.img_products} id={img.image_item.name} src={img.image_item.url} data={img.image_item.url} priority={img.image_item.priority_field} onClick={changeImage} style={{ opacity: '0.5' }} onMouseOver={hoverImage} onMouseOut={leaveImage} />
+                                                            //     </CardContent>
+                                                            // </Card>
+                                                        )
+                                                    }
+                                                </Grid>
+                                            ))}
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid container spacing={1}>
-                                {images.map((img, index) => (
-                                    <Grid item xs={3} key={img.image_item.priority_field} style={{ cursor: 'pointer', paddingRight: '0.5em' }}>
-                                        {img.image_item.priority_field === 1 ? (
-                                            <img className={classes.img_products} id={img.image_item.name} src={img.image_item.url} data={img.image_item.url} priority={img.image_item.priority_field} onClick={changeImage} style={{ opacity: '1' }} onMouseOver={hoverImage} onMouseOut={leaveImage} />
-                                        ) : (
-                                                <img className={classes.img_products} id={img.image_item.name} src={img.image_item.url} data={img.image_item.url} priority={img.image_item.priority_field} onClick={changeImage} style={{ opacity: '0.5' }} onMouseOver={hoverImage} onMouseOut={leaveImage} />
-                                            )
+                            <Grid item xs={12} sm={12} md={6}>
+                                <Grid container>
+                                    <Grid item xs={12}>
+                                        <h3>{product.name}</h3>
+                                    </Grid>
+                                    <Grid item xs={12} style={{ marginTop: '2em', color: '#FF5C5C' }}>
+                                        {product.price &&
+                                            <h5><NumberFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value}</div>} /></h5>
                                         }
                                     </Grid>
-                                ))}
-                            </Grid>
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={6} className={classes.grid2}>
-                            <Grid container>
-                                <Grid item xs={12} style={{ marginTop: '0.5em' }}>
-                                    <h4>{product.name}</h4>
-                                </Grid>
-                                <Grid item xs={12} style={{ marginTop: '2em', color: '#FF5C5C' }}>
-                                    {product.price &&
-                                        <h5><NumberFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value}</div>} /></h5>
-                                    }
-                                </Grid>
-                                <Grid item xs={12} style={{ marginTop: '2em' }}>
-                                    <p>{product.description}</p>
-                                </Grid>
-                                <Grid item xs={12} style={{ marginTop: '0.5em', fontSize: '0.7em' }}>
-                                    <p>Disponibles en inventario: {product.quantity}</p>
-                                </Grid>
-                                <Grid item xs={12} style={{ marginTop: '1em' }}>
-                                    <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-                                        <OutlinedInput
-                                            id="outlined-adornment-weight"
-                                            value={values}
-                                            onChange={handleChange}
-                                            aria-describedby="outlined-weight-helper-text"
-                                            autoComplete="off"
-                                            required
-                                            inputProps={{
-                                                'aria-label': 'weight',
-                                            }}
-                                        />
-                                        <FormHelperText id="outlined-weight-helper-text">cantidad</FormHelperText>
-                                    </FormControl>
-                                </Grid>
-                                <Grid item xs={12} style={{ marginTop: '1em' }}>
-                                    <Button variant="contained" style={{ padding: '1em' }} onClick={saveProduct}>Añadir al Carrito</Button>
+                                    <Grid item xs={12} style={{ marginTop: '2em' }}>
+                                        <p>{product.description}</p>
+                                    </Grid>
+                                    <Grid item xs={12} style={{ marginTop: '0.5em', fontSize: '0.7em' }}>
+                                        <p>Disponibles en inventario: {product.quantity}</p>
+                                    </Grid>
+                                    <Grid item xs={12} style={{ marginTop: '1em' }}>
+                                        <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
+                                            <OutlinedInput
+                                                id="outlined-adornment-weight"
+                                                value={values}
+                                                onChange={handleChange}
+                                                aria-describedby="outlined-weight-helper-text"
+                                                autoComplete="off"
+                                                required
+                                                inputProps={{
+                                                    'aria-label': 'weight',
+                                                }}
+                                            />
+                                            <FormHelperText id="outlined-weight-helper-text">cantidad</FormHelperText>
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid item xs={12} style={{ marginTop: '1em' }}>
+                                        <Button variant="contained" style={{ padding: '1em' }} onClick={saveProduct}>Añadir al Carrito</Button>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                }
-            </Box>
+                    }
+                </Box>
+            </Container>
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error">
                     {message}

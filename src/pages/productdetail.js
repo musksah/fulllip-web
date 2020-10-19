@@ -242,7 +242,7 @@ function ItemDetail() {
                                             <img className={classes.img_product} src={image.url} />
                                         </center>
                                     </Grid>
-                                    <Grid item xs={12} style={{ width: '70%',marginTop:'0.5em', marginRight: '15%', marginLeft: '15%' }}>
+                                    <Grid item xs={12} style={{ width: '70%', marginTop: '0.5em', marginRight: '15%', marginLeft: '15%' }}>
                                         <Grid container spacing={1} >
                                             {images.map((img, index) => (
                                                 <Grid item xs={3} key={img.image_item.priority_field} style={{ cursor: 'pointer', paddingRight: '0.5em' }}>
@@ -335,12 +335,12 @@ function ItemDetail() {
                         </Grid>
                     }
                 </Box>
+                <Snackbar open={open} autoHideDuration={3000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="error">
+                        {message}
+                    </Alert>
+                </Snackbar>
             </Container>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="error">
-                    {message}
-                </Alert>
-            </Snackbar>
         </Box >
     );
 }

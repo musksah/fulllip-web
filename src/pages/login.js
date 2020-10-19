@@ -161,10 +161,11 @@ export default function SignIn(props) {
         setOpenProgress(false);
         if (res.status == 200) {
           Swal.fire({
-            title: 'Urgente',
-            icon: 'warning',
-            text: 'Se a enviado un correo para confirmar su cuenta. Por favor revisar su correo.',
+            title: 'Confirma tu correo electrónico',
+            icon: 'success',
+            text: 'Hemos enviado un mensaje a tu correo para que confirmes tu cuenta.',
             confirmButtonText: 'Ok',
+            confirmButtonColor: '#d33',
             allowOutsideClick: false
           }).then((result) => {
             if (result.isConfirmed) {
@@ -354,7 +355,7 @@ export default function SignIn(props) {
             </form>
           </TabPanel>
         </Paper>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Snackbar open={open} autoHideDuration={3000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} onClose={handleClose}>
           <Alert onClose={handleClose} severity="error">
             {message}
           </Alert>

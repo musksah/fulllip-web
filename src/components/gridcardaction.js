@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
     //   height: '200px',
     // },
     [theme.breakpoints.up('md')]: {
-      height: '200px',
+      height: '255px',
     },
     [theme.breakpoints.up('lg')]: {
       height: '350px',

@@ -165,7 +165,7 @@ export default function SignIn(props) {
             icon: 'success',
             text: 'Hemos enviado un mensaje a tu correo para que confirmes tu cuenta.',
             confirmButtonText: 'Ok',
-            confirmButtonColor: '#d33',
+            confirmButtonColor: '#FF0D00',
             allowOutsideClick: false
           }).then((result) => {
             if (result.isConfirmed) {

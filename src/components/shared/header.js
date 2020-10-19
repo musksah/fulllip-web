@@ -35,13 +35,31 @@ const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
+  image: {
+    marginLeft: '1em',
+    [theme.breakpoints.only('md')]: {
+      marginRight: '4em',
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginRight: '8em',
+    },
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     display: 'none',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'block',
+      marginLeft: '3em'
+    },
+  },
+  title2: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
+      marginLeft: '3em',
+      marginRight: '1em',
     },
   },
   search: {
@@ -94,7 +112,9 @@ const useStyles = makeStyles((theme) => ({
   linkHeader: {
     fontFamily: 'Rubik, verdana',
     fontWeight: '400',
-    fontSize: '0.85em',
+    [theme.breakpoints.up('md')]: {
+      fontSize: '0.85em',
+    },
   },
   sectionMobile: {
     display: 'flex',
@@ -316,31 +336,31 @@ export default function PrimarySearchAppBar(props) {
                 src={`/img/FULLIPS_COLOMBIA_JPG.jpg`}
                 alt={`logo`}
                 width="100"
-                style={{ marginLeft: '1em' }}
+                className={classes.image}
               />
             </NavLink>
             <NavLink to="/" style={{ textDecoration: 'none' }}>
-              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '10em' }}>
+              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" >
                 INICIO
               </Typography>
             </NavLink>
             <NavLink to="/Question" style={{ textDecoration: 'none' }}>
-              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '3em' }}>
+              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" >
                 PREGUNTAS FRECUENTES
               </Typography>
             </NavLink>
             <NavLink to="/Use" style={{ textDecoration: 'none' }}>
-              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '3em' }}>
+              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" >
                 USO
           </Typography>
             </NavLink>
             <NavLink to="/razon-social" style={{ textDecoration: 'none' }}>
-              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '3em' }}>
+              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" >
                 RAZÓN SOCIAL
           </Typography>
             </NavLink>
             <NavLink to="/contact" style={{ textDecoration: 'none' }}>
-              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginLeft: '3em' }}>
+              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" >
                 CONTACTO
               </Typography>
             </NavLink>
@@ -349,7 +369,7 @@ export default function PrimarySearchAppBar(props) {
               pathname: "/Ingresar",
               state: "menu"
             }} style={{ textDecoration: 'none', visibility: visibleIn }}>
-              <Typography variant="h6" className={[classes.title, classes.linkHeader].join(' ')} color="secondary" style={{ marginRight: '6em' }}>
+              <Typography variant="h6" className={[classes.title2, classes.linkHeader].join(' ')} color="secondary" >
                 INGRESAR/REGISTRARSE
           </Typography>
             </NavLink>

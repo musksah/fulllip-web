@@ -11,6 +11,12 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Carousel from 'react-material-ui-carousel';
 import axios from 'axios';
 import Enviroment from '../enviroment';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import CardActionArea from '@material-ui/core/CardActionArea';
 
 const URL = `${Enviroment.urlApi}/img-carrousell`;
 
@@ -66,7 +72,7 @@ var items = [
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: '100%',
-    marginTop: '6em',
+    marginTop: '3.5em',
   },
   rootBefore: {
     backgroundColor: 'rgba(0,0,0,0.6)',
@@ -84,6 +90,28 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     width: '100%',
   },
+  card_media: {
+    [theme.breakpoints.only('xs')]: {
+      height: '450px',
+      width: '100%'
+    },
+    [theme.breakpoints.only('sm')]: {
+      height: '600px',
+      width: '100%'
+    },
+    [theme.breakpoints.only('md')]: {
+      height: '650px',
+      width: '100%'
+    },
+    [theme.breakpoints.only('lg')]: {
+      height: '720px',
+      width: '100%'
+    },
+    [theme.breakpoints.up('xl')]: {
+      height: '850px',
+      width: '100%'
+    },
+  }
 }));
 
 export default function TextMobileStepper() {
@@ -127,12 +155,46 @@ export default function TextMobileStepper() {
     return (
       <Box>
         {/* Se muestra en xs */}
-        <Hidden only={['sm','md','lg','xl']}>
-          <img src={props.item.subtitle} style={{ height: '550px', width: '100%' }}></img>
+        <Hidden only={['sm', 'md', 'lg', 'xl']}>
+          <Card className={[classes.root].join(' ')}>
+            <CardActionArea>
+              <Box>
+                <CardMedia
+                  className={[classes.card_media, ''].join(' ')}
+                  image={props.item.subtitle}
+                  title="Imagen de Carrousel"
+                />
+              </Box>
+            </CardActionArea>
+          </Card>
         </Hidden>
-        {/* Se muestra en sm, md, lg, xl */}
-        <Hidden only={['xs']}>
-          <img src={props.item.url} style={{ height: '550px', width: '100%' }}></img>
+        {/* Se muestra en sm */}
+        <Hidden only={['xs','lg','xl']}>
+          <Card className={[classes.root].join(' ')}>
+            <CardActionArea>
+              <Box>
+                <CardMedia
+                  className={[classes.card_media, ''].join(' ')}
+                  image={"img/index/banner/banner_ipad_3.png"}
+                  title="Imagen de Carrousel"
+                />
+              </Box>
+            </CardActionArea>
+          </Card>
+        </Hidden>
+        {/* Se muestra en md, lg, xl */}
+        <Hidden only={['xs','sm','md']}>
+          <Card className={[classes.root].join(' ')}>
+            <CardActionArea>
+              <Box>
+                <CardMedia
+                  className={[classes.card_media, ''].join(' ')}
+                  image={props.item.url}
+                  title="Imagen de Carrousel"
+                />
+              </Box>
+            </CardActionArea>
+          </Card>
         </Hidden>
       </Box>
     )

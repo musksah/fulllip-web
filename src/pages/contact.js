@@ -55,14 +55,21 @@ const useStyles = makeStyles((theme) => ({
             right: 0,
             bottom: 0
         },
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.only('md')]: {
             position: 'absolute',
             top: 0,
             left: '20%',
             right: 0,
             bottom: 0
         },
-        [theme.breakpoints.up('lg')]: {
+        [theme.breakpoints.only('lg')]: {
+            position: 'absolute',
+            top: 0,
+            left: '15%',
+            right: 0,
+            bottom: 0
+        },
+        [theme.breakpoints.only('xl')]: {
             position: 'absolute',
             top: 0,
             left: '20%',
@@ -79,6 +86,10 @@ const useStyles = makeStyles((theme) => ({
             marginTop: '10em',
             marginBottom: '4em'
         },
+        [theme.breakpoints.up('xl')]: {
+            marginTop: '10em',
+            marginBottom: '4em'
+        },
     },
     title_social_card: {
         [theme.breakpoints.down('sm')]: {
@@ -89,10 +100,38 @@ const useStyles = makeStyles((theme) => ({
             position: 'relative',
             top: '-4em'
         },
+        [theme.breakpoints.up('lg')]: {
+            position: 'relative',
+            top: '-0.5em',
+        },
     },
     link_social_net: {
-        textDecoration: 'none',
-        color: 'inherit'
+        [theme.breakpoints.down('lg')]: {
+            textDecoration: 'none',
+            color: 'inherit',
+        },
+        [theme.breakpoints.up('lg')]: {
+            textDecoration: 'none',
+            color: 'inherit',
+            fontSize: '0.7em'
+        },
+    },
+    paper_form: {
+        [theme.breakpoints.up('lg')]: {
+            marginTop: '10em',
+        },
+        [theme.breakpoints.up('xl')]: {
+            marginTop: '10em',
+        },
+    },
+    container_social_cards: {
+        [theme.breakpoints.down('lg')]: {
+            // marginTop: '10em'
+            marginTop: '20em'
+        },
+        [theme.breakpoints.up('xl')]: {
+            marginTop: '20em'
+        },
     }
 }));
 
@@ -163,7 +202,7 @@ function ModalContact() {
             <Container className={classes.container_card_form}>
                 <Grid container style={{ zIndex: '10', position: 'relative' }} >
                     <Grid item md={3} lg={3} xl={3} style={{ marginLeft: '1em', marginRight: '1em' }}></Grid>
-                    <Grid item md={6} lg={6} xl={6} style={{ marginLeft: '1em', marginRight: '1em' }}>
+                    <Grid item md={6} lg={6} xl={6} style={{ marginLeft: '1em', marginRight: '1em' }} className={classes.paper_form}>
                         <Grid container>
                             <Grid item>
                                 <Paper elevation={7} >
@@ -266,20 +305,22 @@ function ModalContact() {
                 <Hidden only={['xs', 'sm', 'md']}>
                     <img src="img/contact/collage_1000x1000.png" alt="" className={classes.collage} />
                 </Hidden>
-                <Grid container style={{ marginTop: '10em' }}>
+                <Grid container className={classes.container_social_cards}>
                     <Grid item md={12} lg={12} xl={12} style={{ marginTop: '2em', marginBottom: '3.5em', marginRight: '1em', marginLeft: '1em', textAlign: 'center' }}>
                         <Typography variant="h5">
                             MANTENTE AL DÍA EN NUESTRAS REDES SOCIALES
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid container spacing={5} style={{marginBottom:'2em'}}>
+                <Grid container spacing={5} style={{ marginBottom: '2em' }}>
                     <Grid item xs={12} md={4} lg={4} xl={4}>
                         <center>
                             <Paper >
                                 <img src="img/contact/gmail_200x200.png" alt="" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} />
                                 <Typography variant="h6" className={classes.title_social_card}>
-                                    fullipscolombia@gmail.com
+                                    <span className={classes.link_social_net}>
+                                        fullipscolombia@gmail.com
+                                    </span>
                                 </Typography>
                             </Paper>
                         </center>

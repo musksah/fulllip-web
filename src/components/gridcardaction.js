@@ -78,8 +78,11 @@ const useStyles = makeStyles((theme) => ({
   },
   cardProductsMedia: {
     display: 'default',
-    [theme.breakpoints.down('sm')]: {
-      height: '750px',
+    [theme.breakpoints.only('xs')]: {
+      height: '340px',
+    },
+    [theme.breakpoints.only('sm')]: {
+      height: '600px',
     },
     // [theme.breakpoints.down('sm')]: {
     //   height: '200px',

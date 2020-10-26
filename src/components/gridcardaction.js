@@ -84,13 +84,13 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.only('sm')]: {
       height: '600px',
     },
-    // [theme.breakpoints.down('sm')]: {
-    //   height: '200px',
-    // },
-    [theme.breakpoints.up('md')]: {
-      height: '255px',
+    [theme.breakpoints.only('md')]: {
+      height: '250px',
     },
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.only('lg')]: {
+      height: '270px',
+    },
+    [theme.breakpoints.only('xl')]: {
       height: '350px',
     },
   }

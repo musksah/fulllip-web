@@ -104,7 +104,7 @@ const useStyles = makeStyles((theme) => ({
       width: '100%'
     },
     [theme.breakpoints.only('lg')]: {
-      height: '720px',
+      height: '505px',
       width: '100%'
     },
     [theme.breakpoints.up('xl')]: {
@@ -161,7 +161,7 @@ export default function TextMobileStepper() {
               <Box>
                 <CardMedia
                   className={[classes.card_media, ''].join(' ')}
-                  image={props.item.subtitle}
+                  image={props.item.url_mobile}
                   title="Imagen de Carrousel"
                 />
               </Box>
@@ -175,7 +175,7 @@ export default function TextMobileStepper() {
               <Box>
                 <CardMedia
                   className={[classes.card_media, ''].join(' ')}
-                  image={"img/index/banner/banner_ipad_3.png"}
+                  image={props.item.url_tablet}
                   title="Imagen de Carrousel"
                 />
               </Box>

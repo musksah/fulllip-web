@@ -42,23 +42,22 @@ const useStyles = makeStyles((theme) => ({
     },
     img_product: {
         [theme.breakpoints.only('xs')]: {
-            width: '70%',
+            width: '100%',
         },
         [theme.breakpoints.only('sm')]: {
-            width: '70%',
+            width: '84%',
         },
         [theme.breakpoints.only('md')]: {
-            width: '70%',
+            width: '92%',
         },
         [theme.breakpoints.up('lg')]: {
-            width: '70%',
+            width: '78%',
         },
         [theme.breakpoints.up('xl')]: {
-            width: '70%',
+            width: '78%',
         },
     },
     img_products: {
-        // border: 'solid 0.03em #C9C9C9',
         opacity: '0.5',
         "&:hover": {
             opacity: "1"
@@ -67,16 +66,16 @@ const useStyles = makeStyles((theme) => ({
             height: '85px',
         },
         [theme.breakpoints.only('sm')]: {
-            height: '100px',
+            height: '124px',
         },
         [theme.breakpoints.only('md')]: {
-            height: '85px',
+            height: '100px',
         },
         [theme.breakpoints.only('lg')]: {
-            height: '85px',
+            height: '90px',
         },
         [theme.breakpoints.up('xl')]: {
-            height: '85px',
+            height: '90px',
         },
     },
     grid1: {
@@ -121,7 +120,41 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('xl')]: {
             paddingRight: '12em'
         },
-
+    },
+    info_product:{
+        [theme.breakpoints.only('xs')]: {
+            // marginRight: '1em',
+            marginLeft: '0.4em'
+        },
+        [theme.breakpoints.only('sm')]: {
+            marginLeft: '0.5em',
+        },
+        [theme.breakpoints.only('md')]: {
+            marginLeft: '1em',
+        },
+    },
+    carrousel_product: {
+        [theme.breakpoints.only('xs')]: {
+            marginTop: '0.5em',
+        },
+        [theme.breakpoints.only('sm')]: {
+            width: '86%',
+            marginTop: '0.5em',
+            marginRight: '7%',
+            marginLeft: '7%'
+        },
+        [theme.breakpoints.only('md')]: {
+            width: '92%',
+            marginTop: '0.5em',
+            marginRight: '4%',
+            marginLeft: '4%'
+        },
+        [theme.breakpoints.up('lg')]: {
+            width: '80%',
+            marginTop: '0.5em',
+            marginRight: '10%',
+            marginLeft: '10%'
+        },
     }
 }));
 
@@ -244,51 +277,31 @@ function ItemDetail() {
                                             <img className={classes.img_product} src={image.url} />
                                         </center>
                                     </Grid>
-                                    <Grid item xs={12} style={{ width: '70%', marginTop: '0.5em', marginRight: '15%', marginLeft: '15%' }}>
+                                    <Grid item xs={12} className={classes.carrousel_product}>
                                         <Grid container spacing={1} >
                                             {images.map((img, index) => (
                                                 <Grid item xs={3} key={img.image_item.priority_field} style={{ cursor: 'pointer', paddingRight: '0.5em' }}>
                                                     {img.image_item.priority_field === 1 ? (
                                                         <Card variant="outlined"
-                                                            // data={img.image_item.url}
-                                                            // priority={img.image_item.priority_field}
                                                             onClick={() => changeImage(img)}
                                                             style={{ opacity: '1' }}
-                                                        // onMouseOver={hoverImage}
-                                                        // onMouseOut={leaveImage}
                                                         >
                                                             <CardMedia
                                                                 className={classes.img_products}
                                                                 image={img.image_item.url}
                                                                 title={img.image_item.name}
                                                             />
-                                                            {/* <CardContent> */}
-                                                            {/* <img className={classes.img_products} id={img.image_item.name} src={img.image_item.url} data={img.image_item.url} priority={img.image_item.priority_field} onClick={changeImage} style={{ opacity: '1' }} onMouseOver={hoverImage} onMouseOut={leaveImage} /> */}
-                                                            {/* </CardContent> */}
                                                         </Card>
                                                     ) : (
                                                             <Card variant="outlined"
-                                                                // data={img.image_item.url}
-                                                                // priority={img.image_item.priority_field}
                                                                 onClick={() => changeImage(img)}
-                                                            // style={{ opacity: '0.5' }}
-                                                            // onMouseOver={hoverImage}
-                                                            // onMouseOut={leaveImage}
                                                             >
                                                                 <CardMedia
                                                                     className={classes.img_products}
                                                                     image={img.image_item.url}
                                                                     title={img.image_item.name}
                                                                 />
-                                                                {/* <CardContent> */}
-                                                                {/* <img className={classes.img_products} id={img.image_item.name} src={img.image_item.url} data={img.image_item.url} priority={img.image_item.priority_field} onClick={changeImage} style={{ opacity: '1' }} onMouseOver={hoverImage} onMouseOut={leaveImage} /> */}
-                                                                {/* </CardContent> */}
                                                             </Card>
-                                                            // <Card variant="outlined">
-                                                            //     <CardContent>
-                                                            //         <img className={classes.img_products} id={img.image_item.name} src={img.image_item.url} data={img.image_item.url} priority={img.image_item.priority_field} onClick={changeImage} style={{ opacity: '0.5' }} onMouseOver={hoverImage} onMouseOut={leaveImage} />
-                                                            //     </CardContent>
-                                                            // </Card>
                                                         )
                                                     }
                                                 </Grid>
@@ -298,7 +311,7 @@ function ItemDetail() {
                                 </Grid>
                             </Grid>
                             <Grid item xs={12} sm={12} md={6}>
-                                <Grid container>
+                                <Grid container className={classes.info_product}>
                                     <Grid item xs={12}>
                                         <h3>{product.name}</h3>
                                     </Grid>

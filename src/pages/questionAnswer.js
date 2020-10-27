@@ -77,7 +77,7 @@ export default function Question() {
                     <CircularProgress color="inherit" variant="indeterminate" disableShrink style={{ width: 80, height: 80 }} />
                 </Backdrop>
                 <Grid className={classes.centered} item xs={12}>
-                    <Typography variant="h6" color="primary">PREGUNTAS FRECUENTES</Typography>
+                    <Typography variant="h6" color="primary" style={{fontSize:'0.9em'}}>PREGUNTAS FRECUENTES</Typography>
                 </Grid>
                 <Grid style={{ marginTop: '3rem', marginBottom: '6rem' }} className={classes.centered} item xs={12}>
                     <Grid item xs={10}>

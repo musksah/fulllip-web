@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container';
 import Hidden from '@material-ui/core/Hidden';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import { BrowserRouter as Router, Switch, Route, NavLink, useHistory } from "react-router-dom";
+import 'typeface-rubik';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,7 +34,11 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.only('sm')]: {
             fontSize:'0.8em'
         },
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.only('md')]: {
+            fontSize:'0.9em'
+        },
+        [theme.breakpoints.up('lg')]: {
+            fontSize:'1em'
         },
     },
     navlink: {
@@ -58,12 +63,16 @@ const useStyles = makeStyles((theme) => ({
             height: '32px',
         },
         [theme.breakpoints.only('sm')]: {
-            width: '50px',
-            height: '50px',
+            width: '38px',
+            height: '38px',
         },
-        [theme.breakpoints.up('md')]: {
-            width: '64px',
-            height: '64px',
+        [theme.breakpoints.only('md')]: {
+            width: '38px',
+            height: '38px',
+        },
+        [theme.breakpoints.up('lg')]: {
+            width: '38px',
+            height: '38px',
         },
     }
 }));
@@ -77,30 +86,30 @@ export default function PrimaryFooter() {
             className={classes.footer}
         >
             <Container>
-                <Grid container >
+                <Grid container style={{marginBottom:'1em'}} >
                     <Hidden only={['xs']}>
                         <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
                             <center>
-                                <img src="img/contact/LOGO_FULLIPS_BLANCO_200x200.png" />
+                                <img src="img/FULLIPS-COLOMBIA-LOGO.png" style={{marginTop:'0.6em'}} />
                             </center>
                         </Grid>
                     </Hidden>
                     <Grid item xs={6} sm={4} md={4} lg={4} xl={4}>
-                        <ul>
+                        <ul style={{position:'relative',top:'-0.5em'}}>
                             <NavLink to="/" className={classes.navlink}>
                                 <li className={classes.item_footer}>INICIO</li>
                             </NavLink>
                             <NavLink to="/Question" className={classes.navlink}>
-                                <li className={classes.item_footer} style={{ marginTop: '0.5em' }}>PREGUNTAS FRECUENTES</li>
+                                <li className={classes.item_footer} style={{ marginTop: '0.6em', fontFamily: 'Rubik' }}>PREGUNTAS FRECUENTES</li>
                             </NavLink>
                             <NavLink to="/Use" className={classes.navlink}>
-                                <li className={classes.item_footer} style={{ marginTop: '0.5em' }}>USO</li>
+                                <li className={classes.item_footer} style={{ marginTop: '0.6em', fontFamily: 'Rubik' }}>USO</li>
                             </NavLink>
                             <NavLink to="/razon-social" className={classes.navlink}>
-                                <li className={classes.item_footer} style={{ marginTop: '0.5em' }}>RAZÓN SOCIAL</li>
+                                <li className={classes.item_footer} style={{ marginTop: '0.6em', fontFamily: 'Rubik' }}>RAZÓN SOCIAL</li>
                             </NavLink>
                             <NavLink to="/contact" className={classes.navlink}>
-                                <li className={classes.item_footer} style={{ marginTop: '0.5em' }}>CONTACTO</li>
+                                <li className={classes.item_footer} style={{ marginTop: '0.6em', fontFamily: 'Rubik' }}>CONTACTO</li>
                             </NavLink>
                         </ul>
                     </Grid>

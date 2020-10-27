@@ -208,7 +208,7 @@ function ModalContact() {
                                 <Paper elevation={7} >
                                     <Container style={{ paddingTop: '1em' }}>
                                         <Grid item md={12} lg={12} xl={12} style={{ marginTop: '0.7em', marginBottom: '1.5em', marginRight: '1em', marginLeft: '1em', textAlign: 'center' }}>
-                                            <a onClick={handleClickOpen} style={{ cursor: 'pointer', paddingTop: '2em' }}><Typography variant="h5">CONTÁCTANOS</Typography></a>
+                                            <a onClick={handleClickOpen} style={{ cursor: 'pointer', paddingTop: '2em' }}><Typography variant="h5" style={{fontSize:'0.9em'}}>CONTÁCTANOS</Typography></a>
                                         </Grid>
                                         <form noValidate autoComplete="off" onSubmit={sendMessage}>
                                             <Grid item md={12} lg={12} xl={12} style={{ marginRight: '1em', marginLeft: '1em' }}>

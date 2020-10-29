@@ -136,20 +136,21 @@ export default function Payment() {
         const script = document.createElement("script");
         script.src = "https://checkout.epayco.co/checkout.js";
         script.className = "epayco-button"
-        script.setAttribute("data-epayco-key", Enviroment.apiKey);
-        script.setAttribute("data-epayco-amount", total);
+        script.setAttribute("data-epayco-key", Enviroment.epayco.apiKey);
+        // script.setAttribute("data-epayco-amount", total);
+        script.setAttribute("data-epayco-amount", '5000');
         script.setAttribute("data-epayco-name", "Compra producto Fullips");
         script.setAttribute("data-epayco-description", `Cantidad: ${cartItems.lenght} productos`);
-        script.setAttribute("data-epayco-invoice", "cop");
-        script.setAttribute("data-epayco-currency", "cop");
-        script.setAttribute("data-epayco-country", "co");
+        script.setAttribute("data-epayco-invoice", "F12333");
+        script.setAttribute("data-epayco-currency", Enviroment.epayco.currency);
+        script.setAttribute("data-epayco-country", Enviroment.epayco.country);
         script.setAttribute("data-epayco-test", "true");
         script.setAttribute("data-epayco-external", "false");
-        script.setAttribute("data-epayco-acepted", Enviroment.urlWeb+"/accepted-payment");
-        script.setAttribute("data-epayco-rejected", Enviroment.urlWeb+"/rejected-payment");
-        script.setAttribute("data-epayco-pending", Enviroment.urlWeb+"/pending-payment");
-        script.setAttribute("data-epayco-response", Enviroment.responsePage);
-        script.setAttribute("data-epayco-confirmation", Enviroment.urlApi+"/epayco/confirmation-payment");
+        script.setAttribute("data-epayco-acepted", Enviroment.epayco.acceptedPage);
+        script.setAttribute("data-epayco-rejected", Enviroment.epayco.rejectedPage);
+        script.setAttribute("data-epayco-pending", Enviroment.epayco.pendingPage);
+        script.setAttribute("data-epayco-response", Enviroment.epayco.responsePage);
+        script.setAttribute("data-epayco-confirmation", Enviroment.epayco.confirmationPage);
         let contenedorForm = document.getElementById("epaycoForm");
         contenedorForm.appendChild(script);
         return () => {

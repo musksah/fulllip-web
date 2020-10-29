@@ -16,6 +16,7 @@ import ConfirmationPayment from './pages/epayco/confirmationPayment';
 import acceptedPayment from './pages/epayco/acceptedPayment';
 import rejectedPayment from './pages/epayco/rejectedPayment';
 import pendingPayment from './pages/epayco/pendingPayment';
+import responsePayment from './pages/epayco/responsePayment';
 import Use from './pages/use';
 import Sending from './pages/sending';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
@@ -115,6 +116,7 @@ function App() {
                         <Route path="/accepted-payment" exact component={acceptedPayment} />
                         <Route path="/rejected-payment" exact component={rejectedPayment} />
                         <Route path="/pending-payment" exact component={pendingPayment} />
+                        <Route path="/response-payment" exact component={responsePayment} />
                     </Switch>
                     <Footer />
                 </Router>

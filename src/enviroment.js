@@ -11,7 +11,7 @@ export default {
     epayco:{
         apiKey: API_KEY_FULLIPS,
         responsePage: `${URL_APP_PRODUCCION}/response-payment`,
-        confirmationPage: `${URL_APP_PRODUCCION}/confirmation-payment`,
+        confirmationPage: `${URL_PRODUCCION}/epayco/confirmation-payment`,
         acceptedPage: `${URL_APP_PRODUCCION}/accepted-payment`,
         rejectedPage: `${URL_APP_PRODUCCION}/rejected-payment"`,
         pendingPage: `${URL_APP_PRODUCCION}/pending-payment`,

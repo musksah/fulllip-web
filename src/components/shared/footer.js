@@ -90,7 +90,7 @@ export default function PrimaryFooter() {
                     <Hidden only={['xs']}>
                         <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
                             <center>
-                                <img src="img/FULLIPS-COLOMBIA-LOGO.png" style={{marginTop:'0.6em'}} />
+                                <img src="img/footer/logo_no_spaces.png" style={{marginTop:'0.6em'}} />
                             </center>
                         </Grid>
                     </Hidden>

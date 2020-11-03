@@ -26,7 +26,20 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
         padding: '20px 20px',
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+            display: 'block',
+        },
     },
+    submit2: {
+        margin: theme.spacing(3, 0, 2),
+        padding: '20px 20px',
+        display: 'block',
+        [theme.breakpoints.up('md')]: {
+            display: 'none',
+        },
+    },
+
 
 }));
 
@@ -85,21 +98,25 @@ export default function Sending() {
         setCity(value);
     }
 
+    const submitForm = () => {
+        document.getElementById('buttonSubmit').click();
+    }
+
     return (
         <Grid>
             <Header />
             <Container component="main" style={{ marginTop: '9rem', marginBottom: '9rem' }}>
                 <Grid container>
                     <Grid item xs={12} md={1}></Grid>
-                    <Grid item xs={12} md={5}>
-                        <form onSubmit={saveData}>
+                    <Grid item xs={12} md={5} style={{ marginBottom: '2em' }}>
+                        <form id="sendingform" onSubmit={saveData}>
                             <Grid container spacing={2}>
                                 <Grid item xs={12} md={11}>
                                     <InputLabel><Typography variant="body1" color="secondary" component="p" className={classes.subtitle}>Dirección Envío</Typography></InputLabel>
                                 </Grid>
                                 <Grid item xs={12} md={11} >
                                     <Grid container spacing={2}>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={12} sm={6}>
                                             <TextField
                                                 autoComplete="off"
                                                 name="name"
@@ -114,7 +131,7 @@ export default function Sending() {
                                                 onChange={changeName}
                                             />
                                         </Grid>
-                                        <Grid item xs={12} md={6} >
+                                        <Grid item xs={12} sm={6} >
                                             <TextField
                                                 autoComplete="off"
                                                 name="lastname"
@@ -134,7 +151,7 @@ export default function Sending() {
 
                                 <Grid item xs={12} md={11} >
                                     <Grid container spacing={2}>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={12} sm={6}>
                                             <TextField
                                                 autoComplete="off"
                                                 name="dni_id"
@@ -149,7 +166,7 @@ export default function Sending() {
                                                 onChange={changeDni}
                                             />
                                         </Grid>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={12} sm={6}>
                                             <TextField
                                                 autoComplete="off"
                                                 name="phone"
@@ -168,37 +185,41 @@ export default function Sending() {
                                 </Grid>
 
                                 <Grid item xs={12} md={11} >
-                                    <TextField
-                                        autoComplete="off"
-                                        name="address"
-                                        variant="outlined"
-                                        fullWidth
-                                        required
-                                        id="address"
-                                        placeholder='Dirección'
-                                        inputProps={{ className: classes.inputtext }}
-                                        autoFocus
-                                        value={address}
-                                        onChange={changeAddress}
-                                    />
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            autoComplete="off"
+                                            name="address"
+                                            variant="outlined"
+                                            fullWidth
+                                            required
+                                            id="address"
+                                            placeholder='Dirección'
+                                            inputProps={{ className: classes.inputtext }}
+                                            autoFocus
+                                            value={address}
+                                            onChange={changeAddress}
+                                        />
+                                    </Grid>
                                 </Grid>
                                 <Grid item xs={12} md={11} >
-                                    <TextField
-                                        autoComplete="off"
-                                        name="adicional"
-                                        variant="outlined"
-                                        fullWidth
-                                        id="adicional"
-                                        placeholder='Información Adicional'
-                                        inputProps={{ className: classes.inputtext }}
-                                        autoFocus
-                                        value={adicional}
-                                        onChange={changeAdicional}
-                                    />
+                                    <Grid item xs={12}>
+                                        <TextField
+                                            autoComplete="off"
+                                            name="adicional"
+                                            variant="outlined"
+                                            fullWidth
+                                            id="adicional"
+                                            placeholder='Información Adicional'
+                                            inputProps={{ className: classes.inputtext }}
+                                            autoFocus
+                                            value={adicional}
+                                            onChange={changeAdicional}
+                                        />
+                                    </Grid>
                                 </Grid>
                                 <Grid item xs={12} md={11} >
                                     <Grid container spacing={2}>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={12} sm={6}>
                                             <TextField
                                                 autoComplete="off"
                                                 name="country"
@@ -213,7 +234,7 @@ export default function Sending() {
                                                 value="Colombia"
                                             />
                                         </Grid>
-                                        <Grid item xs={6}>
+                                        <Grid item xs={12} sm={6}>
                                             <TextField
                                                 autoComplete="off"
                                                 name="city"
@@ -232,21 +253,11 @@ export default function Sending() {
                                 </Grid>
 
                                 <Grid item xs={12} md={11} >
-                                    {/* <Link href="#" color="secondary" variant="body1" style={{ float: 'left' }} className={classes.submit}>
-                                    Volver al Carrito
-                                </Link> */}
-                                    {/* <Button
-                                    variant="contained"
-                                    color='primary'
-                                    className={classes.submit}
-                                    style={{ float: 'left', padding: '10' }}
-                                >
-                                    Volver al Carrito
-                                </Button> */}
                                     <Button
                                         type="submit"
                                         variant="contained"
                                         color='primary'
+                                        id='buttonSubmit'
                                         className={classes.submit}
                                         style={{ float: 'right', padding: '10' }}
                                     >
@@ -267,6 +278,19 @@ export default function Sending() {
                         </Grid>
                     </Grid>
                     <Grid item xs={12} md={1}></Grid>
+                    <Grid item xs={12} >
+                        <Button
+                            variant="contained"
+                            type="button"
+                            color='primary'
+                            onClick={submitForm}
+                            className={classes.submit2}
+                            style={{ float: 'right', padding: '10' }}
+
+                        >
+                            Continuar Compra
+                                </Button>
+                    </Grid>
                 </Grid>
             </Container>
         </Grid>

@@ -17,6 +17,7 @@ import acceptedPayment from './pages/epayco/acceptedPayment';
 import rejectedPayment from './pages/epayco/rejectedPayment';
 import pendingPayment from './pages/epayco/pendingPayment';
 import responsePayment from './pages/epayco/responsePayment';
+import ChangePassword from './pages/changePassword';
 import Use from './pages/use';
 import Sending from './pages/sending';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
@@ -112,6 +113,7 @@ function App() {
                         <Route path="/error-confirmation" exact component={ErrorConfirmation} />
                         <Route path="/razon-social" exact component={Rsocial} />
                         <Route path="/confirmation-email/:token" exact component={ConfirmationEmail} />
+                        <Route path="/change-Password/:token" exact component={ChangePassword} />
                         <Route path="/confirmation-payment" exact component={ConfirmationPayment} />
                         <Route path="/accepted-payment" exact component={acceptedPayment} />
                         <Route path="/rejected-payment" exact component={rejectedPayment} />

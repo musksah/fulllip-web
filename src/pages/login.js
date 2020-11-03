@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import { Box, Dialog, DialogTitle, DialogContent, InputLabel, Typography } from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
@@ -29,6 +29,9 @@ function Alert(props) {
 }
 
 const useStyles = makeStyles((theme) => ({
+  inputtext: {
+    padding: 14
+  },
   paper: {
     marginTop: theme.spacing(1),
     display: 'flex',
@@ -52,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
+    zIndex: theme.zIndex.drawer + 1000,
     color: '#fff',
   }
 }));
@@ -87,11 +90,15 @@ export default function SignIn(props) {
   const [passwordRe, setPasswordRe] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [open, setOpen] = React.useState(false);
-  const [message, setMessage] = React.useState("");
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [open2, setOpen2] = useState(false);
+  const [message2, setMessage2] = useState("");
   const history = useHistory();
   const [value, setValue] = useState(0);
-  const [openProgress, setOpenProgress] = React.useState(false);
+  const [openProgress, setOpenProgress] = useState(false);
+  const [emailM, setEmailM] = useState("");
+  const [visible, setVisible] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -126,6 +133,36 @@ export default function SignIn(props) {
   const changePassword = (e) => {
     const { value } = e.target;
     setPassword(value);
+  }
+
+  const changeEmailM = (e) => {
+    const { value } = e.target;
+    setEmailM(value);
+  }
+
+  const sendEmail = (e) => {
+    console.log(emailM);
+    setOpenProgress(true);
+    e.preventDefault();
+    axios.post(URL + "/usuario", { email: emailM }).then(res => {
+      setOpenProgress(false);
+      setEmailM("");
+      if (res.status === 200) {
+        setVisible(false);
+        openMessage2(res.data.message);
+      }
+      else {
+        openMessage(res.data.message);
+      }
+    })
+  }
+
+  const openModal = () => {
+    setVisible(true);
+  }
+
+  const CloseModal = () => {
+    setVisible(false);
   }
 
   const findUser = (e) => {
@@ -213,6 +250,23 @@ export default function SignIn(props) {
     }
   }
 
+  const openMessage2 = (message) => {
+    setMessage2(message);
+    handleClick2();
+  }
+
+  const handleClick2 = () => {
+    setOpen2(true);
+  };
+
+  const handleClose2 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen2(false);
+  };
+
   return (
     <Box>
       <Header />
@@ -235,6 +289,7 @@ export default function SignIn(props) {
           <TabPanel value={value} index={0}>
             <form className={classes.form} onSubmit={findUser}>
               <TextField
+                inputProps={{ className: classes.inputtext }}
                 variant="outlined"
                 margin="normal"
                 required
@@ -247,6 +302,7 @@ export default function SignIn(props) {
                 onChange={changeEmail}
               />
               <TextField
+                inputProps={{ className: classes.inputtext }}
                 variant="outlined"
                 margin="normal"
                 required
@@ -269,7 +325,7 @@ export default function SignIn(props) {
           </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" color="secondary" variant="body2">
+                  <Link onClick={openModal} color="secondary" variant="body2" style={{ cursor: 'pointer' }}>
                     Olvidó su contraseña?
               </Link>
                 </Grid>
@@ -281,6 +337,7 @@ export default function SignIn(props) {
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    inputProps={{ className: classes.inputtext }}
                     autoComplete="off"
                     name="firstName"
                     variant="outlined"
@@ -294,6 +351,7 @@ export default function SignIn(props) {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    inputProps={{ className: classes.inputtext }}
                     variant="outlined"
                     required
                     fullWidth
@@ -306,6 +364,7 @@ export default function SignIn(props) {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    inputProps={{ className: classes.inputtext }}
                     variant="outlined"
                     required
                     fullWidth
@@ -318,6 +377,7 @@ export default function SignIn(props) {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
+                    inputProps={{ className: classes.inputtext }}
                     variant="outlined"
                     required
                     fullWidth
@@ -331,6 +391,7 @@ export default function SignIn(props) {
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
+                    inputProps={{ className: classes.inputtext }}
                     variant="outlined"
                     required
                     fullWidth
@@ -360,7 +421,59 @@ export default function SignIn(props) {
             {message}
           </Alert>
         </Snackbar>
+        <Snackbar open={open2} autoHideDuration={3000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} onClose={handleClose2}>
+          <Alert onClose={handleClose2} severity="success">
+            {message2}
+          </Alert>
+        </Snackbar>
       </Container >
+      <Dialog onClose={CloseModal} aria-labelledby="customized-dialog-title" open={visible}>
+        <DialogTitle id="customized-dialog-title" onClose={CloseModal}>
+          Olvidaste tu contraseña
+        </DialogTitle>
+        <DialogContent dividers>
+          <Grid item xs={12} >
+            <form onSubmit={sendEmail}>
+              <Grid container spacing={2} >
+                <Grid item xs={12} >
+                  <InputLabel>
+                    <Typography variant="body1" color="secondary" component="p">
+                      Te enviaremos un email con un enlace para que puedas restablecer tu contraseña.
+                    </Typography>
+                  </InputLabel>
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="emailM"
+                    value={emailM}
+                    type="email"
+                    label="Correo Electrónico"
+                    name="emailM"
+                    autoComplete="off"
+                    onChange={changeEmailM}
+                    inputProps={{ className: classes.inputtext }}
+                  />
+                </Grid>
+                <Grid item xs={12} >
+                  <Button
+                    type='submit'
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                  >
+                    Enviar un email
+                                        </Button>
+                </Grid>
+              </Grid>
+
+            </form>
+          </Grid>
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 }

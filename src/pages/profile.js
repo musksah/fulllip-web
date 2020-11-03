@@ -167,11 +167,11 @@ export default function Perfil() {
     }
     const changePassword = (e) => {
         const { value } = e.target;
-        setPassword(value);
+        setPassword(value.trim());
     }
     const changePasswordC = (e) => {
         const { value } = e.target;
-        setPasswordC(value);
+        setPasswordC(value.trim());
     }
 
     const updateUser = (e) => {

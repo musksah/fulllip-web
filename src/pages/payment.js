@@ -114,6 +114,22 @@ const useStyles = makeStyles((theme) => ({
     },
     media: {
         height: '80px'
+    },
+    productResponsive: {
+        background: '#FFF2F2',
+        marginBottom: '4em',
+        display: 'block',
+        [theme.breakpoints.up('md')]: {
+            display: 'none',
+        },
+
+    },
+    product: {
+        background: '#FFF2F2',
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+            display: 'block',
+        },
     }
 }));
 
@@ -175,9 +191,16 @@ export default function Payment() {
                         <Grid item xs={1}></Grid>
                     </Grid>
                     <Grid container style={{ marginTop: '1.8em', padding: '0.7em' }} >
-                        <Grid item md={1}></Grid>
-                        <Grid item xs={12} md={5}>
+                        <Grid item sm={1}></Grid>
+                        <Grid item xs={12} sm={10} md={5}>
                             <Information />
+                            <Grid item xs={12} md={5} className={classes.productResponsive}>
+                                <Grid container>
+                                    <Grid item xs={12}>
+                                        <ReviewSale></ReviewSale>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Typography variant="h6" style={{ fontWeight: 'bold' }}> Pago </Typography>
@@ -185,7 +208,7 @@ export default function Payment() {
                                 <Grid item xs={12}>
                                     <Typography variant="body2">Nuestros medios de pago son seguros y confiables</Typography>
                                 </Grid>
-                                <Grid item xs={11}>
+                                <Grid item xs={12}>
                                     <Card style={{ marginTop: '2em' }}>
                                         <CardContent>
                                             {/* <hr style={{marginBottom:'1.7em'}} /> */}
@@ -199,7 +222,7 @@ export default function Payment() {
                                 <Grid item xs={1}></Grid>
                             </Grid>
                         </Grid>
-                        <Grid item xs={5} style={{ background: '#FFF2F2' }}>
+                        <Grid item xs={12} md={5} className={classes.product}>
                             <Grid container>
                                 <Grid item xs={12}>
                                     <ReviewSale></ReviewSale>

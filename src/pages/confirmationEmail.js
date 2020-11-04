@@ -35,15 +35,16 @@ export default function ConfirmationEmail() {
         axios.post(`${URL}/${token}`).then(res => {
             console.log(res);
             setOpenProgress(false);
-            localStorage.setItem("confirmed",1);
+            localStorage.clear();
+            history.push("/Ingresar");
         }, error => {
-            console.log("Errosito "+error);    
+            console.log("Errosito " + error);
         })
     }, []);
 
     return (
-        <Box style={{marginBottom:'30em'}}>
-            <Header/>
+        <Box style={{ marginBottom: '30em' }}>
+            <Header />
             <Backdrop className={classes.backdrop} open={openProgress}>
                 <CircularProgress color="inherit" variant="indeterminate" disableShrink style={{ width: 80, height: 80 }} />
             </Backdrop>

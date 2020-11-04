@@ -39,6 +39,12 @@ const useStyles = makeStyles((theme) => ({
             display: 'none',
         },
     },
+    space: {
+        display: 'none',
+        [theme.breakpoints.only('sm')]: {
+            display: 'block',
+        },
+    }
 
 
 }));
@@ -107,8 +113,8 @@ export default function Sending() {
             <Header />
             <Container component="main" style={{ marginTop: '9rem', marginBottom: '9rem' }}>
                 <Grid container>
-                    <Grid item xs={12} md={1}></Grid>
-                    <Grid item xs={12} md={5} style={{ marginBottom: '2em' }}>
+                    <Grid item xs={12} sm={1}></Grid>
+                    <Grid item xs={12} sm={10} md={5} style={{ marginBottom: '2em' }}>
                         <form id="sendingform" onSubmit={saveData}>
                             <Grid container spacing={2}>
                                 <Grid item xs={12} md={11}>
@@ -268,7 +274,9 @@ export default function Sending() {
                             </Grid>
                         </form>
                     </Grid>
-                    <Grid item xs={12} md={5} style={{ background: '#FFF2F2' }}>
+                    <Grid item sm={1}></Grid>
+                    <Grid item sm={1} className={classes.space}></Grid>
+                    <Grid item xs={12} sm={10} md={5} style={{ background: '#FFF2F2' }}>
                         <Grid container >
                             {/* <Grid item xs={1}></Grid> */}
                             <Grid item xs={12}>
@@ -277,8 +285,8 @@ export default function Sending() {
                             {/* <Grid item xs={1}></Grid> */}
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} md={1}></Grid>
-                    <Grid item xs={12} >
+                    <Grid item sm={1}></Grid>
+                    <Grid item xs={12} sm={11} >
                         <Button
                             variant="contained"
                             type="button"

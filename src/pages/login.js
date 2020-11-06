@@ -133,6 +133,8 @@ export default function SignIn(props) {
     e.preventDefault();
     axios.post(URL, { email, password }).then(res => {
       setOpenProgress(false);
+      console.log("Session");
+      console.log(res.data);
       if (res.status === 200) {
         if (res.data.rol === 1) {
           let manageToken = new SessionToken();
@@ -141,6 +143,7 @@ export default function SignIn(props) {
           localStorage.setItem("name", res.data.name.split(" ")[0]);
           localStorage.setItem("sessionid", res.data.session);
           localStorage.setItem("confirmed", res.data.confirmed);
+          localStorage.setItem("customer_id", res.data.idCustomer);
           openMessage("Se ha enviado un correo electrónico a tu correo para que confirmes el correo");
           validate();
         } else {

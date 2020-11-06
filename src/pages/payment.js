@@ -133,6 +133,12 @@ export default function Payment() {
     };
 
     useEffect(() => {
+        let strInformation = localStorage.getItem("h_tinformation");
+        let customerId = localStorage.getItem("customer_id");
+        let curtomerInfo = JSON.stringify({customer_id:customerId});
+        let products = localStorage.getItem("products");
+        let infoCustomer = JSON.parse(strInformation);
+        // Creación del botón de epayco
         const script = document.createElement("script");
         script.src = "https://checkout.epayco.co/checkout.js";
         script.className = "epayco-button"
@@ -151,6 +157,19 @@ export default function Payment() {
         script.setAttribute("data-epayco-pending", Enviroment.epayco.pendingPage);
         script.setAttribute("data-epayco-response", Enviroment.epayco.responsePage);
         script.setAttribute("data-epayco-confirmation", Enviroment.epayco.confirmationPage);
+        // Datos del cliente
+        script.setAttribute("data-epayco-name-billing", `${infoCustomer.name} ${infoCustomer.lastname} `);
+        script.setAttribute("data-epayco-address-billing", infoCustomer.address);
+        script.setAttribute("data-epayco-type-doc-billing", "C.C");
+        script.setAttribute("data-epayco-mobilephone-billing", infoCustomer.phone);
+        script.setAttribute("data-epayco-number-doc-billing", infoCustomer.dni_id);
+        //Datos de dirección
+        script.setAttribute("data-epayco-extra1", strInformation);
+        //Datos del customer ecommerce
+        script.setAttribute("data-epayco-extra2", curtomerInfo);
+        //Datos de los productos
+        script.setAttribute("data-epayco-extra3", products);
+
         let contenedorForm = document.getElementById("epaycoForm");
         contenedorForm.appendChild(script);
         return () => {

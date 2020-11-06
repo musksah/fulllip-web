@@ -6,8 +6,8 @@ const API_KEY_PRUEBAS = "491d6a0b6e992cf924edd8d3d088aff1";
 const API_KEY_FULLIPS = "58fb52a050f1e7cfc8569f7550b477f3";
 
 export default {
-    urlApi: URL_LOCAL,
-    urlWeb: URL_APP_LOCAL,
+    urlApi: URL_PRODUCCION,
+    urlWeb: URL_APP_PRODUCCION,
     epayco:{
         apiKey: API_KEY_FULLIPS,
         responsePage: `${URL_APP_PRODUCCION}/response-payment`,

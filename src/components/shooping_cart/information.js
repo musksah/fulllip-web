@@ -101,14 +101,14 @@ export default function Information() {
                 <Grid item xs={12}>
                     <Typography variant="h6" style={{ fontWeight: 'bold' }}> Datos de Envío </Typography>
                 </Grid>
-                <Grid item xs={11} md={11}>
+                <Grid item xs={12} md={11}>
                     <Card style={{ paddingTop: '1em' }}>
                         <CardContent>
                             <form>
                                 <Grid container spacing={3}>
                                     <Grid item xs={12} md={11} >
                                         <Grid container spacing={2}>
-                                            <Grid item xs={6}>
+                                            <Grid item xs={12} sm={6}>
                                                 <InputLabel><Typography variant="body1" color="secondary" component="p" >Nombre</Typography></InputLabel>
                                                 <TextField
                                                     autoComplete="off"
@@ -125,7 +125,7 @@ export default function Information() {
                                                     onChange={changeName}
                                                 />
                                             </Grid>
-                                            <Grid item xs={12} md={6} >
+                                            <Grid item xs={12} sm={6} >
                                                 <InputLabel><Typography variant="body1" color="secondary" component="p" >Apellido</Typography></InputLabel>
                                                 <TextField
                                                     autoComplete="off"
@@ -147,7 +147,7 @@ export default function Information() {
 
                                     <Grid item xs={12} md={11} >
                                         <Grid container spacing={2}>
-                                            <Grid item xs={6}>
+                                            <Grid item xs={12} sm={6}>
                                                 <InputLabel><Typography variant="body1" color="secondary" component="p" >Cédula</Typography></InputLabel>
                                                 <TextField
                                                     autoComplete="off"
@@ -164,7 +164,7 @@ export default function Information() {
                                                     onChange={changeDni}
                                                 />
                                             </Grid>
-                                            <Grid item xs={6}>
+                                            <Grid item xs={12} sm={6}>
                                                 <InputLabel><Typography variant="body1" color="secondary" component="p" >Teléfono</Typography></InputLabel>
                                                 <TextField
                                                     autoComplete="off"
@@ -219,7 +219,7 @@ export default function Information() {
                                     </Grid>
                                     <Grid item xs={12} md={11} >
                                         <Grid container spacing={2}>
-                                            <Grid item xs={6}>
+                                            <Grid item xs={12} sm={6}>
                                                 <InputLabel><Typography variant="body1" color="secondary" component="p" >País</Typography></InputLabel>
                                                 <TextField
                                                     autoComplete="off"
@@ -235,7 +235,7 @@ export default function Information() {
                                                     value="Colombia"
                                                 />
                                             </Grid>
-                                            <Grid item xs={6}>
+                                            <Grid item xs={12} sm={6}>
                                                 <InputLabel><Typography variant="body1" color="secondary" component="p" >Ciudad</Typography></InputLabel>
                                                 <TextField
                                                     autoComplete="off"

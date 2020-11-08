@@ -143,7 +143,7 @@ export default function SignIn(props) {
   const sendEmail = (e) => {
     setOpenProgress(true);
     e.preventDefault();
-    axios.post(URL + "/usuario", { email: emailM }).then(res => {
+    axios.post(URL + "/user", { email: emailM }).then(res => {
       setOpenProgress(false);
       setEmailM("");
       if (res.status === 200) {

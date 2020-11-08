@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Container from '@material-ui/core/Container';
-import { Box } from '@material-ui/core';
+import { Box, Hidden } from '@material-ui/core';
 import Header from '../components/shared/header';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -85,6 +85,12 @@ const useStyles = makeStyles((theme) => ({
         color: '#2B2B2B',
         fontWeight: '500',
         fontSize: '1.6em',
+    },
+    cart_responsive: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: '3em',
     }
 }));
 
@@ -173,52 +179,89 @@ export default function CheckOut() {
                 }
                 {parseInt(cartItems.length) > 0 &&
                     <Container style={{ marginBottom: '7em' }}>
-                        <Grid container style={{ marginTop: '2em' }} >
-                            <Grid item md={1}></Grid>
-                            <Grid item xs={3} md={3} style={{ background: '#E1E1E1', padding: '0.7em' }}>
-                                <Typography className={classes.product_header} > Imagen </Typography>
-                            </Grid>
-                            <Grid item xs={3} md={3} style={{ background: '#E1E1E1', padding: '0.7em' }}>
-                                <Typography className={classes.product_header} > Producto </Typography>
-                            </Grid>
-                            <Grid item xs={3} md={2} style={{ background: '#E1E1E1', padding: '0.7em' }}>
-                                <Typography className={classes.product_header}> Precio </Typography>
-                            </Grid>
-                            <Grid item xs={3} md={2} style={{ background: '#E1E1E1', padding: '0.7em' }}>
-                                <Typography className={classes.product_header}> Cantidad </Typography>
-                            </Grid>
-                        </Grid>
-                        {cartItems.map((cart, index) => (
-                            <Grid container style={{ padding: '0.7em' }} >
-                                <Grid item md={1}></Grid>
-                                <Grid item xs={3} md={3} className={classes.item_field_container}>
-                                    <img src={cart.img} style={{ width: '40%', marginLeft: '30%', marginRight: '30%' }}></img>
+                        <Hidden only={['xs', 'sm']}>
+                            <Grid container style={{ marginTop: '2em' }} >
+                                <Grid item sm={1}></Grid>
+                                <Grid item sm={2} md={3} style={{ background: '#E1E1E1', padding: '0.7em' }}>
+                                    <Typography className={classes.product_header} > Imagen </Typography>
                                 </Grid>
-                                <Grid item xs={3} md={3} className={classes.item_field_container}>
-                                    <Typography variant="span" className={classes.item_cart}> {cart.name}  </Typography>
+                                <Grid item sm={2} style={{ background: '#E1E1E1', padding: '0.7em' }}>
+                                    <Typography className={classes.product_header} > Producto </Typography>
                                 </Grid>
-                                <Grid item xs={3} md={2} className={classes.item_field_container}>
-                                    {cart.price &&
-                                        <Typography className={classes.item_cart}><NumberFormat value={cart.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value}</div>} /> </Typography>
-                                    }
+                                <Grid item sm={2} style={{ background: '#E1E1E1', padding: '0.7em' }}>
+                                    <Typography className={classes.product_header}> Precio </Typography>
                                 </Grid>
-                                <Grid item xs={3} md={2} className={classes.item_field_container}>
-                                    <Grid item xs={4}>
-                                        <Typography className={classes.item_cart}> {cart.quantity} </Typography>
+                                <Grid item sm={2} style={{ background: '#E1E1E1', padding: '0.7em' }}>
+                                    <Typography className={classes.product_header}> Cantidad </Typography>
+                                </Grid>
+                                <Grid item sm={2} md={1} style={{ background: '#E1E1E1', padding: '0.7em' }}>
+                                    <Typography className={classes.product_header}> Acción </Typography>
+                                </Grid>
+                            </Grid>
+                            {cartItems.map((cart, index) => (
+                                <Grid container style={{ paddingTop: '0.7em', paddingBottom: '0.7em' }} >
+                                    <Grid item sm={1}></Grid>
+                                    <Grid item sm={2} md={3} className={classes.item_field_container}>
+                                        <img src={cart.img} style={{ width: '40%', marginLeft: '30%', marginRight: '30%' }}></img>
                                     </Grid>
-                                    <Grid item xs={4}>
-                                        <IconButton aria-label="add" onClick={() => increase(cart)}>
-                                            <Add />
-                                        </IconButton>
+                                    <Grid item sm={2} className={classes.item_field_container}>
+                                        <Typography variant="span" className={classes.item_cart}> {cart.name}  </Typography>
                                     </Grid>
-                                    <Grid item xs={4}>
-                                        <IconButton aria-label="delete" onClick={() => decreaseProduct(cart)}>
-                                            <Remove />
-                                        </IconButton>
+                                    <Grid item sm={2} className={classes.item_field_container}>
+                                        {cart.price &&
+                                            <Typography className={classes.item_cart}><NumberFormat value={cart.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value}</div>} /> </Typography>
+                                        }
+                                    </Grid>
+                                    <Grid item sm={2} className={classes.item_field_container}>
+                                        <Grid item sm={4}>
+                                            <Typography className={classes.item_cart}> {cart.quantity} </Typography>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid item sm={2} md={1} className={classes.item_field_container}>
+                                        <Grid item sm={4} md={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            <IconButton aria-label="add" onClick={() => increase(cart)} >
+                                                <Add />
+                                            </IconButton>
+                                        </Grid>
+                                        <Grid item sm={4} md={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            <IconButton aria-label="delete" onClick={() => decreaseProduct(cart)}>
+                                                <Remove />
+                                            </IconButton>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
-                            </Grid>
-                        ))}
+                            ))}
+                        </Hidden>
+                        <Hidden only={['md', 'lg', 'xl']}>
+                            <Box className={classes.cart_responsive}>
+                                <Grid item xs={10} >
+                                    {cartItems.map((cart, index) => (
+                                        <Grid container style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                            <Grid item xs={12} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                <img src={cart.img} style={{ width: '40%' }}></img>
+                                            </Grid>
+                                            <Grid item xs={12} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                <Typography variant="span" className={classes.item_cart}> {cart.name}  </Typography>
+                                            </Grid>
+                                            <Grid item xs={12}>
+                                                {cart.price &&
+                                                    <Typography className={classes.item_cart}><NumberFormat value={cart.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value}</div>} /> </Typography>
+                                                }
+                                            </Grid>
+                                            <Grid item xs={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                <Typography className={classes.item_cart}> {cart.quantity} </Typography>
+                                                <IconButton aria-label="add" onClick={() => increase(cart)} >
+                                                    <Add />
+                                                </IconButton>
+                                                <IconButton aria-label="delete" onClick={() => decreaseProduct(cart)}>
+                                                    <Remove />
+                                                </IconButton>
+                                            </Grid>
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                            </Box>
+                        </Hidden>
                         <Grid container style={{ padding: '0.7em', marginTop: '2em' }} >
                             <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
                                 <Typography className={classes.info_donation}> ¿Deseas hacer una donación para ayudar a la educación de los niños? </Typography>

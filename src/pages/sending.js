@@ -5,7 +5,7 @@ import ReviewSale from '../components/shooping_cart/reviewSale';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
-import { Container, Typography, Button, Link } from '@material-ui/core';
+import { Container, Typography, Button, Link, Hidden } from '@material-ui/core';
 import { FaBackward } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 
@@ -26,18 +26,10 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
         padding: '20px 20px',
-        display: 'none',
-        [theme.breakpoints.up('md')]: {
-            display: 'block',
-        },
     },
     submit2: {
         margin: theme.spacing(3, 0, 2),
         padding: '20px 20px',
-        display: 'block',
-        [theme.breakpoints.up('md')]: {
-            display: 'none',
-        },
     },
     space: {
         display: 'none',
@@ -257,20 +249,20 @@ export default function Sending() {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-
-                                <Grid item xs={12} md={11} >
-                                    <Button
-                                        type="submit"
-                                        variant="contained"
-                                        color='primary'
-                                        id='buttonSubmit'
-                                        className={classes.submit}
-                                        style={{ float: 'right', padding: '10' }}
-                                    >
-                                        Continuar Compra
+                                <Hidden only={['xs', 'sm']}>
+                                    <Grid item xs={12} md={11} >
+                                        <Button
+                                            type="submit"
+                                            variant="contained"
+                                            color='primary'
+                                            id='buttonSubmit'
+                                            className={classes.submit}
+                                            style={{ float: 'right', padding: '10' }}
+                                        >
+                                            Continuar Compra
                                 </Button>
-                                </Grid>
-
+                                    </Grid>
+                                </Hidden>
                             </Grid>
                         </form>
                     </Grid>
@@ -286,19 +278,21 @@ export default function Sending() {
                         </Grid>
                     </Grid>
                     <Grid item sm={1}></Grid>
-                    <Grid item xs={12} sm={11} >
-                        <Button
-                            variant="contained"
-                            type="button"
-                            color='primary'
-                            onClick={submitForm}
-                            className={classes.submit2}
-                            style={{ float: 'right', padding: '10' }}
+                    <Hidden only={['md', 'lg', 'xl']}>
+                        <Grid item xs={12} sm={11} >
+                            <Button
+                                variant="contained"
+                                type="button"
+                                color='primary'
+                                onClick={submitForm}
+                                className={classes.submit2}
+                                style={{ float: 'right', padding: '10' }}
 
-                        >
-                            Continuar Compra
+                            >
+                                Continuar Compra
                                 </Button>
-                    </Grid>
+                        </Grid>
+                    </Hidden>
                 </Grid>
             </Container>
         </Grid>

@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
     [theme.breakpoints.up('md')]: {
       display: 'block',
-      marginLeft: '3em'
+      marginLeft: '2.5em'
     },
   },
   title2: {

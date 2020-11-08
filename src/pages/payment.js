@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Container from '@material-ui/core/Container';
-import { Box } from '@material-ui/core';
+import { Box, Hidden } from '@material-ui/core';
 import Header from '../components/shared/header';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -114,22 +114,6 @@ const useStyles = makeStyles((theme) => ({
     },
     media: {
         height: '80px'
-    },
-    productResponsive: {
-        background: '#FFF2F2',
-        marginBottom: '4em',
-        display: 'block',
-        [theme.breakpoints.up('md')]: {
-            display: 'none',
-        },
-
-    },
-    product: {
-        background: '#FFF2F2',
-        display: 'none',
-        [theme.breakpoints.up('md')]: {
-            display: 'block',
-        },
     }
 }));
 
@@ -152,7 +136,7 @@ export default function Payment() {
         let date = new Date();
         let strInformation = localStorage.getItem("h_tinformation");
         let customerId = localStorage.getItem("customer_id");
-        let curtomerInfo = JSON.stringify({customer_id:customerId});
+        let curtomerInfo = JSON.stringify({ customer_id: customerId });
         let products = localStorage.getItem("products");
         let infoCustomer = JSON.parse(strInformation);
         // Creación del botón de epayco
@@ -214,13 +198,15 @@ export default function Payment() {
                         <Grid item sm={1}></Grid>
                         <Grid item xs={12} sm={10} md={5}>
                             <Information />
-                            <Grid item xs={12} md={5} className={classes.productResponsive}>
-                                <Grid container>
-                                    <Grid item xs={12}>
-                                        <ReviewSale></ReviewSale>
+                            <Hidden only={['md', 'lg', 'xl']}>
+                                <Grid item xs={12} md={5} style={{ background: '#FFF2F2', marginBottom: '4em' }}>
+                                    <Grid container>
+                                        <Grid item xs={12}>
+                                            <ReviewSale></ReviewSale>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
-                            </Grid>
+                            </Hidden>
                             <Grid container>
                                 <Grid item xs={12}>
                                     <Typography variant="h6" style={{ fontWeight: 'bold' }}> Pago </Typography>
@@ -228,7 +214,7 @@ export default function Payment() {
                                 <Grid item xs={12}>
                                     <Typography variant="body2">Nuestros medios de pago son seguros y confiables</Typography>
                                 </Grid>
-                                <Grid item xs={12}>
+                                <Grid item xs={12} md={11}>
                                     <Card style={{ marginTop: '2em' }}>
                                         <CardContent>
                                             {/* <hr style={{marginBottom:'1.7em'}} /> */}
@@ -242,13 +228,15 @@ export default function Payment() {
                                 <Grid item xs={1}></Grid>
                             </Grid>
                         </Grid>
-                        <Grid item xs={12} md={5} className={classes.product}>
-                            <Grid container>
-                                <Grid item xs={12}>
-                                    <ReviewSale></ReviewSale>
+                        <Hidden only={['xs', 'sm']}>
+                            <Grid item xs={12} md={5} style={{ background: '#FFF2F2' }}>
+                                <Grid container>
+                                    <Grid item xs={12}>
+                                        <ReviewSale></ReviewSale>
+                                    </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
+                        </Hidden>
                         <Grid item md={1}></Grid>
                     </Grid>
                 </Container>

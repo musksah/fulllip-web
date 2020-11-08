@@ -149,6 +149,7 @@ export default function Payment() {
     };
 
     useEffect(() => {
+        let date = new Date();
         let strInformation = localStorage.getItem("h_tinformation");
         let customerId = localStorage.getItem("customer_id");
         let curtomerInfo = JSON.stringify({customer_id:customerId});
@@ -159,11 +160,11 @@ export default function Payment() {
         script.src = "https://checkout.epayco.co/checkout.js";
         script.className = "epayco-button"
         script.setAttribute("data-epayco-key", Enviroment.epayco.apiKey);
-        // script.setAttribute("data-epayco-amount", total);
-        script.setAttribute("data-epayco-amount", '5000');
+        script.setAttribute("data-epayco-amount", total);
+        // script.setAttribute("data-epayco-amount", '5000');
         script.setAttribute("data-epayco-name", "Compra producto Fullips");
         script.setAttribute("data-epayco-description", `Cantidad: ${cartItems.lenght} productos`);
-        script.setAttribute("data-epayco-invoice", "F12333");
+        script.setAttribute("data-epayco-invoice", `FC-${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}${date.getMilliseconds()}`);
         script.setAttribute("data-epayco-currency", Enviroment.epayco.currency);
         script.setAttribute("data-epayco-country", Enviroment.epayco.country);
         script.setAttribute("data-epayco-test", "true");

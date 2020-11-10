@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import { Box, Dialog, DialogTitle, DialogContent, InputLabel, Typography } from '@material-ui/core';
+import { Box, Dialog, DialogTitle, DialogContent, InputLabel, Typography, IconButton } from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
@@ -20,6 +20,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
 import Enviroment from '../enviroment';
 import Swal from "sweetalert2";
+import CloseIcon from '@material-ui/icons/Close';
 
 const URL = `${Enviroment.urlApi}/user`;
 
@@ -57,6 +58,12 @@ const useStyles = makeStyles((theme) => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1000,
     color: '#fff',
+  },
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
   }
 }));
 
@@ -429,9 +436,12 @@ export default function SignIn(props) {
           </Alert>
         </Snackbar>
       </Container >
-      <Dialog onClose={CloseModal} aria-labelledby="customized-dialog-title" open={visible}>
-        <DialogTitle id="customized-dialog-title" onClose={CloseModal}>
+      <Dialog aria-labelledby="customized-dialog-title" open={visible}>
+        <DialogTitle id="customized-dialog-title">
           Olvidaste tu contraseña
+          <IconButton aria-label="close" className={classes.closeButton} onClick={CloseModal}>
+            <CloseIcon />
+          </IconButton>
         </DialogTitle>
         <DialogContent dividers>
           <Grid item xs={12} >

@@ -4,10 +4,11 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        paddingTop: '3em',
+        paddingTop: '1.5em',
         width: '100%',
         paddingBottom: '4em',
     },
@@ -31,6 +32,9 @@ export default function ContentIndex() {
         <div className={classes.root}>
             <Box>
                 <Grid container style={{ marginBottom: '2em' }}>
+                    <Grid item xs={12} style={{ marginBottom: '3em' }}>
+                        <center><img src="img/index/content/HOLA_LINDA_200PX.png" style={{ width: '160px', marginLeft: '30%', marginRight: '30%', marginTop: '3em' }} /></center>
+                    </Grid>
                     <Grid item xs={1}></Grid>
                     <Grid item xs={10}>
                         {/* <hr style={{ background: '#A20000', height: '0.2em', width: '40%' }} /> */}
@@ -41,11 +45,95 @@ export default function ContentIndex() {
                     </Grid>
                     <Grid item xs={1}></Grid>
                 </Grid>
-                <Box style={{ marginBottom: '2em', marginTop: '4em', color: '#AE5353' }}>
-                    <center>
-                        <Typography variant="h5">¿QUÉ ES FULLIPS?</Typography>
-                    </center>
-                </Box>
+                <Grid container style={{ marginBottom: '2em' }}>
+                    <Grid item xs={1}></Grid>
+                    <Grid item xs={10}>
+                        <Grid container>
+                            <Grid item xs={12} lg={4}>
+                                <Grid container>
+                                    <Grid item xs={6}>
+                                        <center><img src="img/index/content/ICONO1.png" style={{ width: '50%', marginLeft: '25%', marginRight: '25%' }} /></center>
+                                    </Grid>
+                                    <Grid item xs={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <Typography variant="body1" component="p" className={classes.paragraph}>
+                                                            volumen
+                                                </Typography>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <Typography variant="body1" component="p" className={classes.paragraph}>
+                                                            instantáneo
+                                                </Typography>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid item xs={12} lg={4}>
+                                <Grid container>
+                                    <Grid item xs={6}>
+                                        <center><img src="img/index/content/ICONO2.png" style={{ width: '50%', marginLeft: '25%', marginRight: '25%' }} /></center>
+                                    </Grid>
+                                    <Grid item xs={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <Typography variant="body1" component="p" className={classes.paragraph}>
+                                                            sin cirugpias
+                                                </Typography>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <Typography variant="body1" component="p" className={classes.paragraph}>
+                                                            ni inyecciones
+                                                </Typography>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid item xs={12} lg={4}>
+                                <Grid container>
+                                    <Grid item xs={6}>
+                                        <center><img src="img/index/content/ICONO3.png" style={{ width: '50%', marginLeft: '25%', marginRight: '25%' }} /></center>
+                                    </Grid>
+                                    <Grid item xs={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <Typography variant="body1" component="p" className={classes.paragraph}>
+                                                            Super
+                                                </Typography>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <Typography variant="body1" component="p" className={classes.paragraph}>
+                                                            Accesibles
+                                                </Typography>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={1}></Grid>
+                </Grid>
                 <Grid container style={{ marginBottom: '2em' }}>
                     <Grid item xs={1}></Grid>
                     <Grid item xs={10}>
@@ -65,19 +153,26 @@ export default function ContentIndex() {
                         <Typography variant="body1" component="p" className={classes.paragraph}>
                             Gracias por llegar hasta aquí
                         </Typography>
-                        <br />
-                        <Typography variant="body1" component="p" className={classes.paragraph}>
-                            Xoxo 💋 equipo Fullips Colombia
-                        </Typography>
-                        {/* <p style={{ marginTop: '1em', textAlign: 'justify', justifyContent: 'center', fontSize: '1em', color: '#4B4B4B' }}>Con el tiempo nuestras facciones cambian, incluyendo la disminución del grosor de los labios. A partir de los 30 años comienzan a perder un milímetro de volumen por cada cinco años.Conforme envejece el cuerpo se produce menos colágeno haciendo que los labios tengan menos grosor.todos queremos envejecer con Gracia y pensamos como primera opción cirugías e inyecciones ¿Es esta la mejor opción? creemos en resaltar la belleza natural y buscamos alternativas no invasivas y accesibles para lograrlo. Por eso tenemos el accesorio ideal para aumentar el grosor  de los labios.</p> */}
                     </Grid>
                     <Grid item xs={1}></Grid>
+                </Grid>
+                <Grid container style={{ marginTop: '3em', marginBottom: '2em' }}>
                     <Grid item xs={1}></Grid>
                     <Grid item xs={10}>
-                        <img src="img/distribuidor autorizado.jpg" style={{ width: '40%', marginLeft: '30%', marginRight: '30%', marginTop: '3em' }} />
+                        {/* Se muestra en xs */}
+                        <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                            <img src="img/index/content/FIRMA_FULLIPS_BANNER_MOBILE.png" style={{ width: '100%' }} />
+                        </Hidden>
+                        {/* Se muestra en sm */}
+                        <Hidden only={['xs', 'lg', 'xl']}>
+                            <img src="img/index/content/FIRMA_FULLIPS_BANNER_IPAD.png" style={{ width: '100%' }} />
+                        </Hidden>
+                        {/* Se muestra en md, lg, xl */}
+                        <Hidden only={['xs', 'sm', 'md']}>
+                            <img src="img/index/content/FIRMA_FULLIPS_BANNER_COMPUTADOR.png" style={{ width: '100%' }} />
+                        </Hidden>
                     </Grid>
                     <Grid item xs={1}></Grid>
-                    {/* <Grid item xs={1}></Grid> */}
                 </Grid>
             </Box>
         </div >

@@ -92,17 +92,21 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     title_social_card: {
-        [theme.breakpoints.down('sm')]: {
-            position: 'relative',
-            top: '-2em'
-        },
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.only('xs')]: {
             position: 'relative',
             top: '-4em'
         },
+        [theme.breakpoints.only('sm')]: {
+            position: 'relative',
+            top: '-4em'
+        },
+        [theme.breakpoints.only('md')]: {
+            position: 'relative',
+            top: '-3.5em'
+        },
         [theme.breakpoints.up('lg')]: {
             position: 'relative',
-            top: '-0.5em',
+            top: '-2.5em',
         },
     },
     link_social_net: {
@@ -125,9 +129,20 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     container_social_cards: {
-        [theme.breakpoints.down('lg')]: {
-            // marginTop: '10em'
-            marginTop: '20em'
+        [theme.breakpoints.only('xs')]: {
+            marginTop: '3em'
+        },
+        [theme.breakpoints.only('sm')]: {
+            marginTop: '15em',
+            marginBottom: '1em'
+        },
+        [theme.breakpoints.only('md')]: {
+            marginTop: '13em',
+            marginBottom: '1em'
+        },
+        [theme.breakpoints.only('lg')]: {
+            marginTop: '22em',
+            marginBottom: '2em'
         },
         [theme.breakpoints.up('xl')]: {
             marginTop: '20em'
@@ -208,7 +223,7 @@ function ModalContact() {
                                 <Paper elevation={7} >
                                     <Container style={{ paddingTop: '1em' }}>
                                         <Grid item md={12} lg={12} xl={12} style={{ marginTop: '0.7em', marginBottom: '1.5em', marginRight: '1em', marginLeft: '1em', textAlign: 'center' }}>
-                                            <a onClick={handleClickOpen} style={{ cursor: 'pointer', paddingTop: '2em' }}><Typography variant="h5" style={{fontSize:'0.9em'}}>CONTÁCTANOS</Typography></a>
+                                            <a onClick={handleClickOpen} style={{ cursor: 'pointer', paddingTop: '2em' }}><Typography variant="h5" style={{ fontSize: '0.9em' }}>CONTÁCTANOS</Typography></a>
                                         </Grid>
                                         <form noValidate autoComplete="off" onSubmit={sendMessage}>
                                             <Grid item md={12} lg={12} xl={12} style={{ marginRight: '1em', marginLeft: '1em' }}>
@@ -306,56 +321,51 @@ function ModalContact() {
                     <img src="img/contact/collage_1000x1000.png" alt="" className={classes.collage} />
                 </Hidden>
                 <Grid container className={classes.container_social_cards}>
-                    <Grid item md={12} lg={12} xl={12} style={{ marginTop: '2em', marginBottom: '3.5em', marginRight: '1em', marginLeft: '1em', textAlign: 'center' }}>
-                        <Typography variant="h5">
-                            MANTENTE AL DÍA EN NUESTRAS REDES SOCIALES
-                        </Typography>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{ marginTop: '2em', marginBottom: '3.5em', textAlign: 'center' }}>
+                        <center>
+                            <Typography variant="h5">
+                                MANTENTE AL DÍA EN NUESTRAS REDES SOCIALES
+                            </Typography>
+                        </center>
                     </Grid>
                 </Grid>
                 <Grid container spacing={5} style={{ marginBottom: '2em' }}>
                     <Grid item xs={12} md={4} lg={4} xl={4}>
                         <center>
-                            <Paper >
-                                <img src="img/contact/gmail_200x200.png" alt="" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} />
-                                <Typography variant="h6" className={classes.title_social_card}>
-                                    <span className={classes.link_social_net}>
-                                        fullipscolombia@gmail.com
+                            <img src="img/contact/Gmail_200px.png" alt="" style={{ width: '90%', left: '10%', right: '10%' }} />
+                            <Typography variant="h6" className={classes.title_social_card}>
+                                <span className={classes.link_social_net}>
+                                    fullipscolombia@gmail.com
                                     </span>
-                                </Typography>
-                            </Paper>
+                            </Typography>
                         </center>
                     </Grid>
                     <Grid item xs={12} md={4} lg={4} xl={4}>
                         <center>
-                            <Paper>
-                                <a target="_blank" href="https://www.facebook.com/880665175331108/posts/3553199911410941/?extid=0&d=n">
-                                    <img src="img/contact/facebook_200x200.png" alt="" />
+                            <a target="_blank" href="https://www.facebook.com/880665175331108/posts/3553199911410941/?extid=0&d=n">
+                                <img src="img/contact/facebook_200PX.png" alt="" style={{ width: '90%', left: '10%', right: '10%' }} />
+                            </a>
+                            <Typography variant="h6" className={classes.title_social_card}>
+                                <a target="_blank" href="https://www.facebook.com/880665175331108/posts/3553199911410941/?extid=0&d=n" className={classes.link_social_net}>
+                                    Fullips Oficial Colombia
                                 </a>
-                                <Typography variant="h6" className={classes.title_social_card}>
-                                    <a target="_blank" href="https://www.facebook.com/880665175331108/posts/3553199911410941/?extid=0&d=n" className={classes.link_social_net}>
-                                        Fullips Oficial Colombia
-                                </a>
-                                </Typography>
-                            </Paper>
+                            </Typography>
                         </center>
                     </Grid>
                     <Grid item xs={12} md={4} lg={4} xl={4}>
                         <center>
-                            <Paper>
-                                <img src="img/contact/Instagram_200x200.png" alt="" />
-                                <Typography variant="h6" className={classes.title_social_card}>
-                                    <a target="_blank" href="https://www.instagram.com/p/CF7sPsuDALH/?igshid=1aw8zwg3nggt0" className={classes.link_social_net}>
-                                        @fullipscolombia
+                            <a target="_blank" href="https://www.instagram.com/p/CF7sPsuDALH/?igshid=1aw8zwg3nggt0" className={classes.link_social_net}>
+                                <img src="img/contact/instagram_200px.png" alt="" style={{ width: '90%', left: '10%', right: '10%' }} />
+                            </a>
+                            <Typography variant="h6" className={classes.title_social_card}>
+                                <a target="_blank" href="https://www.instagram.com/p/CF7sPsuDALH/?igshid=1aw8zwg3nggt0" className={classes.link_social_net}>
+                                    @fullipscolombia
                                     </a>
-                                </Typography>
-                            </Paper>
+                            </Typography>
                         </center>
                     </Grid>
                 </Grid>
             </Container>
-            {/* <Container>
-                
-            </Container> */}
         </Box>
     );
 }

@@ -315,7 +315,7 @@ function ItemDetail() {
                                     <Grid item xs={12}>
                                         <h3>{product.name}</h3>
                                     </Grid>
-                                    <Grid item xs={12} style={{ marginTop: '2em', color: '#FF5C5C' }}>
+                                    <Grid item xs={12} style={{ marginTop: '2em', color: '#FF5C5C',fontSize:'1.2em' }}>
                                         {product.price &&
                                             <h5><NumberFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value}</div>} /></h5>
                                         }

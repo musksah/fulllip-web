@@ -9,12 +9,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        [theme.breakpoints.down('lg')]: {
-            background: '#FFF2F2',
-        },
-        [theme.breakpoints.up('xl')]: {
-            background: '#FFFFFF',
-        },
+        // [theme.breakpoints.down('lg')]: {
+        //     background: '#FFF2F2',
+        // },
+        // [theme.breakpoints.up('xl')]: {
+        //     background: '#FFFFFF',
+        // },
     },
     container_card:{
         background:'#FFFFFF',

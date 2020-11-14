@@ -281,7 +281,7 @@ export default function Information() {
                                                     required
                                                     id="country"
                                                     placeholder='País'
-                                                    disabled="true"
+                                                    disabled={true}
                                                     inputProps={{ className: classes.inputtext, readOnly: true }}
                                                     autoFocus
                                                     value="Colombia"

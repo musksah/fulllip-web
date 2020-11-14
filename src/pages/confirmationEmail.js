@@ -18,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '10em',
         marginBottom: '11em'
     },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
+    }
 }));
 
 const URL = `${Enviroment.urlApi}/user/confirmation`;

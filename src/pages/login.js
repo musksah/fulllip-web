@@ -376,6 +376,7 @@ export default function SignIn(props) {
                     required
                     fullWidth
                     id="email2"
+                    type="email"
                     label="Correo Electrónico"
                     name="email2"
                     autoComplete="off"

@@ -5,7 +5,6 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
@@ -19,9 +18,6 @@ import { CartContext } from '../contexts/cartContext';
 import NumberFormat from 'react-number-format';
 import Swal from "sweetalert2";
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Alert, AlertTitle } from '@material-ui/lab';
 
@@ -188,22 +184,18 @@ function ItemDetail() {
                 setProduct(res.data[0]);
                 setImages(res.data);
                 setImage({ url: res.data[0].image_item.url, priority: res.data[0].image_item.priority_field });
-            },
-            err => {
-                console.log(err);
             }
         )
     }
 
     const handleChange = (event) => {
         var reg = new RegExp("^[0-9]+$");
-        if (reg.test(event.target.value) || event.target.value == "") {
+        if (reg.test(event.target.value) || event.target.value === "") {
             setValues(event.target.value.trim());
         }
     };
 
     const saveProduct = () => {
-        console.log(product.stock);
         if (parseInt(values) <= 0 || isNaN(parseInt(values))) {
             openMessage("la cantidad debe ser mayor a 0");
         } else if (parseInt(product.stock) <= 0 || parseInt(product.stock) < parseInt(values)) {

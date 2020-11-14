@@ -226,7 +226,7 @@ export default function Sending() {
                                                 required
                                                 id="country"
                                                 placeholder='País'
-                                                disabled="true"
+                                                disabled={true}
                                                 inputProps={{ className: classes.inputtext, readOnly: true }}
                                                 autoFocus
                                                 value="Colombia"

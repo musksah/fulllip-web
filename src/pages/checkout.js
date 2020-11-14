@@ -7,20 +7,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import AlarmIcon from '@material-ui/icons/Alarm';
 import Add from '@material-ui/icons/Add';
 import Remove from '@material-ui/icons/Remove';
-import { BrowserRouter as Router, Switch, Route, NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { CartContext } from '../contexts/cartContext';
 import NumberFormat from 'react-number-format';
 import Checkbox from '@material-ui/core/Checkbox';
-
-const items = [
-    { img: 'img/kit.jpg', name: 'Kit', price: '10000', quantiy: 1 },
-    { img: 'img/kit.jpg', name: 'Medio Ovalado', price: '10000', quantiy: 1 },
-    { img: 'img/kit.jpg', name: 'Pequeño Ovalado', price: '10000', quantiy: 1 },
-]
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -97,7 +89,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CheckOut() {
     const classes = useStyles();
-    const [listitems, setlistitems] = useState(items);
     const [classDonation, setClassDonation] = useState(classes.donation_checked);
     const [checked, setChecked] = useState(true);
 
@@ -136,16 +127,13 @@ export default function CheckOut() {
     const checkConfirmationEmail = () => {
         let confirmed = localStorage.getItem("confirmed");
         let tokenStorage = localStorage.getItem("h_tiov");
-        console.log(`confirmed: ${confirmed}`);
-        if (tokenStorage == null) {
+        if (tokenStorage === null) {
             history.push("/Ingresar");
-        } else if (confirmed == 0 || confirmed == null) {
-            console.log("No se ha confirmado");
+        } else if (confirmed === 0 || confirmed === null) {
             history.push("/error-confirmation");
         } else {
             localStorage.setItem("donation", 1);
             addExtra();
-            console.log("Se confirmó");
         }
     }
 
@@ -164,7 +152,7 @@ export default function CheckOut() {
                 <center>
                     <Typography variant="h6" style={{ color: '#4F4F4F' }}>CARRITO DE COMPRA</Typography>
                 </center>
-                {parseInt(cartItems.length) == 0 &&
+                {parseInt(cartItems.length) === 0 &&
                     <Box>
                         <Container style={{ marginBottom: '20em', marginTop: '2em' }}>
                             <center>
@@ -199,10 +187,10 @@ export default function CheckOut() {
                                 </Grid>
                             </Grid>
                             {cartItems.map((cart, index) => (
-                                <Grid container style={{ paddingTop: '0.7em', paddingBottom: '0.7em' }} >
+                                <Grid container key={cart.id} style={{ paddingTop: '0.7em', paddingBottom: '0.7em' }} >
                                     <Grid item sm={1}></Grid>
                                     <Grid item sm={2} md={3} className={classes.item_field_container}>
-                                        <img src={cart.img} style={{ width: '40%', marginLeft: '30%', marginRight: '30%' }}></img>
+                                        <img src={cart.img} style={{ width: '40%', marginLeft: '30%', marginRight: '30%' }} />
                                     </Grid>
                                     <Grid item sm={2} className={classes.item_field_container}>
                                         <Typography variant="span" className={classes.item_cart}> {cart.name}  </Typography>
@@ -236,9 +224,9 @@ export default function CheckOut() {
                             <Box className={classes.cart_responsive}>
                                 <Grid item xs={10} >
                                     {cartItems.map((cart, index) => (
-                                        <Grid container style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        <Grid container key={cart.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                             <Grid item xs={12} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                                <img src={cart.img} style={{ width: '40%' }}></img>
+                                                <img src={cart.img} style={{ width: '40%' }} />
                                             </Grid>
                                             <Grid item xs={12} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                 <Typography variant="span" className={classes.item_cart}> {cart.name}  </Typography>

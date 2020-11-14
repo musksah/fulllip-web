@@ -6,7 +6,7 @@ const Extra = (total_temp) => {
     let bandera = localStorage.getItem('donation');
     let valor = 800;
     let total = parseInt(total_temp);
-    if (parseInt(bandera) == 1) {
+    if (parseInt(bandera) === 1) {
         total = total + valor;
     }
     return total.toFixed(2);

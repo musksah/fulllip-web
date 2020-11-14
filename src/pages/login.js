@@ -176,8 +176,6 @@ export default function SignIn(props) {
     e.preventDefault();
     axios.post(URL, { email, password }).then(res => {
       setOpenProgress(false);
-      console.log("Session");
-      console.log(res.data);
       if (res.status === 200) {
         if (res.data.rol === 1) {
           let manageToken = new SessionToken();
@@ -205,7 +203,7 @@ export default function SignIn(props) {
       setOpenProgress(true);
       axios.post(URL + "/register", { email, password, name, lastname }).then(res => {
         setOpenProgress(false);
-        if (res.status == 200) {
+        if (res.status === 200) {
           Swal.fire({
             title: 'Confirma tu correo electrónico',
             icon: 'success',
@@ -377,9 +375,9 @@ export default function SignIn(props) {
                     variant="outlined"
                     required
                     fullWidth
-                    id="email"
+                    id="email2"
                     label="Correo Electrónico"
-                    name="email"
+                    name="email2"
                     autoComplete="off"
                     onChange={changeEmail}
                   />
@@ -390,10 +388,10 @@ export default function SignIn(props) {
                     variant="outlined"
                     required
                     fullWidth
-                    name="password"
+                    name="password2"
                     label="Contraseña"
                     type="password"
-                    id="password"
+                    id="password2"
                     autoComplete="off"
                     onChange={changePassword}
                   />
@@ -404,10 +402,10 @@ export default function SignIn(props) {
                     variant="outlined"
                     required
                     fullWidth
-                    name="password2"
+                    name="password3"
                     label="Confirmar Contraseña"
                     type="password"
-                    id="password2"
+                    id="password3"
                     autoComplete="off"
                     onChange={changePasswordRe}
                   />

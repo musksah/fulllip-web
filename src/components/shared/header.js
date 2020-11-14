@@ -2,20 +2,17 @@ import React, { useEffect, useState, useContext } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
+import { IconButton, Box } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { RiUserLine } from "react-icons/ri";
-import MailIcon from '@material-ui/icons/MailOutline';
-import NotificationsIcon from '@material-ui/icons/NotificationsActiveOutlined';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import PropTypes from 'prop-types';
 import { AiOutlineShopping } from "react-icons/ai";
-import { BrowserRouter as Router, Switch, Route, NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import axios from 'axios';
 import 'typeface-rubik';
 import Enviroment from '../../enviroment';
@@ -282,7 +279,7 @@ export default function PrimarySearchAppBar(props) {
           <p>Contacto</p>
         </MenuItem>
       </NavLink>
-      {visibleIn == "visible" ? (
+      {visibleIn === "visible" ? (
         <NavLink to={{
           pathname: "/Ingresar",
           state: "menu"
@@ -300,7 +297,7 @@ export default function PrimarySearchAppBar(props) {
           </MenuItem>
         </NavLink>
       ) : (
-          <>
+          <Box>
             <NavLink to="/profile" style={{ textDecoration: 'none' }}>
               <MenuItem >
                 <IconButton
@@ -320,7 +317,7 @@ export default function PrimarySearchAppBar(props) {
               </IconButton>
               <p>Cerrar Sesión</p>
             </MenuItem>
-          </>
+          </Box>
         )
       }
     </Menu >
@@ -375,7 +372,7 @@ export default function PrimarySearchAppBar(props) {
             </NavLink>
             <div className={classes.sectionDesktop}>
               <NavLink to="/checkout">
-                <IconButton aria-label="show 4 new mails" color="inherit" color="secondary">
+                <IconButton color="inherit" color="secondary">
                   <Badge badgeContent={itemCount} color="error">
                     <AiOutlineShopping />
                   </Badge>
@@ -395,7 +392,7 @@ export default function PrimarySearchAppBar(props) {
             </div>
             <div className={classes.sectionMobile}>
               <NavLink to="/checkout">
-                <IconButton aria-label="show 4 new mails" color="inherit" color="secondary">
+                <IconButton color="inherit" color="secondary">
                   <Badge badgeContent={itemCount} color="error">
                     <AiOutlineShopping />
                   </Badge>

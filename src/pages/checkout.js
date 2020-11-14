@@ -268,9 +268,9 @@ export default function CheckOut() {
                             </Grid>
                             <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', marginBottom: '1em' }}>
                                 <NavLink to="/razon-social" className={classes.navlink}>
-                                    <Typography className={classes.info_donation}>
+                                    <a target="_blank" href="https://fullipscolombia.com/razon-social" className={classes.info_donation}>
                                         Ver mas información
-                                    </Typography>
+                                    </a>
                                 </NavLink>
                             </Grid>
                             <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', marginRight: '7.2em' }}>

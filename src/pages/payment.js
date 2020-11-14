@@ -188,7 +188,7 @@ export default function Payment() {
                         <Grid item xs={10}>
                             <Container>
                                 <NavLink to="/sending" style={{ textDecoration: 'none' }}>
-                                    <Button variant="contained"><ArrowBack style={{ marginRight: '0.3em' }} /> Regresar</Button>
+                                    <Button variant="contained"><ArrowBack style={{ marginRight: '0.3em' }} /> Cambiar información de envío</Button>
                                 </NavLink>
                             </Container>
                         </Grid>

@@ -306,7 +306,7 @@ export default function Information() {
                                             </Grid>
                                         </Grid>
                                     </Grid>
-                                    {flat ? (
+                                    {/* {flat ? (
                                         <Grid item xs={12}>
                                             <Button
                                                 variant="contained"
@@ -325,7 +325,7 @@ export default function Information() {
                                                     className={classes.submit}
                                                     style={{ float: 'right', padding: '10' }}>Guardar Cambios</Button>
                                             </Grid>
-                                        )}
+                                        )} */}
                                 </Grid>
                             </form>
                         </CardContent>

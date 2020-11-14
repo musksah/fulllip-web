@@ -19,6 +19,8 @@ import NumberFormat from 'react-number-format';
 import Swal from "sweetalert2";
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Backdrop from '@material-ui/core/Backdrop';
 import { Alert, AlertTitle } from '@material-ui/lab';
 
 const URL = `${Enviroment.urlApi}/item`;
@@ -152,7 +154,11 @@ const useStyles = makeStyles((theme) => ({
             marginRight: '10%',
             marginLeft: '10%'
         },
-    }
+    },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1000,
+        color: '#fff',
+    },
 }));
 
 function ItemDetail() {
@@ -167,6 +173,7 @@ function ItemDetail() {
     const [message, setMessage] = useState("");
     const history = useHistory();
     const { addProduct, itemCount } = useContext(CartContext);
+    const [openProgress, setOpenProgress] = useState(false);
 
     let { id } = useParams();
 
@@ -175,8 +182,10 @@ function ItemDetail() {
     }, []);
 
     const getProductInfo = () => {
+        setOpenProgress(true);
         axios.get(`${URL}/${id}`).then(
             res => {
+                setOpenProgress(false);
                 if (parseInt(res.data[0].stock) <= 0) {
                     setVisible(true);
                     setVisible2(false);
@@ -276,6 +285,9 @@ function ItemDetail() {
         <Box>
             <Header itemCount={itemCount} />
             <Container style={{}}>
+                <Backdrop className={classes.backdrop} open={openProgress}>
+                    <CircularProgress color="inherit" variant="indeterminate" disableShrink style={{ width: 80, height: 80 }} />
+                </Backdrop>
                 <Box className={classes.root} style={{ paddingTop: '9rem', paddingBottom: '7rem' }}>
                     {images.length > 0 &&
                         < Grid container>

@@ -23,11 +23,12 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 const URL = `${Enviroment.urlApi}/item`;
 
 
-function Alert(props) {
+function Alert2(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
@@ -121,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
             paddingRight: '12em'
         },
     },
-    info_product:{
+    info_product: {
         [theme.breakpoints.only('xs')]: {
             // marginRight: '1em',
             marginLeft: '0.4em'
@@ -165,6 +166,8 @@ function ItemDetail() {
     const [image, setImage] = useState({});
     const [images, setImages] = useState([]);
     const [open, setOpen] = useState(false);
+    const [visible, setVisible] = useState(false);
+    const [visible2, setVisible2] = useState(true);
     const [message, setMessage] = useState("");
     const history = useHistory();
     const { addProduct, itemCount } = useContext(CartContext);
@@ -176,9 +179,12 @@ function ItemDetail() {
     }, []);
 
     const getProductInfo = () => {
-        // console.log("Get product info");
         axios.get(`${URL}/${id}`).then(
             res => {
+                if (parseInt(res.data[0].stock) <= 0) {
+                    setVisible(true);
+                    setVisible2(false);
+                }
                 setProduct(res.data[0]);
                 setImages(res.data);
                 setImage({ url: res.data[0].image_item.url, priority: res.data[0].image_item.priority_field });
@@ -190,12 +196,25 @@ function ItemDetail() {
     }
 
     const handleChange = (event) => {
-        setValues(event.target.value);
+        var reg = new RegExp("^[0-9]+$");
+        if (reg.test(event.target.value) || event.target.value == "") {
+            setValues(event.target.value.trim());
+        }
     };
 
     const saveProduct = () => {
-        if (parseInt(values) <= 0) {
+        console.log(product.stock);
+        if (parseInt(values) <= 0 || isNaN(parseInt(values))) {
             openMessage("la cantidad debe ser mayor a 0");
+        } else if (parseInt(product.stock) <= 0 || parseInt(product.stock) < parseInt(values)) {
+            Swal.fire({
+                title: 'Cantidad no disponible',
+                icon: 'error',
+                text: 'Solo nos queda ' + parseInt(product.stock) + ' productos en el inventario.',
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#FF0D00',
+                allowOutsideClick: false
+            })
         } else {
             Swal.fire({
                 title: 'Producto Agregado',
@@ -239,8 +258,6 @@ function ItemDetail() {
 
 
     function changeImage(img) {
-        console.log("CLick imagen");
-        console.log(img);
         // let images = document.getElementsByClassName(e.target.className);
         // e.target.style.opacity = '1';
         // for (let i = 0; i < images.length; i++) {
@@ -315,7 +332,7 @@ function ItemDetail() {
                                     <Grid item xs={12}>
                                         <h3>{product.name}</h3>
                                     </Grid>
-                                    <Grid item xs={12} style={{ marginTop: '2em', color: '#FF5C5C',fontSize:'1.2em' }}>
+                                    <Grid item xs={12} style={{ marginTop: '2em', color: '#FF5C5C', fontSize: '1.2em' }}>
                                         {product.price &&
                                             <h5><NumberFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value}</div>} /></h5>
                                         }
@@ -323,10 +340,10 @@ function ItemDetail() {
                                     <Grid item xs={12} style={{ marginTop: '2em' }}>
                                         <p>{product.description}</p>
                                     </Grid>
-                                    <Grid item xs={12} style={{ marginTop: '0.5em', fontSize: '0.7em' }}>
-                                        <p>Disponibles en inventario: {product.quantity}</p>
+                                    <Grid item xs={12} style={{ marginTop: '0.5em', fontSize: '0.7em' }} hidden={visible}>
+                                        <p>Disponibles en inventario: {product.stock}</p>
                                     </Grid>
-                                    <Grid item xs={12} style={{ marginTop: '1em' }}>
+                                    <Grid item xs={12} style={{ marginTop: '1em' }} hidden={visible}>
                                         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
                                             <OutlinedInput
                                                 id="outlined-adornment-weight"
@@ -336,14 +353,21 @@ function ItemDetail() {
                                                 autoComplete="off"
                                                 required
                                                 inputProps={{
-                                                    'aria-label': 'weight',
+                                                    'aria-label': 'weight'
                                                 }}
                                             />
                                             <FormHelperText id="outlined-weight-helper-text">cantidad</FormHelperText>
                                         </FormControl>
                                     </Grid>
-                                    <Grid item xs={12} style={{ marginTop: '1em' }}>
+                                    <Grid item xs={12} style={{ marginTop: '1em' }} hidden={visible}>
                                         <Button variant="contained" style={{ padding: '1em' }} onClick={saveProduct}>Añadir al Carrito</Button>
+                                    </Grid>
+                                    <Grid item xs={12} style={{ marginTop: '1em' }} hidden={visible2}>
+                                        <Grid item xs={10}>
+                                            <Alert severity="warning">
+                                                <AlertTitle>Producto Agotado</AlertTitle>
+                                            </Alert>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -351,9 +375,9 @@ function ItemDetail() {
                     }
                 </Box>
                 <Snackbar open={open} autoHideDuration={3000} anchorOrigin={{ vertical: 'top', horizontal: 'center' }} onClose={handleClose}>
-                    <Alert onClose={handleClose} severity="error">
+                    <Alert2 onClose={handleClose} severity="error">
                         {message}
-                    </Alert>
+                    </Alert2>
                 </Snackbar>
             </Container>
         </Box >

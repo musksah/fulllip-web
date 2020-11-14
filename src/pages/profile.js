@@ -55,7 +55,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Perfil() {
     const classes = useStyles();
     const [name, setName] = useState("");
-    const [customer, setCustomer] = useState(0);
     const [user, setUser] = useState(0);
     const [lastname, setLastname] = useState("");
     const [dni_id, setDni] = useState("");
@@ -90,7 +89,6 @@ export default function Perfil() {
     const findCustomer = () => {
         axios.post(URL + "/customer", { session: localStorage.getItem("sessionid") }).then(res => {
             const datos = res.data;
-            setCustomer(datos.id_customer);
             setName(datos.name);
             setLastname(datos.lastname);
             setDni(datos.dni_id);
@@ -229,7 +227,7 @@ export default function Perfil() {
                 setPasswordA("");
                 setPassword("");
                 setPasswordC("");
-                if (res.status == 200) {
+                if (res.status === 200) {
                     openMessage2("La contraseña fue actualizada.")
                 }
                 else {

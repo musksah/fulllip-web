@@ -36,7 +36,7 @@ export default function ReviewSale() {
     return (
         <Container>
             {cartItems.map((cart, index) => (
-                <Grid container style={{ marginBottom: '1.5em', marginTop: '1.5em', paddingLeft: '1.5em', paddingRight: '1.5em' }}>
+                <Grid container key={cart.id} style={{ marginBottom: '1.5em', marginTop: '1.5em', paddingLeft: '1.5em', paddingRight: '1.5em' }}>
 
                     <Grid item xs={3} style={{ border: '1px solid #D9D9D9', background: 'white', borderRadius: '0.2em' }}>
                         <Badge badgeContent={cart.quantity} color="error">

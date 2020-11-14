@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Header from '../components/shared/header';
 import Grid from '@material-ui/core/Grid';
-import { useHistory } from "react-router-dom";
 import Enviroment from '../enviroment';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -15,9 +14,6 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ReactPlayer from "react-player";
 import Interweave from 'interweave';
-import Card from '@material-ui/core/Card';
-import Container from '@material-ui/core/Container';
-import CardContent from '@material-ui/core/CardContent';
 
 
 const URL = `${Enviroment.urlApi}/qa`;
@@ -77,7 +73,7 @@ export default function Question() {
                     <CircularProgress color="inherit" variant="indeterminate" disableShrink style={{ width: 80, height: 80 }} />
                 </Backdrop>
                 <Grid className={classes.centered} item xs={12}>
-                    <Typography variant="h6" color="primary" style={{fontSize:'0.9em'}}>PREGUNTAS FRECUENTES</Typography>
+                    <Typography variant="h6" color="primary" style={{ fontSize: '0.9em' }}>PREGUNTAS FRECUENTES</Typography>
                 </Grid>
                 <Grid style={{ marginTop: '3rem', marginBottom: '6rem' }} className={classes.centered} item xs={12}>
                     <Grid item xs={10}>
@@ -93,16 +89,16 @@ export default function Question() {
                                 </AccordionSummary>
                                 <AccordionDetails>
                                     <Typography>
-                                        {q.id_qa == 1 &&
+                                        {q.id_qa === 1 &&
                                             <Grid style={{ marginTop: '1rem', marginBottom: '1rem' }} container justify="center" spacing={3}>
                                                 {video.map(v => (
-                                                    <Grid item xs={10} sm={8} md={3} lg={3}>
+                                                    <Grid key={v.id_video} item xs={10} sm={8} md={3} lg={3}>
                                                         <ReactPlayer
                                                             url={v.url}
                                                             width='100%'
                                                             height='200px'
                                                         />
-                                                        <Typography gutterBottom variant="h6" color="secondary" style={{ marginTop: '1rem' }}>
+                                                        <Typography variant="h6" color="secondary" style={{ marginTop: '1rem' }}>
                                                             {v.title}
                                                         </Typography>
                                                     </Grid>

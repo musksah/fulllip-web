@@ -147,7 +147,7 @@ export default function Payment() {
         script.setAttribute("data-epayco-amount", total);
         // script.setAttribute("data-epayco-amount", '5000');
         script.setAttribute("data-epayco-name", "Compra producto Fullips");
-        script.setAttribute("data-epayco-description", `Cantidad: ${cartItems.lenght} productos`);
+        script.setAttribute("data-epayco-description", `Compra de producto Fullips`);
         script.setAttribute("data-epayco-invoice", `FC-${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}${date.getMilliseconds()}`);
         script.setAttribute("data-epayco-currency", Enviroment.epayco.currency);
         script.setAttribute("data-epayco-country", Enviroment.epayco.country);

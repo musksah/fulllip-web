@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -6,6 +6,8 @@ import { Container, Typography, Button, Grid, Card, CardContent, CardHeader } fr
 import { parseJSON } from 'date-fns';
 import { useHistory } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
+import { CartContext } from '../../contexts/cartContext';
+import Enviroment from '../../enviroment';
 
 const useStyles = makeStyles((theme) => ({
     inputtext: {
@@ -32,6 +34,7 @@ export default function Information() {
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
     const [city, setCity] = useState("");
+    const { cartItems, total, increase, decrease, removeProduct } = useContext(CartContext);
 
     useEffect(() => {
         if (localStorage.getItem("h_tinformation") !== null) {
@@ -92,8 +95,57 @@ export default function Information() {
             name, lastname, adicional, dni_id, address, phone, city
         }
         localStorage.setItem("h_tinformation", JSON.stringify(information));
+        regenerateButton();
         setFlat(true);
     }
+
+    const regenerateButton = () => {
+        let date = new Date();
+        let strInformation = localStorage.getItem("h_tinformation");
+        let customerId = localStorage.getItem("customer_id");
+        let curtomerInfo = JSON.stringify({ customer_id: customerId });
+        let products = localStorage.getItem("products");
+        let infoCustomer = JSON.parse(strInformation);
+        // Creación del botón de epayco
+        const script = document.createElement("script");
+        script.src = "https://checkout.epayco.co/checkout.js";
+        script.className = "epayco-button"
+        script.setAttribute("data-epayco-key", Enviroment.epayco.apiKey);
+        script.setAttribute("data-epayco-amount", total);
+        // script.setAttribute("data-epayco-amount", '5000');
+        script.setAttribute("data-epayco-name", "Compra producto Fullips");
+        script.setAttribute("data-epayco-description", `Compra de producto Fullips`);
+        script.setAttribute("data-epayco-invoice", `FC-${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getSeconds()}${date.getMilliseconds()}`);
+        script.setAttribute("data-epayco-currency", Enviroment.epayco.currency);
+        script.setAttribute("data-epayco-country", Enviroment.epayco.country);
+        script.setAttribute("data-epayco-test", "true");
+        script.setAttribute("data-epayco-external", "false");
+        script.setAttribute("data-epayco-acepted", Enviroment.epayco.acceptedPage);
+        script.setAttribute("data-epayco-rejected", Enviroment.epayco.rejectedPage);
+        script.setAttribute("data-epayco-pending", Enviroment.epayco.pendingPage);
+        script.setAttribute("data-epayco-response", Enviroment.epayco.responsePage);
+        script.setAttribute("data-epayco-confirmation", Enviroment.epayco.confirmationPage);
+        // Datos del cliente
+        script.setAttribute("data-epayco-name-billing", `${infoCustomer.name} ${infoCustomer.lastname} `);
+        script.setAttribute("data-epayco-address-billing", infoCustomer.address);
+        script.setAttribute("data-epayco-type-doc-billing", "C.C");
+        script.setAttribute("data-epayco-mobilephone-billing", infoCustomer.phone);
+        script.setAttribute("data-epayco-number-doc-billing", infoCustomer.dni_id);
+        //Datos de dirección
+        script.setAttribute("data-epayco-extra1", strInformation);
+        //Datos del customer ecommerce
+        script.setAttribute("data-epayco-extra2", curtomerInfo);
+        //Datos de los productos
+        script.setAttribute("data-epayco-extra3", products);
+
+        let contenedorForm = document.getElementById("epaycoForm");
+        contenedorForm.innerHTML = '';
+        contenedorForm.appendChild(script);
+        return () => {
+            contenedorForm.removeChild(script);
+        };
+    }
+
     return (
         <Grid>
 

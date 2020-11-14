@@ -117,11 +117,9 @@ export default function NestedGrid() {
     // debugger
     axios.get(URL).then(
       res => {
-        console.log(res);
         setlistImages(res.data);
       },
       err => {
-        console.log(err);
       }
     )
   }
@@ -131,29 +129,23 @@ export default function NestedGrid() {
   }
 
   function hoverProductCard(key, image) {
-    console.log(`Hover product ${key}`);
-    // console.log(listImages);
     let newArr = [...listImages];
     newArr.forEach((value, index, currentArr) => {
       if (index == key) {
         currentArr[index].url = listImages[index].name;
       }
     });
-    console.log(newArr);
     // debugger
     setlistImages(newArr);
   }
 
   function leaveProductCard(key, image) {
-    console.log(`Leaving product ${key}`);
-    // console.log(listImages);
     let newArr = [...listImages];
     newArr.forEach((value, index, currentArr) => {
       if (index == key) {
         currentArr[index].url = listImages[index].subtitle;
       }
     });
-    // console.log(newArr);
     setlistImages(newArr);
   }
 

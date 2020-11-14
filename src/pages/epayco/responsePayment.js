@@ -31,6 +31,7 @@ export default function ConfirmationPayment() {
     const classes = useStyles();
 
     useEffect(() => {
+        localStorage.clear();
         // checkPayment();
     }, []);
 
@@ -59,7 +60,7 @@ export default function ConfirmationPayment() {
                                         <Typography variant="h5">Pago Aceptado</Typography>
                                     </center>
                                 </Grid>
-                                <Grid item xs={12} style={{marginTop:'1em'}}>
+                                <Grid item xs={12} style={{ marginTop: '1em' }}>
                                     <center>
                                         <img src="img/icons/check_128.png" />
                                         <Typography variant="body2">Tú pago ha sido aceptado, estaremos haciendo llegar tu producto en los próximos 5 días.</Typography>

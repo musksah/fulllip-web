@@ -128,20 +128,16 @@ export default function TextMobileStepper() {
   }, []);
 
   const getImageCarrousel = () => {
-    console.log("Trayendo imágenes carrousell");
     axios.get(`${URL}`).then(
       res => {
-        console.log(res);
         setItemsCarrousell(res.data);
       },
       err => {
-        console.log(err);
       }
     )
   }
 
   const handleNext = () => {
-    console.log(maxSteps);
     // setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setActiveStep(function (prevActiveStep) {
       if ((maxSteps) == (prevActiveStep + 1)) {
@@ -169,7 +165,7 @@ export default function TextMobileStepper() {
           </Card>
         </Hidden>
         {/* Se muestra en sm */}
-        <Hidden only={['xs','lg','xl']}>
+        <Hidden only={['xs', 'lg', 'xl']}>
           <Card className={[classes.root].join(' ')}>
             <CardActionArea>
               <Box>
@@ -183,7 +179,7 @@ export default function TextMobileStepper() {
           </Card>
         </Hidden>
         {/* Se muestra en md, lg, xl */}
-        <Hidden only={['xs','sm','md']}>
+        <Hidden only={['xs', 'sm', 'md']}>
           <Card className={[classes.root].join(' ')}>
             <CardActionArea>
               <Box>

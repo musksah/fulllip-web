@@ -10,7 +10,7 @@ import { NavLink } from "react-router-dom";
 import axios from 'axios';
 import Enviroment from '../../enviroment';
 
-const URL = Enviroment.urlApi+'/epayco';
+const URL = Enviroment.urlApi + '/epayco';
 
 const items = [
     { img: 'img/kit.jpg', name: 'Kit', price: '10000', quantiy: 1 },
@@ -33,10 +33,11 @@ export default function ConfirmationPayment() {
     const classes = useStyles();
 
     useEffect(() => {
-        checkPayment();
+        localStorage.clear();
+        // checkPayment();
     }, []);
 
-    const checkPayment = () =>{
+    const checkPayment = () => {
         axios.get(`${URL}/confirmation-payment`).then(
             res => {
                 console.log(res);

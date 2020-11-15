@@ -283,7 +283,6 @@ export default function Perfil() {
                                 fullWidth
                                 required
                                 id="firstName"
-                                autoFocus
                                 value={name}
                                 onChange={changeName}
                             />
@@ -301,7 +300,7 @@ export default function Perfil() {
                                 onChange={changeLastname}
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <InputLabel htmlFor="standard-adornment-amount">Cédula</InputLabel>
                             <TextField
                                 variant="outlined"
@@ -313,7 +312,7 @@ export default function Perfil() {
                                 onChange={changeDni}
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <InputLabel htmlFor="standard-adornment-amount">Dirección</InputLabel>
                             <TextField
                                 variant="outlined"
@@ -326,7 +325,7 @@ export default function Perfil() {
                             />
                         </Grid>
 
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <InputLabel htmlFor="standard-adornment-amount">Teléfono</InputLabel>
                             <TextField
                                 variant="outlined"
@@ -338,13 +337,12 @@ export default function Perfil() {
                                 onChange={changePhone}
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <InputLabel htmlFor="standard-adornment-amount">Fecha Nacimiento</InputLabel>
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                 <KeyboardDatePicker
                                     fullWidth
                                     variant="outlined"
-                                    // required
                                     id="date-picker-dialog"
                                     format="MM/dd/yyyy"
                                     value={birthdate}
@@ -352,7 +350,7 @@ export default function Perfil() {
                                 />
                             </MuiPickersUtilsProvider>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <InputLabel htmlFor="standard-adornment-amount">País</InputLabel>
                             <TextField
                                 variant="outlined"
@@ -365,7 +363,7 @@ export default function Perfil() {
                                 onChange={changeCountry}
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <InputLabel htmlFor="standard-adornment-amount">Ciudad</InputLabel>
                             <TextField
                                 variant="outlined"
@@ -378,7 +376,7 @@ export default function Perfil() {
                                 onChange={changeCity}
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <InputLabel htmlFor="standard-adornment-amount">Genero</InputLabel>
                             <Select
                                 labelId="demo-simple-select-outlined-label"
@@ -412,7 +410,7 @@ export default function Perfil() {
                             <hr />
                         </Grid>
                         <Grid item xs={12} >
-                            <Grid item xs={6}>
+                            <Grid item xs={12} sm={6}>
                                 <InputLabel htmlFor="standard-adornment-amount">Contraseña Anterior</InputLabel>
                                 <TextField
                                     fullWidth
@@ -427,7 +425,7 @@ export default function Perfil() {
                                 />
                             </Grid>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <InputLabel htmlFor="standard-adornment-amount">Nueva Contraseña</InputLabel>
                             <TextField
                                 fullWidth
@@ -441,7 +439,7 @@ export default function Perfil() {
                                 onChange={changePassword}
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <InputLabel htmlFor="standard-adornment-amount">Confirmar Nueva contraseña</InputLabel>
                             <TextField
                                 fullWidth
@@ -474,7 +472,7 @@ export default function Perfil() {
                             <hr />
                         </Grid>
                         <Grid item xs={12} >
-                            <Grid item xs={6}>
+                            <Grid item xs={12} sm={6}>
                                 <InputLabel htmlFor="standard-adornment-amount">Correo Anterior</InputLabel>
                                 <TextField
                                     fullWidth
@@ -492,7 +490,7 @@ export default function Perfil() {
                                 />
                             </Grid>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <InputLabel htmlFor="standard-adornment-amount">Nuevo Correo</InputLabel>
                             <TextField
                                 fullWidth
@@ -507,7 +505,7 @@ export default function Perfil() {
                                 value={emailN}
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <InputLabel htmlFor="standard-adornment-amount">Confirmar Nuevo Correo</InputLabel>
                             <TextField
                                 fullWidth

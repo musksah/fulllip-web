@@ -26,10 +26,18 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
         padding: '20px 20px',
+        display: 'block',
+        [theme.breakpoints.down('md')]: {
+            display: 'none',
+        },
     },
     submit2: {
         margin: theme.spacing(3, 0, 2),
         padding: '20px 20px',
+        display: 'none',
+        [theme.breakpoints.down('md')]: {
+            display: 'block',
+        },
     },
     space: {
         display: 'none',
@@ -124,7 +132,6 @@ export default function Sending() {
                                                 id="name"
                                                 placeholder='Nombre'
                                                 inputProps={{ className: classes.inputtext }}
-                                                autoFocus
                                                 value={name}
                                                 onChange={changeName}
                                             />
@@ -139,7 +146,6 @@ export default function Sending() {
                                                 id="lastname"
                                                 placeholder='Apellido'
                                                 inputProps={{ className: classes.inputtext }}
-                                                autoFocus
                                                 value={lastname}
                                                 onChange={changeLastname}
                                             />
@@ -159,7 +165,6 @@ export default function Sending() {
                                                 id="dni_id"
                                                 placeholder='Numero de Documento'
                                                 inputProps={{ className: classes.inputtext }}
-                                                autoFocus
                                                 value={dni_id}
                                                 onChange={changeDni}
                                             />
@@ -174,7 +179,6 @@ export default function Sending() {
                                                 id="phone"
                                                 placeholder='Celular'
                                                 inputProps={{ className: classes.inputtext }}
-                                                autoFocus
                                                 value={phone}
                                                 onChange={changePhone}
                                             />
@@ -193,7 +197,6 @@ export default function Sending() {
                                             id="address"
                                             placeholder='Dirección'
                                             inputProps={{ className: classes.inputtext }}
-                                            autoFocus
                                             value={address}
                                             onChange={changeAddress}
                                         />
@@ -209,7 +212,6 @@ export default function Sending() {
                                             id="adicional"
                                             placeholder='Información Adicional'
                                             inputProps={{ className: classes.inputtext }}
-                                            autoFocus
                                             value={adicional}
                                             onChange={changeAdicional}
                                         />
@@ -228,7 +230,6 @@ export default function Sending() {
                                                 placeholder='País'
                                                 disabled={true}
                                                 inputProps={{ className: classes.inputtext, readOnly: true }}
-                                                autoFocus
                                                 value="Colombia"
                                             />
                                         </Grid>
@@ -242,27 +243,24 @@ export default function Sending() {
                                                 id="city"
                                                 placeholder='Ciudad'
                                                 inputProps={{ className: classes.inputtext }}
-                                                autoFocus
                                                 value={city}
                                                 onChange={changeCity}
                                             />
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Hidden only={['xs', 'sm']}>
-                                    <Grid item xs={12} md={11} >
-                                        <Button
-                                            type="submit"
-                                            variant="contained"
-                                            color='primary'
-                                            id='buttonSubmit'
-                                            className={classes.submit}
-                                            style={{ float: 'right', padding: '10' }}
-                                        >
-                                            Continuar Compra
+                                <Grid item xs={12} md={11} >
+                                    <Button
+                                        type="submit"
+                                        variant="contained"
+                                        color='primary'
+                                        id='buttonSubmit'
+                                        className={classes.submit}
+                                        style={{ float: 'right', padding: '10' }}
+                                    >
+                                        Continuar Compra
                                 </Button>
-                                    </Grid>
-                                </Hidden>
+                                </Grid>
                             </Grid>
                         </form>
                     </Grid>
@@ -278,21 +276,19 @@ export default function Sending() {
                         </Grid>
                     </Grid>
                     <Grid item sm={1}></Grid>
-                    <Hidden only={['md', 'lg', 'xl']}>
-                        <Grid item xs={12} sm={11} >
-                            <Button
-                                variant="contained"
-                                type="button"
-                                color='primary'
-                                onClick={submitForm}
-                                className={classes.submit2}
-                                style={{ float: 'right', padding: '10' }}
+                    <Grid item xs={12} sm={11} >
+                        <Button
+                            variant="contained"
+                            type="button"
+                            color='primary'
+                            onClick={submitForm}
+                            className={classes.submit2}
+                            style={{ float: 'right', padding: '10' }}
 
-                            >
-                                Continuar Compra
+                        >
+                            Continuar Compra
                                 </Button>
-                        </Grid>
-                    </Hidden>
+                    </Grid>
                 </Grid>
             </Container>
         </Grid>

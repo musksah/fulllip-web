@@ -305,7 +305,6 @@ export default function SignIn(props) {
                 label="Correo Electrónico"
                 name="email"
                 autoComplete="off"
-                autoFocus
                 onChange={changeEmail}
               />
               <TextField
@@ -352,7 +351,6 @@ export default function SignIn(props) {
                     fullWidth
                     id="firstName"
                     label="Nombre"
-                    autoFocus
                     onChange={changeName}
                   />
                 </Grid>

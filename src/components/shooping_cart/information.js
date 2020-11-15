@@ -172,7 +172,6 @@ export default function Information() {
                                                     placeholder='Nombre'
                                                     disabled={flat}
                                                     inputProps={{ className: classes.inputtext, readOnly: flat }}
-                                                    autoFocus
                                                     value={name}
                                                     onChange={changeName}
                                                 />
@@ -189,7 +188,6 @@ export default function Information() {
                                                     placeholder='Apellido'
                                                     disabled={flat}
                                                     inputProps={{ className: classes.inputtext, readOnly: flat }}
-                                                    autoFocus
                                                     value={lastname}
                                                     onChange={changeLastname}
                                                 />
@@ -211,7 +209,6 @@ export default function Information() {
                                                     placeholder='Numero de Documento'
                                                     disabled={flat}
                                                     inputProps={{ className: classes.inputtext, readOnly: flat }}
-                                                    autoFocus
                                                     value={dni_id}
                                                     onChange={changeDni}
                                                 />
@@ -228,7 +225,6 @@ export default function Information() {
                                                     placeholder='Celular'
                                                     disabled={flat}
                                                     inputProps={{ className: classes.inputtext, readOnly: flat }}
-                                                    autoFocus
                                                     value={phone}
                                                     onChange={changePhone}
                                                 />
@@ -248,7 +244,6 @@ export default function Information() {
                                             placeholder='Dirección'
                                             disabled={flat}
                                             inputProps={{ className: classes.inputtext, readOnly: flat }}
-                                            autoFocus
                                             value={address}
                                             onChange={changeAddress}
                                         />
@@ -264,7 +259,6 @@ export default function Information() {
                                             placeholder='Información Adicional'
                                             disabled={flat}
                                             inputProps={{ className: classes.inputtext, readOnly: flat }}
-                                            autoFocus
                                             value={adicional}
                                             onChange={changeAdicional}
                                         />
@@ -283,7 +277,6 @@ export default function Information() {
                                                     placeholder='País'
                                                     disabled={true}
                                                     inputProps={{ className: classes.inputtext, readOnly: true }}
-                                                    autoFocus
                                                     value="Colombia"
                                                 />
                                             </Grid>
@@ -299,7 +292,6 @@ export default function Information() {
                                                     placeholder='Ciudad'
                                                     disabled={flat}
                                                     inputProps={{ className: classes.inputtext, readOnly: flat }}
-                                                    autoFocus
                                                     value={city}
                                                     onChange={changeCity}
                                                 />

@@ -33,7 +33,6 @@ export default function ConfirmationPayment() {
     const classes = useStyles();
 
     useEffect(() => {
-        localStorage.clear();
         // checkPayment();
     }, []);
 

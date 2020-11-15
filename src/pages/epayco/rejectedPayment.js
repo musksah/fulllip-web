@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Container from '@material-ui/core/Container';
 import { Box } from '@material-ui/core';
 import Header from '../../components/shared/header';
@@ -7,6 +7,7 @@ import axios from 'axios';
 import Enviroment from '../../enviroment';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import { CartContext } from '../../contexts/cartContext';
 
 const URL = Enviroment.urlApi + '/epayco';
 
@@ -29,27 +30,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ConfirmationPayment() {
     const classes = useStyles();
+    const { clearCart } = useContext(CartContext);
 
     useEffect(() => {
-        localStorage.clear();
-        // checkPayment();
+        // clearCart();
     }, []);
-
-    const checkPayment = () => {
-        axios.get(`${URL}/confirmation-payment`).then(
-            res => {
-                console.log(res);
-            },
-            err => {
-                console.log(err);
-            }
-        )
-    }
 
     return (
         <Box>
             <Header />
-            <Box style={{ marginTop: '6em', marginBottom: '4em' }}>
+            <Box style={{ marginTop: '6em', marginBottom: '12em' }}>
                 <Container style={{ marginTop: '10em' }}>
                     <Grid container>
                         <Grid item xs={1}></Grid>

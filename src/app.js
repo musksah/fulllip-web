@@ -2,8 +2,7 @@ import React from 'react';
 import Login from './pages/login';
 import Home from './pages/home';
 import Profile from './pages/profile';
-import Header from './components/shared/header';
-import Footer from './components/shared/footer';
+import Footer from './components/shared/Footer';
 import Product from './pages/productdetail';
 import Question from './pages/questionAnswer';
 import Checkout from './pages/checkout';
@@ -27,6 +26,15 @@ import ScrollToTop from './util/scrolltop';
 import { BrowserHistory } from 'history';
 import 'typeface-rubik';
 import 'typeface-roboto';
+import './index.css';
+
+const useStyles = makeStyles((theme) => ({
+    containerPage: {
+        display: 'flex',
+        minHeight: '100vh',
+        flexDirection: 'column',
+    }
+}));
 
 const theme = createMuiTheme({
     palette: {
@@ -93,8 +101,9 @@ theme.typography.h6 = {
 };
 
 function App() {
+    const classes = useStyles();
     return (
-        <Box>
+        <Box className={classes.containerPage}>
             <ThemeProvider theme={theme}>
                 <Router>
                     <ScrollToTop />

@@ -118,7 +118,7 @@ export default function Sending() {
                         <form id="sendingform" onSubmit={saveData}>
                             <Grid container spacing={2}>
                                 <Grid item xs={12} md={11}>
-                                    <InputLabel><Typography variant="body1" color="secondary" component="p" className={classes.subtitle}>Información para el Envío</Typography></InputLabel>
+                                    <InputLabel><Typography variant="body1" color="secondary" component="p" className={classes.subtitle}>Información para el envío</Typography></InputLabel>
                                 </Grid>
                                 <Grid item xs={12} md={11} >
                                     <Grid container spacing={2}>

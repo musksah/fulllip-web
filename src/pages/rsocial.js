@@ -50,7 +50,7 @@ export default function RSosial() {
             <Container style={{ marginTop: '9rem', marginBottom: '9rem' }}>
                 <Grid container>
                     <Grid className={classes.centered} item xs={12}>
-                        <Typography variant="h6" color="primary" style={{ fontSize: '0.9em', marginBottom: '2em' }}>RAZON SOCIAL</Typography>
+                        <Typography variant="h6" color="primary" style={{ fontSize: '0.9em', marginBottom: '2em' }}>RAZÓN SOCIAL</Typography>
                     </Grid>
                     <Grid item xs={1}></Grid>
 

@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
 import { CartContext } from '../../contexts/cartContext';
 import NumberFormat from 'react-number-format';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,7 +24,24 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center'
-    }
+    },
+    img_products: {
+        [theme.breakpoints.only('xs')]: {
+            height: '85px',
+        },
+        [theme.breakpoints.only('sm')]: {
+            height: '92px',
+        },
+        [theme.breakpoints.only('md')]: {
+            height: '80px',
+        },
+        [theme.breakpoints.only('lg')]: {
+            height: '86px',
+        },
+        [theme.breakpoints.up('xl')]: {
+            height: '90px',
+        },
+    },
 }));
 
 export default function ReviewSale() {
@@ -39,9 +58,18 @@ export default function ReviewSale() {
                 <Grid container key={cart.id} style={{ marginBottom: '1.5em', marginTop: '1.5em', paddingLeft: '1.5em', paddingRight: '1.5em' }}>
 
                     <Grid item xs={3} style={{ border: '1px solid #D9D9D9', background: 'white', borderRadius: '0.2em' }}>
-                        <Badge badgeContent={cart.quantity} color="error">
-                            <img src={cart.img} style={{ width: '90%', paddingLeft: '5%', paddingRight: '5%' }} />
-                        </Badge>
+
+                        {/* <img src={cart.img} style={{ width: '100%', height: 'auto' }} /> */}
+                        <Card variant="outlined" style={{ width: '100%' }}>
+                            {/* <Badge badgeContent={cart.quantity} color="error"> */}
+                                <CardMedia
+                                    className={classes.img_products}
+                                    image={cart.img}
+                                    title="Producto del carrito"
+                                />
+                            {/* </Badge> */}
+                        </Card>
+
                     </Grid>
                     <Grid item xs={6} className={classes.detail_review}>
                         <Box>

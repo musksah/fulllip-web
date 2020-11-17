@@ -20,6 +20,7 @@ import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
 import Enviroment from '../enviroment';
 import Hidden from '@material-ui/core/Hidden';
+import Swal from "sweetalert2";
 
 const URL = Enviroment.urlApi + '/email';
 
@@ -159,6 +160,7 @@ function ModalContact() {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
     const [open, setOpen] = React.useState(false);
+    const [openProgress, setOpenProgress] = useState(false);
     const bull = <span className={classes.bullet}>•</span>;
 
     const handleClickOpen = () => {
@@ -192,19 +194,23 @@ function ModalContact() {
 
     const sendMessage = (e) => {
         e.preventDefault();
+        setOpenProgress(true);
         axios.post(URL + "/send-mail-contact", { email, subject, name, lastname, message }).then(res => {
-            console.log(res);
-            //     setOpenProgress(false);
-            //     if (res.status == 200) {
-            //         localStorage.setItem("h_tiov", res.data.token);
-            //         localStorage.setItem("name", res.data.name.split(" ")[0]);
-            //         localStorage.setItem("sessionid", res.data.session);
-            //         localStorage.setItem("confirmed", 0);
-            //         validate();
-            //     }
-            //     else {
-            //         openMessage(res.data.message);
-            //     }
+            setOpenProgress(false);
+            Swal.fire({
+                title: 'Mensaje enviado',
+                icon: 'success',
+                text: `${res.data.message}`,
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#FF0D00',
+                allowOutsideClick: false
+            });
+            document.getElementById("form-contact").reset();
+            setName("");
+            setLastname("");
+            setSubject("");
+            setEmail("");
+            setMessage("");
         });
     }
 
@@ -225,7 +231,7 @@ function ModalContact() {
                                         <Grid item md={12} lg={12} xl={12} style={{ marginTop: '0.7em', marginBottom: '1.5em', marginRight: '1em', marginLeft: '1em', textAlign: 'center' }}>
                                             <a onClick={handleClickOpen} style={{ cursor: 'pointer', paddingTop: '2em' }}><Typography variant="h5" style={{ fontSize: '0.9em' }}>CONTÁCTANOS</Typography></a>
                                         </Grid>
-                                        <form noValidate autoComplete="off" onSubmit={sendMessage}>
+                                        <form noValidate autoComplete="off" onSubmit={sendMessage} id="form-contact">
                                             <Grid item md={12} lg={12} xl={12} style={{ marginRight: '1em', marginLeft: '1em' }}>
                                                 <Grid container spacing={2}>
                                                     <Grid item xs={6} lg={6}>
@@ -243,7 +249,6 @@ function ModalContact() {
                                                     </Grid>
                                                     <Grid item xs={6} lg={6}>
                                                         <TextField
-                                                            autoFocus
                                                             margin="dense"
                                                             id="lastname"
                                                             label="Apellidos"
@@ -256,7 +261,6 @@ function ModalContact() {
                                                     </Grid>
                                                     <Grid item xs={6} lg={6}>
                                                         <TextField
-                                                            autoFocus
                                                             margin="dense"
                                                             id="subject"
                                                             label="Asunto"
@@ -269,7 +273,6 @@ function ModalContact() {
                                                     </Grid>
                                                     <Grid item xs={6} lg={6}>
                                                         <TextField
-                                                            autoFocus
                                                             margin="dense"
                                                             id="email"
                                                             label="Correo"

@@ -49,10 +49,10 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.only('md')]: {
             width: '92%',
         },
-        [theme.breakpoints.up('lg')]: {
+        [theme.breakpoints.only('lg')]: {
             width: '78%',
         },
-        [theme.breakpoints.up('xl')]: {
+        [theme.breakpoints.only('xl')]: {
             width: '78%',
         },
     },
@@ -344,9 +344,9 @@ function ItemDetail() {
                                     <Grid item xs={12} style={{ marginTop: '2em' }}>
                                         <p>{product.description}</p>
                                     </Grid>
-                                    <Grid item xs={12} style={{ marginTop: '0.5em', fontSize: '0.7em' }} hidden={visible}>
+                                    {/* <Grid item xs={12} style={{ marginTop: '0.5em', fontSize: '0.7em' }} hidden={visible}>
                                         <p>Disponibles en inventario: {product.stock}</p>
-                                    </Grid>
+                                    </Grid> */}
                                     <Grid item xs={12} style={{ marginTop: '1em' }} hidden={visible}>
                                         <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
                                             <OutlinedInput

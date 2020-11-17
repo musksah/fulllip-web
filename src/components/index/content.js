@@ -87,7 +87,7 @@ export default function ContentIndex() {
                                                 <tr>
                                                     <td>
                                                         <Typography variant="body1" component="p" className={classes.paragraph}>
-                                                            sin cirugpias
+                                                            sin cirugías
                                                 </Typography>
                                                     </td>
                                                 </tr>

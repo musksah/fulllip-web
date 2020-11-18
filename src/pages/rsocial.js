@@ -33,8 +33,31 @@ const useStyles = makeStyles((theme) => ({
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,
         color: '#fff',
-    }, title: {
+    }, 
+    title: {
         color: '#8A0000',
+    },
+    container: {
+        [theme.breakpoints.only('xs')]: {
+            marginTop: '9rem',
+            marginBottom: '9rem'
+        },
+        [theme.breakpoints.only('sm')]: {
+            marginTop: '9rem',
+            marginBottom: '9rem'
+        },
+        [theme.breakpoints.only('md')]: {
+            marginTop: '9rem',
+            marginBottom: '9rem'
+        },
+        [theme.breakpoints.only('lg')]: {
+            paddingTop: '9rem',
+            marginBottom: '9rem'
+        },
+        [theme.breakpoints.up('xl')]: {
+            paddingTop: '11rem',
+            marginBottom: '13.5rem'
+        },
     }
 }));
 
@@ -47,7 +70,7 @@ export default function RSosial() {
     return (
         <Box>
             <Header />
-            <Container style={{ marginTop: '9rem', marginBottom: '9rem' }}>
+            <Container className={classes.container}>
                 <Grid container>
                     <Grid className={classes.centered} item xs={12}>
                         <Typography variant="h6" color="primary" style={{ fontSize: '0.9em', marginBottom: '2em' }}>RAZÓN SOCIAL</Typography>

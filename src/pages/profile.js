@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,
         color: '#fff',
+    },
+    label_form:{
+        marginBottom:'0.7em'
     }
 }));
 
@@ -271,11 +274,11 @@ export default function Perfil() {
                 </Backdrop>
                 <CssBaseline />
                 <h5>DATOS PERSONALES</h5>
-                <hr />
+                <hr style={{marginBottom:'1em'}} />
                 <form className={classes.form} onSubmit={updateUser}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel htmlFor="standard-adornment-amount">Nombre</InputLabel>
+                            <InputLabel htmlFor="standard-adornment-amount" className={classes.label_form}>Nombre</InputLabel>
                             <TextField
                                 autoComplete="off"
                                 name="firstName"
@@ -288,7 +291,7 @@ export default function Perfil() {
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel htmlFor="standard-adornment-amount">Apellido</InputLabel>
+                            <InputLabel htmlFor="standard-adornment-amount" className={classes.label_form}>Apellido</InputLabel>
                             <TextField
                                 variant="outlined"
                                 fullWidth
@@ -301,7 +304,7 @@ export default function Perfil() {
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel htmlFor="standard-adornment-amount">Cédula</InputLabel>
+                            <InputLabel htmlFor="standard-adornment-amount" className={classes.label_form}>Cédula</InputLabel>
                             <TextField
                                 variant="outlined"
                                 fullWidth
@@ -313,7 +316,7 @@ export default function Perfil() {
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel htmlFor="standard-adornment-amount">Dirección</InputLabel>
+                            <InputLabel htmlFor="standard-adornment-amount" className={classes.label_form}>Dirección</InputLabel>
                             <TextField
                                 variant="outlined"
                                 fullWidth
@@ -326,7 +329,7 @@ export default function Perfil() {
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
-                            <InputLabel htmlFor="standard-adornment-amount">Teléfono</InputLabel>
+                            <InputLabel htmlFor="standard-adornment-amount" className={classes.label_form}>Teléfono</InputLabel>
                             <TextField
                                 variant="outlined"
                                 fullWidth
@@ -338,7 +341,7 @@ export default function Perfil() {
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel htmlFor="standard-adornment-amount">Fecha Nacimiento</InputLabel>
+                            <InputLabel htmlFor="standard-adornment-amount" className={classes.label_form}>Fecha Nacimiento</InputLabel>
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                 <KeyboardDatePicker
                                     fullWidth
@@ -351,7 +354,7 @@ export default function Perfil() {
                             </MuiPickersUtilsProvider>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel htmlFor="standard-adornment-amount">País</InputLabel>
+                            <InputLabel htmlFor="standard-adornment-amount" className={classes.label_form}>País</InputLabel>
                             <TextField
                                 variant="outlined"
                                 fullWidth
@@ -364,7 +367,7 @@ export default function Perfil() {
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel htmlFor="standard-adornment-amount">Ciudad</InputLabel>
+                            <InputLabel htmlFor="standard-adornment-amount" className={classes.label_form}>Ciudad</InputLabel>
                             <TextField
                                 variant="outlined"
                                 fullWidth
@@ -377,7 +380,7 @@ export default function Perfil() {
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel htmlFor="standard-adornment-amount">Genero</InputLabel>
+                            <InputLabel htmlFor="standard-adornment-amount" className={classes.label_form}>Genero</InputLabel>
                             <Select
                                 labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined"
@@ -411,7 +414,7 @@ export default function Perfil() {
                         </Grid>
                         <Grid item xs={12} >
                             <Grid item xs={12} sm={6}>
-                                <InputLabel htmlFor="standard-adornment-amount">Contraseña Anterior</InputLabel>
+                                <InputLabel htmlFor="standard-adornment-amount" className={classes.label_form}>Contraseña Anterior</InputLabel>
                                 <TextField
                                     fullWidth
                                     variant="outlined"
@@ -426,7 +429,7 @@ export default function Perfil() {
                             </Grid>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel htmlFor="standard-adornment-amount">Nueva Contraseña</InputLabel>
+                            <InputLabel htmlFor="standard-adornment-amount" className={classes.label_form}>Nueva Contraseña</InputLabel>
                             <TextField
                                 fullWidth
                                 variant="outlined"
@@ -440,7 +443,7 @@ export default function Perfil() {
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel htmlFor="standard-adornment-amount">Confirmar Nueva contraseña</InputLabel>
+                            <InputLabel htmlFor="standard-adornment-amount" className={classes.label_form}>Confirmar Nueva contraseña</InputLabel>
                             <TextField
                                 fullWidth
                                 variant="outlined"
@@ -473,7 +476,7 @@ export default function Perfil() {
                         </Grid>
                         <Grid item xs={12} >
                             <Grid item xs={12} sm={6}>
-                                <InputLabel htmlFor="standard-adornment-amount">Correo Anterior</InputLabel>
+                                <InputLabel htmlFor="standard-adornment-amount" className={classes.label_form}>Correo Anterior</InputLabel>
                                 <TextField
                                     fullWidth
                                     variant="outlined"
@@ -491,7 +494,7 @@ export default function Perfil() {
                             </Grid>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel htmlFor="standard-adornment-amount">Nuevo Correo</InputLabel>
+                            <InputLabel htmlFor="standard-adornment-amount" className={classes.label_form}>Nuevo Correo</InputLabel>
                             <TextField
                                 fullWidth
                                 required
@@ -506,7 +509,7 @@ export default function Perfil() {
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <InputLabel htmlFor="standard-adornment-amount">Confirmar Nuevo Correo</InputLabel>
+                            <InputLabel htmlFor="standard-adornment-amount" className={classes.label_form}>Confirmar Nuevo Correo</InputLabel>
                             <TextField
                                 fullWidth
                                 required

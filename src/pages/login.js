@@ -64,6 +64,28 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(1),
     top: theme.spacing(1),
     color: theme.palette.grey[500],
+  },
+  container: {
+    [theme.breakpoints.only('xs')]: {
+      marginTop: '9rem', 
+      marginBottom: '16rem'
+    },
+    [theme.breakpoints.only('sm')]: {
+      marginTop: '9rem', 
+      marginBottom: '16rem'
+    },
+    [theme.breakpoints.only('md')]: {
+      marginTop: '9rem', 
+      marginBottom: '16rem'
+    },
+    [theme.breakpoints.only('lg')]: {
+      marginTop: '9rem', 
+      marginBottom: '15rem'
+    },
+    [theme.breakpoints.up('xl')]: {
+      marginTop: '13rem', 
+      marginBottom: '16.5rem'
+    },
   }
 }));
 
@@ -185,7 +207,7 @@ export default function SignIn(props) {
           localStorage.setItem("sessionid", res.data.session);
           localStorage.setItem("confirmed", res.data.confirmed);
           localStorage.setItem("customer_id", res.data.idCustomer);
-          openMessage("Se ha enviado un correo electrónico a tu correo para que confirmes el correo");
+          openMessage("Se ha enviado un mensaje de confirmación a tu correo electrónico.");
           validate();
         } else {
           openMessage("Credenciales Inválidas");
@@ -277,7 +299,7 @@ export default function SignIn(props) {
   return (
     <Box>
       <Header />
-      <Container component="main" maxWidth="sm" style={{ marginTop: '9rem', marginBottom: '16rem' }}>
+      <Container component="main" maxWidth="sm" className={classes.container}>
         <Backdrop className={classes.backdrop} open={openProgress}>
           <CircularProgress color="inherit" variant="indeterminate" disableShrink style={{ width: 80, height: 80 }} />
         </Backdrop>

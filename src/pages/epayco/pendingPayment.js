@@ -26,6 +26,28 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '1em',
         marginBottom: '3em'
     },
+    box_message: {
+        [theme.breakpoints.only('xs')]: {
+            marginTop: '6em',
+            marginBottom: '12em'
+        },
+        [theme.breakpoints.only('sm')]: {
+            marginTop: '6em',
+            marginBottom: '12em'
+        },
+        [theme.breakpoints.only('md')]: {
+            marginTop: '6em',
+            marginBottom: '12em'
+        },
+        [theme.breakpoints.only('lg')]: {
+            paddingTop: '4em',
+            marginBottom: '13em'
+        },
+        [theme.breakpoints.up('xl')]: {
+            paddingTop: '8em',
+            marginBottom: '20em'
+        },
+    }
 }));
 
 export default function ConfirmationPayment() {
@@ -39,7 +61,7 @@ export default function ConfirmationPayment() {
     return (
         <Box>
             <Header />
-            <Box style={{ marginTop: '6em', marginBottom: '12em' }}>
+            <Box className={classes.box_message}>
                 <Container style={{ marginTop: '10em' }}>
                     <Grid container>
                         <Grid item xs={1}></Grid>
@@ -52,8 +74,8 @@ export default function ConfirmationPayment() {
                                 </Grid>
                                 <Grid item xs={12} style={{ marginTop: '1em' }}>
                                     <center>
-                                        <img src="img/icons/check_128.png" />
-                                        <Typography variant="body2">Tú pago ha sido aceptado, estaremos haciendo llegar tu producto en los próximos 5 días.</Typography>
+                                        <img src="img/icons/wait_128.png" />
+                                        <Typography variant="body2">Tú pago está pendiente, si elegiste nuestros medios de pago de efectivo quedamos pendiente de tu pago. Sino, espera a que tu pago sea confirmado.</Typography>
                                     </center>
                                 </Grid>
                             </Grid>

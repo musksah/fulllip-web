@@ -79,6 +79,9 @@ export default function ReviewSale() {
                             <Typography variant="body2" component="p" >
                                 {cart.subtitle}
                             </Typography>
+                            <Typography variant="body2" component="p" style={{ color:'#454545', fontWeight:'bold'}}>
+                                Cantidad: <span style={{ fontWeight:'normal'}}>{cart.quantity}</span>
+                            </Typography>
                         </Box>
                     </Grid>
                     <Grid item xs={3} className={classes.detail_review}>

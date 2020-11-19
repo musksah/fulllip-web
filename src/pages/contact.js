@@ -326,16 +326,14 @@ function ModalContact() {
                 <Grid container className={classes.container_social_cards}>
                     <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{ marginTop: '2em', marginBottom: '3.5em', textAlign: 'center' }}>
                         <center>
-                            <Typography variant="h5">
-                                MANTENTE AL DÍA EN NUESTRAS REDES SOCIALES
-                            </Typography>
+                        <Typography variant="h6" color="primary" style={{ fontSize: '0.9em', marginBottom: '2em' }}>MANTENTE AL DÍA EN NUESTRAS REDES SOCIALES</Typography>
                         </center>
                     </Grid>
                 </Grid>
                 <Grid container spacing={5} style={{ marginBottom: '2em' }}>
                     <Grid item xs={12} md={4} lg={4} xl={4}>
                         <center>
-                            <img src="img/contact/Gmail_200px.png" alt="" style={{ width: '90%', left: '10%', right: '10%' }} />
+                            <img src="img/contact/gmail_400px.png" alt="" style={{ width: '90%', left: '10%', right: '10%' }} />
                             <Typography variant="h6" className={classes.title_social_card}>
                                 <span className={classes.link_social_net}>
                                     fullipscolombia@gmail.com
@@ -346,7 +344,7 @@ function ModalContact() {
                     <Grid item xs={12} md={4} lg={4} xl={4}>
                         <center>
                             <a target="_blank" href="https://www.facebook.com/880665175331108/posts/3553199911410941/?extid=0&d=n">
-                                <img src="img/contact/facebook_200PX.png" alt="" style={{ width: '90%', left: '10%', right: '10%' }} />
+                                <img src="img/contact/facebook_400px.png" alt="" style={{ width: '90%', left: '10%', right: '10%' }} />
                             </a>
                             <Typography variant="h6" className={classes.title_social_card}>
                                 <a target="_blank" href="https://www.facebook.com/880665175331108/posts/3553199911410941/?extid=0&d=n" className={classes.link_social_net}>
@@ -358,7 +356,7 @@ function ModalContact() {
                     <Grid item xs={12} md={4} lg={4} xl={4}>
                         <center>
                             <a target="_blank" href="https://www.instagram.com/p/CF7sPsuDALH/?igshid=1aw8zwg3nggt0" className={classes.link_social_net}>
-                                <img src="img/contact/instagram_200px.png" alt="" style={{ width: '90%', left: '10%', right: '10%' }} />
+                                <img src="img/contact/instagram_400px.png" alt="" style={{ width: '90%', left: '10%', right: '10%' }} />
                             </a>
                             <Typography variant="h6" className={classes.title_social_card}>
                                 <a target="_blank" href="https://www.instagram.com/p/CF7sPsuDALH/?igshid=1aw8zwg3nggt0" className={classes.link_social_net}>

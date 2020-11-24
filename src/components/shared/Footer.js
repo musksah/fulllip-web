@@ -114,13 +114,13 @@ function Footern() {
             <Grid container style={{ marginTop: '1em' }}>
               <Grid item xs={2}></Grid>
               <Grid item xs={3}>
-                <a target="_blank" href="https://www.facebook.com/880665175331108/posts/3553199911410941/?extid=0&d=n" className={classes.navlink}>
+                <a target="_blank" href="https://www.facebook.com/fullipscolombia/" className={classes.navlink}>
                   <img src="img/contact/FACEBOOK_64X64.png" className={classes.icons_footer} />
                 </a>
               </Grid>
               <Grid item xs={2}></Grid>
               <Grid item xs={3}>
-                <a target="_blank" href="https://www.instagram.com/p/CF7sPsuDALH/?igshid=1aw8zwg3nggt0" className={classes.navlink}>
+                <a target="_blank" href="https://www.instagram.com/fullipscolombia/" className={classes.navlink}>
                   <img src="img/contact/INSTAGRAM_64X64.png" className={classes.icons_footer} />
                 </a>
               </Grid>

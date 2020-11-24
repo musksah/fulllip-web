@@ -343,23 +343,23 @@ function ModalContact() {
                     </Grid>
                     <Grid item xs={12} md={4} lg={4} xl={4}>
                         <center>
-                            <a target="_blank" href="https://www.facebook.com/880665175331108/posts/3553199911410941/?extid=0&d=n">
+                            <a target="_blank" href="https://www.facebook.com/fullipscolombia/">
                                 <img src="img/contact/facebook_400px.png" alt="" style={{ width: '90%', left: '10%', right: '10%' }} />
                             </a>
                             <Typography variant="h6" className={classes.title_social_card}>
-                                <a target="_blank" href="https://www.facebook.com/880665175331108/posts/3553199911410941/?extid=0&d=n" className={classes.link_social_net}>
-                                    Fullips Oficial Colombia
+                                <a target="_blank" href="https://www.facebook.com/fullipscolombia/" className={classes.link_social_net}>
+                                    Fullips Official Colombia
                                 </a>
                             </Typography>
                         </center>
                     </Grid>
                     <Grid item xs={12} md={4} lg={4} xl={4}>
                         <center>
-                            <a target="_blank" href="https://www.instagram.com/p/CF7sPsuDALH/?igshid=1aw8zwg3nggt0" className={classes.link_social_net}>
+                            <a target="_blank" href="https://www.instagram.com/fullipscolombia/" className={classes.link_social_net}>
                                 <img src="img/contact/instagram_400px.png" alt="" style={{ width: '90%', left: '10%', right: '10%' }} />
                             </a>
                             <Typography variant="h6" className={classes.title_social_card}>
-                                <a target="_blank" href="https://www.instagram.com/p/CF7sPsuDALH/?igshid=1aw8zwg3nggt0" className={classes.link_social_net}>
+                                <a target="_blank" href="https://www.instagram.com/fullipscolombia/" className={classes.link_social_net}>
                                     @fullipscolombia
                                     </a>
                             </Typography>

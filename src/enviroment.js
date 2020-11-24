@@ -1,7 +1,7 @@
 const URL_APP_LOCAL = "http://localhost:3000";
 const URL_APP_PRODUCCION = "https://fullipscolombia.com";
 const URL_LOCAL = "http://localhost:8005/api";
-const URL_PRODUCCION = "https://sebastian-hr.com/api";
+const URL_PRODUCCION = "https://sebastianhr-services.site/api";
 const API_KEY_PRUEBAS = "491d6a0b6e992cf924edd8d3d088aff1";
 const API_KEY_FULLIPS = "58fb52a050f1e7cfc8569f7550b477f3";
 

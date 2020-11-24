@@ -56,7 +56,6 @@ export default function Question() {
             <Container style={{ marginTop: '9rem', marginBottom: '9rem' }}>
                 <Grid container>
                     <Grid item xs={1}></Grid>
-
                     <Grid item xs={10}>
                         <Backdrop className={classes.backdrop} open={openProgress}>
                             <CircularProgress color="inherit" variant="indeterminate" disableShrink style={{ width: 80, height: 80 }} />
@@ -64,11 +63,11 @@ export default function Question() {
                         {use.map(u => (
                             <Grid key={u.id_advice}>
                                 <Grid className={classes.centered} item xs={12}>
-                                    <Typography variant="h6" color="primary">{u.name}</Typography>
+                                    <Typography variant="h6" color="primary" style={{ fontSize: '0.9em', marginBottom: '2em' }}>{u.name}</Typography>
                                 </Grid>
                                 <Grid style={{ marginBottom: '4rem' }} className={classes.centered} item xs={12}>
                                     <Grid item xs={10} sm={10}>
-                                        <Interweave
+                                        <Interweave 
                                             content={u.description}
                                         />
                                     </Grid>

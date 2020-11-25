@@ -21,6 +21,7 @@
     "history": "^5.0.0",
     "interweave": "^12.5.0",
     "material-auto-rotating-carousel": "^3.0.2",
+    "normalize.css": "^8.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.11.0",

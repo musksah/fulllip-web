@@ -13,6 +13,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { CartContext } from '../contexts/cartContext';
 import NumberFormat from 'react-number-format';
 import Checkbox from '@material-ui/core/Checkbox';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,6 +31,11 @@ const useStyles = makeStyles((theme) => ({
         color: '#7F7F7F',
         textAlign: 'center',
         fontSize: '0.7em'
+    },
+    item_cart_responsive: {
+        color: '#7F7F7F',
+        textAlign: 'center',
+        fontSize: '1em',
     },
     subtotal: {
         color: '#7F7F7F',
@@ -167,13 +173,13 @@ export default function CheckOut() {
                 }
                 {parseInt(cartItems.length) > 0 &&
                     <Container style={{ marginBottom: '7em' }}>
-                        <Hidden only={['xs', 'sm']}>
+                        <Hidden only={['xs']}>
                             <Grid container style={{ marginTop: '2em' }} >
-                                <Grid item sm={1}></Grid>
-                                <Grid item sm={2} md={3} style={{ background: '#E1E1E1', padding: '0.7em' }}>
+                                <Grid item md={1}></Grid>
+                                <Grid item sm={3} md={3} style={{ background: '#E1E1E1', padding: '0.7em' }}>
                                     <Typography className={classes.product_header} > Imagen </Typography>
                                 </Grid>
-                                <Grid item sm={2} style={{ background: '#E1E1E1', padding: '0.7em' }}>
+                                <Grid item sm={3} md={2} style={{ background: '#E1E1E1', padding: '0.7em' }}>
                                     <Typography className={classes.product_header} > Producto </Typography>
                                 </Grid>
                                 <Grid item sm={2} style={{ background: '#E1E1E1', padding: '0.7em' }}>
@@ -188,11 +194,11 @@ export default function CheckOut() {
                             </Grid>
                             {cartItems.map((cart, index) => (
                                 <Grid container key={cart.id} style={{ paddingTop: '0.7em', paddingBottom: '0.7em' }} >
-                                    <Grid item sm={1}></Grid>
-                                    <Grid item sm={2} md={3} className={classes.item_field_container}>
+                                    <Grid item md={1}></Grid>
+                                    <Grid item sm={3} md={3} className={classes.item_field_container}>
                                         <img src={cart.img} style={{ width: '40%', marginLeft: '30%', marginRight: '30%' }} />
                                     </Grid>
-                                    <Grid item sm={2} className={classes.item_field_container}>
+                                    <Grid item sm={3} md={2} className={classes.item_field_container}>
                                         <Typography variant="span" className={classes.item_cart}> {cart.name}  </Typography>
                                     </Grid>
                                     <Grid item sm={2} className={classes.item_field_container}>
@@ -220,32 +226,37 @@ export default function CheckOut() {
                                 </Grid>
                             ))}
                         </Hidden>
-                        <Hidden only={['md', 'lg', 'xl']}>
+                        <Hidden only={['sm', 'md', 'lg', 'xl']}>
                             <Box className={classes.cart_responsive}>
-                                <Grid item xs={10} >
+                                <Grid item xs={12} >
                                     {cartItems.map((cart, index) => (
-                                        <Grid container key={cart.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                            <Grid item xs={12} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                                <img src={cart.img} style={{ width: '40%' }} />
+                                        <>
+                                            <Grid container key={cart.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '2em' }}>
+                                                <Grid item xs={12} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1em' }}>
+                                                    <img src={cart.img} style={{ width: '30%' }} />
+                                                </Grid>
+                                                <Grid item xs={12} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.2em' }}>
+                                                    <Typography variant="span" className={classes.item_cart_responsive}> {cart.name}  </Typography>
+                                                </Grid>
+                                                <Grid item xs={12} style={{ marginBottom: '0.2em' }}>
+                                                    {cart.price &&
+                                                        <Typography className={classes.item_cart_responsive}><NumberFormat value={cart.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value} COP</div>} /> </Typography>
+                                                    }
+                                                </Grid>
+                                                <Grid item xs={12} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.2em' }}>
+                                                    <Typography className={classes.item_cart_responsive}> {cart.quantity} </Typography>
+                                                </Grid>
+                                                <Grid item xs={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.2em' }}>
+                                                    <IconButton aria-label="add" onClick={() => increase(cart)} >
+                                                        <Add />
+                                                    </IconButton>
+                                                    <IconButton aria-label="delete" onClick={() => decreaseProduct(cart)}>
+                                                        <Remove />
+                                                    </IconButton>
+                                                </Grid>
                                             </Grid>
-                                            <Grid item xs={12} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                                <Typography variant="span" className={classes.item_cart}> {cart.name}  </Typography>
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                {cart.price &&
-                                                    <Typography className={classes.item_cart}><NumberFormat value={cart.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value}</div>} /> </Typography>
-                                                }
-                                            </Grid>
-                                            <Grid item xs={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                                <Typography className={classes.item_cart}> {cart.quantity} </Typography>
-                                                <IconButton aria-label="add" onClick={() => increase(cart)} >
-                                                    <Add />
-                                                </IconButton>
-                                                <IconButton aria-label="delete" onClick={() => decreaseProduct(cart)}>
-                                                    <Remove />
-                                                </IconButton>
-                                            </Grid>
-                                        </Grid>
+                                            <Divider />
+                                        </>
                                     ))}
                                 </Grid>
                             </Box>

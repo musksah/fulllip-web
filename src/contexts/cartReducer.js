@@ -3,21 +3,25 @@ const Storage = (cartItems) => {
 }
 
 const Extra = (total_temp) => {
-    let bandera = localStorage.getItem('donation');
+    let flat = localStorage.getItem('donation');
     let valor = 800;
+    let donation = 0;
     let total = parseInt(total_temp);
-    if (parseInt(bandera) === 1) {
+    if (parseInt(flat) === 1) {
         total = total + valor;
+        donation = donation + valor;
     }
-    return total.toFixed(2);
+    return { total: total.toFixed(2), donation: donation };
 }
 
 export const sumItems = cartItems => {
     Storage(cartItems);
     let itemCount = cartItems.reduce((total, product) => total + product.quantity, 0);
     let total_temp = cartItems.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
-    let total = Extra(total_temp);
-    return { itemCount, total }
+    let extra = Extra(total_temp);
+    let total = extra.total;
+    let donation = extra.donation;
+    return { itemCount, total, donation }
 }
 
 export const CartReducer = (state, action) => {

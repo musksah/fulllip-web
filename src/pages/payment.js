@@ -126,7 +126,7 @@ export default function Payment() {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState('panel1');
     const [value, setValue] = React.useState('female');
-    const { cartItems, total, increase, decrease, removeProduct } = useContext(CartContext);
+    const { cartItems, total, increase, decrease, removeProduct, donation } = useContext(CartContext);
 
     const handleChange = (event) => {
         setValue(event.target.value);
@@ -136,7 +136,7 @@ export default function Payment() {
         let date = new Date();
         let strInformation = localStorage.getItem("h_tinformation");
         let customerId = localStorage.getItem("customer_id");
-        let curtomerInfo = JSON.stringify({ customer_id: customerId });
+        let curtomerInfo = JSON.stringify({ customer_id: customerId, donation: donation });
         let products = localStorage.getItem("products");
         let infoCustomer = JSON.parse(strInformation);
         // Creación del botón de epayco

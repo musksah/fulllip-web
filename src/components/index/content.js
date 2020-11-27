@@ -49,12 +49,12 @@ export default function ContentIndex() {
                     <Grid item xs={1}></Grid>
                     <Grid item xs={10}>
                         <Grid container>
-                            <Grid item xs={12} lg={4}>
+                            <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
                                 <Grid container>
-                                    <Grid item xs={6}>
+                                    <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
                                         <center><img src="img/index/content/ICONO1.png" style={{ width: '50%', marginLeft: '25%', marginRight: '25%' }} /></center>
                                     </Grid>
-                                    <Grid item xs={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+                                    <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
                                         <table>
                                             <tbody>
                                                 <tr>
@@ -76,12 +76,12 @@ export default function ContentIndex() {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid item xs={12} lg={4}>
+                            <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
                                 <Grid container>
-                                    <Grid item xs={6}>
+                                    <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
                                         <center><img src="img/index/content/ICONO2.png" style={{ width: '50%', marginLeft: '25%', marginRight: '25%' }} /></center>
                                     </Grid>
-                                    <Grid item xs={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+                                    <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
                                         <table>
                                             <tbody>
                                                 <tr>
@@ -103,12 +103,12 @@ export default function ContentIndex() {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid item xs={12} lg={4}>
+                            <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
                                 <Grid container>
-                                    <Grid item xs={6}>
+                                    <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
                                         <center><img src="img/index/content/ICONO3.png" style={{ width: '50%', marginLeft: '25%', marginRight: '25%' }} /></center>
                                     </Grid>
-                                    <Grid item xs={6} style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+                                    <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
                                         <table>
                                             <tbody>
                                                 <tr>
@@ -157,22 +157,20 @@ export default function ContentIndex() {
                     <Grid item xs={1}></Grid>
                 </Grid>
                 <Grid container style={{ marginTop: '3em', marginBottom: '2em' }}>
-                    <Grid item xs={1}></Grid>
-                    <Grid item xs={10}>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                         {/* Se muestra en xs */}
                         <Hidden only={['sm', 'md', 'lg', 'xl']}>
-                            <img src="img/index/content/FIRMA_FULLIPS_BANNER_MOBILE.png" style={{ width: '100%' }} />
+                            <img src="img/index/content/FIRMA_FULLIPS_BANNER_MOBILE.png" style={{ width: '90%', marginLeft:'5%',marginRight:'5%' }} />
                         </Hidden>
                         {/* Se muestra en sm */}
                         <Hidden only={['xs', 'lg', 'xl']}>
-                            <img src="img/index/content/FIRMA_FULLIPS_BANNER_IPAD.png" style={{ width: '100%' }} />
+                            <img src="img/index/content/FIRMA_FULLIPS_BANNER_IPAD.png" style={{ width: '90%', marginLeft:'5%',marginRight:'5%' }} />
                         </Hidden>
                         {/* Se muestra en md, lg, xl */}
                         <Hidden only={['xs', 'sm', 'md']}>
-                            <img src="img/index/content/FIRMA_FULLIPS_BANNER_COMPUTADOR.png" style={{ width: '100%' }} />
+                            <img src="img/index/content/FIRMA_FULLIPS_BANNER_COMPUTADOR.png" style={{ width: '90%', marginLeft:'5%',marginRight:'5%' }} />
                         </Hidden>
                     </Grid>
-                    <Grid item xs={1}></Grid>
                 </Grid>
             </Box>
         </div >

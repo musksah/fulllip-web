@@ -87,7 +87,7 @@ function Footern() {
           <Hidden only={['xs']}>
             <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
               <center>
-                <img src="img/footer/logo_no_spaces.png" style={{ marginTop: '0.6em' }} />
+                <img src="https://fullipscolombia.com/img/footer/logo_no_spaces.png" style={{ marginTop: '0.6em' }} />
               </center>
             </Grid>
           </Hidden>
@@ -115,13 +115,13 @@ function Footern() {
               <Grid item xs={2}></Grid>
               <Grid item xs={3}>
                 <a target="_blank" href="https://www.facebook.com/fullipscolombia/" className={classes.navlink}>
-                  <img src="img/contact/FACEBOOK_64X64.png" className={classes.icons_footer} />
+                  <img src="https://fullipscolombia.com/img/contact/FACEBOOK_64X64.png" className={classes.icons_footer} />
                 </a>
               </Grid>
               <Grid item xs={2}></Grid>
               <Grid item xs={3}>
                 <a target="_blank" href="https://www.instagram.com/fullipscolombia/" className={classes.navlink}>
-                  <img src="img/contact/INSTAGRAM_64X64.png" className={classes.icons_footer} />
+                  <img src="https://fullipscolombia.com/img/contact/INSTAGRAM_64X64.png" className={classes.icons_footer} />
                 </a>
               </Grid>
               <Grid item xs={2}></Grid>

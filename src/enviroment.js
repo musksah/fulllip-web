@@ -5,8 +5,8 @@ const URL_PRODUCCION = "https://fullipscolombia-services.site/api";
 const API_KEY_PRUEBAS = "491d6a0b6e992cf924edd8d3d088aff1";
 const API_KEY_FULLIPS = "58fb52a050f1e7cfc8569f7550b477f3";
 
-const URL_API = URL_PRODUCCION;
-const URL_WEBSITE = URL_APP_PRODUCCION;
+const URL_API = URL_LOCAL;
+const URL_WEBSITE = URL_APP_LOCAL;
 const API_KEY = API_KEY_FULLIPS;
 
 export default {

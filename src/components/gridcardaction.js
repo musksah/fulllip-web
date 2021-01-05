@@ -55,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  main_title:{
+    color:'#7C7C7C'
+  },
   box_product: {
     position: 'absolute',
     width: '100%',
@@ -152,6 +155,7 @@ export default function NestedGrid() {
   function FormRow() {
     return (
       <React.Fragment>
+        <Typography variant="h5" className={classes.main_title}>Nuestros Productos</Typography>
         <Grid container justify="center" spacing={2} style={{ marginTop: '1em' }}>
           {listImages.map((image, index) => (
             <Grid item xs={12} sm={12} md={3} lg={3} key={image.id_image_index_product} onMouseEnter={() => hoverProductCard(index, image.name)} onMouseLeave={() => leaveProductCard(index, image.name)} className={[].join(' ')}  >

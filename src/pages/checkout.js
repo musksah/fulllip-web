@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import Container from '@material-ui/core/Container';
-import { Box, Hidden } from '@material-ui/core';
+import { Box, Hidden, Backdrop, CircularProgress } from '@material-ui/core';
 import Header from '../components/shared/header';
 import { makeStyles } from '@material-ui/core/styles';
+import Enviroment from '../enviroment';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -14,6 +16,8 @@ import { CartContext } from '../contexts/cartContext';
 import NumberFormat from 'react-number-format';
 import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
+
+const URL_SETTINGS = `${Enviroment.urlApi}/settings`;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     item_cart: {
         color: '#7F7F7F',
         textAlign: 'center',
-        fontSize: '0.7em'
+        fontSize: '0.8em'
     },
     item_cart_responsive: {
         color: '#7F7F7F',
@@ -97,6 +101,7 @@ export default function CheckOut() {
     const classes = useStyles();
     const [classDonation, setClassDonation] = useState(classes.donation_checked);
     const [checked, setChecked] = useState(true);
+    const [openProgress, setOpenProgress] = useState(false);
 
     const handleChange = (event) => {
         setChecked(event.target.checked);
@@ -116,14 +121,15 @@ export default function CheckOut() {
 
 
     const validateLogin = () => {
-        if (localStorage.getItem("h_tiov") !== null) {
-            history.push("/sending");
-        } else {
-            history.push({
-                pathname: "/Ingresar",
-                state: "checkout"
-            });
-        }
+        // if (localStorage.getItem("h_tiov") !== null) {
+        //     history.push("/sending");
+        // } else {
+        //     history.push({
+        //         pathname: "/Ingresar",
+        //         state: "checkout"
+        //     });
+        // }
+        history.push("/sending");
     }
 
     useEffect(() => {
@@ -133,14 +139,33 @@ export default function CheckOut() {
     const checkConfirmationEmail = () => {
         let confirmed = localStorage.getItem("confirmed");
         let tokenStorage = localStorage.getItem("h_tiov");
-        if (tokenStorage === null) {
-            history.push("/Ingresar");
-        } else if (confirmed === 0 || confirmed === null) {
-            history.push("/error-confirmation");
-        } else {
-            localStorage.setItem("donation", 1);
-            addExtra();
-        }
+        setOpenProgress(true);
+        axios.get(`${URL_SETTINGS}`).then(res => {
+            setOpenProgress(false);
+            let activated = res.data.activated;
+            if (activated == 1) {
+                if (tokenStorage === null) {
+                    history.push("/Ingresar");
+                } else if (confirmed === 0 || confirmed === null) {
+                    history.push("/error-confirmation");
+                }
+            } else {
+                localStorage.setItem("donation", 1);
+                addExtra();
+            }
+        }, error => {
+            console.log("Errosito " + error);
+        });
+        // if (tokenStorage === null) {
+        //     history.push("/Ingresar");
+        // } else if (confirmed === 0 || confirmed === null) {
+        //     history.push("/error-confirmation");
+        // } else {
+        //     localStorage.setItem("donation", 1);
+        //     addExtra();
+        // }
+        localStorage.setItem("donation", 1);
+        addExtra();
     }
 
     const decreaseProduct = (product) => {
@@ -154,6 +179,9 @@ export default function CheckOut() {
     return (
         <Box>
             <Header />
+            <Backdrop className={classes.backdrop} open={openProgress}>
+                <CircularProgress color="inherit" variant="indeterminate" disableShrink style={{ width: 80, height: 80 }} />
+            </Backdrop>
             <Box style={{ marginTop: '8em' }}>
                 <center>
                     <Typography variant="h6" style={{ color: '#4F4F4F' }}>CARRITO DE COMPRA</Typography>

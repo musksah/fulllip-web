@@ -135,7 +135,7 @@ export default function Payment() {
     useEffect(() => {
         let date = new Date();
         let strInformation = localStorage.getItem("h_tinformation");
-        let customerId = localStorage.getItem("customer_id");
+        let customerId = localStorage.getItem("customer_id") == null ? 0 : localStorage.getItem("customer_id");
         let curtomerInfo = JSON.stringify({ customer_id: customerId, donation: donation });
         let products = localStorage.getItem("products");
         let infoCustomer = JSON.parse(strInformation);

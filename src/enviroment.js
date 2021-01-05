@@ -5,16 +5,20 @@ const URL_PRODUCCION = "https://sebastianhr-services.site/api";
 const API_KEY_PRUEBAS = "491d6a0b6e992cf924edd8d3d088aff1";
 const API_KEY_FULLIPS = "58fb52a050f1e7cfc8569f7550b477f3";
 
+const URL_API = URL_LOCAL;
+const URL_WEBSITE = URL_APP_LOCAL;
+const API_KEY = API_KEY_FULLIPS;
+
 export default {
-    urlApi: URL_PRODUCCION,
+    urlApi: URL_API,
     urlWeb: URL_APP_PRODUCCION,
     epayco:{
-        apiKey: API_KEY_FULLIPS,
-        responsePage: `${URL_APP_PRODUCCION}/response-payment`,
-        confirmationPage: `${URL_PRODUCCION}/epayco/confirmation-payment`,
-        acceptedPage: `${URL_APP_PRODUCCION}/accepted-payment`,
-        rejectedPage: `${URL_APP_PRODUCCION}/rejected-payment"`,
-        pendingPage: `${URL_APP_PRODUCCION}/pending-payment`,
+        apiKey: API_KEY,
+        responsePage: `${URL_WEBSITE}/response-payment`,
+        confirmationPage: `${URL_API}/epayco/confirmation-payment`,
+        acceptedPage: `${URL_WEBSITE}/accepted-payment`,
+        rejectedPage: `${URL_WEBSITE}/rejected-payment"`,
+        pendingPage: `${URL_WEBSITE}/pending-payment`,
         currency: "cop",
         country: "co",
     },

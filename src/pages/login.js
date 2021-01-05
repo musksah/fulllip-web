@@ -21,9 +21,10 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Enviroment from '../enviroment';
 import Swal from "sweetalert2";
 import CloseIcon from '@material-ui/icons/Close';
+import SimpleAlert from '@material-ui/lab/Alert';
 
 const URL = `${Enviroment.urlApi}/user`;
-
+const URL_SETTINGS = `${Enviroment.urlApi}/settings`;
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -67,23 +68,23 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     [theme.breakpoints.only('xs')]: {
-      marginTop: '9rem', 
+      marginTop: '8rem',
       marginBottom: '16rem'
     },
     [theme.breakpoints.only('sm')]: {
-      marginTop: '9rem', 
+      marginTop: '8rem',
       marginBottom: '16rem'
     },
     [theme.breakpoints.only('md')]: {
-      marginTop: '9rem', 
+      marginTop: '8rem',
       marginBottom: '16rem'
     },
     [theme.breakpoints.only('lg')]: {
-      marginTop: '9rem', 
+      marginTop: '8rem',
       marginBottom: '15rem'
     },
     [theme.breakpoints.up('xl')]: {
-      marginTop: '13rem', 
+      marginTop: '12rem',
       marginBottom: '16.5rem'
     },
   }
@@ -128,6 +129,7 @@ export default function SignIn(props) {
   const [openProgress, setOpenProgress] = useState(false);
   const [emailM, setEmailM] = useState("");
   const [visible, setVisible] = useState(false);
+  const [isAuthConfirm, setIsAuthConfirm] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -137,7 +139,23 @@ export default function SignIn(props) {
     if (localStorage.getItem("h_tiov") !== null) {
       history.push("/");
     }
+    checkConfirmationEmail();
   }, []);
+
+  const checkConfirmationEmail = () => {
+    setOpenProgress(true);
+    axios.get(`${URL_SETTINGS}`).then(res => {
+      setOpenProgress(false);
+      let activated = res.data.activated;
+      if (activated == 1) {
+        setIsAuthConfirm(true);
+      } else {
+        setIsAuthConfirm(false);
+      }
+    }, error => {
+      console.log("Errosito " + error);
+    });
+  }
 
   const changeName = (e) => {
     const { value } = e.target;
@@ -239,6 +257,7 @@ export default function SignIn(props) {
               localStorage.setItem("name", res.data.name.split(" ")[0]);
               localStorage.setItem("sessionid", res.data.session);
               localStorage.setItem("confirmed", 0);
+              localStorage.setItem("customer_id", res.data.id_customer);
               validate();
             }
           });
@@ -300,9 +319,12 @@ export default function SignIn(props) {
     <Box>
       <Header />
       <Container component="main" maxWidth="sm" className={classes.container}>
-        <Backdrop className={classes.backdrop} open={openProgress}>
+        <Backdrop className={classes.backdrop} open={openProgress} >
           <CircularProgress color="inherit" variant="indeterminate" disableShrink style={{ width: 80, height: 80 }} />
         </Backdrop>
+        {isAuthConfirm ?
+          <SimpleAlert severity="info" size="small" style={{ marginBottom: '1em' }} onClose={() => { setIsAuthConfirm(false); }}>No olvides registrarte para hacer tu compra!</SimpleAlert>
+          : ''}
         <Paper square elevation={5}>
           <Tabs
             value={value}

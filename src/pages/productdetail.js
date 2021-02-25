@@ -217,6 +217,7 @@ function ItemDetail() {
                 allowOutsideClick: false
             })
         } else {
+            let price_temp = parseInt(product.is_discounted) === 1 ? product.discounted_price : product.price;
             Swal.fire({
                 title: 'Producto Agregado',
                 icon: 'success',
@@ -234,7 +235,7 @@ function ItemDetail() {
                     history.push("/");
                 }
             });
-            const products = { id: product.id_item, img: image.url, name: product.name, subtitle: product.subtitle, price: product.price, quantity: parseInt(values) }
+            const products = { id: product.id_item, img: image.url, name: product.name, subtitle: product.subtitle, price: price_temp, quantity: parseInt(values) }
             addProduct(products);
 
         }
@@ -338,7 +339,10 @@ function ItemDetail() {
                                     </Grid>
                                     <Grid item xs={12} style={{ marginTop: '2em', color: '#FF5C5C', fontSize: '1.2em' }}>
                                         {product.price &&
-                                            <h5><NumberFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value}</div>} /></h5>
+                                            parseInt(product.is_discounted) === 1 ?
+                                            <h4><NumberFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <label style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid', opacity: '0.5' }}>{value}</label>} /> <NumberFormat value={product.discounted_price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <label>{value}</label>} /></h4>
+                                            :
+                                            <h4><NumberFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <label>{value}</label>} /></h4>
                                         }
                                     </Grid>
                                     <Grid item xs={12} style={{ marginTop: '2em' }}>

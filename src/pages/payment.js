@@ -136,6 +136,7 @@ export default function Payment() {
         let date = new Date();
         let strInformation = localStorage.getItem("h_tinformation");
         let customerId = localStorage.getItem("customer_id") == null ? 0 : localStorage.getItem("customer_id");
+        let couponId = localStorage.getItem("couponid") == null ? 0 : localStorage.getItem("couponid");
         let curtomerInfo = JSON.stringify({ customer_id: customerId, donation: donation });
         let products = localStorage.getItem("products");
         let infoCustomer = JSON.parse(strInformation);
@@ -170,6 +171,8 @@ export default function Payment() {
         script.setAttribute("data-epayco-extra2", curtomerInfo);
         //Datos de los productos
         script.setAttribute("data-epayco-extra3", products);
+        //Coupon Name
+        script.setAttribute("data-epayco-extra4", couponId);
 
         let contenedorForm = document.getElementById("epaycoForm");
         contenedorForm.appendChild(script);

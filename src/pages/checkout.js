@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Container from '@material-ui/core/Container';
-import { Box, Hidden, Backdrop, CircularProgress } from '@material-ui/core';
+import { Box, Hidden, Backdrop, CircularProgress, TextField } from '@material-ui/core';
 import Header from '../components/shared/header';
 import { makeStyles } from '@material-ui/core/styles';
 import Enviroment from '../enviroment';
@@ -16,8 +16,10 @@ import { CartContext } from '../contexts/cartContext';
 import NumberFormat from 'react-number-format';
 import Checkbox from '@material-ui/core/Checkbox';
 import Divider from '@material-ui/core/Divider';
+import AES from 'crypto-js/aes';
 
 const URL_SETTINGS = `${Enviroment.urlApi}/settings`;
+const URL_COUPON = `${Enviroment.urlApi}/coupon`;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -53,6 +55,13 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '0.9em',
         fontWeight: '500',
     },
+    coupon: {
+        color: '#7F7F7F',
+        textAlign: 'left',
+        fontSize: '0.9em',
+        fontWeight: '500',
+        marginRight: '2.55em'
+    },
     info_donation: {
         color: '#7F7F7F',
         textAlign: 'left',
@@ -83,6 +92,11 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: '500',
         fontSize: '1.6em',
     },
+    price_coupon: {
+        color: '#D55353',
+        fontWeight: '500',
+        fontSize: '1.6em',
+    },
     price_donation: {
         color: '#2B2B2B',
         fontWeight: '500',
@@ -93,6 +107,15 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: '3em',
+    },
+    error_coupon: {
+        color: '#D55353',
+        marginLeft: '0.5em',
+        fontWeight: '500',
+        fontSize: '1.1em'
+    },
+    input_applied: {
+        color: '#A8A8A8'
     }
 }));
 
@@ -101,7 +124,11 @@ export default function CheckOut() {
     const classes = useStyles();
     const [classDonation, setClassDonation] = useState(classes.donation_checked);
     const [checked, setChecked] = useState(true);
+    const [couponValue, setcouponValue] = useState("");
+    const [couponApplied, setCouponApplied] = useState(false);
+    const [couponError, setCouponError] = useState(false);
     const [openProgress, setOpenProgress] = useState(false);
+    const delay = 5;
 
     const handleChange = (event) => {
         setChecked(event.target.checked);
@@ -116,8 +143,15 @@ export default function CheckOut() {
         }
     };
 
+    const changeCoupon = (event) => {
+        setcouponValue(event.target.value);
+        if (couponError) {
+            setCouponError(false);
+        }
+    };
+
     const history = useHistory();
-    const { cartItems, total, increase, decrease, removeProduct, addExtra } = useContext(CartContext);
+    const { cartItems, total, increase, decrease, removeProduct, addExtra, couponV } = useContext(CartContext);
 
 
     const validateLogin = () => {
@@ -134,6 +168,7 @@ export default function CheckOut() {
 
     useEffect(() => {
         checkConfirmationEmail();
+        checkCoupon();
     }, []);
 
     const checkConfirmationEmail = () => {
@@ -168,11 +203,60 @@ export default function CheckOut() {
         addExtra();
     }
 
+    const checkCoupon = (isClick = false) => {
+        let couponName = localStorage.getItem("couponname");
+        if (isClick) {
+            couponName = couponValue;
+        }
+        setOpenProgress(true);
+        axios.post(`${URL_COUPON}/check`, { 'codename': couponName }).then(res => {
+            if (res.data) {
+                let cupon = res.data;
+                let valueEncripted = AES.encrypt(cupon.discount_value.toString(), 'secret key 123').toString();
+                localStorage.setItem("htiov100", valueEncripted);
+                localStorage.setItem("couponname", couponName);
+                localStorage.setItem("couponid", cupon.id_coupon);
+                addExtra();
+                setCouponApplied(true);
+                setcouponValue(couponName);
+            } else {
+                if (isClick) {
+                    setcouponValue("");
+                    setCouponError(true);
+                    setTimeout(() => setCouponError(false), delay * 1000);
+                }
+                DeleteCoupon();
+            }
+            setOpenProgress(false);
+        }, error => {
+            console.log("Errosito " + error);
+        });
+    }
+
+    const DeleteCoupon = () => {
+        localStorage.removeItem("htiov100");
+        localStorage.removeItem("couponname");
+        localStorage.removeItem("couponid");
+        addExtra();
+        setCouponApplied(false);
+        setcouponValue("");
+    }
+
+    const goToHome = () => {
+        history.push("/");
+    }
+
     const decreaseProduct = (product) => {
         if (product.quantity > 1) {
             decrease(product);
         } else {
+            decrease(product);
             removeProduct(product);
+            if(cartItems.length == 1){
+                if(cartItems[0].quantity == 0){
+                    DeleteCoupon();
+                }
+            }
         }
     }
 
@@ -191,9 +275,8 @@ export default function CheckOut() {
                         <Container style={{ marginBottom: '20em', marginTop: '2em' }}>
                             <center>
                                 <Typography variant="body2">
-                                    El carrito de compras está vació. <NavLink to="/" >
-                                        <span>Haz click para buscar tu producto fullips.</span>
-                                    </NavLink>
+                                    El carrito de compras está vació.
+                                        <span onClick={goToHome} style={{ textDecoration: 'underline', cursor: 'pointer', color: '#490098', marginLeft: '0.2em' }}>Haz click para buscar tu producto fullips.</span>
                                 </Typography>
                             </center>
                         </Container>
@@ -253,6 +336,34 @@ export default function CheckOut() {
                                     </Grid>
                                 </Grid>
                             ))}
+                            <Grid container style={{ marginTop: '1.5em' }} >
+                                <Grid item md={1}></Grid>
+                                <Grid item sm={11} md={11}>
+                                    {couponApplied
+                                        ?
+                                        <Box style={{ height: '100%' }}>
+                                            <form noValidate autoComplete="off" style={{ position: 'relative', float: 'left' }}>
+                                                <TextField id="filled-basic" InputProps={{ readOnly: true, className: classes.input_applied }} placeholder="Código Cupón" label="" variant="outlined" value={couponValue} />
+                                            </form>
+                                            <Button variant="contained" color="primary" style={{ position: 'relative', float: 'left', height: '100%', marginLeft: '1rem' }} onClick={DeleteCoupon}>Eliminar Cupón</Button>
+                                        </Box>
+                                        :
+                                        <Box style={{ height: '100%' }} >
+                                            <form noValidate autoComplete="off" style={{ position: 'relative', float: 'left' }}>
+                                                <TextField id="filled-basic" placeholder="Código Cupón" label="" variant="outlined" onChange={changeCoupon} value={couponValue} />
+                                            </form>
+                                            <Button variant="contained" style={{ position: 'relative', float: 'left', height: '100%', marginLeft: '1rem' }} onClick={() => checkCoupon(true)} >Aplicar Cupón</Button>
+                                        </Box>
+                                    }
+                                    {couponError &&
+                                        <Grid item md={12} style={{ marginTop: '1em' }} >
+                                            <Typography variant="body2" gutterBottom className={classes.error_coupon}>
+                                                Cupón inválido!
+                                            </Typography>
+                                        </Grid>
+                                    }
+                                </Grid>
+                            </Grid>
                         </Hidden>
                         <Hidden only={['sm', 'md', 'lg', 'xl']}>
                             <Box className={classes.cart_responsive}>
@@ -288,6 +399,43 @@ export default function CheckOut() {
                                     ))}
                                 </Grid>
                             </Box>
+                            <Grid container style={{ marginTop: '1.5em' }} >
+                                <Grid item md={1}></Grid>
+                                <Grid item sm={11} md={11}>
+                                    {couponApplied
+                                        ?
+                                        <Grid container style={{ height: '100%' }}>
+                                            <Grid item md={6} style={{ width: '45%' }} >
+                                                <form noValidate autoComplete="off" style={{ position: 'relative', float: 'left' }}>
+                                                    <TextField id="filled-basic" InputProps={{ readOnly: true, className: classes.input_applied }} placeholder="Código Cupón" label="" variant="outlined" value={couponValue} />
+                                                </form>
+                                            </Grid>
+                                            <Grid item md={6} style={{ width: '45%' }}>
+                                                <Button variant="contained" color="primary" style={{ position: 'relative', float: 'left', height: '100%', marginLeft: '1rem' }} onClick={DeleteCoupon}>Eliminar Cupón</Button>
+                                            </Grid>
+                                        </Grid>
+                                        :
+                                        <Grid container style={{ height: '100%' }} >
+                                            <Grid item md={6} style={{ width: '45%' }}>
+                                                <form noValidate autoComplete="off" style={{ position: 'relative', float: 'left' }}>
+                                                    <TextField id="filled-basic" placeholder="Código Cupón" label="" variant="outlined" onChange={changeCoupon} value={couponValue} />
+                                                </form>
+                                            </Grid>
+                                            <Grid item md={6} style={{ width: '50%' }}>
+                                                <Button variant="contained" style={{ position: 'relative', float: 'left', height: '100%', marginLeft: '1rem' }} onClick={() => checkCoupon(true)} >Aplicar Cupón</Button>
+                                            </Grid>
+                                            {couponError &&
+                                                <Grid item md={12} style={{ marginTop: '1em' }} >
+                                                    <Typography variant="body2" gutterBottom className={classes.error_coupon}>
+                                                        Cupón inválido!
+                                                    </Typography>
+                                                </Grid>
+                                            }
+                                        </Grid>
+                                    }
+
+                                </Grid>
+                            </Grid>
                         </Hidden>
                         <Grid container style={{ padding: '0.7em', marginTop: '2em' }} >
                             <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
@@ -312,6 +460,11 @@ export default function CheckOut() {
                                     inputProps={{ 'aria-label': 'checkbox with small size' }}
                                 /><NumberFormat value={800} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div className={classDonation}>{value} COP</div>} /> </span>
                             </Grid>
+                            {couponApplied &&
+                                <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
+                                    <Typography className={classes.coupon}> Cupón:  <span className={classes.price_coupon}> <NumberFormat value={couponV} displayType={'text'} thousandSeparator={true} prefix={'-$'} renderText={value => <div>{value} COP</div>} /> </span> </Typography>
+                                </Grid>
+                            }
                             <Grid item xs={12} style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
                                 <Typography className={classes.subtotal}> Total:  <span className={classes.price}> <NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div>{value} COP</div>} /> </span> </Typography>
                             </Grid>

@@ -1,27 +1,40 @@
+import AES from 'crypto-js/aes';
+import CryptoJS from 'crypto-js/core';
+
 const Storage = (cartItems) => {
     localStorage.setItem('products', JSON.stringify(cartItems.length > 0 ? cartItems : []));
 }
 
 const Extra = (total_temp) => {
     let flat = localStorage.getItem('donation');
+    let flatCoupon = localStorage.getItem('couponname');
+    let couponValue = localStorage.getItem('htiov100');
     let valor = 800;
     let donation = 0;
+    let originalValue = 0;
     let total = parseInt(total_temp);
     if (parseInt(flat) === 1) {
         total = total + valor;
         donation = donation + valor;
     }
-    return { total: total.toFixed(2), donation: donation };
+    if (flatCoupon != null) {
+        let bytes = AES.decrypt(couponValue.toString(), 'secret key 123');
+        originalValue = bytes.toString(CryptoJS.enc.Utf8);
+        total = total - parseInt(originalValue);
+    }
+    return { total: total.toFixed(2), donation: donation, couponV: originalValue };
 }
 
-export const sumItems = cartItems => {
+export const sumItems = (cartItems) => {
+
     Storage(cartItems);
     let itemCount = cartItems.reduce((total, product) => total + product.quantity, 0);
     let total_temp = cartItems.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
     let extra = Extra(total_temp);
     let total = extra.total;
     let donation = extra.donation;
-    return { itemCount, total, donation }
+    let couponV = extra.couponV;
+    return { itemCount, total, donation, couponV }
 }
 
 export const CartReducer = (state, action) => {
